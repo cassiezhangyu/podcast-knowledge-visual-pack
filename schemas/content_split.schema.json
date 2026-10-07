@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContentSplit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "episode_content_inventory_sha256", "overall_question", "thesis", "thesis_boundaries", "structure_rationale", "module_order", "modules"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "kind": {"const": "content_split"},
+    "status": {"enum": ["partial", "completed"]},
+    "episode_content_inventory_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "overall_question": {"type": "string", "minLength": 1},
+    "thesis": {"type": "string", "minLength": 20},
+    "thesis_boundaries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "structure_rationale": {"type": "string", "minLength": 20},
+    "module_order": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^mod_"}},
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "thread", "role", "question", "conclusion", "relationship_to_previous", "source_unit_ids", "required_detail_ids", "logic_steps", "supporting_cases", "boundaries", "open_questions"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^mod_"},
+          "title": {"type": "string", "minLength": 1},
+          "thread": {"enum": ["main_argument", "parallel_reflection"]},
+          "role": {"type": "string", "minLength": 1},
+          "question": {"type": "string", "minLength": 1},
+          "conclusion": {"type": "string", "minLength": 20},
+          "relationship_to_previous": {"type": "string", "minLength": 1},
+          "source_unit_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^cu_"}},
+          "required_detail_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^det_"}},
+          "logic_steps": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["order", "function", "statement", "source_unit_ids", "detail_ids"],
+              "properties": {
+                "order": {"type": "integer", "minimum": 1},
+                "function": {"enum": ["question", "observation", "claim", "mechanism", "evidence", "example", "counterpoint", "boundary", "implication", "transition", "synthesis"]},
+                "statement": {"type": "string", "minLength": 1},
+                "source_unit_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^cu_"}},
+                "detail_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^det_"}}
+              }
+            }
+          },
+          "supporting_cases": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "boundaries": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "open_questions": {"type": "array", "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    }
+  }
+}

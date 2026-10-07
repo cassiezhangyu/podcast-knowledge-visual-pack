@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "kind": "content_review_gate",
+  "status": "pass",
+  "episode_content_inventory_sha256": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+  "content_review_document_sha256": "6e517aa2074f059407125d619a0be77303072e751062f9245fe8ecd23f267dae",
+  "grounded_transcript_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+  "checks": [
+    {
+      "name": "whole_transcript_coverage_and_evidence",
+      "status": "pass",
+      "details": {
+        "pass": true,
+        "groundedTranscriptSha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+        "invalidSegments": [],
+        "missingSpanIds": [],
+        "overlappingSpanIds": [],
+        "outOfOrder": false,
+        "missingUnitReferences": [],
+        "unassignedUnitIds": [],
+        "invalidAnchorIds": [],
+        "danglingEvidenceReferences": []
+      }
+    },
+    {
+      "name": "human_content_review",
+      "status": "pass",
+      "details": {
+        "approval_sha256": "5bb07dea17001b0d1a06f4b171b9c2774ebcd9de11973d5a2dabbca2d9ab4bee"
+      }
+    }
+  ],
+  "human_review_required": false,
+  "human_review": {
+    "approval_sha256": "5bb07dea17001b0d1a06f4b171b9c2774ebcd9de11973d5a2dabbca2d9ab4bee"
+  }
+}

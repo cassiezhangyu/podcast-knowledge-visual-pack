@@ -1,0 +1,53 @@
+{
+  "name": "podcast-knowledge-skill",
+  "version": "0.2.1-beta.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && npm run build:preview",
+    "build:preview": "esbuild src/excalidraw-preview-browser.ts --bundle --platform=browser --format=iife --outfile=dist/excalidraw-preview-browser.js",
+    "test": "vitest run",
+    "preintake": "npm run build",
+    "intake": "node dist/cli.js",
+    "content:gate": "npm run build && node dist/content-gates-cli.js",
+    "knowledge:prepare": "npm run build && node dist/knowledge-cli.js",
+    "knowledge:assemble": "npm run build && node dist/knowledge-assemble-cli.js",
+    "knowledge:closeout": "npm run build && node dist/knowledge-closeout-cli.js",
+    "editorial:assemble": "npm run build && node dist/editorial-assemble-cli.js",
+    "editorial:closeout": "npm run build && node dist/editorial-closeout-cli.js",
+    "visual:candidates": "npm run build && node dist/visual-candidates-cli.js",
+    "visual:select": "npm run build && node dist/visual-select-cli.js",
+    "construct": "tsc -p tsconfig.json && node dist/construction-cli.js",
+    "construction:closeout": "npm run build && node dist/construction-closeout-cli.js",
+    "render": "npm run build && node dist/render-cli.js",
+    "render:preflight": "npm run build && node scripts/render-runtime-preflight.mjs",
+    "render:checked": "node scripts/render-checked.mjs",
+    "visual:review:prepare": "python3 scripts/prepare_independent_review.py",
+    "visual:closeout": "npm run build && node dist/visual-closeout-cli.js",
+    "public-copy:check": "npm run build && node dist/public-copy-cli.js",
+    "public-copy:bundle-check": "node scripts/check-companion-copy.mjs",
+    "package": "npm run build && node dist/package-cli.js",
+    "workflow:status": "npm run build && node dist/workflow-cli.js",
+    "accepted-artwork:import": "tsc -p tsconfig.json && node dist/accepted-artwork-import-cli.js",
+    "content:assemble": "npm run build && python3 scripts/assemble_content_package.py",
+    "test:python": "python3 -m unittest discover -s tests -p '*.py'"
+  },
+  "dependencies": {
+    "@excalidraw/excalidraw": "^0.18.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "cheerio": "^1.1.2",
+    "playwright": "^1.63.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

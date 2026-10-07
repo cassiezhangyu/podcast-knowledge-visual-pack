@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UnderstandingLossAudit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "episode_content_inventory_sha256", "knowledge_base_sha256", "knowledge_graph_sha256", "unit_dispositions", "detail_dispositions"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "kind": {"const": "understanding_loss_audit"},
+    "status": {"enum": ["partial", "completed"]},
+    "episode_content_inventory_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "knowledge_base_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "knowledge_graph_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "unit_dispositions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/disposition"}},
+    "detail_dispositions": {"type": "array", "items": {"$ref": "#/$defs/disposition"}},
+    "open_questions": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "importance", "disposition", "target_ids", "rationale"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "importance": {"enum": ["core", "supporting", "context"]},
+        "disposition": {"enum": ["graph_core", "graph_support", "retained_explanatory_material", "context_only", "excluded_with_reason", "needs_human_review"]},
+        "target_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "rationale": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

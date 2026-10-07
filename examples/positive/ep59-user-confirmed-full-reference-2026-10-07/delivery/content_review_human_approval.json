@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "kind": "human_approval",
+  "stage": "content_review",
+  "status": "accepted",
+  "artifact_hashes": {
+    "episode_content_inventory": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+    "content_review_document": "6e517aa2074f059407125d619a0be77303072e751062f9245fe8ecd23f267dae",
+    "grounded_transcript": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2"
+  },
+  "reviewed_by": "user",
+  "reviewed_at": "2026-10-02T00:41:25.417Z",
+  "note": "用户在当前对话中对本版《内容梳理》回复“确认”；未批准《内容拆分》或后续图文。"
+}

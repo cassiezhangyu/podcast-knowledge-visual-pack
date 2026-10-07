@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CoverageMatrix", "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "editorial_plan_id", "knowledge_graph_sha256", "entries"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "kind": {"const": "coverage_matrix"}, "editorial_plan_id": {"type": "string", "pattern": "^edp_"}, "knowledge_graph_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "entries": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/entry"}}
+  },
+  "$defs": {"entry": {"type": "object", "additionalProperties": false, "required": ["target", "argument_role", "input_epistemic_status", "input_confidence", "disposition", "rationale", "placements", "review_status"], "properties": {
+    "target": {"type": "object", "additionalProperties": false, "required": ["kind", "id"], "properties": {"kind": {"enum": ["thesis", "core_question", "node", "relationship", "relationship_decision"]}, "id": {"type": "string", "minLength": 1}}},
+    "argument_role": {"enum": ["central", "supporting", "example", "boundary", "counterpoint", "context"]}, "input_epistemic_status": {"enum": ["speaker_explicit", "source_explicit", "episode_synthesis", "model_inference", "not_applicable"]}, "input_confidence": {"enum": ["high", "medium", "low", "not_applicable"]},
+    "disposition": {"enum": ["overview_core", "deep_dive_primary", "deep_dive_support", "contextual_mention", "boundary_retained", "not_paged_with_reason", "guardrail_reference"]}, "rationale": {"type": "string", "minLength": 1},
+    "placements": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["page_id", "coverage", "reason"], "properties": {"page_id": {"type": "string", "pattern": "^edp_"}, "coverage": {"enum": ["mention", "explain", "evidence", "boundary"]}, "reason": {"type": "string", "minLength": 1}}}}, "review_status": {"enum": ["needs_human_review", "accepted", "revise"]}
+  }}}
+}

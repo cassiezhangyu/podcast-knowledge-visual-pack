@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "kind": "content_split_gate",
+  "status": "pass",
+  "episode_content_inventory_sha256": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+  "content_split_sha256": "527ea76c947099a7abb7c2f92a37b496cd54a02e2b9a64543c687705449978e3",
+  "content_split_coverage_sha256": "ca558907617817eb33b05225dc62c1c6f528257b1d7fae207bc6bd6362e68d92",
+  "content_split_document_sha256": "95f8f6eeac07f1c0d75aa7c3984864dd05531a09374bef9955d2740b5ec28af6",
+  "checks": [
+    {
+      "name": "complete_content_disposition",
+      "status": "pass",
+      "details": {
+        "pass": true,
+        "identityValid": true,
+        "invalidModuleOrder": false,
+        "invalidModuleReferences": [],
+        "missingUnitDispositions": [],
+        "missingDetailDispositions": [],
+        "duplicateUnitDispositions": [],
+        "duplicateDetailDispositions": [],
+        "invalidDispositionReferences": []
+      }
+    },
+    {
+      "name": "human_content_split_review",
+      "status": "pass",
+      "details": {
+        "approval_sha256": "0b0fd1c88c9f460228a01daf507326f465a4ca992248c90c6972510a74cb41c4"
+      }
+    }
+  ],
+  "human_review_required": false,
+  "human_review": {
+    "approval_sha256": "0b0fd1c88c9f460228a01daf507326f465a4ca992248c90c6972510a74cb41c4"
+  }
+}

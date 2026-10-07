@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KnowledgeGate",
+  "oneOf": [
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "KnowledgeGateV1Legacy",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "kind",
+        "status",
+        "knowledge_graph_sha256",
+        "checks"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "kind": {
+          "const": "knowledge_gate"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "needs_human_review",
+            "fail"
+          ]
+        },
+        "knowledge_graph_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "needs_human_review"
+                ]
+              },
+              "details": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "high_impact_inference_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "human_review": {
+          "type": "object",
+          "required": [
+            "status",
+            "reviewed_on",
+            "scope"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "pass",
+                "revise"
+              ]
+            },
+            "reviewed_on": {
+              "type": "string",
+              "format": "date"
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "KnowledgeGateV2",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "kind",
+        "status",
+        "knowledge_graph_sha256",
+        "checks",
+        "episode_content_inventory_sha256",
+        "knowledge_base_sha256",
+        "understanding_loss_audit_sha256"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "2.0"
+        },
+        "kind": {
+          "const": "knowledge_gate"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "needs_human_review",
+            "fail"
+          ]
+        },
+        "knowledge_graph_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "needs_human_review"
+                ]
+              },
+              "details": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "high_impact_inference_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "human_review": {
+          "type": "object",
+          "required": [
+            "status",
+            "reviewed_on",
+            "scope"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "pass",
+                "revise"
+              ]
+            },
+            "reviewed_on": {
+              "type": "string",
+              "format": "date"
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "episode_content_inventory_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "knowledge_base_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "understanding_loss_audit_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "human_review_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  ]
+}

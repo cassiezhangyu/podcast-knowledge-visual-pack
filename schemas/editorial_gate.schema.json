@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "title": "EditorialGate", "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "editorial_plan_sha256", "coverage_matrix_sha256", "knowledge_graph_sha256", "knowledge_gate_sha256", "checks", "human_review_required"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "kind": {"const": "editorial_gate"}, "status": {"enum": ["pass", "needs_human_review", "fail"]}, "editorial_plan_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "coverage_matrix_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "knowledge_graph_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "knowledge_gate_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "checks": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["name", "status", "details"], "properties": {"name": {"type": "string", "minLength": 1}, "status": {"enum": ["pass", "fail", "needs_human_review"]}, "details": {"type": "object"}}}}, "human_review_required": {"type": "boolean"},
+    "human_review": {"type": "object", "additionalProperties": false, "required": ["status", "reviewed_on", "scope"], "properties": {"status": {"enum": ["pass", "revise"]}, "reviewed_on": {"type": "string", "format": "date"}, "scope": {"type": "string", "minLength": 1}}}
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "kind": "public_copy_gate",
+  "status": "pass",
+  "public_copy_record_sha256": "9dcc328f070e2925c221c6ddf905574893253fe9952e9161b06e9aa814aecff2",
+  "checks": [
+    {
+      "name": "approval",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "draft",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "final",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "review",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "humanizer",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "aiTrace",
+      "status": "pass",
+      "details": {}
+    },
+    {
+      "name": "fidelity",
+      "status": "pass",
+      "details": {}
+    }
+  ]
+}

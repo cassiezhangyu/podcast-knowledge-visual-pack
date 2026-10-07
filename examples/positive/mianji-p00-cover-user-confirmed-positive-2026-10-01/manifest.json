@@ -1,0 +1,37 @@
+{
+  "kind": "user_confirmed_positive_cover_case",
+  "confirmed_on": "2026-10-01",
+  "approval_scope": "GitHub Skill 封面正例用途；不改写历史独立审核等级",
+  "scene_native_editability": {
+    "image_elements": 0,
+    "embedded_files": 0
+  },
+  "files": [
+    {
+      "path": "cover.png",
+      "bytes": 288993,
+      "sha256": "b659f4075d1c58d2e3b476b9ba54cb921075cc63aa3b4b8a8e958010012d24cd",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "cover-phone.png",
+      "bytes": 84162,
+      "sha256": "b450ad3178837dadbcf15477d3588b8a6cb252c0e1348cb0f08d1fb5712cd676",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "cover-grayscale.png",
+      "bytes": 241348,
+      "sha256": "8a212ee7af9b86e1359eafe996b0ac05f8346132db3101fd5a553fa5f2d7fe14",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "cover.excalidraw",
+      "bytes": 59769,
+      "sha256": "e4b093de68b4cc85a978e108248b1dba4b00483a722f7efe2b28828f82c223ab"
+    }
+  ]
+}

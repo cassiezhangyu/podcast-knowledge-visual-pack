@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KnowledgeHumanReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "reviewed_on", "reviewer", "artifact_hashes", "checks", "decision", "rationale"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "kind": {"const": "knowledge_human_review"},
+    "status": {"enum": ["pass", "revise"]},
+    "reviewed_on": {"type": "string", "format": "date"},
+    "reviewer": {"type": "string", "minLength": 1},
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episode_content_inventory_sha256", "knowledge_base_sha256", "knowledge_graph_sha256", "understanding_loss_audit_sha256"],
+      "properties": {
+        "episode_content_inventory_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "knowledge_base_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "knowledge_graph_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "understanding_loss_audit_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status", "notes"],
+        "properties": {
+          "name": {"enum": ["whole_episode_coverage", "important_claims_and_support", "examples_and_concrete_details", "boundaries_and_counterpoints", "attribution_and_uncertainty", "thesis_and_relationships"]},
+          "status": {"enum": ["pass", "revise"]},
+          "notes": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "decision": {"enum": ["accept_understanding_v2", "revise_understanding_v2"]},
+    "rationale": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Transcript","type":"object","required":["episode_id","duration_ms","segments"],
+  "properties":{"episode_id":{"type":"string"},"duration_ms":{"type":"integer"},"language":{"type":"string"},"segments":{"type":"array","items":{"type":"object","required":["start_ms","end_ms","text"],"properties":{"start_ms":{"type":"integer"},"end_ms":{"type":"integer"},"speaker":{"type":["string","null"]},"text":{"type":"string"},"confidence":{"type":["number","null"]},"flags":{"type":"array","items":{"type":"string"}}}}}}
+}

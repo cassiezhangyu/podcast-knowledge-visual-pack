@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RenderManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "scene_manifest_sha256", "pages", "created_at"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "kind": {"const": "render_manifest"}, "status": {"const": "completed"},
+    "scene_manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "pages": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["page_id", "scene_sha256", "png", "png_sha256", "phone_png", "phone_png_sha256", "grayscale_png", "grayscale_png_sha256"], "properties": {
+      "page_id": {"type": "string"}, "scene_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "png": {"type": "string"}, "png_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "phone_png": {"type": "string"}, "phone_png_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "grayscale_png": {"type": "string"}, "grayscale_png_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      ,"brand_asset_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+    }}},
+    "created_at": {"type": "string", "format": "date-time"}
+  }
+}

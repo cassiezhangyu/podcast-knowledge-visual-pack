@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PipelineError",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "stage", "message", "recoverable"],
+  "properties": {
+    "code": {"enum": ["INVALID_EPISODE_URL", "EPISODE_NOT_FOUND", "METADATA_INCOMPLETE", "AUDIO_UNAVAILABLE", "AUDIO_ACCESS_RESTRICTED", "AUDIO_DOWNLOAD_FAILED", "CACHE_CORRUPT", "SCHEMA_VALIDATION_FAILED", "AUDIO_PRECHECK_FAILED", "AUDIO_NO_SPEECH", "ASR_PROVIDER_UNAVAILABLE", "ASR_SEGMENT_FAILED", "ASR_PROCESS_ERROR", "ASR_EXECUTION_INTERRUPTED", "ASR_CHECKPOINT_CORRUPT", "TRANSCRIPT_GATE_FAILED", "KNOWLEDGE_INPUT_INVALID", "KNOWLEDGE_PROVIDER_UNAVAILABLE", "KNOWLEDGE_PROVIDER_FAILED", "KNOWLEDGE_WINDOW_FAILED", "KNOWLEDGE_GATE_FAILED"]},
+    "stage": {"enum": ["resolve", "acquire", "cache", "validate", "preflight", "segment", "transcribe", "clean", "ground", "transcript_gate", "knowledge_prepare", "knowledge_assemble", "understand", "reconcile", "knowledge_gate"]}, "message": {"type": "string"}, "recoverable": {"type": "boolean"}, "details": {"type": "object"}
+  }
+}

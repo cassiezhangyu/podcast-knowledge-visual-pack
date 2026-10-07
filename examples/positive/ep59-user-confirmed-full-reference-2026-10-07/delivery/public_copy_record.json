@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "kind": "public_copy_record",
+  "status": "completed",
+  "content_split_human_approval_sha256": "72abefd2ef95fd41b9c05df9cbf2e3eb0b220eaed3029f3535a18c17b905c4a8",
+  "draft_sha256": "f8f12400d5cf8e937cbd442ad0042442258d371a56d970f662f115ab72edcbea",
+  "final_sha256": "58c3c60ff410b5ec318e7bec880a03d36af5fceb93685f40ee0c503f90e0ad05",
+  "humanizer": {
+    "status": "completed",
+    "scope": "expression_only"
+  },
+  "ai_trace_review": "pass",
+  "fidelity_regression": "pass"
+}

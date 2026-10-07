@@ -1,0 +1,22 @@
+{
+  "fixture_version": "1.0",
+  "golden_audio_sha256": "23610ab94d4ac46abb4243ebb5fde6f4e8e3200c1b885f4d8cec6638e64f9e94",
+  "anomalies": [
+    {
+      "id": "direct_repetition_opening",
+      "raw_span_ref": "raw_direct_00000",
+      "range_ms": [15260, 22920],
+      "raw_signature": { "repeated_token": "本", "count": 221, "compression_ratio": 36.833333333333336 },
+      "raw_qa_status": "needs_grounding",
+      "grounded_correction": "平时在生活中我们都会遇到一些时刻，一个APP的功能也许并不特别，但"
+    },
+    {
+      "id": "direct_homophone_late",
+      "raw_span_ref": "raw_direct_02800",
+      "range_ms": [4636880, 4638340],
+      "raw_text": "我愿意同入之后",
+      "raw_qa_status": "not_detected_by_compression_rule",
+      "grounded_correction": "我愿意投入之后"
+    }
+  ]
+}

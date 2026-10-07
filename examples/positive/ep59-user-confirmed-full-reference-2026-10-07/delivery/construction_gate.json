@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "kind": "construction_gate",
+  "status": "pass",
+  "construction_plan_sha256": "f1cda60d9471b3adbac0435a94d80e19f1be6a85fe5b5f79d4ca7efbd27fc4b6",
+  "scene_manifest_sha256": "f669b81354706bf843bb31a6f8e3fa8612743c57a8f01333a724d9f36ff2c7c9",
+  "checks": [
+    {
+      "name": "approved_native_assets_and_current_source_binding",
+      "status": "pass",
+      "details": {
+        "import_sha256": "a68dc85a852a7a481a9a5c35937f43275bbf8739c0813c4c859a75b33508f2e5"
+      }
+    },
+    {
+      "name": "real_editor_interaction_review",
+      "status": "pass",
+      "details": {
+        "path": "[本地工作区]/outputs/GitHub开源发布收尾-2026-10-07/latest-EP59/editor-validation/EDITOR_INTERACTION_REVIEW.json",
+        "sha256": "4efa84464bcef4a4aad214bd2d49cebb9f9fe79c8dd2a01a1db99fdcc661d275"
+      }
+    }
+  ],
+  "human_review_required": false
+}

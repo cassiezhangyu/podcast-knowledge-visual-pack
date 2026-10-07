@@ -1,0 +1,270 @@
+{
+  "version": "0.8",
+  "canvas": {
+    "ratio": "3:4",
+    "width": 1200,
+    "height": 1600,
+    "safe_margin": 80,
+    "safe_left": 80,
+    "safe_right": 1120,
+    "top_visible_target": 64,
+    "bottom_visible_target": 68,
+    "outer_vertical_tolerance": 8,
+    "right_text_inner_buffer": 20
+  },
+  "colors": {
+    "background": "#FFFFFF",
+    "surface_neutral": "#F8FAFB",
+    "text_primary": "#2E3B49",
+    "text_secondary": "#6D7882",
+    "primary": "#4B6F8D",
+    "primary_light": "#EEF2F5",
+    "accent": "#8A6748",
+    "accent_light": "#F2EDE7",
+    "line_weak": "#D2D9DE"
+  },
+  "package_palette_policy": {
+    "scope": "one_episode_package",
+    "theme_colors": 2,
+    "roles": [
+      "primary",
+      "secondary"
+    ],
+    "derive_for": [
+      "cover",
+      "overview",
+      "deep_dives",
+      "text_emphasis",
+      "hero_surfaces",
+      "rules"
+    ],
+    "selection_basis": [
+      "episode_tone",
+      "content_objects",
+      "official_brand_asset"
+    ],
+    "constraints": [
+      "select a fresh harmonious primary-secondary pair for each episode",
+      "reuse semantic color roles across the whole package",
+      "do not inherit the previous episode palette by default",
+      "official album art keeps original colors but does not expand the content palette"
+    ],
+    "colors_field_is_fallback_only": true
+  },
+  "typography": {
+    "font_family": "system-cjk-sans",
+    "title": 45,
+    "subtitle": 25,
+    "section": 28,
+    "module": 26,
+    "body": 24,
+    "annotation": 22,
+    "min_readable": 22,
+    "header_meta": 22,
+    "footer_meta": 22,
+    "role_sizes": {
+      "cover_brand": 28,
+      "cover_title": 62,
+      "cover_hook": 42,
+      "cover_support": 26,
+      "overview_title": 45,
+      "overview_thesis": 25,
+      "overview_section": 28,
+      "overview_body": 24,
+      "deep_title": 45,
+      "deep_thesis": 25,
+      "section_entry": 30,
+      "section": 28,
+      "subheading": 26,
+      "body": 24,
+      "annotation": 22,
+      "diagram_label": 23,
+      "object_name": 27,
+      "header_meta": 22,
+      "footer_meta": 22,
+      "page_conclusion": 32
+    },
+    "strong_inner_roles": [
+      "overview_title",
+      "deep_title",
+    "page_conclusion",
+    "section_entry",
+    "overview_section",
+      "section",
+      "subheading"
+    ],
+    "policy": "每个文字元素声明 typography_role；字号严格等于 role_sizes，同句跨行和同级并列使用同角色。容量不足调整布局，未经用户明确授权不缩小字号。"
+  },
+  "cover": {
+    "background": "#FFFFFF",
+    "palette_policy": {
+      "theme_colors_per_episode": 2,
+      "roles": [
+        "primary",
+        "secondary"
+      ],
+      "allow_new_pair_for_next_episode": true,
+      "derive": [
+        "primary_soft",
+        "secondary_soft",
+        "hero_background",
+        "text_primary",
+        "text_secondary",
+        "line_weak"
+      ],
+      "constraints": [
+        "colored text, diagram strokes and fills, hero background, and weak rules reuse the episode palette by semantic role",
+        "hero background is a high-lightness low-saturation derivative, not a third theme color",
+        "official album art keeps original colors but does not expand the page palette"
+      ]
+    },
+    "reference_palette_e248": {
+      "text_primary": "#273545",
+      "text_secondary": "#6C7886",
+      "primary": "#466C8B",
+      "primary_soft": "#DCE7EF",
+      "secondary": "#A56A2C",
+      "secondary_soft": "#EFE3D4",
+      "hero_background": "#EEF2F3",
+      "line_weak": "#C8D1D8"
+    },
+    "safe_margin": {
+      "min": 80,
+      "preferred": 92
+    },
+    "type_scale": {
+      "episode_title": {
+        "min": 62,
+        "max": 62,
+        "weight_role": "heaviest"
+      },
+      "editorial_hook": {
+        "min": 42,
+        "max": 42,
+        "weight_role": "strong"
+      },
+      "hook_support": {
+        "min": 26,
+        "max": 26,
+        "weight_role": "secondary"
+      },
+      "hero_heading": {
+        "min": 28,
+        "max": 28,
+        "weight_role": "secondary"
+      },
+      "hero_copy": {
+        "min": 24,
+        "max": 24,
+        "weight_role": "supporting"
+      },
+      "keyword_value": {
+        "min": 24,
+        "max": 24,
+        "weight_role": "supporting"
+      },
+      "appearance_meta": {
+        "min": 22,
+        "max": 22,
+        "weight_role": "muted"
+      }
+    },
+    "hierarchy": [
+      "episode_title",
+      "editorial_hook",
+      "hero_diagram",
+      "hook_support",
+      "keywords",
+      "appearance_and_duration"
+    ],
+    "hero_surface": {
+      "role": "local_visual_anchor_only",
+      "color_rule": "derive a high-lightness low-saturation color from the episode primary or coordinated primary-secondary mixture",
+      "e248_example": "#EEF2F3",
+      "full_page_mask_allowed": false,
+      "overview_ghost_allowed": false
+    },
+    "brand_asset": {
+      "official_album_art_only": true,
+      "preserve_aspect_ratio": true,
+      "preserve_original_colors": true,
+      "scene_image_elements": 0,
+      "scene_files_entries": 0,
+      "final_composite_requires_sha256": true
+    }
+  },
+  "stroke": {
+    "primary": 2.8,
+    "secondary": 2,
+    "roughness": 2.8,
+    "roughness_object": 2.8,
+    "roughness_rule": 1.1,
+    "roundness": "moderate",
+    "role_settings": {
+      "object": {
+        "strokeWidth": 2.8,
+        "roughness": 2.8
+      },
+      "detail": {
+        "strokeWidth": 2,
+        "roughness": 1.8
+      },
+      "relation": {
+        "strokeWidth": 2.6,
+        "roughness": 3
+      },
+      "connector": {
+        "strokeWidth": 2.2,
+        "roughness": 0.8
+      },
+      "emphasis": {
+        "strokeWidth": 3.2,
+        "roughness": 2.2
+      },
+      "heavy_detail": {
+        "strokeWidth": 4.5,
+        "roughness": 1.6
+      },
+      "rule": {
+        "strokeWidth": 1.8,
+        "roughness": 0.8
+      },
+      "surface": {
+        "strokeWidth": 1.8,
+        "roughness": 1.1
+      },
+      "fill_only": {
+        "strokeWidth": 0,
+        "roughness": 0
+      },
+      "frame": {
+        "strokeWidth": 2,
+        "roughness": 1.1
+      },
+      "accent_detail": {
+        "strokeWidth": 2,
+        "roughness": 2.2
+      },
+      "object_simple": {
+        "strokeWidth": 2.4,
+        "roughness": 1.6
+      }
+    },
+    "policy": "保持对象真实点列，通过 roughness 呈现自然笔触；插图可局部复描，排版线和信息框克制，不添加人为弯曲或平移重描。按语义角色取参数。"
+  },
+  "spacing": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58,
+    "text_to_rule_min": 12,
+    "text_to_object_line_min": 20
+  },
+  "semantics": {
+    "ink": "论点、证据、案例细节与必要边界的正文",
+    "primary": "导航和关键层级；具体内容含义在每期构图前声明",
+    "accent": "本期论证需要区分的另一类信息；具体含义在构图前声明",
+    "weak": "辅助背景、来源和导航；不得承载必要证据或边界"
+  }
+}

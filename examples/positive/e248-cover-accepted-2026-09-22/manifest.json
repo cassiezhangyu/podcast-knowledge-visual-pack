@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "example_id": "e248-cover-accepted-2026-09-22",
+  "status": "accepted",
+  "user_accepted_at": "2026-09-22",
+  "canvas": {
+    "width": 1200,
+    "height": 1600,
+    "background": "#FFFFFF"
+  },
+  "files": {
+    "png": "cover.png",
+    "phone": "cover-phone.png",
+    "scene": "cover.excalidraw",
+    "official_album_mark": "official-album-mark.png"
+  },
+  "scene_contract": {
+    "native_excalidraw_only": true,
+    "image_elements": 0,
+    "files_entries": 0
+  },
+  "sha256": {
+    "png": "0b9da4e0b580348eb0158df1519f0633637e4f9d7de27455fc9febc6faf704cd",
+    "phone": "5bed3d9e12583130f52512010996cdc80bf088e79360014f2c2a7b1d7ca80959",
+    "scene": "1ba2f738a548b171050f76b3d1436ba5ff4991bee7161497b61f6ee49cbc1a9f",
+    "official_album_mark": "efd299be57d7baa688a587cae6630d8836f64210492a87236a15ef9cc61c3b7e"
+  }
+}

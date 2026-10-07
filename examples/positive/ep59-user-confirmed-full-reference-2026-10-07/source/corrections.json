@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "policy_version": "1.0",
+  "corrections": [
+    {
+      "id": "verbatim_raw_direct_02168",
+      "affected_span_ref": "raw_direct_02168",
+      "corrected": "啥啥啥啥啥啥",
+      "resolution": "verbatim_confirmed",
+      "reason": "用户提供的原文逐字保留此口语占位重复；仅确认本段文本，不声称已完成整期音频人工听证",
+      "evidence": [
+        {
+          "kind": "user_verbatim_excerpt",
+          "path": "05-qa/user-verbatim-55m.txt",
+          "raw_span_id": "raw_direct_02168",
+          "sha256": "cba97a5e87657f5c6da88a85d832b1085ff30186e4450be1b6fa62d069387760",
+          "origin": "user_attachment"
+        }
+      ],
+      "confidence": 0.8,
+      "review_status": "applied",
+      "original": "啥啥啥啥啥啥"
+    },
+    {
+      "id": "verbatim_raw_direct_04230",
+      "affected_span_ref": "raw_direct_04230",
+      "corrected": "欢迎啥啥啥啥啥啥",
+      "resolution": "verbatim_confirmed",
+      "reason": "用户提供的原文逐字保留此口语占位重复；仅确认本段文本，不声称已完成整期音频人工听证",
+      "evidence": [
+        {
+          "kind": "user_verbatim_excerpt",
+          "path": "05-qa/user-verbatim-106m.txt",
+          "raw_span_id": "raw_direct_04230",
+          "sha256": "9a83bfb71f84ed4a131acbf3dea8d3e85504ca423f7e19dbd4f4bf925372ef54",
+          "origin": "user_attachment"
+        }
+      ],
+      "confidence": 0.8,
+      "review_status": "applied",
+      "original": "欢迎啥啥啥啥啥啥"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
+import { validateAlbumArt, type PageSpec } from "./construction.js";
 
 type R = Record<string, unknown>;
 const read = <T>(path: string) => JSON.parse(readFileSync(path, "utf8")) as T;
@@ -22,6 +23,9 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
   validateArtifact("scene_manifest", manifest); validateArtifact("construction_plan", constructionPlan); validateArtifact("construction_gate", constructionGate); validateArtifact("construction_spec", constructionSpec);
   if (constructionGate.construction_plan_sha256 !== hashJson(constructionPlan) || constructionGate.scene_manifest_sha256 !== hashJson(manifest) || (constructionPlan.input as R).construction_spec_sha256 !== hashJson(constructionSpec)) fail("Construction inputs changed after the gate was created.");
   if (!(constructionGate.status === "needs_human_review" || constructionGate.status === "pass")) fail("Construction Gate does not permit rendering.");
+  const tokens = read<R>(join(process.cwd(), "design_tokens.json"));
+  const brandSettings = (tokens.cover as R)?.brand_asset as R | undefined;
+  validateAlbumArt(constructionSpec.pages as PageSpec[], constructionSpec.album_art_policy as string | undefined, brandSettings?.box as { x: number; y: number; width: number; height: number } | undefined);
   const pages = (manifest.pages as R[]).filter((page) => !onlyPages || onlyPages.includes(page.page_id as string));
   if (!pages.length || onlyPages?.some((id) => !pages.some((page) => page.page_id === id))) fail("No matching scenes were selected for rendering.");
   mkdirSync(out, { recursive: true }); mkdirSync(join(out, "checks"), { recursive: true });

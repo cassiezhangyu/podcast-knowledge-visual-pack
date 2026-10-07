@@ -33,6 +33,22 @@ const fail = (message: string, details?: R): never => {
 };
 const seed = (key: string) => Number.parseInt(hash(key).slice(0, 8), 16);
 
+export function validateAlbumArt(specs: PageSpec[], policy?: string, box?: { x: number; y: number; width: number; height: number }) {
+  for (const spec of specs) {
+    const brand = spec.brand_asset;
+    if (!brand) {
+      if (policy === "all_pages") fail("每页必须声明官方专辑封面。", { page_id: spec.page_id });
+      continue;
+    }
+    if (![brand.x, brand.y, brand.width, brand.height].every(Number.isFinite) || brand.x < 0 || brand.y < 0 || brand.width <= 0 || brand.height <= 0 || brand.x + brand.width > PAGE.width || brand.y + brand.height > PAGE.height) fail("官方专辑封面超出画布或尺寸无效。", { page_id: spec.page_id });
+    if (policy === "all_pages") {
+      const first = specs[0].brand_asset;
+      if (!first || brand.relative_path !== first.relative_path || brand.sha256 !== first.sha256) fail("同一材料包必须使用同一官方专辑封面。", { page_id: spec.page_id });
+      if (box && ["x", "y", "width", "height"].some(key => brand[key as keyof typeof box] !== box[key as keyof typeof box])) fail("官方专辑封面位置与尺寸不符合当前设计参数。", { page_id: spec.page_id });
+    }
+  }
+}
+
 function inputs(workspace: string) {
   const source = join(workspace, "00-source");
   const understanding = join(workspace, "01-understanding");
@@ -76,9 +92,8 @@ function resolvePages(state: ReturnType<typeof inputs>): Page[] {
   const expected = expectedPageIds(state.editorial);
   if (specs.map((page) => page.page_id).join("|") !== expected.join("|")) fail("Construction pages do not match the approved editorial package.", { expected, actual: specs.map((page) => page.page_id) });
   if (specs[0]?.page_kind !== "cover" || specs[0]?.display_order !== 0 || specs[0]?.selected_candidate_id !== null) fail("The first construction page must be the cover with no visual candidate id.");
-  if (specs.slice(1).some((page) => page.brand_asset)) fail("Official album art may only be declared on the cover.");
-  const brand = specs[0]?.brand_asset;
-  if (brand && (brand.x + brand.width > PAGE.width || brand.y + brand.height > PAGE.height)) fail("Official album art placement exceeds the cover canvas.");
+  const brandSettings = (state.tokens.cover as R)?.brand_asset as R | undefined;
+  validateAlbumArt(specs, state.specification.album_art_policy as string | undefined, brandSettings?.box as { x: number; y: number; width: number; height: number } | undefined);
   const byCandidate = new Map((state.candidates.pages as R[]).flatMap((page) => (page.candidates as R[]).map((candidate) => [candidate.candidate_id as string, candidate])));
   const selections = state.selected.selections as R[];
   return specs.map((spec) => {

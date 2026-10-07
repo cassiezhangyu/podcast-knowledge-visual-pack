@@ -4,10 +4,12 @@
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "kind", "status", "input", "pages"],
+  "allOf": [{"if": {"required": ["album_art_policy"]}, "then": {"properties": {"pages": {"items": {"required": ["brand_asset"]}}}}}],
   "properties": {
     "schema_version": {"const": "1.0"},
     "kind": {"const": "construction_spec"},
     "status": {"const": "completed"},
+    "album_art_policy": {"const": "all_pages"},
     "input": {
       "type": "object",
       "additionalProperties": false,

@@ -43,7 +43,7 @@ Hierarchy, reading path, main explanatory structure, explanatory value, density/
 
 ## Per-page gate and revision evidence
 
-Follow `rules/cover_page_production.md` for Cover and `rules/page_visual_production.md` for every Overview and Deep Dive. A page may enter Human Review only with a current original-size PNG, its matching editable scene, content coverage, sentence review, graphic-object review, series-contract check and mechanical results. Cover 使用官方专辑图时还必须提交品牌资产来源、哈希和最终合成记录。保持needs_human_review直到用户明确验收当前版本。默认三案选择模式在用户选定当前候选后开始下一页，所选 `REJECT-B` 保留质量待办并阻断正式发布；用户明确改用单案逐页确认或批量制作时按visual_pack_execution执行，不自动写入accepted。
+Follow `rules/cover_page_production.md` for Cover and `rules/page_visual_production.md` for every Overview and Deep Dive. A page may enter Human Review only with a current original-size PNG, its matching editable scene, content coverage, sentence review, graphic-object review, series-contract check and mechanical results. 全页官方专辑封面必须提交品牌资产来源、哈希和最终合成记录，实际核对同包身份一致、位置尺寸和标题避让。保持needs_human_review直到用户明确验收当前版本。默认三案选择模式在用户选定当前候选后开始下一页，所选 `REJECT-B` 保留质量待办并阻断正式发布；用户明确改用单案逐页确认或批量制作时按visual_pack_execution执行，不自动写入accepted。
 
 The creator cannot award the Visual Gate. Follow `rules/independent_visual_review.md`: a context-isolated, read-only reviewer must compare the rendered page with the accepted positive reference and return `TARGET` before Human Review. If isolation is unavailable, keep `independent_review_required`; never substitute creator self-review.
 

@@ -119,6 +119,8 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 每次拆页都要留下理由：指出当前页无法同时容纳的独立问题、论证路径或必留证据，并说明为什么合并会造成信息折损或手机阅读失败。不得因为上一模块拆成多页，就沿用相同页数。
 
 ## 8. Phase 6 — Visual Reasoning
+编辑标题默认用具体陈述，非必要不用问句；标题、核心结论和副标题各司其职，句式随内容变化。拟定和终校标题时执行 `rules/page_visual_production.md → 通用标题表达`，内部 `page_question` 不直接作为成图标题；官方单集标题与必要的来源问题保持忠实。
+
 开始新节目第一张正式视觉页前，必须在当前对话展示 `assets/color-library.png` 色卡，等待用户选择 01–12 中的一组或给出自定义主辅色；色值以 `assets/color-library.json` 为准。用户明确要求重选颜色或指出本次未经历选色确认时，即使文件中已有旧选择，也要再次展示色卡并等待新的选择，旧 `selected_palette.json` 此时仅作历史记录。不要把色卡授权、其他节目的配色、历史默认值或助手的推荐视为本次选择。用户在**当前这次选色步骤**回答后，将色库版本、编号、实际 HEX、正文色、派生浅底色、选择日期和用户原话写入本集 `selected_palette.json`，再用于 construction spec 与 scene。一个制作周期内后续页面沿用已选颜色，不逐页重复询问；用户改选时重新记录并重检受影响页面。编号按白底知识信息图的通用适用性排序，不代表对每期内容的绝对审美判定。用中深色强调关键文字与线条，以同色高明度浅阶铺面；辅色只作局部提示，正文保持深色。这里的“弹出”是在对话中显示色卡并等待选择，不依赖系统弹窗。
 
 **选色先于构图。** 本集 `selected_palette.json` 必须在第一张 scene 生成前存在；每张新画或重画的页面都在当版 `REFERENCE_PREFLIGHT.json` 记录该文件路径、SHA-256、实际色值和颜色职责，并核对 scene 使用的是同一组 HEX。换色后重做受影响页的预检、渲染和颜色语义审查。持续使用已选配色不意味着每张图都让用户重新选一次。
@@ -140,7 +142,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 每次构图、字号精修和送审必须执行 `rules/typography_hierarchy.md`。字号唯一读取 `design_tokens.json → typography.role_sizes`；所有文字声明 `customData.typography_role`，内页主标题、结论、模块／栏目入口按该规则形成可见强字重，副标题不得误用辅助弱色。构建后运行 `python3 scripts/check_typography.py <scene或scene目录> --design-tokens <当前design_tokens.json>`；若报单行宽度风险，先换行或重分空间。脚本通过后仍要与正例并排核对原图、390px 与灰度图的颜色、字重、阅读层级和每处文字到边框的真实间距，不能用 scene 宽度宣告无越界。
 1. Cover 先完成 `COVER_BRIEF.md`；所有页以当前内容规划、视觉方案和 token 哈希生成 `02-visual-plan/construction_spec.json`，显式记录原生图元、几何、来源与构图职责。内页保持外围语法，正文按问题决定，不复制旧坐标或对象。
-2. 正式内容图仅使用原生可编辑元素：`image` 为0、`files` 为空。封面官方专辑图仅可按封面协议在导出时确定性合成，记录来源、尺寸、位置与哈希。运行 `npm run construct -- --workspace <workspace>`；再按 `docs/RENDER_BROWSER_ENVIRONMENT.md` 用已验证权限执行 `npm run render:checked -- --workspace <workspace>`，同一scene导出原图、390px与灰度。局部渲染也先通过同环境 `npm run render:preflight`；预检失败即停止。
+2. 正式内容图仅使用原生可编辑元素：`image` 为0、`files` 为空。全套每页右上角均放对应官方专辑封面；按 `rules/inner_page_module_contract.md` 的品牌合同，在导出时确定性合成并记录来源、尺寸、位置与哈希。新 `construction_spec` 声明 `album_art_policy: "all_pages"`，每页填写同一 `brand_asset`。运行 `npm run construct -- --workspace <workspace>`；再按 `docs/RENDER_BROWSER_ENVIRONMENT.md` 用已验证权限执行 `npm run render:checked -- --workspace <workspace>`，同一scene导出原图、390px与灰度。局部渲染也先通过同环境 `npm run render:preflight`；预检失败即停止。
 3. 真实打开全部scene，验证文字、对象、组及适用的绑定箭头编辑；无绑定箭头时明确记录不适用。中文字形、换行、边界与碰撞以真实PNG为准，不能由静态坐标代证。实际操作完成后运行 `npm run construction:closeout -- --workspace <workspace>`。
 4. 完整出图后按 `rules/page_visual_production.md` 对照内容包、正反例和真实像素，保存绑定当前scene/PNG的 `RENDERED_PAGE_CHECK.md/json`；覆盖、图形解释、参考比较、文字几何与手机可读性任一失败则保持 `rejected_by_creator`。返工后重新渲染并重跑受影响层；不能以更整洁为理由丢失案例、条件或边界。
 5. 对象的整体识别、部件装配、状态、归属与视觉权重按逐页规则检查；图文结合必须增加理解。只有可隔离局部问题才按对应页协议进入 `SCOPED_REPAIR`，冻结基线及允许元素、验证其余未变、重渲整页并隔离审核；新增主结构仍从原型开始。
@@ -168,7 +170,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 ## 11. Phase 9 — Package Review
 
 按 `rules/visual_pack_execution.md` 的整包精修与交付版本流程横向审查，含主标题策略、模块标题与提纲编号、导航底色、线条密度和设计通过后的首读文案终校。先逐句核验七层语义职责，再核验字号和真实像素；任何改字都由当前 scene 重渲并复看原图、390px 与灰度图，局部审查不升级原整体等级。所有内容、伴读文案和报告完成后再冻结清单、当前规范快照与ZIP，逐文件核对目录和压缩包的hash，禁止混装历史版本。
-先按 `rules/public_copy_production.md` 完成小红书草稿、Humanizer 表达处理、AI 痕迹人工检查和忠实度回归，运行 `npm run public-copy:check -- --workspace <workspace>`。Humanizer 只处理表达层，不承担内容理解或事实修复。
+伴读文案围绕有来源的分享主线自然展开，避免逐模块报目录，并匹配实际交付范围；单页总览作为最终交付时，也配套标题、正文和话题。先按 `rules/public_copy_production.md` 完成小红书草稿、Humanizer 表达处理、AI 痕迹人工检查和忠实度回归，运行 `npm run public-copy:check -- --workspace <workspace>`。Humanizer 只处理表达层，不承担内容理解或事实修复。
 正式打包用 `npm run package` 的文案门禁；集中查看包或限质包采用手工归档时，打 ZIP 前还须按 `rules/visual_pack_execution.md` 运行 `npm run public-copy:bundle-check`，核对归档中的五份伴读文件与当前 `06-delivery` 一致。缺失时不得宣称整包交付完成。
 
 检查：
@@ -234,7 +236,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 - Visual Gate 为 REJECT-A/B；
 - 缺少隔离审核，或隔离审核尚未达到 `TARGET`；
 - 页面存在严重溢出/遮挡/不可读字号。
-- 页面 scene 含任何嵌入位图、`image` 元素或非空 `files`；封面官方专辑图的受控导出例外必须有来源与哈希，其他位图一律禁止。
+- 页面 scene 含任何嵌入位图、`image` 元素或非空 `files`；全页官方专辑封面的受控导出例外必须有来源与哈希，其他位图一律禁止。
 - 创作者没有留下可核对的内容、案例与审美联合预检记录。
 - 联合预检声称拒绝的失败模式仍出现在当前真实 PNG，或关键对象连同必要短标签仍无法辨认、与正文结合后仍无解释增益。
 - 默认逐页确认模式下，当前页尚未获用户通过且不满足获准限质继续条件就开始下一页。已授权批量模式按visual_pack_execution执行；各模式均不得把未获验收页面记为accepted，或让未满足条件的正式发布门禁放行。

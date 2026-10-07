@@ -185,6 +185,8 @@
       "overview_ghost_allowed": false
     },
     "brand_asset": {
+      "scope": "all_pages",
+      "box": { "x": 976, "y": 64, "width": 144, "height": 144 },
       "official_album_art_only": true,
       "preserve_aspect_ratio": true,
       "preserve_original_colors": true,

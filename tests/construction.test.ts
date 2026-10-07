@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { validateArtifact } from "../src/validate.js";
-import { materializePageElements, validatePersistedScene, type PageSpec } from "../src/construction.js";
+import { materializePageElements, validatePersistedScene, validateAlbumArt, type PageSpec } from "../src/construction.js";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -17,6 +17,26 @@ const fileFor = (elements: unknown[]) => {
 };
 
 describe("Sprint 06 native construction", () => {
+  it("允许全页官方封面，并拒绝漏页、混用素材、位置不一致和越界", () => {
+    const box = { x: 976, y: 64, width: 144, height: 144 };
+    const brand = { ...box, relative_path: "00-source/official-album.png", sha256: hash };
+    const pages: PageSpec[] = [
+      { ...coverSpec, brand_asset: { ...brand } },
+      { ...coverSpec, page_id: "overview", page_kind: "overview", display_order: 1, brand_asset: { ...brand } },
+      { ...coverSpec, page_id: "deep", page_kind: "deep_dive", display_order: 2, brand_asset: { ...brand } },
+    ];
+    expect(() => validateAlbumArt(pages, "all_pages", box)).not.toThrow();
+    expect(() => validateAlbumArt([pages[0], { ...pages[1], brand_asset: undefined }], "all_pages", box)).toThrow(/每页/);
+    expect(() => validateAlbumArt([pages[0], { ...pages[1], brand_asset: { ...brand, sha256: "b".repeat(64) } }], "all_pages", box)).toThrow(/同一/);
+    expect(() => validateAlbumArt([pages[0], { ...pages[1], brand_asset: { ...brand, width: 140 } }], "all_pages", box)).toThrow(/设计参数/);
+    expect(() => validateAlbumArt([{ ...pages[0], brand_asset: { ...brand, x: 1190 } }], "all_pages", box)).toThrow(/画布/);
+    expect(() => validateAlbumArt([coverSpec])).not.toThrow();
+    const input = Object.fromEntries(["episode_metadata_sha256", "editorial_plan_sha256", "selected_visual_plan_sha256", "visual_gate_sha256", "design_tokens_sha256"].map(key => [key, hash]));
+    const artifact = { schema_version: "1.0", kind: "construction_spec", status: "completed", album_art_policy: "all_pages", input, pages: pages.map(page => ({ ...page, elements: [{ id: "paper", type: "rectangle", x: 0, y: 0, width: 1200, height: 1600, role: "canvas_background" }] })) };
+    expect(() => validateArtifact("construction_spec", artifact)).not.toThrow();
+    delete (artifact.pages[1] as Partial<PageSpec>).brand_asset;
+    expect(() => validateArtifact("construction_spec", artifact)).toThrow();
+  });
   it("requires Composition Intent and selected source links without a preview cache", () => {
     const page = { page_id: "p", scene_key: "p.excalidraw", grammar: "spatial_relation", selected_candidate_id: "vca_p", source_mappings: [], semantic_guardrails: [], composition_intent: { dominant_gesture: "a", visual_center_of_gravity: "b", scale_contrast: "c", density_rhythm: "d", directional_energy: "e", asymmetry_balance_intent: "f", local_irregularity_allowance: "g" } };
     const plan = { schema_version: "1.0", kind: "construction_plan", status: "completed", construction_plan_id: "cp_test", input: { selected_visual_plan_sha256: hash, visual_gate_sha256: hash, design_tokens_sha256: hash, construction_spec_sha256: hash }, pages: Array.from({ length: 3 }, (_, i) => ({ ...page, page_id: `p${i}` })), created_at: "2026-09-18T00:00:00.000Z" };

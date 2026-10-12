@@ -55,7 +55,7 @@
     },
     "pages": {
       "type": "array",
-      "minItems": 2,
+      "minItems": 1,
       "maxItems": 18,
       "items": {
         "type": "object",

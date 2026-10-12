@@ -21,3 +21,13 @@ describe("导入与打包遵守 production_scope", () => {
     expect(deliveryPageName(e, "edp_dd_a", 1)).toBe("03-a");
   });
 });
+
+import { validateArtifact } from "../src/validate.js";
+describe("单页范围的清单 schema", () => {
+  it("overview_only 单页 scene_manifest 通过；空清单仍拒绝", () => {
+    const page = { page_id: "edp_overview_x", file: "a.excalidraw", sha256: "a".repeat(64), element_count: 1, source_mappings: [], element_index: [{ id: "e" }], composition_fingerprint: "f" };
+    const m: any = { schema_version: "1.0", kind: "scene_manifest", status: "completed", adapter: { package: "@excalidraw/excalidraw", version: "x", format_version: 2 }, pages: [page], created_at: new Date().toISOString() };
+    expect(() => validateArtifact("scene_manifest", m)).not.toThrow();
+    m.pages = []; expect(() => validateArtifact("scene_manifest", m)).toThrow();
+  });
+});

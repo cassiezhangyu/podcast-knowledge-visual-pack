@@ -203,42 +203,42 @@
   "stroke": {
     "primary": 2.8,
     "secondary": 2,
-    "roughness": 0.9,
-    "roughness_object": 0.9,
-    "roughness_rule": 0.3,
+    "roughness": 1.5,
+    "roughness_object": 1.5,
+    "roughness_rule": 0.5,
     "roundness": "moderate",
     "role_settings": {
       "object": {
         "strokeWidth": 2.8,
-        "roughness": 0.9
+        "roughness": 1.5
       },
       "detail": {
         "strokeWidth": 2,
-        "roughness": 0.6
+        "roughness": 1.1
       },
       "relation": {
         "strokeWidth": 2.6,
-        "roughness": 0.9
+        "roughness": 1.4
       },
       "connector": {
         "strokeWidth": 2.2,
-        "roughness": 0.4
+        "roughness": 0.7
       },
       "emphasis": {
         "strokeWidth": 3.2,
-        "roughness": 0.8
+        "roughness": 1.3
       },
       "heavy_detail": {
         "strokeWidth": 4.5,
-        "roughness": 0.6
+        "roughness": 1.1
       },
       "rule": {
         "strokeWidth": 1.8,
-        "roughness": 0.3
+        "roughness": 0.5
       },
       "surface": {
         "strokeWidth": 1.8,
-        "roughness": 0.5
+        "roughness": 0.8
       },
       "fill_only": {
         "strokeWidth": 0,
@@ -246,18 +246,18 @@
       },
       "frame": {
         "strokeWidth": 2,
-        "roughness": 0.5
+        "roughness": 0.9
       },
       "accent_detail": {
         "strokeWidth": 2,
-        "roughness": 0.8
+        "roughness": 1.3
       },
       "object_simple": {
         "strokeWidth": 2.4,
-        "roughness": 0.6
+        "roughness": 1.2
       }
     },
-    "policy": "保持对象真实点列，用低 roughness（≤0.9）呈现干净的手绘笔触，避免颤抖感和平行双线描边；插图可局部复描，排版线和信息框克制，不添加人为弯曲或平移重描。按语义角色取参数。（2026-10-12 用户反馈：线条像手在颤抖。）"
+    "policy": "保持对象真实点列，用中等 roughness 呈现清楚的手绘单线：对象 1.5、关系 1.4、强调 1.3、细节 1.1、信息框 0.9、连接线 0.7、规则线 0.5。不要高到颤抖/平行双线（旧值 2.8–3），也不要低到失去手绘感（V6 的 ≤0.9）。按语义角色取参数。（2026-10-12 用户两次反馈校准。）"
   },
   "spacing": {
     "xs": 8,

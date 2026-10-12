@@ -255,9 +255,13 @@
       "object_simple": {
         "strokeWidth": 2.4,
         "roughness": 1.4
+      },
+      "curve": {
+        "strokeWidth": 2.6,
+        "roughness": 0.9
       }
     },
-    "policy": "按已通过样稿 examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26 并排校准：信息框、排版横线与导航边界 roughness=1.1（frame/rule/surface），只用于具体插图对象与语义关系箭头的较强笔触 2.0；细节 1.4、强调 1.6、连接线 0.8。颤抖感主要来自把信息框按插图对象（2.8）绘制——信息框一律用 frame 角色。不得出现整段平行双线，也不能低到失去手绘感。（2026-10-12 用户两次反馈后校准。）"
+    "policy": "按已通过样稿 examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26 并排校准：信息框、排版横线与导航边界 roughness=1.1（frame/rule/surface），只用于具体插图对象与语义关系箭头的较强笔触 2.0；细节 1.4、强调 1.6、连接线 0.8。颤抖感主要来自把信息框按插图对象（2.8）绘制——信息框一律用 frame 角色。不得出现整段平行双线，也不能低到失去手绘感。（2026-10-12 用户两次反馈后校准。） 曲线（圆弧、环形箭头）用 curve 角色：roughness 0.9、少量控制点并开启平滑（roundness type 2），单线；折线逐段叠加高 roughness 会显得颤抖。（2026-10-12 用户：“圆弧线条还是在抖”。）"
   },
   "spacing": {
     "xs": 8,

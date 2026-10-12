@@ -3,6 +3,7 @@ import { readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
+import { packetPageId } from "./review-packet.js";
 type R = Record<string, unknown>;
 const args = process.argv.slice(2), value = (name: string) => { const index = args.indexOf(name); return index === -1 ? undefined : args[index + 1]; };
 const values = (name: string) => args.flatMap((arg, index) => arg === name && args[index + 1] ? [args[index + 1]] : []);
@@ -19,11 +20,11 @@ try {
   if (review.render_manifest_sha256 !== hash(manifest)) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "独立审核绑定的 render manifest 已失效。", false);
   const reviewPages = review.pages as R[], manifestPages = manifest.pages as R[];
   const packets = packetPaths.map((path) => ({ path, value: read<R>(path), sha256: fileHash(path) }));
-  if (packets.length !== manifestPages.length || new Set(packets.map(({ value }) => value.page_id)).size !== manifestPages.length) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "每张当前页面都必须有唯一的隔离审核输入包。", false);
+  if (packets.length !== manifestPages.length || new Set(packets.map(({ value }) => packetPageId(value))).size !== manifestPages.length) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "每张当前页面都必须有唯一的隔离审核输入包。", false);
   for (const page of manifestPages) {
     const result = reviewPages.find((item) => item.page_id === page.page_id);
     if (!result || result.png_sha256 !== page.png_sha256) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "独立审核未绑定全部当前 PNG。", false, { page_id: page.page_id });
-    const packet = packets.find(({ value }) => value.page_id === page.page_id);
+    const packet = packets.find(({ value }) => packetPageId(value) === page.page_id);
     const current = packet?.value.current as R | undefined;
     if (!packet || packet.value.kind !== "independent_visual_review_packet" || result.review_packet_sha256 !== packet.sha256 || !current || (current.png as R)?.sha256 !== page.png_sha256 || (current.phone as R)?.sha256 !== page.phone_png_sha256 || (current.scene as R)?.sha256 !== page.scene_sha256 || typeof packet.value.preflight_sha256 !== "string" || typeof packet.value.rendered_page_check_sha256 !== "string") throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "隔离审核输入包与当前 scene、PNG、预检、自检或审核报告不匹配。", false, { page_id: page.page_id });
     if (typeof packet.value.creator_context_id !== "string" || packet.value.creator_context_id.length < 2 || packet.value.creator_context_id === review.reviewer_context_id) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "创作者与隔离审核者必须来自不同的执行上下文。", false, { page_id: page.page_id });

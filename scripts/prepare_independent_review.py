@@ -15,6 +15,11 @@ def asset(path_string: str) -> dict:
     return {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
 
 
+def packet_page_ids(page_id: str, manifest_page_id: str | None) -> dict:
+    """审核包页号：page_id 用于核对预检/自检（如 P01）；manifest_page_id 与渲染清单页号一致，供 closeout/import 匹配。"""
+    return {"page_id": page_id, "manifest_page_id": manifest_page_id or page_id}
+
+
 def require_text(value: object, field: str) -> None:
     if not isinstance(value, str) or len(value.strip()) < 8:
         raise SystemExit(f"联合预检缺少具体记录：{field}")
@@ -116,6 +121,7 @@ def check_rendered_page(path_string: str, args: argparse.Namespace, scene: dict,
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--page-id", required=True)
+    parser.add_argument("--manifest-page-id", default=None, help="渲染清单中的页号（如 edp_overview_…）；缺省同 --page-id")
     parser.add_argument("--role", required=True, choices=["cover", "overview", "deep_dive"])
     parser.add_argument("--creator-context-id", required=True)
     parser.add_argument("--scene", required=True)
@@ -165,7 +171,7 @@ def main() -> None:
     page_check = check_rendered_page(args.page_check, args, scene_asset, png)
     packet = {
         "kind": "independent_visual_review_packet",
-        "page_id": args.page_id,
+        **packet_page_ids(args.page_id, args.manifest_page_id),
         "role": args.role,
         "creator_context_id": args.creator_context_id,
         "creator_notes_included": False,

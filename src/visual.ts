@@ -67,7 +67,8 @@ function inputState(workspace: string) {
 
 function eligiblePages(plan: RecordValue): RecordValue[] {
   const packageValue = plan.package as RecordValue;
-  return [packageValue.overview as RecordValue, ...((packageValue.overview_continuations as RecordValue[] | undefined) ?? []), ...packageValue.deep_dives as RecordValue[]];
+  const scope = (packageValue.production_scope as RecordValue | undefined)?.pages as string[] | undefined ?? ["cover", "overview", "deep_dive"];
+  return [...(scope.includes("overview") ? [packageValue.overview as RecordValue, ...((packageValue.overview_continuations as RecordValue[] | undefined) ?? [])] : []), ...(scope.includes("deep_dive") ? packageValue.deep_dives as RecordValue[] : [])];
 }
 
 function allowedPageSources(page: RecordValue, plan: RecordValue, graph?: RecordValue) {

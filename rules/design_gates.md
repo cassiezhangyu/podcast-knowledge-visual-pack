@@ -52,3 +52,7 @@ Route failures to the earliest failed layer. Rebuild the visual model for struct
 ## 精修与交付的独立检查
 
 执行visual_pack_execution：语义角色、参数一致性、当前像素分开验；整页结论必须回答主问题。样稿批准仅授权所述迁移，不是全包验收。局部审核通过只证明该范围，不替代完整Visual Gate。Package Gate核验选定页版本、当前规范快照、来源范围、文案与审核报告，目录/manifest/ZIP必须一致，旧整体评级只能保留为标有依据版本的历史记录。
+
+## 生产范围
+
+`production_scope` 只决定制作哪些页面，不放宽任何门禁。范围内的每一页照常执行 Gate 0–4；范围外的页面不进入构图、渲染和交付，它们的细节在 coverage matrix 里记为 `deferred_out_of_scope`，必须可追溯。

@@ -84,14 +84,23 @@ function expectedPageIds(editorial: R) {
   const overview = packageValue.overview as R;
   const deep = packageValue.deep_dives as R[];
   const continuations = (packageValue.overview_continuations as R[] | undefined) ?? [];
-  return ["cover", overview.page_id as string, ...continuations.map((page) => page.page_id as string), ...deep.map((page) => page.page_id as string)];
+  const scope = productionScopePages(editorial);
+  return [...(scope.includes("cover") ? ["cover"] : []), ...(scope.includes("overview") ? [overview.page_id as string, ...continuations.map((page) => page.page_id as string)] : []), ...(scope.includes("deep_dive") ? deep.map((page) => page.page_id as string) : [])];
+}
+
+/** 用户指定的生产范围；缺省为整包（cover + overview + deep_dive），保持原有行为。 */
+export function productionScopePages(editorial: R): string[] {
+  const scope = (editorial.package as R).production_scope as R | undefined;
+  return scope ? (scope.pages as string[]) : ["cover", "overview", "deep_dive"];
 }
 
 function resolvePages(state: ReturnType<typeof inputs>): Page[] {
   const specs = (state.specification.pages as PageSpec[]).slice().sort((a, b) => a.display_order - b.display_order);
   const expected = expectedPageIds(state.editorial);
   if (specs.map((page) => page.page_id).join("|") !== expected.join("|")) fail("Construction pages do not match the approved editorial package.", { expected, actual: specs.map((page) => page.page_id) });
-  if (specs[0]?.page_kind !== "cover" || specs[0]?.display_order !== 0 || specs[0]?.selected_candidate_id !== null) fail("The first construction page must be the cover with no visual candidate id.");
+  const coverInScope = productionScopePages(state.editorial).includes("cover");
+  if (coverInScope && (specs[0]?.page_kind !== "cover" || specs[0]?.display_order !== 0 || specs[0]?.selected_candidate_id !== null)) fail("The first construction page must be the cover with no visual candidate id.");
+  if (!coverInScope && specs.some((page) => page.page_kind === "cover")) fail("Production scope excludes the cover; construction must not include a cover page.");
   const brandSettings = (state.tokens.cover as R)?.brand_asset as R | undefined;
   validateAlbumArt(specs, state.specification.album_art_policy as string | undefined, brandSettings?.box as { x: number; y: number; width: number; height: number } | undefined);
   const byCandidate = new Map((state.candidates.pages as R[]).flatMap((page) => (page.candidates as R[]).map((candidate) => [candidate.candidate_id as string, candidate])));

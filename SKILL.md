@@ -34,7 +34,29 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 ## 1. Input Contract
 必填：`episode_url`。
-可选：`focus`, `audience`, `max_deep_dive_pages`, `exploration_mode`, `transcription_policy`, `output_language`。
+可选：`focus`, `audience`, `max_deep_dive_pages`, `exploration_mode`, `transcription_policy`, `output_language`, `production_scope`。
+
+**`production_scope`（生产范围）**：本次要做哪些页面。缺省为整包，行为和以前完全一样。只有用户明确指定时才写入 `page_content_plan_proposal.json → production_scope`，并引用用户原话；助手不能自行缩小范围。
+
+```json
+{"pages": ["overview"], "source": "user_specified", "user_words": "只做总览，不要封面和深度页",
+ "deep_dive_targets": [{"topic": "用户点名的主题", "module_ids": ["mod_02"], "unit_ids": []}]}
+```
+
+| 模式 | `pages` | 说明 |
+|---|---|---|
+| 整包（默认） | 省略 `production_scope` | 封面 + 总览 + 全部 Deep Dive，至少一张 Deep Dive |
+| 仅封面 | `["cover"]` | `deep_dive_proposals` 须为空 |
+| 仅总览 | `["overview"]` | 例：只做总览，给没听过节目的读者看全貌 |
+| 仅 Deep Dive（全部） | `["deep_dive"]` | 不设 `deep_dive_targets`，模块按常规规划 |
+| 定向 Deep Dive | `["deep_dive"]` + `deep_dive_targets` | 用户点名模块 id 或一个自由文本主题；规划者把它映射到 `module_ids`/`unit_ids`，写在《图片内容规划》里交用户审批。每张 Deep Dive 必须落在某个目标内 |
+| 组合 | 如 `["cover","overview"]`、`["overview","deep_dive"]` + targets | 按 cover → overview → deep_dive 顺序生产 |
+
+规则：
+- 内容梳理、内容拆分和页面规划的门禁不随范围变化。总览骨架（问题、组件、关系台账）和封面副标题仍须在规划里写明，作为全包的知识骨架；范围外的页面只规划、不制作。
+- 范围外页面的细节去向写 `OUT_OF_SCOPE`，或保留在不制作的总览/封面上。组装后它们记为 `deferred_out_of_scope`：继续追踪，不计入 18 张页数，也不是删除。整包默认模式下不能用 `OUT_OF_SCOPE`。
+- 页数只计算范围内的页面。构图（construct）、视觉候选、渲染和交付只处理范围内的页面；范围内页面的视觉、独立审核和用户确认门禁全部不变。
+- 范围改变时，页面规划及其下游作废，须重新审批。
 默认：中文；exploration_mode=`balanced`。**整包硬上限为 18 张：封面 + 全部总览页（含续页）+ 全部 Deep Dive；随组图交付的附录视觉页也占名额。** 单页总览时 Deep Dive 最多 16 张；总览增加一页，Deep Dive 名额相应减一。`max_deep_dive_pages` 若由用户给出，只能进一步收紧上限，不能突破整包 18 张。页数在《内容拆分》通过后按独立问题、证据边界和手机容量确定；超过上限时先重排能共享一个问题的内容与证据去向，保持每条必留细节可追溯，不得靠删内容、微字或把两种无关问题硬塞一页达标。无法同时满足完整性、可读性与 18 张上限时，停止页面制作并提交具体冲突与可审的范围调整方案，不能生成超额正式页面。
 
 ## 2. Phase 0 — Episode Intake

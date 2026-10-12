@@ -55,4 +55,6 @@ Route failures to the earliest failed layer. Rebuild the visual model for struct
 
 ## 生产范围
 
+成图文字只面向读者：生产范围、暂缓、未出页等制作状态不得出现在页面上（`scripts/check_reader_facing_text.py`）。
+
 `production_scope` 只决定制作哪些页面，不放宽任何门禁。范围内的每一页照常执行 Gate 0–4；范围外的页面不进入构图、渲染和交付，它们的细节在 coverage matrix 里记为 `deferred_out_of_scope`，必须可追溯。

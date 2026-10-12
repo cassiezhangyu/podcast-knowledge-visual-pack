@@ -87,9 +87,9 @@
     "strong_inner_roles": [
       "overview_title",
       "deep_title",
-    "page_conclusion",
-    "section_entry",
-    "overview_section",
+      "page_conclusion",
+      "section_entry",
+      "overview_section",
       "section",
       "subheading"
     ],
@@ -186,7 +186,12 @@
     },
     "brand_asset": {
       "scope": "all_pages",
-      "box": { "x": 976, "y": 64, "width": 144, "height": 144 },
+      "box": {
+        "x": 976,
+        "y": 64,
+        "width": 144,
+        "height": 144
+      },
       "official_album_art_only": true,
       "preserve_aspect_ratio": true,
       "preserve_original_colors": true,
@@ -198,42 +203,42 @@
   "stroke": {
     "primary": 2.8,
     "secondary": 2,
-    "roughness": 2.8,
-    "roughness_object": 2.8,
-    "roughness_rule": 1.1,
+    "roughness": 0.9,
+    "roughness_object": 0.9,
+    "roughness_rule": 0.3,
     "roundness": "moderate",
     "role_settings": {
       "object": {
         "strokeWidth": 2.8,
-        "roughness": 2.8
+        "roughness": 0.9
       },
       "detail": {
         "strokeWidth": 2,
-        "roughness": 1.8
+        "roughness": 0.6
       },
       "relation": {
         "strokeWidth": 2.6,
-        "roughness": 3
+        "roughness": 0.9
       },
       "connector": {
         "strokeWidth": 2.2,
-        "roughness": 0.8
+        "roughness": 0.4
       },
       "emphasis": {
         "strokeWidth": 3.2,
-        "roughness": 2.2
+        "roughness": 0.8
       },
       "heavy_detail": {
         "strokeWidth": 4.5,
-        "roughness": 1.6
+        "roughness": 0.6
       },
       "rule": {
         "strokeWidth": 1.8,
-        "roughness": 0.8
+        "roughness": 0.3
       },
       "surface": {
         "strokeWidth": 1.8,
-        "roughness": 1.1
+        "roughness": 0.5
       },
       "fill_only": {
         "strokeWidth": 0,
@@ -241,18 +246,18 @@
       },
       "frame": {
         "strokeWidth": 2,
-        "roughness": 1.1
+        "roughness": 0.5
       },
       "accent_detail": {
         "strokeWidth": 2,
-        "roughness": 2.2
+        "roughness": 0.8
       },
       "object_simple": {
         "strokeWidth": 2.4,
-        "roughness": 1.6
+        "roughness": 0.6
       }
     },
-    "policy": "保持对象真实点列，通过 roughness 呈现自然笔触；插图可局部复描，排版线和信息框克制，不添加人为弯曲或平移重描。按语义角色取参数。"
+    "policy": "保持对象真实点列，用低 roughness（≤0.9）呈现干净的手绘笔触，避免颤抖感和平行双线描边；插图可局部复描，排版线和信息框克制，不添加人为弯曲或平移重描。按语义角色取参数。（2026-10-12 用户反馈：线条像手在颤抖。）"
   },
   "spacing": {
     "xs": 8,

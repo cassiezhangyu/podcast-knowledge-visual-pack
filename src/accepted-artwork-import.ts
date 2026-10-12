@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join, resolve, relative, isAbsolute } from "node:path";
 import { validateArtifact } from "./validate.js";
+import { scopedEditorialPages } from "./production-scope.js";
 type R = Record<string, any>;
 export const digest = (bytes: string | Buffer) => createHash("sha256").update(bytes).digest("hex");
 export const canonical = (value: unknown) => digest(JSON.stringify(value));
@@ -33,7 +34,7 @@ export function verifyImportRecord(workspace: string, record: R, requireEditor =
   requireValue(authorization.authorized === true && authorization.scope === "accepted_native_artwork_import", "缺少显式原生图导入授权");
   for (const [key, path] of Object.entries(IMPORT_INPUTS)) requireValue(record.input_hashes[key] === canonical(readJson(join(workspace, path))), `导入上游已变化：${key}`);
   const editorial = readJson(join(workspace, IMPORT_INPUTS.editorial_plan));
-  const editorialPages: R[] = [editorial.package.cover, editorial.package.overview, ...(editorial.package.overview_continuations ?? []), ...editorial.package.deep_dives];
+  const editorialPages: R[] = scopedEditorialPages(editorial);
   requireValue(record.pages.length === editorialPages.length && record.pages.length <= 18, "导入页数与当前规划不符");
   const ids = new Set<string>(), sourceIds = new Set<string>(); let boundCount = 0;
   for (const page of record.pages as R[]) {

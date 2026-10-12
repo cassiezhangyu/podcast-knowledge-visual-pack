@@ -4,6 +4,7 @@ import { basename, join, resolve, sep } from "node:path";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
 import { verifyAcceptedImport } from "./accepted-artwork-import.js";
+import { deliveryPageName, scopePages, scopedEditorialPages } from "./production-scope.js";
 type R = Record<string, unknown>;
 const args = process.argv.slice(2), value = (name: string) => { const index = args.indexOf(name); return index === -1 ? undefined : args[index + 1]; };
 const workspace = value("--workspace"), action = value("--action") ?? "assemble";
@@ -130,9 +131,12 @@ try {
     if (resolve(source) !== resolve(target)) copyFileSync(source, target);
     files.push({ role, path: targetName, sha256: hashBuffer(readFileSync(target)) });
   };
+  const scopedIds = scopedEditorialPages(editorialPlan).map((p: R) => p.page_id as string);
+  if ((renderManifest.pages as R[]).map((p) => p.page_id).join("|") !== scopedIds.join("|")) stop("交付页面与当前生产范围内的规划页不符。", { expected: scopedIds });
+  const coverInScope = scopePages(editorialPlan).includes("cover");
   for (let index = 0; index < (renderManifest.pages as R[]).length; index++) {
     const page = (renderManifest.pages as R[])[index], scene = (sceneManifest.pages as R[]).find((item) => item.page_id === page.page_id)!;
-    const pageName = index === 0 ? "00-cover" : index === 1 ? "01-overview" : `${String(index).padStart(2, "0")}-${String(page.page_id).replace(/^edp_dd_/, "")}`;
+    const pageName = deliveryPageName(editorialPlan, page.page_id as string, index);
     for (const [role, source, extension] of [["page_png", page.png, ".png"], ["page_phone_png", page.phone_png, "-phone.png"], ["page_grayscale_png", page.grayscale_png, "-grayscale.png"], ["page_scene", scene.file, ".excalidraw"]] as string[][]) addFile(`${role}:${page.page_id}`, join(workspace, source), `${pageName}${extension}`);
     const renderSlug = basename(page.png as string, ".png");
     addFile(`rendered_page_check:${page.page_id}`, join(workspace, "04-rendered", "checks", `${renderSlug}.md`), `qa-${pageName}.md`);
@@ -153,10 +157,8 @@ try {
     ["editorial_gate", join(workspace, "01-understanding", "editorial_gate.json"), "editorial_gate.json"],
     ["construction_spec", join(workspace, "02-visual-plan", "construction_spec.json"), "construction_spec.json"],
     ["visual_gate", join(workspace, "02-visual-plan", "visual_gate.json"), "visual_gate.json"],
-    ["cover_brief", join(workspace, "02-visual-plan", "COVER_BRIEF.md"), "COVER_BRIEF.md"],
     ["construction_human_approval", join(workspace, "03-excalidraw", "construction_human_approval.json"), "construction_human_approval.json"],
     ["construction_gate", join(workspace, "03-excalidraw", "construction_gate.json"), "construction_gate.json"],
-    ["cover_rendered_check", join(workspace, "04-rendered", "COVER_RENDERED_CHECK.md"), "COVER_RENDERED_CHECK.md"],
     ["independent_visual_review", join(workspace, "04-rendered", "independent_visual_review.json"), "independent_visual_review.json"],
     ["visual_page_human_approval", join(workspace, "04-rendered", "visual_page_human_approval.json"), "visual_page_human_approval.json"],
     ["render_gate", join(workspace, "04-rendered", "render_gate.json"), "render_gate.json"],
@@ -165,6 +167,10 @@ try {
     ["xiaohongshu_review", join(delivery, "xiaohongshu-review.md"), "xiaohongshu-review.md"],
     ["public_copy_record", join(delivery, "public_copy_record.json"), "public_copy_record.json"],
     ["public_copy_gate", join(delivery, "public_copy_gate.json"), "public_copy_gate.json"],
+  ] as string[][]) addFile(role, source, name);
+  if (coverInScope) for (const [role, source, name] of [
+    ["cover_brief", join(workspace, "02-visual-plan", "COVER_BRIEF.md"), "COVER_BRIEF.md"],
+    ["cover_rendered_check", join(workspace, "04-rendered", "COVER_RENDERED_CHECK.md"), "COVER_RENDERED_CHECK.md"],
   ] as string[][]) addFile(role, source, name);
   if (importedArtwork) addFile("accepted_artwork_import", importPath, "accepted_artwork_import.json");
   writeFileSync(join(delivery, "package.md"), `# 播客知识图交付包\n\n- 页面数量：${(renderManifest.pages as R[]).length}\n- 内容梳理：内容梳理.md\n- 内容拆分：内容拆分.md\n- 小红书文案：xiaohongshu.md\n- 当前状态：等待整包人工审核\n`);

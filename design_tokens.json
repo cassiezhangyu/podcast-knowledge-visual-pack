@@ -1,5 +1,5 @@
 {
-  "version": "0.8",
+  "version": "0.9",
   "canvas": {
     "ratio": "3:4",
     "width": 1200,
@@ -15,13 +15,10 @@
   "colors": {
     "background": "#FFFFFF",
     "surface_neutral": "#F8FAFB",
-    "text_primary": "#2E3B49",
+    "text_primary": "#273348",
     "text_secondary": "#6D7882",
-    "primary": "#4B6F8D",
-    "primary_light": "#EEF2F5",
-    "accent": "#8A6748",
-    "accent_light": "#F2EDE7",
-    "line_weak": "#D2D9DE"
+    "line_weak": "#D2D9DE",
+    "note": "主辅色只读本期 selected_palette.json；此处不提供主题色回退。"
   },
   "package_palette_policy": {
     "scope": "one_episode_package",
@@ -82,7 +79,11 @@
       "object_name": 27,
       "header_meta": 22,
       "footer_meta": 22,
-      "page_conclusion": 32
+      "page_conclusion": 32,
+      "key_l1": 27,
+      "key_lead": 32,
+      "note_l2": 22,
+      "caption_l3": 22
     },
     "strong_inner_roles": [
       "overview_title",
@@ -277,5 +278,83 @@
     "primary": "导航和关键层级；具体内容含义在每期构图前声明",
     "accent": "本期论证需要区分的另一类信息；具体含义在构图前声明",
     "weak": "辅助背景、来源和导航；不得承载必要证据或边界"
+  },
+  "export": {
+    "scale": 2.4,
+    "delivery_size": [
+      2880,
+      3840
+    ],
+    "check_size": [
+      1200,
+      1600
+    ],
+    "policy": "交付图为 scene 按 scale 2.4 的矢量重渲（*-4k.png）；1200px、390px、灰度仅用于检查。禁止放大 PNG。"
+  },
+  "text_levels": {
+    "L0": {
+      "use": "整页结论、模块标题",
+      "color": "primary_deep",
+      "weight": "bold",
+      "size": [
+        30,
+        32
+      ]
+    },
+    "L1": {
+      "use": "每模块唯一关键句",
+      "color": "primary",
+      "weight": "bold",
+      "size": 27,
+      "lead": {
+        "use": "关键句引导字（如“破＝”）",
+        "color": "secondary_deep",
+        "weight": "bold",
+        "size": 32
+      }
+    },
+    "L2": {
+      "use": "解释、例子、因果链",
+      "color": "#3E4552",
+      "weight": "regular",
+      "size": 22
+    },
+    "L3": {
+      "use": "图注、标签、免责",
+      "color": "#8E939C",
+      "weight": "regular",
+      "size": 22
+    },
+    "bold_simulation": "渲染器无粗体时以 0.8px 横向偏移叠画 2–3 次",
+    "min_size_note": "任何层级不低于 typography.min_readable（22）；层级差靠颜色与字重，不靠压字号"
+  },
+  "nav_panel": {
+    "position": "页首横线与页尾横线之间，紧贴整页结论之下，整宽",
+    "fill": "secondary_tint (#EDE6EB for palette 01)",
+    "frame": "secondary_mid (#B9A3B2 for palette 01)",
+    "text": "secondary_deep / text_primary",
+    "rows": [
+      "本页提纲：编号圈+模块名+（角色）",
+      "怎么读：本版构图的读图路线",
+      "全文大纲：读者语言的节目顺序"
+    ],
+    "width_margin": 1.15
+  },
+  "palette_duties": {
+    "primary": [
+      "主视觉",
+      "结构线",
+      "L0/L1 文字"
+    ],
+    "secondary": [
+      "导航区浅底与边框",
+      "关键句引导字与标签深阶",
+      "对比对象局部填充"
+    ],
+    "secondary_pixel_share": [
+      0.15,
+      0.3
+    ],
+    "colored_text_contrast_min": 4.5
   }
 }

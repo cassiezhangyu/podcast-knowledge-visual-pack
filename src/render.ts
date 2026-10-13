@@ -61,6 +61,7 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
       const pageSpec = (constructionSpec.pages as R[]).find((spec) => spec.page_id === item.page_id);
       const brand = pageSpec?.brand_asset as R | undefined;
       let brandHash: string | undefined;
+      let brandDataUrl: string | undefined, brandBox: { x: number; y: number; width: number; height: number } | undefined;
       if (brand) {
         const assetPath = resolve(workspace, brand.relative_path as string), workspaceRoot = `${resolve(workspace)}/`;
         if (!assetPath.startsWith(workspaceRoot)) fail("Brand asset must stay inside the episode workspace.", { page_id: item.page_id });
@@ -71,7 +72,14 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
         const mime = extension === ".jpg" || extension === ".jpeg" ? "image/jpeg" : "image/png";
         const assetDataUrl = `data:${mime};base64,${asset.toString("base64")}`;
         const box = { x: brand.x as number, y: brand.y as number, width: brand.width as number, height: brand.height as number };
+        brandDataUrl = assetDataUrl; brandBox = box;
         originalUrl = await page.evaluate(async ({ baseDataUrl, assetDataUrl, box }) => (window as unknown as { composeBrandAsset: (base: string, asset: string, box: R) => Promise<string> }).composeBrandAsset(baseDataUrl, assetDataUrl, box), { baseDataUrl: originalUrl, assetDataUrl, box });
+      }
+      const deliveryScale = Number(((tokens.export as R)?.scale as number) ?? 2.4);
+      let deliveryUrl = await page.evaluate(async ({ value, scale }) => (window as unknown as { renderPersistedExcalidrawScene: (scene: R, scale: number) => Promise<string> }).renderPersistedExcalidrawScene(value, scale), { value: scene, scale: deliveryScale });
+      if (brand && brandDataUrl && brandBox) {
+        const box = { x: brandBox.x * deliveryScale, y: brandBox.y * deliveryScale, width: brandBox.width * deliveryScale, height: brandBox.height * deliveryScale };
+        deliveryUrl = await page.evaluate(async ({ baseDataUrl, assetDataUrl, box }) => (window as unknown as { composeBrandAsset: (base: string, asset: string, box: R) => Promise<string> }).composeBrandAsset(baseDataUrl, assetDataUrl, box), { baseDataUrl: deliveryUrl, assetDataUrl: brandDataUrl, box });
       }
       const phoneUrl = await page.evaluate(async ({ dataUrl, width }) => (window as unknown as { deriveRenderedPng: (url: string, width: number, grayscale: boolean) => Promise<string> }).deriveRenderedPng(dataUrl, width, false), { dataUrl: originalUrl, width: 390 });
       const grayscaleUrl = await page.evaluate(async ({ dataUrl, width }) => (window as unknown as { deriveRenderedPng: (url: string, width: number, grayscale: boolean) => Promise<string> }).deriveRenderedPng(dataUrl, width, true), { dataUrl: originalUrl, width: 1200 });
@@ -79,7 +87,8 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
       const slug = `${String(rendered.length).padStart(2, "0")}-${String(item.page_id).replace(/[^a-zA-Z0-9_-]/g, "-")}`;
       const originalPath = join(out, `${slug}.png`), phonePath = join(out, `${slug}-phone.png`), grayscalePath = join(out, `${slug}-grayscale.png`);
       writeFileSync(originalPath, original); writeFileSync(phonePath, phone); writeFileSync(grayscalePath, grayscale);
-      const record: R = { page_id: item.page_id, scene_sha256: item.sha256, png: relative(workspace, originalPath), png_sha256: hashBuffer(original), phone_png: relative(workspace, phonePath), phone_png_sha256: hashBuffer(phone), grayscale_png: relative(workspace, grayscalePath), grayscale_png_sha256: hashBuffer(grayscale), ...(brandHash ? { brand_asset_sha256: brandHash } : {}) };
+      const delivery = pngBuffer(deliveryUrl), deliveryPath = join(out, `${slug}-4k.png`); writeFileSync(deliveryPath, delivery);
+      const record: R = { page_id: item.page_id, scene_sha256: item.sha256, png: relative(workspace, originalPath), png_sha256: hashBuffer(original), phone_png: relative(workspace, phonePath), phone_png_sha256: hashBuffer(phone), grayscale_png: relative(workspace, grayscalePath), grayscale_png_sha256: hashBuffer(grayscale), ...(brandHash ? { brand_asset_sha256: brandHash } : {}), delivery_png: relative(workspace, deliveryPath), delivery_png_sha256: hashBuffer(delivery), delivery_scale: deliveryScale };
       rendered.push(record);
       writeFileSync(join(out, "checks", `${slug}.md`), `# RENDERED_PAGE_CHECK\n\n- Page: ${item.page_id}\n- Scene SHA-256: ${item.sha256}\n- 原尺寸 PNG SHA-256: ${record.png_sha256}\n- 390px PNG SHA-256: ${record.phone_png_sha256}\n- 灰度 PNG SHA-256: ${record.grayscale_png_sha256}\n\n## 仍需人工填写\n\n- 规则到像素：待检查\n- 遮字、压线与越界：待检查\n- 内容差异：待检查\n- 手机阅读：待检查\n- 独立视觉审核：待检查\n`);
     }

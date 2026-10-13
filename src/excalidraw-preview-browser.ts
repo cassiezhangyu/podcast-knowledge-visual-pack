@@ -3,14 +3,16 @@ import { exportToCanvas, restoreElements } from "@excalidraw/excalidraw";
 type PersistedScene = { elements: readonly Record<string, unknown>[]; appState: Record<string, unknown>; files: Record<string, unknown> };
 
 declare global { interface Window {
-  renderPersistedExcalidrawScene: (scene: PersistedScene) => Promise<string>;
+  renderPersistedExcalidrawScene: (scene: PersistedScene, scale?: number) => Promise<string>;
   deriveRenderedPng: (dataUrl: string, width: number, grayscale: boolean) => Promise<string>;
   composeBrandAsset: (baseDataUrl: string, assetDataUrl: string, box: { x: number; y: number; width: number; height: number }) => Promise<string>;
 } }
 
-window.renderPersistedExcalidrawScene = async (scene) => {
+window.renderPersistedExcalidrawScene = async (scene, scale = 1) => {
   const elements = restoreElements(scene.elements, null);
-  const canvas = await exportToCanvas({ elements, appState: scene.appState, files: scene.files, exportPadding: 0 });
+  // True vector re-render at `scale` (exportToCanvas ignores appState.exportScale, so pass getDimensions).
+  const canvas = await exportToCanvas({ elements, appState: scene.appState, files: scene.files, exportPadding: 0,
+    getDimensions: (width: number, height: number) => ({ width: Math.round(width * scale), height: Math.round(height * scale), scale }) });
   return canvas.toDataURL("image/png");
 };
 

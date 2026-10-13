@@ -3,17 +3,8 @@
 每次出图读取本规则与 design_tokens.json → stroke.role_settings。1200×1600画布使用角色参数，其他画布整体同比例缩放。
 
 ## 已通过的校准
-2026-09-26 用户明确通过 EP88 P13-rough-stroke-v1：插图保留较强原生笔触，信息框与排版横线采用克制roughness。手绘线条保持本来的方向和几何结构，通过roughness体现自然抖动、笔触起伏与局部复描。不能用人为弯曲的光滑单线代替手绘笔触，也不能把整页边框和长横线都描成明显双线。
 
-2026-10-12 用户反馈（EP40 总览）：“线有点奇怪，很像是划线的时候手在颤抖”。roughness 统一下调到 ≤0.9（对象/关系 0.9、细节 0.6、信息框 0.5、连接线 0.4、规则线 0.3），以干净的单线手绘为准；高 roughness 产生的颤抖感和平行双线描边视为失败。
-
-同日第二次反馈：“虽然不抖动了，但是手绘感也变弱了”。与 EP88 P13 通过样稿（`../examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/`，信息框与横线 1.1、插图与箭头 2.8–3）及面基 P01、E248 总览并排对照后定标：信息框/横线/导航 1.1，插图对象与语义箭头 2.0，强调 1.6，细节 1.4，连接线 0.8。EP40 的颤抖主要来自把文字信息框按插图对象（2.8、深色）描边；信息框一律用 `frame` 角色、浅色细线，高 roughness 只给具体插图和语义关系。
-
-曲线单列：同日用户反馈 C 版“圆弧线条还是在抖”。圆弧、环形箭头等曲线用 `curve` 角色（roughness 0.9），用 4–6 个控制点并开启平滑（Excalidraw roundness type 2），不要用十几段折线逐段叠加 2.0 的抖动；对照 EP88 P13 的箭头与刻度曲线，曲线保持一笔顺滑的手绘单线。
-
-本轮通过原图与可编辑源：`../examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/`。
-
-面基 P01 的用户通过版进一步验证：抽象结果框、资料窗与长刻度属于 `frame`／`rule`，采用轻微 roughness；只有焦虑等具体状态图形与有语义的关系箭头保留较强局部复描。逐项降低信息框的重影后，手绘感仍由对象和连接承担。对照 `../examples/positive/mianji-p01-overview-user-approved-2026-09-29/`；这里的对象和三栏构图不可复制为模板。
+线感基准：`../examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/`。数值只看 design_tokens.json → stroke.role_settings；历次调参过程见该目录的 `CALIBRATION_HISTORY.md`。目标是稳定的手绘线（R11）：不颤抖，也不退成平直几何线。
 
 ## 角色
 数值以design_tokens.json为唯一来源：object为较大的具体对象轮廓；object_simple为小幅、简单物件的单线轮廓；detail为对象内部部件；accent_detail为需更明显笔触的内圈、进度线等局部细节；relation为有来源且需要较强动态笔触的关系箭头；connector为抽象对象之间的简单直线连接；emphasis为批注或划除；heavy_detail为有动作含义的粗段；rule为排版分隔；surface为弱背景底板；frame为信息框及显示区域；fill_only为无描边色块。物件轮廓保持object或object_simple，不因元素类型为line而降级。纸张、衣物、镜子等允许局部自然复描；信息框不应与真实物件使用同样强的复描。

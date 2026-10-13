@@ -288,3 +288,8 @@ Overview 的预检还须记录 `overview_scope_check`：试排页数下整期问
 总览基准原图见 `rules/acceptance_case_index.md`；检查方法与返工路由以当前总览协议为准，不复制历史构图。
 
 字号层级必须执行 `typography_hierarchy.md`；每轮预检先建立文字语义台账，送审前分别通过整页核心职责、角色字号及真实像素检查。只查数字合法不等于结论选择正确。全流程复盘及交付完整性见 `visual_pack_execution.md`。
+
+## 交付分辨率：4K（R8）
+
+- `npm run render:checked` 会同时输出 1200 检查图、390px 图、灰度图和交付图 `*-4k.png`。交付图是 scene 按 design_tokens.json → export.scale（2.4，即 2880×3840）做的矢量重渲，品牌图按同比例合成。
+- 品牌图源文件宽度须 ≥ box.width×2.4，否则先找更高分辨率的封面。禁止放大 PNG。

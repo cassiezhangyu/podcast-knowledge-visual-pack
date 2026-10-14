@@ -33,13 +33,16 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
   if (existsSync(staleError)) unlinkSync(staleError);
   const html = join(out, ".render-runtime.html");
   const browserBundle = join(process.cwd(), "dist", "excalidraw-preview-browser.js");
-  writeFileSync(html, `<!doctype html><meta charset="utf-8"><body><script src="${pathToFileURL(browserBundle).href}"></script></body>`);
+  writeFileSync(html, `<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><body><script src="${pathToFileURL(browserBundle).href}"></script></body>`);
   const macChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
   const executablePath = process.env.PODCAST_MAP_CHROME_PATH
     || (process.platform === "darwin" && existsSync(macChrome) ? macChrome : undefined);
   let browser;
   try {
-    browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
+    // v0.6.1: force Simplified Chinese glyphs (see rules/cjk_glyphs.md): fontconfig prefers Noto Sans CJK SC, zh-CN locale.
+    const fontconf = join(process.cwd(), "scripts", "fontconfig", "pkvp-fonts.conf");
+    browser = await chromium.launch({ headless: true, args: ["--lang=zh-CN"], ...(executablePath ? { executablePath } : {}),
+      env: { ...process.env, LANG: "zh_CN.UTF-8", ...(existsSync(fontconf) ? { FONTCONFIG_FILE: fontconf } : {}) } as Record<string, string> });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const code = message.includes("Executable doesn't exist") ? "BROWSER_NOT_INSTALLED"
@@ -50,7 +53,7 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
   }
   const rendered: R[] = [];
   try {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 1800 }, deviceScaleFactor: 1 });
+    const page = await browser.newPage({ locale: "zh-CN", viewport: { width: 1280, height: 1800 }, deviceScaleFactor: 1 });
     await page.goto(pathToFileURL(html).href);
     for (const item of pages) {
       const scenePath = join(workspace, item.file as string);

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // 使用正式 Excalidraw 浏览器适配器验证当前执行环境能导出真实 PNG。
 import { chromium } from "playwright";
+import { zhLaunchOptions } from './lib/zh_browser.mjs'; // v0.6.1: Simplified Chinese glyphs
 import { existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -23,9 +24,9 @@ function dimensions(dataUrl) {
 
 try {
   const html = join(temp, "preview.html");
-  writeFileSync(html, `<!doctype html><meta charset="utf-8"><script src="${pathToFileURL(bundle).href}"></script>`);
-  browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 1800 }, deviceScaleFactor: 1 });
+  writeFileSync(html, `<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><script src="${pathToFileURL(bundle).href}"></script>`);
+  browser = await chromium.launch(zhLaunchOptions({ headless: true, ...(executablePath ? { executablePath } : {}) }));
+  const page = await browser.newPage({locale:'zh-CN', viewport: { width: 1280, height: 1800 }, deviceScaleFactor: 1 });
   await page.goto(pathToFileURL(html).href);
   const scene = JSON.parse(readFileSync(fixture, "utf8"));
   const originalUrl = await page.evaluate(async value => window.renderPersistedExcalidrawScene(value), scene);

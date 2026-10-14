@@ -30,3 +30,4 @@
 | 负面视觉现象 | `examples/negative/e248-capwords-2026-09-20/`；逐图查看README，不补造用户未说明的失败原因 |
 
 历史开发复盘留在开发档案，不作为公开 Skill 的运行时依赖。案例用于方法与完成度校准，不提供新的来源事实。
+- `examples/positive/mianji-etf-overview-user-approved-2026-10-13/`：ETF E177 总览 A-V32（飞轮中心、热格 vs 空池、价差填充、底部地图）。不是版式模板。

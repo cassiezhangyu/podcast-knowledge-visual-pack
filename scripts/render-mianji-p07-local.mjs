@@ -1,4 +1,5 @@
 import {chromium} from 'playwright';
+import { zhLaunchOptions } from './lib/zh_browser.mjs'; // v0.6.1: Simplified Chinese glyphs
 import {readFileSync,writeFileSync,mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {resolve,join} from 'node:path';
@@ -6,9 +7,9 @@ import {pathToFileURL} from 'node:url';
 const out=resolve(process.argv[2]),root=process.cwd(),tmp=mkdtempSync(join(tmpdir(),'mianji-p07-'));
 let browser;
 try {
- const html=join(tmp,'preview.html');writeFileSync(html,`<!doctype html><meta charset="utf-8"><script src="${pathToFileURL(join(root,'dist/excalidraw-preview-browser.js')).href}"></script>`);
- browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
- const page=await browser.newPage({viewport:{width:1280,height:1800},deviceScaleFactor:1});await page.goto(pathToFileURL(html).href);
+ const html=join(tmp,'preview.html');writeFileSync(html,`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><script src="${pathToFileURL(join(root,'dist/excalidraw-preview-browser.js')).href}"></script>`);
+ browser=await chromium.launch(zhLaunchOptions({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'}));
+ const page=await browser.newPage({locale:'zh-CN',viewport:{width:1280,height:1800},deviceScaleFactor:1});await page.goto(pathToFileURL(html).href);
  const scene=JSON.parse(readFileSync(join(out,'P07-deep-dive.excalidraw'),'utf8'));
  const png=await page.evaluate(s=>window.renderPersistedExcalidrawScene(s),scene);
  const save=(name,url)=>writeFileSync(join(out,name),Buffer.from(url.split(',')[1],'base64'));

@@ -5,6 +5,8 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 # Podcast Knowledge Visual Pack Skill
 
+**版本：v0.6.1**
+
 > **Development note:** `SKILL.md` defines runtime behavior of the finished Skill. Repository development is governed separately by `AGENTS.md` and `ROADMAP.md`. Do not mix development protocol into runtime reasoning.
 
 
@@ -12,7 +14,11 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 存在 `RUNTIME_ROOT.json` 时先读取其 `runtime_root`，后续所有 npm、scripts 和 workers 命令都以该仓库为工作目录；资源参考按本 Skill 所在目录解析。直接从仓库使用时以仓库根目录执行。仓库移动后重新安装入口；入口里不安装 node_modules、保存生产工作区或构建 dist。
 
-> v0.4.0：作图必读 `rules/visual_quality_bar.md`（R1–R14）；内容梳理必读 `rules/content_pipeline.md` §0（A1–A8）。
+> **v0.6.0：先读 `rules/main_workflow_sop.md`**（SOP A 内容梳理确认 → SOP B 主图构思确认 → SOP C 画图，各以用户确认结束；里程碑与阻塞主动汇报）。转写见 `rules/transcription_guide.md`。
+> **v0.6.1：所有中文必须是简体中文字形**（`rules/cjk_glyphs.md`）：渲染器统一用 `scripts/lib/zh_browser.mjs`（fontconfig 优先 Noto Sans CJK SC + zh-CN），交付前 `node scripts/audit_cjk_glyphs.mjs <scene>` 必须 exit 0。
+> v0.6.0：首次渲染前必须跑 `scripts/layout_budget.py`；颜色重量看实心信号块，不再计主色墨迹占比。
+> v0.5.1：交付前除 check_strokes 外必须跑 `scripts/audit_stroke_shapes.py` 与 `scripts/audit_overlap_margins.py`（见 rules/handdrawn_strokes.md §v0.5.1）。
+> v0.5.0：作图先按 `rules/overview_page_production.md` §0 生产顺序（解释底账 → 连通机制中心 → 审稿顺序 解释力 → 构图层次 → 颜色／线条／细节 → 对照质量锚点），再用 `rules/visual_quality_bar.md`（R1–R20）当护栏；检查脚本只是下限。内容梳理必读 `rules/content_pipeline.md` §0（A1–A8）。
 
 ## 0. Mission
 输入一个小宇宙播客单集 URL，建立可追溯的节目证据层，重建知识结构，再寻找能让读者“看见这个结构”的视觉表达，最终输出：系列化、内容驱动的封面 + 经内容与真实阅读容量验证的节目级 Overview + N 张 Deep Dive + 可编辑 Excalidraw 源文件 + 来源与 QA 底账。Overview 用一张图汇总全文核心内容并建立理解框架，具体知识展开进入 Deep Dive；续页必要性按 `rules/overview_page_production.md` 验证核心框架本身的容量。
@@ -176,7 +182,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 ## 10. Phase 8 — Quality Gates
 
-每页送审前先过 `rules/visual_quality_bar.md` R1–R14：执行者亲眼看原尺寸图、390px 图和关键局部（R9），并完成同类问题扫描（R10）；交付图用 `*-4k.png`（R8）。命令、审核包和门禁细节见 `docs/QUALITY_GATES_CLI.md`，流程不变。
+每页送审前先过 `rules/visual_quality_bar.md` R1–R15：执行者亲眼看原尺寸图、390px 图和关键局部（R9），并完成同类问题扫描（R10）；交付图用 `*-4k.png`（R8）。命令、审核包和门禁细节见 `docs/QUALITY_GATES_CLI.md`，流程不变。
 
 ## 11. Phase 9 — Package Review
 

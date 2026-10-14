@@ -1,5 +1,5 @@
 {
-  "version": "0.9",
+  "version": "0.5.0",
   "canvas": {
     "ratio": "3:4",
     "width": 1200,
@@ -219,7 +219,7 @@
       },
       "relation": {
         "strokeWidth": 2.6,
-        "roughness": 2.0
+        "roughness": 1.4
       },
       "connector": {
         "strokeWidth": 2.2,
@@ -227,7 +227,7 @@
       },
       "emphasis": {
         "strokeWidth": 3.2,
-        "roughness": 1.6
+        "roughness": 1.4
       },
       "heavy_detail": {
         "strokeWidth": 4.5,
@@ -262,7 +262,20 @@
         "roughness": 0.9
       }
     },
-    "policy": "按已通过样稿 examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26 并排校准：信息框、排版横线与导航边界 roughness=1.1（frame/rule/surface），只用于具体插图对象与语义关系箭头的较强笔触 2.0；细节 1.4、强调 1.6、连接线 0.8。颤抖感主要来自把信息框按插图对象（2.8）绘制——信息框一律用 frame 角色。不得出现整段平行双线，也不能低到失去手绘感。（2026-10-12 用户两次反馈后校准。） 曲线（圆弧、环形箭头）用 curve 角色：roughness 0.9、少量控制点并开启平滑（roundness type 2），单线；折线逐段叠加高 roughness 会显得颤抖。（2026-10-12 用户：“圆弧线条还是在抖”。）"
+    "policy": "按已通过样稿 examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26 并排校准：信息框、排版横线与导航边界 roughness=1.1（frame/rule/surface），具体插图小对象 object 2.0；短语义关系箭头 relation 1.4、强调 emphasis 1.4（v0.6.0 由 2.0/1.6 下调，长路径上不再产生抖线）；细节 1.4、连接线 0.8。超过 path_limits 的长曲线／圆环／椭圆／长箭头一律 curve。颤抖感主要来自把信息框按插图对象（2.8）绘制——信息框一律用 frame 角色。不得出现整段平行双线，也不能低到失去手绘感。（2026-10-12 用户两次反馈后校准。） 曲线（圆弧、环形箭头）用 curve 角色：roughness 0.9、少量控制点并开启平滑（roundness type 2），单线；折线逐段叠加高 roughness 会显得颤抖。（2026-10-12 用户：“圆弧线条还是在抖”。）",
+    "path_limits": {
+      "max_points_per_path": 6,
+      "long_path_px": 220,
+      "long_path_max_roughness": 1.0,
+      "large_ellipse_px": 60,
+      "large_ellipse_max_roughness": 1.0,
+      "rule": "长曲线、圆环弧、椭圆(>60px)、>220px 的箭头一律用 curve（0.9）且 ≤6 点；relation/emphasis/object 只用于短路径与小对象。这是 token 本身，不是事后修补；audit_stroke_shapes.py 读取本节。 排版横线／信息框（rule/surface/frame，1.1）是直线，不受长路径限制。",
+      "long_path_exempt_roles": [
+        "rule",
+        "surface",
+        "frame"
+      ]
+    }
   },
   "spacing": {
     "xs": 8,
@@ -294,7 +307,7 @@
   "text_levels": {
     "L0": {
       "use": "整页结论、模块标题",
-      "color": "primary_deep",
+      "color": "primary_deep（整页结论、模块标题）",
       "weight": "bold",
       "size": [
         30,
@@ -303,7 +316,7 @@
     },
     "L1": {
       "use": "每模块唯一关键句",
-      "color": "primary",
+      "color": "ink 或 primary，按判断；粗体",
       "weight": "bold",
       "size": 27,
       "lead": {
@@ -329,10 +342,12 @@
     "min_size_note": "任何层级不低于 typography.min_readable（22）；层级差靠颜色与字重，不靠压字号"
   },
   "nav_panel": {
-    "position": "页首横线与页尾横线之间，紧贴整页结论之下，整宽",
-    "fill": "secondary_tint (#EDE6EB for palette 01)",
-    "frame": "secondary_mid (#B9A3B2 for palette 01)",
-    "text": "secondary_deep / text_primary",
+    "position": "按本期版式需要决定（窄条、页首／页尾横带、角块或面板），不得挤占视觉中心；任务固定：内容地图、本页提纲、关系说明＋怎么读（R5 v0.4.4）",
+    "fill": "primary_tint（由本期 primary 派生；例 palette 06 → #EEF1F8）",
+    "frame": "primary 或 primary_mid（同主色家族细框）",
+    "text": "primary_deep / text_primary",
+    "number_ring_stroke": "secondary 可作小强调描边",
+    "forbidden_fill": "secondary_tint / accent_surface（桃、沙、杏等）",
     "rows": [
       "本页提纲：编号圈+模块名+（角色）",
       "怎么读：本版构图的读图路线",
@@ -342,19 +357,48 @@
   },
   "palette_duties": {
     "primary": [
-      "主视觉",
-      "结构线",
-      "L0/L1 文字"
+      "整页结论／主命题",
+      "模块标题与编号圈",
+      "主链关系箭头",
+      "一个焦点信号（如液柱）",
+      "导航区浅底与边框",
+      "主标题（可选，按判断；也可用墨色）"
     ],
     "secondary": [
-      "导航区浅底与边框",
-      "关键句引导字与标签深阶",
-      "对比对象局部填充"
+      "关键句引导字与标签深阶（小面积）",
+      "编号圈描边",
+      "小圆点／短下划线／小图标局部",
+      "对比对象上的细强调"
+    ],
+    "secondary_forbidden": [
+      "导航区大底",
+      "大模块色块填充",
+      "accent_surface 大面积面板"
     ],
     "secondary_pixel_share": [
-      0.15,
-      0.3
+      0.0,
+      0.08
     ],
-    "colored_text_contrast_min": 4.5
+    "secondary_pixel_share_note": "≤约 8%；旧 15–30% 已废止（2026-10-13 Cassie）",
+    "colored_text_contrast_min": 4.5,
+    "nav_fill_source": "primary_tint（主色高明度低饱和浅阶），禁止 secondary / accent_surface",
+    "ink": [
+      "正文、解释",
+      "机制内标签",
+      "非焦点对象轮廓与分隔线用 L2 中性深灰"
+    ],
+    "colour_weight_rule": {
+      "source": "颜色重量来自有含义的实心信号块（实心比例条、热格、拥挤 vs 空池对比、价差填充），不是把正文或轮廓改成主色",
+      "check": [
+        "与锚点并排目测",
+        "页面至少有一处承载含义的实心信号块"
+      ],
+      "removed": "v0.6.0 删除 primary ink-share 指标：不同色板之间不可比"
+    }
+  },
+  "density": {
+    "no_empty_band_px": 80,
+    "rule": "正文区（导航底边→页脚顶边）不得出现连续 ≥80px 高的无信息纯白水平带；中心对象与模块须放大填满可用区；对标 EP88 正例密度",
+    "whitespace_role": "仅服务分组与节奏，不是独立审美目标"
   }
 }

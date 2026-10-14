@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 核对集中查看包中的小红书伴读文案是否与当前 06-delivery 一致。
 import {createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
+import {existsSync,readFileSync} from 'node:fs';
 import {join} from 'node:path';
 
 const args=process.argv.slice(2);
@@ -12,7 +12,8 @@ if(!workspace||!bundleCopyDir){
  process.exit(2);
 }
 const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
-const source=join(workspace,'06-delivery');
+// 标准目录 06-delivery；旧工作区的 delivery/ 仍兼容读取。
+const source=existsSync(join(workspace,'06-delivery'))||!existsSync(join(workspace,'delivery'))?join(workspace,'06-delivery'):join(workspace,'delivery');
 const names=['xiaohongshu-draft.md','xiaohongshu.md','xiaohongshu-review.md','public_copy_record.json','public_copy_gate.json'];
 try{
  const record=JSON.parse(readFileSync(join(source,'public_copy_record.json'),'utf8'));

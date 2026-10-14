@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.6.2 — 2026-10-14（本地，未推送；备份标签 v0.6.1-local）
+
+按《v0.6.2 修改方案（易读版）》16 项执行（Cassie 批准）：
+- **总流程只留一份**：`rules/main_workflow_sop.md` 成为唯一总流程，写全 7 个用户确认点（内容梳理、内容拆分、图片规划含范围、选色、主图构思、每版成图、交付）、主动汇报时刻、SOP C 必跑检查完整清单。三案始终要做（含只做总览）；只有隔离独立审核可在写明原因后记为 `independent_review_waived`（不写成 TARGET，`npm run package` 正式门禁不变）。SKILL.md 改为入口＋输入／范围＋输出＋硬性停止＋阶段索引；Phase 0–10 原文原样移到 `rules/phase_details.md`（哈希审批命令、18 张上限等细节均保留）。
+- **R21 陌生读者理解检查**（visual_quality_bar、SOP B 线框粗查、SOP C 第 9 步、content_pipeline A5 标出需背景概念）；每版诊断 `05-qa/COLD_READ_<页>-V<n>.md`。
+- **颜色只留 R4b 一处**；R4 改为指针；taste.md、design_tokens（palette_duties.source_of_truth、去掉历史注释、导航框改灰或不加框）、inner_page_module_contract、page_visual／deep_dive／cover 指向 R4b；RELEASE_NOTES 0.4.0 导航条目加“已推翻”注。
+- **规则写明“只改本地，用户要求才推送”**（SKILL.md 开发说明）。
+- **交付目录统一 `06-delivery/`**，`src/delivery-dir.ts` 兼容旧 `delivery/`（package、public-copy、workflow:status、public-copy:bundle-check）。
+- **过时引用**：R1–R13/R14/R15 → R1–R21；R18 写明锚点选法。
+- **历史说明移出规则正文**：版本号／日期标签删除；抖线与简体字形的排查经过移到 `docs/HISTORY_NOTES.md`。
+- **重复合并**：交付前检查清单只在 SOP C 第 7 步；正例用法只在 R20；导航只在 R5；颜色只在 R4b；overview §0 只写总览特有部分。
+- **检查留痕**：每版 `05-qa/CHECK_<页>-V<n>.md`（看了哪些图、发现、脚本结果、R21 结论）。
+- **layout_budget `--scene`**：渲染前直接从草稿 scene 估算文字块高度、上下间距与页脚余量。
+- **文案两档**：完整档／轻量档（单页总览），财经类固定免责声明。
+- **audit_overlap_margins 新增**：左右边距对称（≤6px）、顶部留白（≥40px）、页眉线到正文间距（≥12px）。
+- **新增测试**：`tests/test_v062_audit_scripts.py`（layout_budget、audit_stroke_shapes、audit_cjk_glyphs 含反向对照、audit_overlap_margins）、`tests/delivery-dir.test.ts`。
+- **Mac 实测**：`render-mianji-overview-local.mjs` 在 MacBook（Chrome）上渲染 E177 A-V35，中文为简体字形、标点位置正确。
+- **其他**：新增 `rules/README.md` 导读；`scripts/sync_mirror.py`（`npm run mirror:sync`／`mirror:check`）；`construct`、`accepted-artwork:import` 改为完整 `npm run build`；写明只用 npm 命令运行、不直接跑 dist；删除 `_render_any_tmp.mjs`。
+
 ## 0.6.1 — 2026-10-14（本地，未推送／未提交）
 
 - **简体字形规则与门禁**：新增 `rules/cjk_glyphs.md`（规则 + 根因）；SKILL.md、SOP C7、handdrawn_strokes QA 列表、typography_hierarchy 引用。新增 `scripts/lib/zh_browser.mjs` 统一启动器，`render_scene.mjs`、`render-mianji-*-local.mjs`（9 个）、`render-runtime-preflight.mjs`、`src/render.ts`（→ dist/render.js）全部改用 SC fontconfig + zh-CN + `lang="zh-Hans"`。新增 `scripts/audit_cjk_glyphs.mjs`（逐字对比 SC/JP 参照 + CDP 平台字体，exit 1 即失败；含反向对照开关）。

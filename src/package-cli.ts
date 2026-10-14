@@ -5,6 +5,7 @@ import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
 import { verifyAcceptedImport } from "./accepted-artwork-import.js";
 import { deliveryPageName, scopePages, scopedEditorialPages } from "./production-scope.js";
+import { resolveDeliveryDir } from "./delivery-dir.js";
 type R = Record<string, unknown>;
 const args = process.argv.slice(2), value = (name: string) => { const index = args.indexOf(name); return index === -1 ? undefined : args[index + 1]; };
 const workspace = value("--workspace"), action = value("--action") ?? "assemble";
@@ -16,7 +17,7 @@ const hashText = (value: string) => createHash("sha256").update(value).digest("h
 const ensurePass = (name: string, gate: R) => { if (gate.status !== "pass") throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", `${name} 尚未通过。`, false, { status: gate.status }); };
 const stop = (message: string, details?: R): never => { throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", message, false, details); };
 const checkDetails = (gate: R, name: string) => (((gate.checks as R[]).find((check) => check.name === name)?.details as R | undefined) ?? {});
-const delivery = join(workspace, "06-delivery");
+const delivery = resolveDeliveryDir(workspace);
 const importPath = join(workspace, "02-visual-plan", "accepted_artwork_import.json");
 const importedArtwork = existsSync(importPath);
 

@@ -3,7 +3,9 @@
 - text vs graphics: renders text-only and graphics-only layers, ANDs dilated text ink with graphic ink
   (fill-only/surface rectangles excluded; hatch lines reported separately as 'hatch')
 - text vs text: texts split into non-adjacent groups, rendered separately, pairwise AND of dilated ink
-- margins: ink outside x∈[80,1120] (except full-bleed bg/album slot), gap from body ink to footer rule"""
+- margins: ink outside x∈[80,1120] (except full-bleed bg/album slot), gap from body ink to footer rule
+- header/side (v0.6.2): left/right margin symmetry (|left−right| ≤ 6px), top ink ≥ 40px from page top,
+  gap from header rule (long rule above y=400) to first body ink below it ≥ 12px"""
 import json, sys, subprocess, tempfile, os, itertools
 import numpy as np
 from PIL import Image
@@ -94,8 +96,20 @@ xs = np.where((full & ~art).any(0))[0]; ys = np.where(full.any(1))[0]
 L, R = xs.min() / sc, (xs.max() + 1) / sc
 rule_y = max([e["y"] for e in E if e["type"] == "line" and e.get("width", 0) > 900], default=1490)
 above = full[: int((rule_y - 5) * sc)]; body_bottom = np.where(above.any(1))[0].max() / sc
+W_PAGE = 1200
+sym = abs(L - (W_PAGE - R))
+top_ink = ys.min() / sc
+hrules = [e["y"] for e in E if e["type"] == "line" and e.get("width", 0) > 900 and e["y"] < 400]
+head_gap = None
+if hrules:
+  hy = max(hrules); below = full[int((hy + 5) * sc):]
+  rows = np.where(below.any(1))[0]
+  if len(rows): head_gap = float(round(rows.min() / sc + 5, 1))
 res = {"scene": os.path.basename(src), "ink_left": float(round(L, 1)), "ink_right": float(round(R, 1)), "footer_rule_y": rule_y,
        "gap_body_to_footer_rule": float(round(rule_y - body_bottom, 1)), "issues": issues,
-       "pass": bool(not issues and L >= 77.5 and R <= 1122.5 and rule_y - body_bottom >= 12)}
+       "side_margin_asymmetry": float(round(sym, 1)), "top_ink": float(round(top_ink, 1)),
+       "header_rule_y": max(hrules) if hrules else None, "gap_header_rule_to_body": head_gap,
+       "pass": bool(not issues and L >= 77.5 and R <= 1122.5 and rule_y - body_bottom >= 12
+                    and sym <= 6 and top_ink >= 40 and (head_gap is None or head_gap >= 12))}
 print(json.dumps(res, ensure_ascii=False, indent=1))
 sys.exit(0 if res["pass"] else 1)

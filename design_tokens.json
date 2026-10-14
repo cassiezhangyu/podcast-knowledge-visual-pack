@@ -342,9 +342,9 @@
     "min_size_note": "任何层级不低于 typography.min_readable（22）；层级差靠颜色与字重，不靠压字号"
   },
   "nav_panel": {
-    "position": "按本期版式需要决定（窄条、页首／页尾横带、角块或面板），不得挤占视觉中心；任务固定：内容地图、本页提纲、关系说明＋怎么读（R5 v0.4.4）",
+    "position": "按本期版式需要决定（窄条、页首／页尾横带、角块或面板），不得挤占视觉中心；任务固定：内容地图、本页提纲、关系说明＋怎么读（R5）",
     "fill": "primary_tint（由本期 primary 派生；例 palette 06 → #EEF1F8）",
-    "frame": "primary 或 primary_mid（同主色家族细框）",
+    "frame": "中性灰细线（L2）或不加框（R4b）",
     "text": "primary_deep / text_primary",
     "number_ring_stroke": "secondary 可作小强调描边",
     "forbidden_fill": "secondary_tint / accent_surface（桃、沙、杏等）",
@@ -361,7 +361,7 @@
       "模块标题与编号圈",
       "主链关系箭头",
       "一个焦点信号（如液柱）",
-      "导航区浅底与边框",
+      "导航区浅底（边框用灰或不加框）",
       "主标题（可选，按判断；也可用墨色）"
     ],
     "secondary": [
@@ -379,7 +379,6 @@
       0.0,
       0.08
     ],
-    "secondary_pixel_share_note": "≤约 8%；旧 15–30% 已废止（2026-10-13 Cassie）",
     "colored_text_contrast_min": 4.5,
     "nav_fill_source": "primary_tint（主色高明度低饱和浅阶），禁止 secondary / accent_surface",
     "ink": [
@@ -394,7 +393,9 @@
         "页面至少有一处承载含义的实心信号块"
       ],
       "removed": "v0.6.0 删除 primary ink-share 指标：不同色板之间不可比"
-    }
+    },
+    "source_of_truth": "rules/visual_quality_bar.md R4b（颜色规则唯一来源，冲突以 R4b 为准）",
+    "secondary_purpose": "只用于风险／不做标记与极小强调"
   },
   "density": {
     "no_empty_band_px": 80,

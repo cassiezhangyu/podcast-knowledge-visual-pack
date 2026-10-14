@@ -3,13 +3,14 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
+import { resolveDeliveryDir } from "./delivery-dir.js";
 type R = Record<string, unknown>;
 const args = process.argv.slice(2), index = args.indexOf("--workspace"), workspace = index === -1 ? undefined : args[index + 1];
 if (!workspace) { console.error("Usage: npm run public-copy:check -- --workspace <episode-workspace>"); process.exit(2); }
 const hashText = (value: string) => createHash("sha256").update(value).digest("hex");
 const hashJson = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const readJson = <T>(path: string) => JSON.parse(readFileSync(path, "utf8")) as T;
-const delivery = join(workspace, "06-delivery");
+const delivery = resolveDeliveryDir(workspace);
 try {
   const approvalText = readFileSync(join(workspace, "01-understanding", "content_split_human_approval.json"), "utf8");
   const approval = JSON.parse(approvalText) as R; validateArtifact("human_approval", approval);

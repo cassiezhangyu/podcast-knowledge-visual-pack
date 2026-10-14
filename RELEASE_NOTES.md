@@ -6,7 +6,7 @@
 - `content_pipeline.md` 新增 §0 A1–A8：先找论点、用节目自己的方法骨架、分清主线／例子／岔题、时间戳证据、陌生人可读测试前移到规划阶段、例子写出因果、读者语言、迁移段单列。
 - design_tokens：新增 text_levels（L0–L3，任何层级 ≥22px，解决最小字号与层级冲突）、nav_panel（辅色浅底 #EDE6EB 加中阶框 #B9A3B2 的做法）、palette_duties、export.scale=2.4；删除 E248 主题色回退。
 - 渲染：`render:checked` 额外输出 `*-4k.png`（2880×3840 矢量重渲，品牌图按同比例合成），render_manifest 记录 delivery_png；不再需要单独的 scaled bundle。
-- 冲突处理：导航区从“主色浅阶右栏”改为“辅色浅底整宽面板”；线条 roughness 只认 tokens，调参过程移入案例；taste 的“不强制 Hero”改为“必须有一个视觉重心”。
+- 冲突处理（注：导航配色与位置已被 0.4.1／0.4.4 推翻，现行见 visual_quality_bar R4b、R5）：导航区从“主色浅阶右栏”改为“辅色浅底整宽面板”；线条 roughness 只认 tokens，调参过程移入案例；taste 的“不强制 Hero”改为“必须有一个视觉重心”。
 - 去掉节目专属内容：面基外围锚点表、EP88/EP40 线条调参史、P08 提纲例子移入 examples；SKILL.md 的门禁命令细节移到 `docs/QUALITY_GATES_CLI.md`。
 
 # 0.3.0 · 小版本迭代（灵活生产范围）

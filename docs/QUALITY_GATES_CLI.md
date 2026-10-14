@@ -1,6 +1,5 @@
 # Quality Gates 命令细节
 
-自 v0.4.0 起从 SKILL.md §10 移出。
 
 严格执行 `rules/design_gates.md`：Transcript → Content → Editorial → Visual → Package。
 **每一页从规划开始都以 `TARGET` 为目标。** `TARGET` 的可见标准以当前 `taste.md`、相关已通过正例和反例及逐页协议为准；初版之前就核对整页问题、决定性关系、具体对象或文字结构、标题层级、手机阅读和来源边界，尽量通过充分规划在初版或一至两轮实质修改内达到标准。`REJECT-A`／`REJECT-B` 是失败诊断与返工路由，不是创作目标或常规出图、交付标准；机械检查通过、相对上一版改善、达到返工上限都不能把它们升级为 `TARGET`。

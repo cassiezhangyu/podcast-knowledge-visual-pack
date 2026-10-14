@@ -1,4 +1,4 @@
-# 转写指南（v0.6.0）
+# 转写指南
 
 ## Mac 本地（首选：mlx whisper-large-v3-turbo）
 

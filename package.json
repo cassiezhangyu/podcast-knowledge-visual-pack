@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,7 +17,7 @@
     "editorial:closeout": "npm run build && node dist/editorial-closeout-cli.js",
     "visual:candidates": "npm run build && node dist/visual-candidates-cli.js",
     "visual:select": "npm run build && node dist/visual-select-cli.js",
-    "construct": "tsc -p tsconfig.json && node dist/construction-cli.js",
+    "construct": "npm run build && node dist/construction-cli.js",
     "construction:closeout": "npm run build && node dist/construction-closeout-cli.js",
     "render": "npm run build && node dist/render-cli.js",
     "render:preflight": "npm run build && node scripts/render-runtime-preflight.mjs",
@@ -28,9 +28,11 @@
     "public-copy:bundle-check": "node scripts/check-companion-copy.mjs",
     "package": "npm run build && node dist/package-cli.js",
     "workflow:status": "npm run build && node dist/workflow-cli.js",
-    "accepted-artwork:import": "tsc -p tsconfig.json && node dist/accepted-artwork-import-cli.js",
+    "accepted-artwork:import": "npm run build && node dist/accepted-artwork-import-cli.js",
     "content:assemble": "npm run build && python3 scripts/assemble_content_package.py",
-    "test:python": "python3 -m unittest discover -s tests -p '*.py'"
+    "test:python": "python3 -m unittest discover -s tests -p '*.py'",
+    "mirror:sync": "python3 scripts/sync_mirror.py",
+    "mirror:check": "python3 scripts/sync_mirror.py --check"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

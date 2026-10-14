@@ -1,6 +1,6 @@
 # 线条调参历史（案例记录）
 
-自 v0.4.0 起从 rules/handdrawn_strokes.md 移出；数值以 design_tokens.json 为准。
+数值以 design_tokens.json 为准。
 
 2026-09-26 用户明确通过 EP88 P13-rough-stroke-v1：插图保留较强原生笔触，信息框与排版横线采用克制roughness。手绘线条保持本来的方向和几何结构，通过roughness体现自然抖动、笔触起伏与局部复描。不能用人为弯曲的光滑单线代替手绘笔触，也不能把整页边框和长横线都描成明显双线。
 

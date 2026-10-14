@@ -1,13 +1,8 @@
-# 中文字形规则：一律简体中文字形（v0.6.1，Cassie 2026-10-14）
+# 中文字形规则：一律简体中文字形
 
 **规则：** 成图里的所有中文字符和全角标点，都必须用简体中文字形（Noto Sans CJK SC 或其它 SC 字体）渲染；不得落到日文（JP）、繁体（TC/HK）或韩文（KR）字形。全角标点（，。、：；！？）也必须是简体中文位置（靠左下），不是日文的居中位置。
 
-## 根因（ETF E177 A-V34）
-
-- 场景文字用 Excalidraw 的 Helvetica（`fontFamily: 2`），它的回退链只有 `Segoe UI Emoji`，没有中文字体。
-- 中文因此交给系统字体回退：Linux 上由 fontconfig 决定，Helvetica／sans-serif 的 CJK 回退解析为 `Noto Sans CJK JP`（另一台机器上没有语言提示时甚至落到韩文 NanumGothic）。
-- 渲染页面没有 `lang`，Chromium 也没有中文 locale，没有任何东西把回退推向 SC。
-- 结果：“门”“直”“骨”“关”等字是日文字形，冒号逗号居中。看起来“字有点怪”，脚本审计也查不出来。
+排查背景见 `docs/HISTORY_NOTES.md`。
 
 ## 做法（所有渲染器必须一致）
 

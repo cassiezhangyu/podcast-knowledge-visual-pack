@@ -5,7 +5,8 @@ type R = Record<string, unknown>;
 const args = process.argv.slice(2), index = args.indexOf("--workspace"), workspace = index === -1 ? undefined : args[index + 1];
 if (!workspace) { console.error("Usage: npm run workflow:status -- --workspace <episode-workspace>"); process.exit(2); }
 const state = (relativePath: string) => {
-  const path = join(workspace, relativePath);
+  let path = join(workspace, relativePath);
+  if (relativePath.startsWith("06-delivery/") && !existsSync(path)) { const legacy = join(workspace, relativePath.replace(/^06-delivery\//, "delivery/")); if (existsSync(legacy)) path = legacy; }
   if (!existsSync(path)) return { exists: false, status: "missing" };
   try { const value = JSON.parse(readFileSync(path, "utf8")) as R; return { exists: true, status: String(value.status ?? "present") }; }
   catch { return { exists: true, status: "present" }; }

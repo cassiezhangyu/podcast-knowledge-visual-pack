@@ -24,24 +24,15 @@
 - 修改只影响获准范围，冻结内容、布局和文字；需要改布局时说明具体碰撞证据，禁止借笔触返工重做已认可构图。
 
 
-## v0.6.0：规则已写进 token
+## 路径形状与角色（防抖线）
 
-下面 v0.5.1 的规则现在就是 `design_tokens.json` 的 `stroke.path_limits`（≤6 点；>220px 路径与 >60px 椭圆 roughness ≤1.0），`relation`／`emphasis` 下调到 1.4；`audit_stroke_shapes.py` 直接读 token。按 token 选角色即可，不需要另作绕行。手绘感保留：curve 0.9、frame 1.1、短 object 2.0。
-
-## v0.5.1 抖线根因（ETF E177 总览，Cassie 2026-10-13）
-
-A-V7 的“抖、颤”不是 token 数值错，而是**路径形状和角色分配**错：飞轮四段弧各 11 点且用 `relation`（roughness 2.0）、成分股大椭圆用 `object`（2.0）、S 曲线 21 点、长箭头用 `relation`。roughness 在每个顶点叠加偏移，点越多、路径越长越像手抖；`emphasis`（1.6）画在弧线上会出现可见的双线。硬规则：
+数值以 `design_tokens.json → stroke.path_limits` 与 `stroke.role_settings` 为准，`audit_stroke_shapes.py` 直接读取。手绘感保留：curve 0.9、frame 1.1、短 object 2.0。roughness 在每个顶点叠加偏移，点越多、路径越长越像手抖。硬规则：
 
 - 曲线、椭圆、圆环弧、长箭头（>220px）一律用 `curve` 角色（roughness 0.9）；`relation`/`emphasis` 只给短的、需要动作感的箭头。
 - 任何 line/arrow 路径 ≤6 个点；弧线按每段约 25° 取点（3–5 段），不得逐度采样；S 曲线 5–6 个关键点即可。
 - 大于 60px 的椭圆 roughness ≤1.0（用 `curve`）；抽象信息卡用 `frame`，不用 `object_simple`。
 - 不用加粗角色制造“焦点”；焦点靠实心节点、尺寸和位置。
 
-**标准 QA（交付前必跑，均以 exit 0 为通过）：**
+**交付前必跑的检查清单**只在 `rules/main_workflow_sop.md` SOP C 第 7 步维护（含 check_strokes、audit_stroke_shapes、audit_overlap_margins、audit_cjk_glyphs、layout_budget）。
 
-1. `python3 scripts/check_strokes.py <scene>`（角色与 token）
-2. `python3 scripts/audit_stroke_shapes.py <scene>`（点数／长路径 roughness／大椭圆 roughness）
-3. `python3 scripts/audit_overlap_margins.py <scene> [scale]`（分层真实渲染：文字×线、文字×排线、文字×文字像素接触，x=80/1120 安全线，正文到页脚分隔线 ≥12px）
-4. `node scripts/audit_cjk_glyphs.mjs <scene>`（所有中文与全角标点为简体中文字形，`rules/cjk_glyphs.md`，v0.6.1）
-5. 首次渲染前：`python3 scripts/layout_budget.py <budget.json>`（布局预算，v0.6.0）。
-6. 再亲眼看 1x、390px 与 4K 局部（飞轮、大椭圆、长箭头、页脚）。脚本通过不代表成立。
+亲眼看 1x、390px 与 4K 局部（飞轮、大椭圆、长箭头、页脚）。脚本通过不代表成立。

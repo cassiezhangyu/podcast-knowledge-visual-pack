@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.3 — 2026-10-14（本地，未推送）
+
+- **去重**：`rules/phase_details.md` 从 21.9 KB 减到约 9.9 KB，只保留其它规则里没有的补充细节（恢复入口、单集解析与三层 transcript、内容梳理补充、模块关系类型、图片规划产物与哈希失效、信息预算、选色细节、预检细节、构建与导出命令、整包冻结与额外检查、审美反馈记录）。
+- 删除的段落及其唯一来源：DIRECT／SEGMENTED 与 Transcript Gate → `audio_pipeline.md`；内容单元字段、拆分五问、总图/操作/检验层级、transcript-window → `content_pipeline.md`；100% 去向不代替语义审核 → `design_gates.md`；页面存在性审查 → `page_content_planning.md`；总览“导航名称不能代替解释”“平行问题线” → `overview_page_production.md`；必读文件列表 → SKILL.md 阶段索引；三案、整包连续、样稿、限质例外、七层语义、改字重渲、bundle-check → `visual_pack_execution.md`；新页面创作链 → `visual_reasoning.md`／`visual_creation_context.md`；线条与字号细则 → `handdrawn_strokes.md`／`typography_hierarchy.md`；中文字形以真实 PNG 为准 → `cjk_glyphs.md`；质量门禁（R8/R9/R10）→ `visual_quality_bar.md` 与 SOP C；文案流程 → `public_copy_production.md`；内容审批命令与 18 张上限 → `main_workflow_sop.md`／SKILL.md §1。
+
 ## 0.6.2 — 2026-10-14（本地，未推送；备份标签 v0.6.1-local）
 
 按《v0.6.2 修改方案（易读版）》16 项执行（Cassie 批准）：

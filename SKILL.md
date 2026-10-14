@@ -5,7 +5,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 # Podcast Knowledge Visual Pack Skill
 
-**版本：v0.6.2**
+**版本：v0.6.3**
 
 > **Development note:** `SKILL.md` defines runtime behavior of the finished Skill. Repository development is governed separately by `AGENTS.md` and `ROADMAP.md`. Do not mix development protocol into runtime reasoning.
 >

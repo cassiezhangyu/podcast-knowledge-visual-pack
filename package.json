@@ -1,12 +1,12 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json && npm run build:preview",
-    "build:preview": "esbuild src/excalidraw-preview-browser.ts --bundle --platform=browser --format=iife --outfile=dist/excalidraw-preview-browser.js",
-    "test": "vitest run",
+    "build:preview": "esbuild scripts/src/excalidraw-preview-browser.ts --bundle --platform=browser --format=iife --outfile=dist/excalidraw-preview-browser.js && node scripts/stamp-render-build.mjs",
+    "test": "vitest run --config development/build-tools/vitest.config.ts",
     "preintake": "npm run build",
     "intake": "node dist/cli.js",
     "content:gate": "npm run build && node dist/content-gates-cli.js",
@@ -30,7 +30,8 @@
     "workflow:status": "npm run build && node dist/workflow-cli.js",
     "accepted-artwork:import": "tsc -p tsconfig.json && node dist/accepted-artwork-import-cli.js",
     "content:assemble": "npm run build && python3 scripts/assemble_content_package.py",
-    "test:python": "python3 -m unittest discover -s tests -p '*.py'"
+    "test:python": "python3 -m unittest discover -s development/tests -p '*.py'",
+    "render:scene:checked": "npm run build && node scripts/render-scene-checked.mjs"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

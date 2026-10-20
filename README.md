@@ -1,23 +1,31 @@
-# 播客知识视觉材料包 · 0.3.0
+# 播客知识视觉材料包 · 0.4.0
 
 将小宇宙单集转成可追溯的《内容梳理》《内容拆分》、封面、节目总览、深度解读信息图、原生可编辑 Excalidraw 与配套文案。语义理解、构图与审美由执行 Skill 的模型完成；工具承担抓取、转写、校验、哈希绑定、渲染和打包。
 
-这是经过本机实际制作验证的公开测试版。它需要查看真实图片、隔离审核和人类审批；不能把安装或测试通过当作新节目已经产出 TARGET。
+这是经过本机实际制作验证的公开测试版。它需要查看真实图片、作者自检和人类审批；安装和测试通过只说明工具检查成立，不代表新节目已完成视觉自检。
 
 ## 安装
 
-将 GitHub 仓库克隆到普通工具目录，进入包含 package.json 的根目录；仓库不放进 Skill 扫描目录。
+将仓库克隆到目标项目的 `.agents/skills/podcast-knowledge-visual-pack/`，或将 Release 安装包解压到该位置。根目录可直接找到 `SKILL.md`。
+
+进入 Skill 根目录安装依赖并构建：
 
 ```bash
 npm ci
 npm run build
-npm test
-npm run test:python
-# 用户级入口；目标应为空，现有版本不会被覆盖
-python3 scripts/install_skill.py --destination "$HOME/.agents/skills/podcast-knowledge-visual-pack"
 ```
 
-也可将 destination 改为自己工作项目的 `.agents/skills/podcast-knowledge-visual-pack`，该目录应在工具仓库之外。安装器只复制指令和资源，并写入本机 `RUNTIME_ROOT.json`；node_modules、dist、生产工作区留在工具仓库。仓库移动后需重新安装入口。官方位置与显式调用规则见 [Codex Skill 文档](https://learn.chatgpt.com/docs/build-skills)。
+项目开发测试仍从同一目录运行 `npm test` 和 `npm run test:python`，测试实体位于本仓库的 `development/tests/`。独立复制包不包含这些项目测试。
+
+安装到另一个项目时，可执行：
+
+```bash
+python3 scripts/install_skill.py --mode copy --destination <另一项目>/.agents/skills/podcast-knowledge-visual-pack
+```
+
+目标必须尚不存在，并位于当前 Skill 目录之外。copy 携带规则、资源、运行源码、脚本、worker、依赖声明与构建配置；不携带 node_modules、dist、开发测试或生产工作区。进入目标目录执行 `npm ci` 和 `npm run build`，音频转写仍需独立 MLX 环境。案例迁移范围受 `LICENSING.md` 约束。
+
+安装器保留 link 与 legacy 以兼容旧调用；本项目使用直接存放，新增独立安装使用 copy。官方目录说明见 [Codex Skill 文档](https://learn.chatgpt.com/docs/build-skills)。
 
 安装后明确调用：
 
@@ -27,7 +35,32 @@ python3 scripts/install_skill.py --destination "$HOME/.agents/skills/podcast-kno
 输出到我指定的本地目录；完整保留来源、案例、条件与边界。
 ```
 
-在支持 `$` 提及的 Codex 入口可使用 `$podcast-knowledge-visual-pack`。整个工具链以 RUNTIME_ROOT 指向的仓库为命令工作目录；不要在安装入口中 npm install。
+在支持 `$` 提及的 Codex 入口可使用 `$podcast-knowledge-visual-pack`。link 模式先解析入口目录的真实路径，再在该根目录运行命令；copy 模式在复制后的根目录运行；legacy 模式在 `RUNTIME_ROOT.json` 指向的仓库运行。生产工作区放在 Skill 之外。
+
+## 资源组织与兼容路径
+
+```text
+podcast-knowledge-visual-pack/
+├── SKILL.md                         模型入口与分阶段读取
+├── references/
+│   ├── rules/                       工作流程与质量标准
+│   ├── taste.md                     用户及系列表达偏好
+│   ├── schemas/                     结构化数据合同
+│   └── environment/                 运行环境说明
+├── assets/
+│   ├── templates/                   生成与填写模板
+│   ├── examples/                    原字节案例和使用范围
+│   ├── design_tokens.json           绘制参数
+│   └── color-library.*              色卡
+├── scripts/
+│   ├── src/                         运行源码
+│   ├── workers/                     转写 worker
+│   └── 其他执行与安装脚本
+├── src/、workers/                    指向 scripts 内的旧路径兼容链接
+└── package.json 等                   依赖与构建配置
+```
+
+`rules/`、`schemas/`、`templates/`、`examples/`、`taste.md`、`design_tokens.json` 及原环境文档路径均为指向规范位置的相对兼容链接。现有命令、历史哈希绑定和案例引用可继续通过原路径读取；编辑链接和规范路径会修改同一文件，无需两处同步。完整 Skill 直接在其根目录维护；运行回归测试及配置位于本仓库 `development/`。`npm test` 与 `npm run test:python` 从本仓库 development 目录加载测试；独立 copy 安装仅携带运行能力，不携带项目测试。开发和发布说明不要求每次生产加载。执行 `python3 scripts/check_skill_layout.py` 检查结构、兼容链接及运行资源。
 
 ## 环境与依赖
 
@@ -36,7 +69,7 @@ python3 scripts/install_skill.py --destination "$HOME/.agents/skills/podcast-kno
 | 工具链 | Node.js 24.x；npm ci 使用 package-lock.json；Python 3.9或以上用于标准库脚本 |
 | 图片渲染 | Playwright 与官方 Excalidraw 适配器；本机 macOS 已安装 Chrome，按 `docs/RENDER_BROWSER_ENVIRONMENT.md` 使用能启动浏览器的权限 |
 | 本地转写 | 当前实现为 macOS Apple Silicon 的 MLX Whisper；另备 Python 环境，包含 mlx_whisper、av、numpy，并通过 --provider-python 指定 |
-| 模型 | 能读取来源、编写原生 scene、实际看图；隔离只读审核者与创作者使用不同上下文 |
+| 模型 | 主会话能读取来源、编写原生scene、实际看图并完成作者自检，无需另建审核上下文 |
 | 表达处理 | 配套文案阶段调用可用的 Humanizer Skill；不可用时保持该阶段待完成，不冒称执行过 |
 | 校准素材 | 有明确使用范围的正反参考和本期来源；节目名称、摘录、品牌等第三方内容不受MIT授权 |
 
@@ -50,8 +83,8 @@ python3 scripts/install_skill.py --destination "$HOME/.agents/skills/podcast-kno
 2. 模型形成内容梳理、清单；用户批准当前版本。
 3. 模型形成内容拆分、覆盖与页面规划；用户批准当前版本。
 4. 通用工具组装知识图、编辑规划与覆盖矩阵。
-5. 用户选色；按内容探索每页构图，默认三案，先使最有把握的一案达到完整独立 TARGET。三案不能沿用同一骨架换图标。
-6. 正反参考预检、真实原型、原生整页构建、原图/390px/灰度与独立审核；展示真实图，用户选定并批准当前哈希。
+5. 用户选色；按内容探索每页构图，默认三案，先使最有把握的一案达到完整作者自检。三案不能沿用同一骨架换图标。
+6. 正反参考预检、真实原型、原生整页构建、原图/390px/灰度与作者自检；展示真实图，用户选定并批准当前哈希。
 7. 实际编辑检查、整包横审、配套文案忠实度回归与ZIP一致性检查；用户明确确认当前整包后发布门禁通过。
 
 ```bash
@@ -65,7 +98,7 @@ npm run construct -- --workspace <工作区>
 npm run render:checked -- --workspace <工作区>
 ```
 
-这些命令之间需要模型生成相应语义工件与真实审批，不是直接连跑的自动产图流水线。视觉 prepare / closeout 的参数与状态见 `rules/independent_visual_review.md`；默认三案、逐页/整包授权、两轮返工与限质边界见 `rules/visual_pack_execution.md`。机器校验不承担视觉判断。
+这些命令之间需要模型生成相应语义工件与真实审批，不是直接连跑的自动产图流水线。作者自检字段见 `rules/page_quality_check.md`，页面登记使用 `visual:closeout --page-check`；默认三案、逐页/整包授权、两轮返工与限质边界见 `rules/visual_pack_execution.md`。机器校验不承担视觉判断。
 
 已验收旧图可用 `npm run accepted-artwork:import -- --workspace <工作区> --input <实际批准清单>` 冻结导入。仍须当前四工件、真实单页报告、选择批准、实际编辑操作和当前整包横审；不能借此补签制作历史或放宽新页默认三案。
 
@@ -85,9 +118,11 @@ DIRECT 是当前稳定完整音频路线；失败后不自动转为分段。状�
 
 ```bash
 PODCAST_MAP_REAL_IMPORT_ROOT="<含workspace和IMPORT_INPUT.json的本地目录>" \
-  npm test -- --run tests/accepted-artwork-import.test.ts
+  npm test -- development/tests/accepted-artwork-import.test.ts
 ```
 
 已完成新播客的17页实际制作、逐页选择和验收；当前替换页另做实际导入与编辑，最新整包实看51张原图/手机/灰度图。此证据证明本次人工协作流程成立，不代表所有未来输入或模型都能获得同样结果。发布检查和限制见 `RELEASE_NOTES.md`。
 
 通用代码和指令按MIT发布，版权归属 cassiezhangyu；案例与色卡有单独范围，见 `LICENSING.md`。未核定第三方公开范围的材料不进入可上传版本。正反参考迁移时保持原字节与身份，不改图来制造新许可。
+
+当前流程不触发审核agent；绘制、作者自检及输出由主会话完成。visual:closeout默认接收--page-check，旧--review路径仅为显式历史兼容，不是必需步骤。

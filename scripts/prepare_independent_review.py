@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """生成不含创作者自评的只读视觉审核输入包。"""
+from __future__ import annotations
 import argparse
 import hashlib
 import json
 from check_typography import validate_scene
 from check_strokes import check as check_strokes
 from pathlib import Path
+from user_requirements import resolve_requirements, check_requirements
 
 
 def asset(path_string: str) -> dict:
@@ -56,9 +58,17 @@ def check_preflight(path_string: str, args: argparse.Namespace, references: list
     if not args.revalidate_existing and Path(preflight_asset["path"]).stat().st_mtime > Path(args.scene).expanduser().resolve().stat().st_mtime:
         raise SystemExit("联合预检文件晚于当前 scene；不得在作图后补签。")
     preflight = json.loads(Path(preflight_asset["path"]).read_text())
+    try:
+        resolve_requirements(preflight.get('inputs', {}))
+    except (OSError, ValueError) as exc:
+        raise SystemExit(str(exc)) from exc
     for key, expected in {"page_id": args.page_id, "role": args.role, "content_sha256": content["sha256"], "taste_sha256": taste["sha256"], "design_tokens_sha256": tokens["sha256"]}.items():
         if preflight.get(key) != expected:
             raise SystemExit(f"联合预检与当前输入不一致：{key}")
+    if args.role == 'overview':
+        basis = preflight.get('inputs', {}).get('framework_basis')
+        if not isinstance(basis, dict) or asset(basis.get('path', '')) != basis:
+            raise SystemExit('总览预检缺少当前批准关系台账 inputs.framework_basis，或其绑定已失效。')
     expected_status = "completed_before_existing_artwork_review" if args.revalidate_existing else "completed_before_construction"
     if preflight.get("status") != expected_status:
         raise SystemExit("联合预检必须在构图前完成，不能事后补签。")
@@ -85,7 +95,7 @@ def check_preflight(path_string: str, args: argparse.Namespace, references: list
                 raise SystemExit(f"联合预检页内关系格式错误：module_relations[{index}]")
             for field in ("from", "to", "relation_type", "reader_question", "forbidden_reading"):
                 value = relation.get(field)
-                if field in ("from", "to"):
+                if field in ("from", "to", "relation_type", "forbidden_reading"):
                     if not isinstance(value, str) or not value.strip():
                         raise SystemExit(f"联合预检缺少页内模块名称：module_relations[{index}].{field}")
                 else:
@@ -99,7 +109,8 @@ def check_preflight(path_string: str, args: argparse.Namespace, references: list
     if not isinstance(forbidden, list) or not forbidden:
         raise SystemExit("联合预检必须列出本页禁用的失败画法。")
     for index, pattern in enumerate(forbidden):
-        require_text(pattern, f"forbidden_patterns[{index}]")
+        if not isinstance(pattern, str) or not pattern.strip():
+            raise SystemExit(f"联合预检缺少失败画法：forbidden_patterns[{index}]")
     return preflight_asset
 
 
@@ -132,6 +143,7 @@ def main() -> None:
     parser.add_argument("--negative", required=True, action="append")
     parser.add_argument("--taste", required=True)
     parser.add_argument("--design-tokens", required=True)
+    parser.add_argument("--mechanical-check", required=True)
     parser.add_argument("--preflight", required=True)
     parser.add_argument("--page-check", required=True)
     parser.add_argument("--design-gates", required=True)
@@ -168,28 +180,72 @@ def main() -> None:
     negative = [asset(path) for path in args.negative]
     preflight = check_preflight(args.preflight, args, positive + negative, content, taste, tokens)
     png = asset(args.png)
+    mechanical = asset(args.mechanical_check)
+    record = json.loads(Path(mechanical['path']).read_text())
+    required = {'preconstruction_reference_plan', 'native_scene', 'typography_roles_sizes_strong_weight', 'stroke_roles', 'static_text_geometry', 'reader_facing_text', 'outline_alignment', 'current_input_bindings', 'same_scene_real_export'}
+    passed = {c.get('name') for c in record.get('checks', []) if c.get('status') == 'pass'}
+    if record.get('kind') != 'mechanical_render_record' or record.get('status') != 'pass' or not required <= passed:
+        raise SystemExit('强制机械导出记录缺项或未通过')
+    for key, expected in [('scene', scene_asset), ('png', png), ('phone', asset(args.phone)), ('gray', asset(args.gray) if args.gray else None)]:
+        if expected is None or record.get('current', {}).get(key) != expected:
+            raise SystemExit('强制导出记录与当前工件不一致：' + key)
+    for key in ['tokens', 'preflight', 'renderer', 'brand_asset']:
+        bound = record.get(key, {})
+        if not bound.get('path') or asset(bound['path']) != bound:
+            raise SystemExit('强制导出输入已变化：' + key)
+    outline = record.get('outline_check', {})
+    if args.role in ['overview', 'deep_dive']:
+        bound = outline.get('regions', {})
+        if outline.get('status') != 'pass' or not bound.get('path') or asset(bound['path']) != bound:
+            raise SystemExit('提纲区域缺失、未检查或已变化')
+    elif outline != {'status': 'not_applicable', 'reason': 'cover'}:
+        raise SystemExit('提纲检查适用范围无效')
+    if record['tokens'] != tokens or record['preflight'] != preflight:
+        raise SystemExit('送审与导出使用的规范或预检不同')
     page_check = check_rendered_page(args.page_check, args, scene_asset, png)
+    requirements = resolve_requirements(json.loads(Path(preflight['path']).read_text()).get('inputs', {}))
+    try:
+        check_requirements(requirements, json.loads(Path(page_check['path']).read_text()).get('user_requirements_check'))
+    except (OSError, ValueError) as exc:
+        raise SystemExit(str(exc)) from exc
     packet = {
         "kind": "independent_visual_review_packet",
         **packet_page_ids(args.page_id, args.manifest_page_id),
         "role": args.role,
         "creator_context_id": args.creator_context_id,
         "creator_notes_included": False,
-        "current": {"scene": scene_asset, "png": png, "phone": asset(args.phone)},
+        "current": {"scene": scene_asset, "png": png, "phone": asset(args.phone), "gray": asset(args.gray)},
         "content": content,
         "positive": positive,
         "negative": negative,
         "standards": {
+            "quality_criteria": asset(Path(__file__).resolve().parents[1] / "rules/visual_reasoning.md"),
             "taste": taste,
             "design_tokens": tokens,
             "design_gates": asset(args.design_gates),
             "review_protocol": asset(args.review_protocol),
         },
+        "mechanical_render_record": mechanical,
         "preflight_sha256": preflight["sha256"],
         "rendered_page_check_sha256": page_check["sha256"],
-        "instruction": "独立只读审核。自行打开原图、手机图、正反案例与规范；先复述页面表达，再按正例最低交付线判定 TARGET/REJECT-A/REJECT-B。不要读取创作者方案、自评或版本说明，不要修改文件。",
+        "instruction": "独立只读审核。先打开原图与手机图固化读回，再对照内容、实际正反参考、quality_criteria第1节、taste及当前合同；使用与创作相同的标准判定TARGET/REJECT-A/REJECT-B。只作独立复核与兜底，不代替创作者完成基本设计。不读取作者方案、自评、预期答案或版本说明，不修改文件。",
     }
+    if record.get('current', {}).get('delivery'):
+        bound = record['current']['delivery']
+        if asset(bound['path']) != bound:
+            raise SystemExit('高清导出图已变化')
+        packet['current']['delivery'] = bound
+    if requirements:
+        packet['standards']['user_requirements'] = requirements
+    diagnostics = record.get('diagnostics', {})
+    for key, bound in diagnostics.items():
+        if asset(bound['path']) != bound:
+            raise SystemExit('导出诊断已变化：' + key)
+    if diagnostics:
+        packet['diagnostics'] = diagnostics
     output = Path(args.output).expanduser().resolve()
+    if args.role == 'overview':
+        packet['framework_basis'] = json.loads(Path(preflight['path']).read_text())['inputs']['framework_basis']
     output.parent.mkdir(parents=True, exist_ok=True)
     color_path = output.with_name(output.stem + "-color-roles.json")
     color_path.write_text(json.dumps(json.loads(Path(preflight["path"]).read_text())["color_role_plan"], ensure_ascii=False, indent=2) + "\n")

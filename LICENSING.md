@@ -2,8 +2,8 @@
 
 本仓库根目录的 `LICENSE`（MIT）适用于以下通用 Skill 文件：
 
-- `SKILL.md`、`README.md`、`rules/`、`schemas/`、`templates/`；
-- `src/`、`scripts/`、`workers/`、`tests/`；
+- `SKILL.md`、`README.md`、`references/`、`assets/templates/` 及对应兼容路径；
+- `scripts/`、`development/` 及 `src/`、`workers/` 兼容路径；
 - `package.json`、`package-lock.json`、`tsconfig.json`、`design_tokens.json`、`taste.md`。
 
 单期专用脚本不属于此精简包；若以后另行加入，应先确定相应内容与许可范围。

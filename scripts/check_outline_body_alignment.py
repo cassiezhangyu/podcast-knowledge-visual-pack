@@ -17,21 +17,68 @@ LEGACY_REGIONS = {
 
 
 def text_elements(scene: dict) -> list[dict]:
-    return [e for e in scene.get("elements", [])
-            if e.get("type") == "text" and not e.get("isDeleted")]
+    candidates = [e for e in scene.get("elements", [])
+                  if e.get("type") == "text" and not e.get("isDeleted")]
+    strong = set(json.loads((Path(__file__).resolve().parents[1] / "design_tokens.json").read_text())["typography"]["strong_inner_roles"])
+    unique = []
+    for e in sorted(candidates, key=lambda e: (e.get("y", 0), e.get("x", 0))):
+        role = e.get("customData", {}).get("typography_role")
+        copy = role in strong and any(
+            b.get("text") == e.get("text") and b.get("fontSize") == e.get("fontSize")
+            and b.get("strokeColor") == e.get("strokeColor")
+            and b.get("customData", {}).get("typography_role") == role
+            and .5 <= abs(b.get("x", 0) - e.get("x", 0)) <= 1.5
+            and abs(b.get("y", 0) - e.get("y", 0)) <= .5 for b in unique)
+        if not copy:
+            unique.append(e)
+    return unique
 
 
 def one_digit(e: dict) -> int | None:
     value = str(e.get("text", "")).strip()
-    return int(value) if re.fullmatch(r"[1-9][0-9]*", value) else None
+    return int(value) if re.fullmatch(r"0*[1-9][0-9]*", value) else None
+
+
+CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
+PREFIX = re.compile(r"^(?:([" + CIRCLED + r"])\s*|[（(](0*[1-9][0-9]*)[)）]\s*|(0*[1-9][0-9]*)[.、．:：)）](?![0-9])\s*)(.*)$", re.S)
+
+
+def prefix(value: str) -> tuple[int, str] | None:
+    match = PREFIX.match(value.strip())
+    if not match:
+        return None
+    number = CIRCLED.index(match[1]) + 1 if match[1] else int(match[2] or match[3])
+    return number, match[4].strip()
+
+
+def explicit_number(e: dict) -> int | None:
+    data = e.get("customData", {})
+    if 'navigation_number' not in data:
+        return None
+    number = data['navigation_number']
+    if isinstance(number, bool) or not isinstance(number, int) or number < 1:
+        raise ValueError("navigation_number 必须为正整数")
+    if e.get('opacity', 100) == 0 or not str(e.get('text', '')).strip():
+        raise ValueError("navigation_number 必须绑定可见文字标记")
+    title = data.get('navigation_label')
+    if title is not None and (not isinstance(title, str) or not title.strip()
+                              or title not in str(e.get('text', ''))):
+        raise ValueError("navigation_label 必须是当前可见文字中的真实标题")
+    visible = prefix(str(e.get('text', ''))) or ((one_digit(e), '') if one_digit(e) else None)
+    if visible and visible[0] != number:
+        raise ValueError("navigation_number 与可见数字不一致")
+    return number
 
 
 def body_number(e: dict) -> int | None:
+    explicit = explicit_number(e)
+    if explicit is not None:
+        return explicit
     number = one_digit(e)
     if number is not None:
         return number
-    match = re.match(r"^([①②③④⑤⑥⑦⑧⑨])\s*\S", str(e.get("text", "")).strip())
-    return "①②③④⑤⑥⑦⑧⑨".index(match.group(1)) + 1 if match else None
+    parsed = prefix(str(e.get("text", "")))
+    return parsed[0] if parsed else None
 
 
 def validate_regions(regions: dict) -> None:
@@ -68,9 +115,14 @@ def belongs(e: dict, region: dict) -> bool:
 
 
 def nearby_heading(elements: list[dict], number: dict, side: str, region: dict) -> dict | None:
-    inline = re.match(r"^[①②③④⑤⑥⑦⑧⑨]\s*(.+)", str(number.get("text", "")).strip())
-    if side == "body" and inline:
-        return number
+    declared_label = number.get('customData', {}).get('navigation_label')
+    if declared_label:
+        return {**number, "text": declared_label}
+    inline = prefix(str(number.get("text", "")))
+    if side == "rail" and number.get("_inline_outline_label"):
+        return {**number, "text": number["_inline_outline_label"]}
+    if inline and inline[1]:
+        return {**number, "text": inline[1]}
     x0, y0 = float(number.get("x", 0)), float(number.get("y", 0))
     choices = [
         e for e in elements
@@ -92,8 +144,6 @@ def label(heading: dict | None, side: str) -> str | None:
     if heading is None:
         return None
     value = str(heading["text"]).strip()
-    if side == "body":
-        value = re.sub(r"^[①②③④⑤⑥⑦⑧⑨]\s*", "", value)
     return value.replace("\n", " / ")
 
 
@@ -108,13 +158,25 @@ def check(path: Path, regions: dict | None = None) -> dict:
         return result
     scene = json.loads(path.read_text(encoding="utf-8"))
     elements = text_elements(scene)
+    try:
+        for element in elements:
+            explicit_number(element)
+    except ValueError as exc:
+        result['errors'].append(str(exc))
+        return result
     body: dict[int, list[tuple[dict, dict]]] = {}
     rail: dict[int, list[tuple[dict, dict]]] = {}
     for e in elements:
-        for key, groups, parse in (("outline_regions", rail, one_digit),
+        for key, groups, parse in (("outline_regions", rail, body_number),
                                    ("body_regions", body, body_number)):
             region = next((r for r in regions[key] if belongs(e, r)), None)
-            if region is not None and (num := parse(e)) is not None:
+            inline_entries = list(re.finditer(r"([" + CIRCLED + r"])\s*([^" + CIRCLED + r"]+)", str(e.get("text", "")))) if key == 'outline_regions' and explicit_number(e) is None else []
+            if region is not None and len(inline_entries) > 1:
+                for match in inline_entries:
+                    num = CIRCLED.index(match[1]) + 1
+                    part = {**e, "_inline_outline_label": match[2].strip()}
+                    groups.setdefault(num, []).append((part, region))
+            elif region is not None and (num := parse(e)) is not None:
                 groups.setdefault(num, []).append((e, region))
     errors = result["errors"]
     expected = list(range(1, len(rail) + 1))

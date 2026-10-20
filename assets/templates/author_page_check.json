@@ -1,0 +1,13 @@
+{
+  "page_id": "P01",
+  "status": "self_check_passed",
+  "current": {},
+  "mechanical_render_record": {},
+  "checks": {
+    "content_coverage": {"status": "pass", "visible_evidence": "填写实际内容及来源核对证据"},
+    "visual_explanation": {"status": "pass", "visible_evidence": "填写图文如何呈现必要关系的证据"},
+    "reference_alignment": {"status": "pass", "visible_evidence": "填写与实际参考对照的结果"},
+    "text_geometry": {"status": "pass", "visible_evidence": "填写实际字形及间隔核对结果"},
+    "mobile_readability": {"status": "pass", "visible_evidence": "填写390px实图的可读性核对结果"}
+  }
+}

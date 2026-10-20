@@ -5,6 +5,25 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_overview_framework import framework_errors
+from user_requirements import resolve_requirements, check_requirements
+
+
+def reader_provenance_errors(reader, required=False):
+    """只核披露完整与模式一致；不判断是否真正陌生或理解。"""
+    keys = ('review_mode', 'prior_exposure', 'readback_scope')
+    if not required and (not isinstance(reader, dict) or not any(k in reader for k in keys)):
+        return []
+    if (not isinstance(reader, dict)
+            or reader.get('review_mode') not in ('first_read', 'informed_regression')
+            or reader.get('prior_exposure') not in ('none', 'content_or_draft', 'unknown')
+            or not isinstance(reader.get('readback_scope'), str)
+            or not reader['readback_scope'].strip()
+            or (reader['review_mode'] == 'first_read' and reader['prior_exposure'] != 'none')):
+        return ['理解读回缺少有效模式、上下文接触或范围；已知或不明上下文不能声称陌生首读']
+    return []
 
 
 def validate(report, stage, case_id=None):
@@ -38,6 +57,12 @@ def validate(report, stage, case_id=None):
         errors.append('三案中没有完整TARGET，停止展示选择')
     for case in cases:
         name = case.get('case', '?')
+        reader = case.get('unfamiliar_reader_check', {})
+        errors.extend(name + e for e in reader_provenance_errors(reader, report.get('schema_version') == '1.1'))
+        fields = ['entry_and_path', 'graphic_text_gain', 'whole_page_summary']
+        blocks = reader.get('block_readback') if isinstance(reader, dict) else None
+        if not isinstance(reader, dict) or reader.get('status') != 'pass' or not all(isinstance(reader.get(k), str) and len(reader[k].strip()) >= 8 for k in fields) or not isinstance(blocks, list) or not blocks or not all(isinstance(b, dict) and all(isinstance(b.get(k), str) and b[k].strip() for k in ['block', 'observed', 'expected']) and b.get('match') is True for b in blocks) or reader.get('summary_matches_approved_content') is not True or reader.get('breakpoints') != [] or not isinstance(reader.get('repairs'), list):
+            errors.append(name + '理解读回检查缺项、未通过或仍有断点')
         if not case.get('readback') or not case.get('visible_evidence'):
             errors.append(name + '缺少独立读回与可见依据')
         if case.get('composition_passed') is not True:
@@ -79,6 +104,45 @@ def validate(report, stage, case_id=None):
         for kind in ['scene', 'png', 'phone', 'gray']:
             if kind not in current:
                 errors.append(name + '缺少' + kind + '绑定')
+        record_bound = current.get('mechanical_render_record')
+        if not record_bound:
+            errors.append(name + '缺少强制机械检查与同场景真实导出记录')
+        else:
+            try:
+                record = json.loads(Path(record_bound['path']).read_text())
+                required = {'preconstruction_reference_plan', 'native_scene', 'typography_roles_sizes_strong_weight', 'stroke_roles', 'static_text_geometry', 'reader_facing_text', 'outline_alignment', 'current_input_bindings', 'same_scene_real_export'}
+                passed = {c.get('name') for c in record.get('checks', []) if c.get('status') == 'pass'}
+                if record.get('kind') != 'mechanical_render_record' or record.get('status') != 'pass' or not required <= passed:
+                    errors.append(name + '机械检查记录缺项或未通过')
+                for kind in ['scene', 'png', 'phone', 'gray'] + (['delivery'] if record.get('current', {}).get('delivery') else []):
+                    if record.get('current', {}).get(kind) != {k: current.get(kind, {}).get(k) for k in ['path', 'sha256']}:
+                        errors.append(name + '真实导出记录与当前' + kind + '不一致')
+                inputs.extend(record.get('diagnostics', {}).values())
+                outline = record.get('outline_check', {})
+                preflight_bound = record.get('preflight', {})
+                preflight_data = json.loads(Path(preflight_bound['path']).read_text())
+                preflight_role = preflight_data.get('role')
+                requirements = resolve_requirements(preflight_data.get('inputs', {}))
+                check_requirements(requirements, case.get('user_requirements_check'))
+                if requirements:
+                    inputs.append(requirements)
+                if preflight_role == 'overview':
+                    basis = preflight_data.get('inputs', {}).get('framework_basis')
+                    errors.extend(name + e for e in framework_errors(reader.get('overview_framework_check'), basis, report['page_id']))
+                    if isinstance(basis, dict): inputs.append(basis)
+                if preflight_role in ['overview', 'deep_dive']:
+                    if outline.get('status') != 'pass' or not outline.get('regions'):
+                        errors.append(name + '缺少当前提纲区域核验')
+                    else:
+                        inputs.append(outline['regions'])
+                elif preflight_role != 'cover' or outline != {'status': 'not_applicable', 'reason': 'cover'}:
+                    errors.append(name + '提纲检查适用范围无效')
+                for key in ['tokens', 'preflight', 'renderer', 'brand_asset']:
+                    value = record.get(key)
+                    if not value: errors.append(name + '导出记录缺少' + key)
+                    else: inputs.append(value)
+            except (OSError, KeyError, TypeError, ValueError) as exc:
+                errors.append(name + '导出记录不可核验：' + str(exc))
         inputs.extend(current.values())
     for bound in inputs:
         try:

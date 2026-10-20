@@ -1,3 +1,51 @@
+# v0.4.0 · 独立安装、作者自检与渲染证据更新
+
+以 v0.3.0 为基线，整合当前已维护的 Skill、运行工具与回归测试；完整 Skill 可直接放入项目发现目录，主会话完成创作与作者自检，真实渲染记录继续绑定当前工件。
+
+## 新增与改进
+
+- 增加独立 copy 安装和共享维护源的 link 安装；保留默认 legacy 调用兼容。规则、schema、模板、运行源码和转写 worker 随独立包提供。
+- 规范资源集中到 references/、assets/、scripts/src/ 与 scripts/workers/，保留原 rules/、schemas/、templates/、examples/、src/、workers/ 等包内相对兼容链接。
+- 页面登记默认接收作者自检 `--page-check`，不再要求创建审核 agent；来源、当前工件哈希、用户内容确认及选图停点继续保留。旧 `--review` 与 `--packet` 为显式兼容调用。
+- 总览规划增加批准关系台账和框架核验；理解读回与用户条件检查分别记录证据及适用范围。强化内容职责、整页构图、图文指认、手机阅读和来源边界的制作要求。
+- 统一渲染前机械检查、中文字体与字形核验、文字几何和固定外围模块检查；导出记录绑定 scene、原图、390px、灰度及可选高清图与比例。
+- 运行回归测试、合成夹具及 Vitest 配置纳入仓库内 development/，测试不再依赖外层项目布局。
+
+## 修复
+
+- 修复文字元素缺少 customData 时，重叠检查提前崩溃而未报告重叠的问题。
+- 补齐过期测试夹具所缺的预检、笔触职责、理解读回及机械导出记录，使测试进入各自需要验证的业务分支。
+- 修复测试迁移后的根路径与 macOS 临时目录真实路径绑定。
+
+## 兼容影响与迁移
+
+本次含流程及数据合同变化，按项目 0.x 版本规则递增 MINOR。
+
+1. 新安装：解压独立安装包到目标项目 `.agents/skills/podcast-knowledge-visual-pack/`，确认根目录存在 SKILL.md，再运行 `npm ci` 和 `npm run build`。ZIP 使用包内相对符号链接，macOS/Linux 可用 `unzip` 解压并执行 `python3 scripts/check_skill_layout.py` 验证。
+2. 升级：先保留现有安装和生产工作区，再将新版本安装到空目录；安装器不覆盖已有目标。工作区放在 Skill 目录之外，不把旧 RUNTIME_ROOT.json 移入完整 copy 安装。
+3. 新 construction_spec 须提供 preflight_relative_path，内页须提供 outline_regions_relative_path；文字元素须声明 typography_role，非文字元素须声明 stroke_role。旧规格应按当前 schema 补齐真实记录，不能批量补签审批。
+4. 页面登记使用 `visual:closeout -- --workspace <工作区> --page-check <作者自检文件>`；只有当前用户明确确认后才使用 approve 与 --user-approved。需要复核旧独立报告时，显式使用旧 --review/--packet 路径，并满足当前绑定要求。
+5. 新理解读回记录需遵循当前 schema；1.1 记录明确 review_mode、prior_exposure 和 readback_scope，知情回归不能声称陌生首读。
+6. 源码开发测试在仓库根目录执行 `npm test` 和 `npm run test:python`；安装 ZIP 不包含 development、测试依赖缓存或 dist，使用者须自行安装依赖并构建。
+
+Node.js 最低要求仍为 24；标准库脚本使用 Python 3.9+。完整转写另需 macOS Apple Silicon 的 MLX Whisper 环境。Humanizer 为文案阶段的独立外部 Skill，不随本安装包分发。
+
+## 公开范围与许可
+
+纳入通用代码、规则、schema、模板、参数、色卡和此前已确认公开的8组历史案例及 EP59 参考。案例和色卡依各自使用说明，不适用 MIT 通用代码许可。
+
+排除项目私有正反案例、候选案例、对应索引与私有实图指引、生产成果、原始音频、缓存、日志及外层项目专用工具。本地原件保留。源码快照包含开发测试；独立安装 ZIP 只包含安装和运行所需文件。
+
+## 验证范围与限制
+
+发布准备检查包括候选源码干净安装、构建、运行回归测试、结构及包内链接检查；独立安装包另行解压、安装依赖、构建和启动核心命令。精确结果与文件校验值以同批发布清单为准。
+
+本次不重新转写完整音频，也不制作或验收新播客整包；测试中的合成图片、机械记录和审批只验证协议与防篡改行为，不代表真实视觉质量。可选真实整包测试默认跳过。其他操作系统、陌生物理机器与无人干预长序列生产仍未验证。npm 可能报告 Excalidraw/Radix 与 React 的既有 peer 警告。
+
+上一正式版本：[v0.3.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.3.0)。本次完整 Commit 与比较链接在冻结候选后附于发布计划；历史条目保留在 RELEASE_NOTES.md。
+
+---
+
 # 0.3.0 · 小版本迭代（灵活生产范围）
 
 在 0.2.1-beta.1 基础上新增，旧版逻辑保留在标签 `v0.2.1-beta.1`。

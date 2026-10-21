@@ -59,3 +59,5 @@
 - **R17 画机制，不画文字**：每个模块至少有一个承载意义的图（流程、对照、状态切换、数量比较、包含/分叉等关系结构）；装饰性小图标不算。
 - **R18 禁止简笔画**：火柴人、类人简笔人物、粗糙简单线描图标一律不合格；大幅装饰插画配散落标签等同反例 e248-capwords。
 - 这三条在作者自检的 `side_by_side_reference_comparison` 中逐条记录可见证据；任何一条不成立不得记 `self_check_passed`。
+
+- 右上角封面核对：对照 episode_metadata，确认素材是专辑（播客）封面 `podcast_cover_url`，不是单集封面 `episode_cover_url`/`cover_url`；合成前比对，不一致即拦下。

@@ -70,7 +70,8 @@
         "semantic_guardrails": {"type": "array", "items": {"type": "string"}}, "elements": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/element"}},
         "brand_asset": {"type": "object", "additionalProperties": false, "required": ["relative_path", "sha256", "x", "y", "width", "height"], "properties": {
           "relative_path": {"type": "string", "pattern": "\\.(png|jpe?g)$"}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
-          "x": {"type": "number", "minimum": 0}, "y": {"type": "number", "minimum": 0}, "width": {"type": "number", "exclusiveMinimum": 0}, "height": {"type": "number", "exclusiveMinimum": 0}
+          "x": {"type": "number", "minimum": 0}, "y": {"type": "number", "minimum": 0}, "width": {"type": "number", "exclusiveMinimum": 0}, "height": {"type": "number", "exclusiveMinimum": 0},
+          "source_url": {"type": "string", "description": "Must equal episode_metadata.episode.podcast_cover_url (album cover), never the episode cover."}
         }}
       }
     }

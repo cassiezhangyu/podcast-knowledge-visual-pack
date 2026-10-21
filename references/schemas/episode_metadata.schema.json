@@ -18,7 +18,7 @@
         "id": {"type": "string", "minLength": 1}, "title": {"type": ["string", "null"]},
         "podcast_name": {"type": ["string", "null"]}, "published_at": {"type": ["string", "null"]},
         "duration_seconds": {"type": ["number", "null"], "minimum": 0}, "show_notes": {"type": ["string", "null"]},
-        "cover_url": {"type": ["string", "null"]}, "audio_candidates": {"type": "array", "items": {"type": "string", "format": "uri"}}
+        "cover_url": {"type": ["string", "null"], "description": "Legacy: episode cover. Not the album cover."}, "episode_cover_url": {"type": ["string", "null"]}, "podcast_cover_url": {"type": ["string", "null"], "description": "Podcast album official cover; sole source for brand_asset/album_art."}, "audio_candidates": {"type": "array", "items": {"type": "string", "format": "uri"}}
       }
     },
     "source_refs": {"type": "array", "minItems": 1, "items": {"$ref": "source_ref.schema.json"}}

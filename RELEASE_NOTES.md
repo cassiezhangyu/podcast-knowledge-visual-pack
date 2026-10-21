@@ -1,3 +1,10 @@
+# v0.4.3-local（仅本地，2026-10-21）
+
+- 修复：小宇宙适配器把单集封面（episode.image）记成 `cover_url` 并被当作专辑封面合成。现分别记录 `podcast_cover_url`（专辑封面，取 podcast.image）与 `episode_cover_url`；`cover_url` 保留兼容，含义为单集封面。
+- episode_metadata / construction_spec schema：新增 `podcast_cover_url`、`episode_cover_url`、`brand_asset.source_url`。
+- 门禁：`construct`、`render`（validateAlbumCoverSource）与 `render:scene:checked`（scripts/album-cover-check.mjs）核对品牌素材来源等于专辑封面，等于单集封面或缺来源即失败；checked 渲染同时核对素材 hash。
+- 规则：inner_page_module_contract.md、page_quality_check.md、SKILL.md 增加“合成前对照元数据确认是专辑封面”。
+
 # v0.4.2-local（仅本地，2026-10-21）
 
 - taste.md：以“禁止简笔画”替换“简笔画可以出现”；REJECT-A 同步。

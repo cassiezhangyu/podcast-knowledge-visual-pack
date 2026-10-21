@@ -4,7 +4,7 @@ import { join, relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
-import { validateAlbumArt, type PageSpec } from "./construction.js";
+import { validateAlbumArt, validateAlbumCoverSource, type PageSpec } from "./construction.js";
 
 type R = Record<string, unknown>;
 const read = <T>(path: string) => JSON.parse(readFileSync(path, "utf8")) as T;
@@ -24,6 +24,7 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
   const tokens = read<R>(join(process.cwd(), "design_tokens.json"));
   const brandSettings = (tokens.cover as R)?.brand_asset as R | undefined;
   validateAlbumArt(constructionSpec.pages as PageSpec[], constructionSpec.album_art_policy as string | undefined, brandSettings?.box as { x: number; y: number; width: number; height: number } | undefined);
+  if (constructionSpec.album_art_policy) validateAlbumCoverSource(constructionSpec.pages as PageSpec[], read<R>(join(workspace, "00-source", "episode_metadata.json")));
   const pages = (manifest.pages as R[]).filter((page) => !onlyPages || onlyPages.includes(page.page_id as string));
   if (!pages.length || onlyPages?.some((id) => !pages.some((page) => page.page_id === id))) fail("No matching scenes were selected for rendering.");
   mkdirSync(out, { recursive: true }); mkdirSync(join(out, "checks"), { recursive: true });

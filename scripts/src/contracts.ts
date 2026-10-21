@@ -19,7 +19,11 @@ export type EpisodeMetadata = {
     published_at: string | null;
     duration_seconds: number | null;
     show_notes: string | null;
+    /** Episode cover (legacy name). Never use as the album brand asset. */
     cover_url: string | null;
+    episode_cover_url?: string | null;
+    /** Podcast album official cover: the only valid source for the top-right brand asset. */
+    podcast_cover_url?: string | null;
     audio_candidates: string[];
   };
   source_refs: SourceRef[];

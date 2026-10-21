@@ -23,4 +23,13 @@ describe("XiaoyuzhouEpisodeAdapter", () => {
     await expect(new XiaoyuzhouEpisodeAdapter(fetchMock as typeof fetch).resolve("https://www.xiaoyuzhoufm.com/podcast/abc")).rejects.toMatchObject<Partial<PipelineError>>({ code: "INVALID_EPISODE_URL" });
     expect(fetchMock).not.toHaveBeenCalled();
   });
+
+  it("records podcast album cover separately from the episode cover", async () => {
+    const id = "6ad48f83641ef406308d65e1";
+    const doc = `<html><head><script id="__NEXT_DATA__" type="application/json">${JSON.stringify({ props: { pageProps: { episode: { eid: id, title: "T", image: { picUrl: "https://image.xyzcdn.net/EP.jpg" }, podcast: { title: "另辟西径", image: { picUrl: "https://image.xyzcdn.net/ALBUM.jpg" } }, enclosure: { url: "https://cdn.example.test/a.m4a" } } } } })}</script></head></html>`;
+    const result = await new XiaoyuzhouEpisodeAdapter(vi.fn(async () => new Response(doc, { status: 200 })) as typeof fetch).resolve(`https://www.xiaoyuzhoufm.com/episode/${id}`);
+    expect(result.episode.podcast_cover_url).toBe("https://image.xyzcdn.net/ALBUM.jpg");
+    expect(result.episode.episode_cover_url).toBe("https://image.xyzcdn.net/EP.jpg");
+    expect(result.episode.cover_url).toBe("https://image.xyzcdn.net/EP.jpg");
+  });
 });

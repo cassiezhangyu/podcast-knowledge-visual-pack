@@ -119,6 +119,7 @@ export class XiaoyuzhouEpisodeAdapter {
       { kind: "html_meta", locator: canonicalUrl, retrieved_at: timestamp, note: "HTML metadata and structured-data extraction" },
     ];
     if (html.includes("__NEXT_DATA__") || html.includes("application/ld+json")) refs.push({ kind: "embedded_json", locator: canonicalUrl, retrieved_at: timestamp });
+    const episodeCover = stringAt(record(embeddedEpisode?.image), "largePicUrl", "picUrl", "smallPicUrl", "url") ?? meta($, "og:image", "twitter:image");
     return {
       schema_version: "1.0", source_identity: { canonical_url: canonicalUrl, adapter_version: ADAPTER_VERSION },
       episode: {
@@ -128,7 +129,11 @@ export class XiaoyuzhouEpisodeAdapter {
         published_at: stringAt(embeddedEpisode, "pubDate", "publishedAt") ?? meta($, "article:published_time", "publish-date", "date"),
         duration_seconds: numberAt(embeddedEpisode, "duration", "durationSeconds") ?? toSeconds(meta($, "music:duration", "og:duration")),
         show_notes: stringAt(embeddedEpisode, "shownotes", "showNotes", "description") ?? embeddedValues(html, /^(showNotes|shownotes|description)$/i)[0] ?? meta($, "og:description", "description"),
-        cover_url: stringAt(record(embeddedEpisode?.image), "smallPicUrl", "picUrl", "url") ?? meta($, "og:image", "twitter:image"), audio_candidates: audioCandidates,
+        // cover_url is kept for backward compatibility and is the EPISODE cover, never the album cover.
+        cover_url: episodeCover, episode_cover_url: episodeCover,
+        // podcast_cover_url is the PODCAST ALBUM official cover; the top-right brand asset must use this.
+        podcast_cover_url: stringAt(record(embeddedPodcast?.image), "largePicUrl", "picUrl", "middlePicUrl", "smallPicUrl", "url") ?? stringAt(embeddedPodcast, "picUrl", "cover", "coverUrl") ?? null,
+        audio_candidates: audioCandidates,
       }, source_refs: refs,
     };
   }

@@ -35,6 +35,22 @@ const fail = (message: string, details?: R): never => {
 };
 const seed = (key: string) => Number.parseInt(hash(key).slice(0, 8), 16);
 
+const normCover = (u: unknown) => typeof u === "string" && u ? u.split("?")[0].split("@")[0].trim() : null;
+/** Brand asset must come from the podcast ALBUM cover recorded in episode_metadata, never the episode cover. */
+export function validateAlbumCoverSource(specs: PageSpec[], metadata: Record<string, unknown> | undefined) {
+  const ep = (metadata?.episode ?? {}) as Record<string, unknown>;
+  const album = normCover(ep.podcast_cover_url);
+  const episodeCovers = [ep.episode_cover_url, ep.cover_url].map(normCover).filter(Boolean);
+  for (const spec of specs) {
+    const brand = spec.brand_asset as (PageSpec["brand_asset"] & { source_url?: string }) | undefined;
+    if (!brand) continue;
+    if (!album) fail("episode_metadata 缺少 podcast_cover_url（专辑封面），不能合成右上角封面。", { page_id: spec.page_id });
+    const src = normCover(brand.source_url);
+    if (!src) fail("brand_asset 缺少 source_url，无法核对是否为专辑封面。", { page_id: spec.page_id });
+    if (src !== album) fail(episodeCovers.includes(src) ? "右上角素材是单集封面，必须用专辑封面。" : "右上角素材来源与专辑封面不一致。", { page_id: spec.page_id, source_url: src, podcast_cover_url: album });
+  }
+}
+
 export function validateAlbumArt(specs: PageSpec[], policy?: string, box?: { x: number; y: number; width: number; height: number }) {
   for (const spec of specs) {
     const brand = spec.brand_asset;
@@ -105,6 +121,7 @@ function resolvePages(state: ReturnType<typeof inputs>): Page[] {
   if (!coverInScope && specs.some((page) => page.page_kind === "cover")) fail("Production scope excludes the cover; construction must not include a cover page.");
   const brandSettings = (state.tokens.cover as R)?.brand_asset as R | undefined;
   validateAlbumArt(specs, state.specification.album_art_policy as string | undefined, brandSettings?.box as { x: number; y: number; width: number; height: number } | undefined);
+  validateAlbumCoverSource(specs, state.metadata as Record<string, unknown>);
   const byCandidate = new Map((state.candidates.pages as R[]).flatMap((page) => (page.candidates as R[]).map((candidate) => [candidate.candidate_id as string, candidate])));
   const selections = state.selected.selections as R[];
   return specs.map((spec) => {

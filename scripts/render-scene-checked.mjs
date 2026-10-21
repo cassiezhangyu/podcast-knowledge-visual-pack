@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync, rmSync, existsSync } 
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { launchZh, newZhPage, ZH_HTML_HEAD } from './lib/zh_browser.mjs';
+import { findEpisodeMetadata, checkAlbumCoverSource } from './album-cover-check.mjs';
 import { auditRenderedGeometry } from './lib/rendered-geometry.mjs';
 import { assertSceneMechanics } from '../dist/scene-mechanics.js';
 if(process.env.PKVP_GLYPH_NEGATIVE_CONTROL==='1')throw new Error('字形负向对照仅可用于审计验证，禁止正式导出');
@@ -61,7 +62,11 @@ try{
  if(!assetArg)throw new Error('缺少官方专辑封面--brand');
  const assetPath=resolve(assetArg),contract=JSON.parse(readFileSync(preflight.inputs.page_contract.path));
  if(resolve(contract.brand_asset?.path||'')!==assetPath)throw new Error('官方专辑素材不匹配当前页面合同');
+ const metadataPath=findEpisodeMetadata(dirname(assetPath));
+ if(!metadataPath)throw new Error('找不到 00-source/episode_metadata.json，无法核对专辑封面');
+ const albumCoverCheck=checkAlbumCoverSource({metadata:JSON.parse(readFileSync(metadataPath,'utf8')),sourceUrl:contract.brand_asset?.source_url});
  const assetBytes=readFileSync(assetPath),box=tokens.cover.brand_asset.box;
+ if(contract.brand_asset?.sha256&&createHash('sha256').update(assetBytes).digest('hex')!==contract.brand_asset.sha256)throw new Error('专辑封面文件hash与页面合同不一致');
  const deliveryScale=tokens.export.scale,[deliveryWidth,deliveryHeight]=tokens.export.delivery_size;
  if(deliveryWidth!==Math.round(tokens.canvas.width*deliveryScale)||deliveryHeight!==Math.round(tokens.canvas.height*deliveryScale))throw new Error('高清导出尺寸与比例不一致');
  const assetUrl='data:image/'+(/\.jpe?g$/i.test(assetPath)?'jpeg':'png')+';base64,'+assetBytes.toString('base64');
@@ -79,7 +84,7 @@ try{
   const bytes=Buffer.from(url.split(',')[1],'base64');if(bytes.toString('hex',0,8)!=='89504e470d0a1a0a'||bytes.readUInt32BE(16)!==width||bytes.readUInt32BE(20)!==height)throw new Error('真实导出尺寸异常：'+k);
   const p=join(out,name);writeFileSync(p,bytes);artifacts[k]=bind(p);
  }
- const record={kind:'mechanical_render_record',status:'pass',page_id:preflight.page_id,created_at:new Date().toISOString(),checks:['preconstruction_reference_plan','native_scene','typography_roles_sizes_strong_weight','stroke_roles','static_text_geometry','reader_facing_text','outline_alignment','current_input_bindings','same_scene_real_export'].map(name=>({name,status:'pass'})),outline_check: outlineRegions ? {status:'pass',regions:bind(outlineRegions)} : {status:'not_applicable',reason:'cover'},tokens:bind(tokensPath),preflight:bind(preflightPath),renderer:bind(bundle),brand_asset:bind(assetPath),current:artifacts,visual_quality:'needs_independent_review',pixel_geometry:'needs_rendered_review',semantic_roles:'needs_rendered_review'};
+ const record={kind:'mechanical_render_record',status:'pass',page_id:preflight.page_id,created_at:new Date().toISOString(),checks:['preconstruction_reference_plan','native_scene','typography_roles_sizes_strong_weight','stroke_roles','static_text_geometry','reader_facing_text','outline_alignment','current_input_bindings','same_scene_real_export'].map(name=>({name,status:'pass'})),outline_check: outlineRegions ? {status:'pass',regions:bind(outlineRegions)} : {status:'not_applicable',reason:'cover'},tokens:bind(tokensPath),preflight:bind(preflightPath),renderer:bind(bundle),brand_asset:{...bind(assetPath),source_url:albumCoverCheck.source_url,album_cover_check:albumCoverCheck},current:artifacts,visual_quality:'needs_independent_review',pixel_geometry:'needs_rendered_review',semantic_roles:'needs_rendered_review'};
  record.diagnostics={layout:bind(layoutPath),glyphs:bind(glyphPath),geometry:bind(geometryPath)};
  record.chrome_check=chromeCheck;
  if(chromeCheck.status==='pass')record.checks.push({name:'declared_fixed_chrome',status:'pass'});

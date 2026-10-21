@@ -36,6 +36,8 @@ Page Content Pack 只规定本页必须解释什么，不提前规定画法，�
 
 ## 2. 内容、案例与审美联合预检
 
+> **硬门禁（v0.4.2-local）：**任何 scene 渲染（含诊断渲染 `scripts/render_scene.mjs`）前，`REFERENCE_PREFLIGHT` 必须已保存并通过 `scripts/check_reference_preflight.py`：至少一张正例与一张反例被实际打开并逐图写出 `observed`（≥20字）与 `effect_on_page`；总览必须包含基准 `e248-overview`；必须填写 `allowed_graphic_language` 与 `forbidden_graphic_language`，后者须明确禁用简笔画。未通过时渲染脚本拒绝运行。
+
 按 `visual_reasoning.md` 第1节阶段落实表及 `page_quality_check.md` 的适用标准执行本节预检。
 
 每次创建或修改scene前，核验输入并保存当版 `REFERENCE_PREFLIGHT_Vn.json`，记录当前哈希与绘制决定；缺项、绑定失效或记录晚于scene时不进入构建或输出前检查。已验收冻结工件只按当前授权核对，不追认原构图前预检；修改scene前仍需本次预检。按改动范围加载依据，未变化且仍有效的上游不重做：

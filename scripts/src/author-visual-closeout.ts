@@ -17,6 +17,19 @@ function checkBindings(v: any): void {
   if ("path" in v && "sha256" in v) bound(v);
   else for (const item of Object.values(v)) checkBindings(item);
 }
+const longText = (v: unknown, n = 12) => typeof v === "string" && v.trim().length >= n;
+/** v0.4.2-local：没有正反例并排比较与视觉收益反证，不能记self_check_passed。 */
+export function assertComparisonAndCounterproof(c: R): void {
+  const cmp = c.checks?.side_by_side_reference_comparison;
+  if (!cmp || cmp.status !== "pass" || !longText(cmp.visible_evidence)) throw new Error("作者自检缺少实际证据：side_by_side_reference_comparison");
+  for (const kind of ["positive", "negative"]) {
+    const list = cmp[kind];
+    if (!Array.isArray(list) || !list.length || list.some((x: R) => !x || typeof x.path !== "string" || !longText(x.comparison))) throw new Error(`side_by_side_reference_comparison 缺少${kind === "positive" ? "正例" : "反例"}逐图比较`);
+  }
+  for (const rule of ["R11", "R17", "R18"]) if (!longText(cmp.quality_bar?.[rule], 6)) throw new Error("side_by_side_reference_comparison 缺少视觉质量硬线证据：" + rule);
+  const proof = c.visual_gain_counterproof;
+  if (!proof || !longText(proof.simple_alternative) || !longText(proof.remove_subject)) throw new Error("作者自检缺少 visual_gain_counterproof（simple_alternative 与 remove_subject）");
+}
 export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: string[]): R[] {
   const pages = manifest.pages as R[];
   if (!paths.length || paths.length !== pages.length) throw new Error("每张当前页面须有一份作者自检。");
@@ -30,6 +43,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     for (const name of ["content_coverage", "visual_explanation", "reference_alignment", "text_geometry", "mobile_readability", "cold_reader_check", "layout_budget", "margin_audit", "cjk_glyph_audit"]) {
       if (c.checks?.[name]?.status !== "pass" || typeof c.checks[name].visible_evidence !== "string" || c.checks[name].visible_evidence.trim().length < 8) throw new Error("作者自检缺少实际证据：" + name);
     }
+    assertComparisonAndCounterproof(c);
     bound(c.mechanical_render_record);
     const mechanical = read(c.mechanical_render_record.path);
     const required = ["preconstruction_reference_plan", "native_scene", "typography_roles_sizes_strong_weight", "stroke_roles", "static_text_geometry", "reader_facing_text", "outline_alignment", "current_input_bindings", "same_scene_real_export"];
@@ -48,6 +62,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     if (preflight.status !== "completed_before_construction") throw new Error("当前制作预检未通过。");
     checkBindings(inputs);
     if (["overview", "deep_dive"].includes(preflight.role) && mechanical.outline_check?.status !== "pass") throw new Error("内页提纲检查未通过。");
+    if (preflight.role === "overview" && !c.overview_framework_check) throw new Error("总览作者自检缺少 overview_framework_check");
     if (preflight.role === "overview") assertOverviewFrameworkCheck(c.overview_framework_check, inputs?.framework_basis, c.page_id);
     const requirements: R[] = [];
     if (inputs?.user_requirements) requirements.push(inputs.user_requirements);

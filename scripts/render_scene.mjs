@@ -12,7 +12,18 @@ import { tmpdir } from "node:os";
 const root = process.env.PKVP_RUNTIME || resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const bundle = join(root, "dist/excalidraw-preview-browser.js");
 if (!existsSync(bundle)) { console.error(`missing ${bundle}: run npm run build in the runtime root or set PKVP_RUNTIME`); process.exit(2); }
-const args = process.argv.slice(2);
+let args = process.argv.slice(2);
+// v0.4.2-local hard gate: no scene may be rendered before a passing REFERENCE_PREFLIGHT.
+// Only the internal layered audit (audit_overlap_margins.py) sets PKVP_AUDIT_LAYER=1.
+import { spawnSync } from "node:child_process";
+let preflight = null;
+const pi = args.indexOf("--preflight");
+if (pi >= 0) { preflight = args[pi + 1]; args.splice(pi, 2); }
+if (!preflight && process.env.PKVP_AUDIT_LAYER !== "1") { console.error("拒绝渲染：缺少 --preflight <REFERENCE_PREFLIGHT.json>。构图前参考硬门禁见 references/rules/page_visual_production.md §2。"); process.exit(3); }
+if (preflight) for (let i = 0; i < args.length; i += 3) {
+  const r = spawnSync("python3", [join(root, "scripts/check_reference_preflight.py"), "--scene", resolve(args[i]), "--preflight", resolve(preflight)], { encoding: "utf8" });
+  if (r.status !== 0) { console.error("拒绝渲染：联合预检未通过\n" + (r.stderr || r.stdout)); process.exit(3); }
+}
 if (args.length === 0 || args.length % 3) { console.error("usage: render_scene.mjs in out scale [...]"); process.exit(2); }
 const temp = mkdtempSync(join(tmpdir(), "pkvp-render-"));
 writeFileSync(join(temp, "p.html"), `${ZH_HTML_HEAD}<script src="${pathToFileURL(bundle).href}"></script>`);

@@ -1,3 +1,11 @@
+# v0.4.2-local（仅本地，2026-10-21）
+
+- taste.md：以“禁止简笔画”替换“简笔画可以出现”；REJECT-A 同步。
+- page_quality_check.md：恢复 v0.6 R11（不能退成平直的 SVG 或几何图）、R17（装饰性小图标不算），新增 R18 禁止简笔画。
+- 参考硬门禁：scripts/reference_gate.py；check_reference_preflight.py 与诊断渲染器 render_scene.mjs 在任何渲染前强制正反例逐图观察、总览 e248 基准、允许/禁用图形语言（须禁简笔画）。审计分层渲染以 PKVP_AUDIT_LAYER=1 内部豁免。
+- visual:closeout：缺 side_by_side_reference_comparison（正/反例逐图 + R11/R17/R18）、visual_gain_counterproof 或总览 overview_framework_check 时拒绝。
+- 测试：development/tests/test_reference_gate.py；author-visual-closeout.test.ts 新增 5 例。
+
 # v0.4.1-local · 移植 v0.6.3 的五条本地规则（仅本地，未推送）
 
 在 v0.4.0 作者自检框架内补回，均为主会话自检必做项，不恢复审核、陌生首读或仲裁 agent：

@@ -74,7 +74,7 @@ for t in texts:
 jobs = [render(graph, "G"), render(hatch, "H")] + [render(g, f"T{i}") for i, g in enumerate(groups)]
 args = []
 for i, o in jobs: args += [i, o, str(sc)]
-subprocess.run(["node", RENDERER] + args, cwd=RUNTIME or SK, env=dict(os.environ, PKVP_RUNTIME=RUNTIME or SK), check=True, stdout=subprocess.DEVNULL)
+subprocess.run(["node", RENDERER] + args, cwd=RUNTIME or SK, env=dict(os.environ, PKVP_RUNTIME=RUNTIME or SK, PKVP_AUDIT_LAYER="1"), check=True, stdout=subprocess.DEVNULL)
 G, H = ink(jobs[0][1]), ink(jobs[1][1]); Ts = [ink(o) for _, o in jobs[2:]]
 dil = lambda m, r: ndimage.binary_dilation(m, iterations=max(1, int(r * sc)))
 T = np.any(Ts, 0); Td = dil(T, 2)

@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 from prepare_independent_review import asset, check_preflight
+from reference_gate import check_reference_notes
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--scene', required=True)
@@ -15,6 +16,7 @@ inputs = plan.get('inputs', {})
 args.page_id = plan.get('page_id')
 args.role = plan.get('role')
 args.revalidate_existing = False
+check_reference_notes(plan)
 refs = [asset(item['path']) for kind in ['positive', 'negative'] for item in inputs[kind]]
 check_preflight(args.preflight, args, refs, asset(inputs['content']['path']), asset(inputs['taste']['path']), asset(inputs['tokens']['path']))
 print(json.dumps({'status': 'pass', 'page_id': args.page_id}, ensure_ascii=False))

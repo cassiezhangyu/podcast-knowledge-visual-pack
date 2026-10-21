@@ -61,3 +61,6 @@
 - 这三条在作者自检的 `side_by_side_reference_comparison` 中逐条记录可见证据；任何一条不成立不得记 `self_check_passed`。
 
 - 右上角封面核对：对照 episode_metadata，确认素材是专辑（播客）封面 `podcast_cover_url`，不是单集封面 `episode_cover_url`/`cover_url`；合成前比对，不一致即拦下。
+
+- **R19 并列不成路径（v0.4.5-local）**：台账未授权顺序时，把并列项画成路径／旅程／时间线即结构失败。
+- **R20 读者文字**：执行 `cold_reader_check.md` 必查清单与逐句白话复述；提醒只写页面上出现的对象和读者事实。

@@ -14,3 +14,21 @@
 **怎么改**：只改真正读不懂的地方，用最小改法：补一根连线、调顺序、加图例、补半句交代，或删掉。节目原话能看懂就保留原话和节目语气。改后重渲并重新检查受影响层。
 
 **记录**：写入当前 `RENDERED_PAGE_CHECK.json` 的 `cold_reader_check`（`entry_and_path`、`blocks_read_vs_intended`、`breakpoints`、`minimal_fixes`、`one_sentence_restatement`、`status`），可同时保存 `05-qa/COLD_READ_<页>-V<n>.md`。展示给用户时用几句话说明能否看懂、改了哪里。`status` 不为 `pass` 时不得记 `self_check_passed`。
+
+
+## 必查清单与逐句白话复述（v0.4.5-local，必做）
+
+来自 6ad48f83 复盘：作者“逐块确认意思对”会漏掉读者障碍。每页按下表逐项核对，写入 `cold_reader_check.comprehension_checklist`（每项 `status: pass|not_applicable` + `evidence`），缺项则 `visual:closeout` 拒绝。
+
+| 键 | 检查 | 反例 → 改法 |
+|---|---|---|
+| `memes_slang_plain` | 网络梗、黑话、谐音词换成白话，节目原话也一样 | 活人微死 → 按部就班，却好久没觉得有劲 |
+| `english_terms_chinese` | 非标题英文词有中文说法 | feel aligned → 只觉得被编进队伍 |
+| `no_literal_contradiction` | 字面不自相矛盾（主动/被动等）；原话会误读时换节目里另一句原话 | 主动被点燃 → 被重新启动 |
+| `reminder_items_on_page` | 提醒／边界里提到的每个对象都在本页出现；否则移到深读页或文案 | 提醒里列脑力游戏、晒伤，页面没有 → 删 |
+| `example_outcome_and_feeling` | 每个例子写到“所以呢”：发生了什么＋感受或结果 | 圣托里尼跳海 → 跳海：满心幸福 |
+| `one_caption_per_example_adjacent` | 一句说明只讲一个例子并紧挨它，不会被读成属于邻近例子 | “当新手”贴在洗澡旁 → 移到学游泳 |
+| `diagram_labels_match_text` | 图内每个标签能在相邻正文找到同一个词或说法 | 圈内“生活尺度” vs 正文“烦恼变小” → 圈内“我的烦恼” |
+| `subtitle_reader_takeaway` | 副标题是读者带走的一句话，不描述排版／整理方式 | 按四个来源并列整理 → 让人觉得活着真好的四种时刻 |
+
+**逐句白话复述表** `cold_reader_check.plain_restatement`：页面上每个句子／标签组一行 `{page_text, stranger_restatement, clear}`（至少3行，覆盖副标题、结论、每个案例说明）。以从没听过节目的人口吻转述；转述需要补上下文、出现“？”或与原意不同，`clear=false`，修好再记。任何一行 `clear=false` 都不能记 `self_check_passed`。

@@ -10,6 +10,9 @@ FORBIDDEN = [
     r'本轮范围', r'生产范围', r'只做总览', r'暂缓', r'未出页', r'待出页', r'后续出页',
     r'范围外', r'不在本轮', r'production[_ ]scope', r'deferred', r'out[_ ]of[_ ]scope',
     r'OUT_OF_SCOPE', r'本轮不做', r'未制作',
+    # v0.4.5-local：编辑过程用语（提醒/边界只写读者需要的事实，不解释作者怎么整理）
+    r'本页整理', r'由本页', r'整理而成', r'松散', r'分组', r'归类', r'归属由', r'示意归属',
+    r'按.{0,6}并列整理', r'Show ?Notes 的',
 ]
 PATTERN = re.compile('|'.join(FORBIDDEN), re.I)
 

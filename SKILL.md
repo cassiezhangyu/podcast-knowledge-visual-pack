@@ -153,6 +153,8 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 严格遵循 `references/rules/visual_reasoning.md`、`references/rules/page_visual_production.md`、`references/rules/page_quality_check.md` 和 `references/taste.md`。制作 Cover 时必须读取 `references/rules/cover_page_production.md`；制作 Overview 时必须读取 `references/rules/overview_page_production.md`；制作 Deep Dive 时必须读取 `references/rules/deep_dive_page_production.md`。所有内页还须执行 `references/rules/inner_page_module_contract.md`：保留页眉、标题／核心结论、主内容、整包地图、本页提纲及来源页脚的模块分工，正文构图仍由内容决定。Cover、Overview 与每张 Deep Dive 都是独立的逐页闭环。开始视觉制作、精修或整包交付时必须执行 `references/rules/visual_pack_execution.md`：默认三案选择；用户已授权整包连续制作时自主逐页完成后一次交付；要求先验一页时仅做样稿。各模式均保留内容门禁、真实渲染和作者自检，批量授权不等于用户验收。两轮返工限质例外按逐页协议记录，不能冒称页面通过。
 
+v0.4.5-local 顺序：先锁字号与终稿文字（过陌生读者必查清单），再精修图形（`visual_pack_execution.md`“先锁文字，再精修图形”）。并列项不画成路径／旅程／时间线（`overview_page_production.md`）。偏离默认参数按 `references/rules/project_overrides.md` 登记；预检改版用 `npm run preflight:bump`。专辑封面在 intake 时落盘到 `00-source/brand/` 并登记 `album_cover.json`（sha256），合成只用这份文件。
+
 每版构图或修改 scene 前，必须执行 `references/rules/page_visual_production.md` 第2节的联合预检，保存当前输入、参考观察和构图决定；缺项、过时或事后补签记录禁止送审。原型与完整构建的时间顺序执行该协议第3.1节。
 选图时先执行 `references/rules/acceptance_case_index.md` 的参考选择与解读：优先查看本次用户指定参考，按理解任务补充内置案例；各页协议要求的基准图仍须查看。把实际打开的文件全部列入预检和当前自检记录。
 
@@ -189,7 +191,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 在RENDERED_PAGE_CHECK.json中记录status:self_check_passed、当前scene/png/phone/gray及高清图、mechanical_render_record和五项真实证据；总览记录overview_framework_check，用户条件记录user_requirements_check。格式见templates/author_page_check.json。
 
-运行 `npm run visual:closeout -- --workspace <workspace> --page-check <作者自检.json> --action submit`，多页重复--page-check。命令验证当前文件、机械记录和自检证据后输出needs_human_review；无独立审核输入。用户明确接受当前版本后，同一输入加 `--action approve --user-approved` 记录批准。未验收时直接展示可编辑源和真实图片，不擅写用户通过。
+运行 `npm run visual:closeout -- --workspace <workspace> --page-check <作者自检.json> --action submit`，多页重复--page-check。命令验证当前文件、机械记录和自检证据（含 v0.4.5-local 的陌生读者必查清单、逐句白话复述与 `text_and_scale_lock`）后输出needs_human_review；无独立审核输入，也不需要 reviewer。三案推进报告用 `review_mode: author_self_check`，`check_visual_progression.py` 不再要求隔离审核者。用户明确接受当前版本后，同一输入加 `--action approve --user-approved` 记录批准。未验收时直接展示可编辑源和真实图片，不擅写用户通过。
 
 ## 11. Phase 9 — Package Review
 

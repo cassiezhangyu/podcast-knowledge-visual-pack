@@ -30,6 +30,27 @@ export function assertComparisonAndCounterproof(c: R): void {
   const proof = c.visual_gain_counterproof;
   if (!proof || !longText(proof.simple_alternative) || !longText(proof.remove_subject)) throw new Error("作者自检缺少 visual_gain_counterproof（simple_alternative 与 remove_subject）");
 }
+/** v0.4.5-local：陌生读者必查清单与逐句白话复述（来自 6ad48f83 复盘）。 */
+export const COMPREHENSION_ITEMS = ["memes_slang_plain", "english_terms_chinese", "no_literal_contradiction", "reminder_items_on_page", "example_outcome_and_feeling", "one_caption_per_example_adjacent", "diagram_labels_match_text", "subtitle_reader_takeaway"] as const;
+export function assertComprehensionChecklist(c: R): void {
+  const cold = c.checks?.cold_reader_check;
+  const list = cold?.comprehension_checklist;
+  if (!list || typeof list !== "object") throw new Error("cold_reader_check 缺少 comprehension_checklist（陌生读者必查清单）");
+  for (const item of COMPREHENSION_ITEMS) {
+    const v = list[item];
+    if (!v || !["pass", "not_applicable"].includes(v.status) || !longText(v.evidence, 6)) throw new Error("comprehension_checklist 缺项或未通过：" + item);
+  }
+  const rows = cold.plain_restatement;
+  if (!Array.isArray(rows) || rows.length < 3) throw new Error("cold_reader_check 缺少 plain_restatement 逐句白话复述表（至少3行）");
+  for (const r of rows) {
+    if (!r || !longText(r.page_text, 2) || !longText(r.stranger_restatement, 4) || r.clear !== true) throw new Error("plain_restatement 有读不懂或缺复述的句子：" + String(r?.page_text ?? ""));
+  }
+}
+/** v0.4.5-local：先锁字号和终稿文字，再精修图形。 */
+export function assertTextLock(c: R): void {
+  const lock = c.checks?.text_and_scale_lock;
+  if (!lock || lock.status !== "pass" || !longText(lock.visible_evidence, 8)) throw new Error("作者自检缺少实际证据：text_and_scale_lock（字号与终稿文字须在精修图形前锁定）");
+}
 export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: string[]): R[] {
   const pages = manifest.pages as R[];
   if (!paths.length || paths.length !== pages.length) throw new Error("每张当前页面须有一份作者自检。");
@@ -44,6 +65,8 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
       if (c.checks?.[name]?.status !== "pass" || typeof c.checks[name].visible_evidence !== "string" || c.checks[name].visible_evidence.trim().length < 8) throw new Error("作者自检缺少实际证据：" + name);
     }
     assertComparisonAndCounterproof(c);
+    assertComprehensionChecklist(c);
+    assertTextLock(c);
     bound(c.mechanical_render_record);
     const mechanical = read(c.mechanical_render_record.path);
     const required = ["preconstruction_reference_plan", "native_scene", "typography_roles_sizes_strong_weight", "stroke_roles", "static_text_geometry", "reader_facing_text", "outline_alignment", "current_input_bindings", "same_scene_real_export"];

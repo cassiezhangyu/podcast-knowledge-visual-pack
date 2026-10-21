@@ -73,6 +73,14 @@ class ProgressionRisks(unittest.TestCase):
     def test_same_context_cannot_release(self):
         self.report['reviewer_context_id'] = 'creator'
         self.assertTrue(module.validate(self.report, 'prototype'))
+    def test_author_self_check_mode_needs_no_reviewer(self):
+        self.report['review_mode'] = 'author_self_check'
+        del self.report['reviewer_context_id']
+        self.assertEqual(module.validate(self.report, 'prototype'), [])
+    def test_author_mode_cannot_claim_same_context_reviewer(self):
+        self.report['review_mode'] = 'author_self_check'
+        self.report['reviewer_context_id'] = 'creator'
+        self.assertTrue(module.validate(self.report, 'prototype'))
     def test_changed_scene_invalidates_review(self):
         Path(self.asset['path']).write_text('改变后的场景')
         self.assertTrue(module.validate(self.report, 'prototype'))

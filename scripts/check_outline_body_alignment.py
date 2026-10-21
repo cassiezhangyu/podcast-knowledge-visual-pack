@@ -210,16 +210,74 @@ def check(path: Path, regions: dict | None = None) -> dict:
     return result
 
 
+OUTLINE_TITLE = "本页提纲"
+
+
+def derive_regions(scene: dict, canvas_w: float = 1200, margin: float = 60) -> dict:
+    """v0.4.5-local：从 scene 自动推导区域。提纲区＝包住“本页提纲”的最小矩形；
+    正文区＝核心结论下方到页脚线上方、去掉提纲区后的上下左右四块。"""
+    els = [e for e in scene.get("elements", []) if not e.get("isDeleted")]
+    title = next((e for e in els if e.get("type") == "text" and str(e.get("text", "")).strip() == OUTLINE_TITLE), None)
+    if title is None:
+        raise ValueError("scene 中没有“本页提纲”标题，无法自动推导区域")
+    boxes = [e for e in els if e.get("type") == "rectangle"
+             and e["x"] <= title["x"] and e["y"] <= title["y"]
+             and e["x"] + e["width"] >= title["x"] + title.get("width", 0)
+             and e["y"] + e["height"] >= title["y"] + title.get("height", 0)
+             and e["width"] < canvas_w - 2 * margin + 1 or False]
+    boxes = [b for b in boxes if b["width"] * b["height"] < canvas_w * 1600 * 0.5]
+    if not boxes:
+        raise ValueError("“本页提纲”没有外框矩形，无法自动推导区域")
+    nav = min(boxes, key=lambda b: b["width"] * b["height"])
+    ox, oy, ow, oh = nav["x"] - 4, nav["y"] - 4, nav["width"] + 8, nav["height"] + 8
+    rules = [e for e in els if e.get("type") == "line" and e.get("width", 0) > 900]
+    foot = max((r["y"] for r in rules if r["y"] > 1200), default=1490)
+    heads = [e["y"] for e in els if e.get("type") == "text"
+             and e.get("customData", {}).get("typography_role") in ("section_entry", "overview_section")]
+    top = min(min(heads, default=330) - 20, oy)
+    right = canvas_w - margin
+    cand = [(margin, top, right - margin, oy - top),
+            (margin, oy + oh, right - margin, foot - oy - oh),
+            (margin, oy, ox - margin, oh),
+            (ox + ow, oy, right - ox - ow, oh)]
+    body = [{"x": x, "y": y, "width": w, "height": h} for x, y, w, h in cand if w > 1 and h > 1]
+    return {"derived": "auto", "outline_regions": [{"x": ox, "y": oy, "width": ow, "height": oh}], "body_regions": body}
+
+
+def manual_region_errors(regions: dict, base: Path) -> list[str]:
+    """手工区域须写明原因并附叠框截图；自动推导结果不需要。"""
+    if regions.get("derived") == "auto":
+        return []
+    errs = []
+    if not isinstance(regions.get("manual_reason"), str) or len(regions["manual_reason"].strip()) < 8:
+        errs.append("手工区域缺少 manual_reason（为什么不能用自动推导）")
+    shot = regions.get("overlay_screenshot")
+    if not isinstance(shot, str) or not (base / shot).is_file():
+        errs.append("手工区域缺少 overlay_screenshot（区域叠在原图上的截图）或文件不存在")
+    return errs
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("scene", type=Path)
-    parser.add_argument("--regions", type=Path, help="正文与提纲实际区域的 JSON 文件")
+    parser.add_argument("--regions", help="正文与提纲实际区域的 JSON 文件；写 auto 则从 scene 自动推导")
+    parser.add_argument("--write-regions", type=Path, help="把实际使用的区域写到此文件")
+    parser.add_argument("--require-manual-provenance", action="store_true", help="手工区域必须有 manual_reason 与 overlay_screenshot")
     args = parser.parse_args()
     try:
-        regions = json.loads(args.regions.read_text(encoding="utf-8")) if args.regions else None
-        if args.regions:
+        if args.regions == "auto":
+            regions = derive_regions(json.loads(args.scene.read_text(encoding="utf-8")))
+        else:
+            regions = json.loads(Path(args.regions).read_text(encoding="utf-8")) if args.regions else None
+        if regions is not None:
             validate_regions(regions)
+        prov = manual_region_errors(regions, Path(args.regions).parent) if (args.require_manual_provenance and regions and args.regions != "auto") else []
         result = check(args.scene, regions)
+        if prov:
+            result["errors"] += prov; result["status"] = "fail"
+        if args.write_regions and regions is not None:
+            args.write_regions.write_text(json.dumps(regions, ensure_ascii=False, indent=1), encoding="utf-8")
+        result["regions_mode"] = "auto" if args.regions == "auto" else ("manual" if args.regions else "legacy")
     except (OSError, ValueError, OverflowError) as exc:
         result = {"scene": str(args.scene), "status": "fail", "mapping": [],
                   "errors": [f"读取或检查失败：{exc}"], "manual_semantic_review_required": True}

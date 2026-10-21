@@ -243,5 +243,37 @@ class OutlineAlignmentTest(unittest.TestCase):
                 self.assertTrue(json.loads(completed.stdout)["manual_semantic_review_required"])
 
 
+class DerivedRegionsTest(unittest.TestCase):
+    """v0.4.5-local：区域默认从 scene 自动推导；手工区域须写原因并附叠框截图。"""
+    def scene(self):
+        els = [{"type": "rectangle", "x": 900, "y": 340, "width": 220, "height": 260},
+               {"type": "line", "x": 80, "y": 1490, "width": 1040, "height": 0},
+               {**text("本页提纲", 920, 356, 22, "annotation")}]
+        for n in range(1, 4):
+            els += [text(str(n), 88, 300 + n * 200, 32, "section_entry"), text(f"入口{n}", 120, 300 + n * 200, 32, "section_entry"),
+                    text(str(n), 920, 380 + n * 40, 22, "annotation"), text(f"入口{n}", 950, 380 + n * 40, 22, "annotation")]
+        return {"elements": els}
+    def test_derive_regions_excludes_outline_and_passes(self):
+        regions = CHECKER.derive_regions(self.scene())
+        self.assertEqual(regions["derived"], "auto")
+        CHECKER.validate_regions(regions)
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "s.excalidraw"; p.write_text(json.dumps(self.scene()))
+            self.assertEqual(CHECKER.check(p, regions)["status"], "pass")
+    def test_derive_needs_outline_title(self):
+        s = self.scene(); s["elements"] = [e for e in s["elements"] if e.get("text") != "本页提纲"]
+        with self.assertRaises(ValueError):
+            CHECKER.derive_regions(s)
+    def test_manual_regions_need_reason_and_overlay(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            regions = {"outline_regions": [], "body_regions": []}
+            self.assertEqual(len(CHECKER.manual_region_errors(regions, base)), 2)
+            (base / "overlay.png").write_bytes(b"x")
+            regions.update(manual_reason="导航在左栏，自动推导会漏掉左栏正文", overlay_screenshot="overlay.png")
+            self.assertEqual(CHECKER.manual_region_errors(regions, base), [])
+            self.assertEqual(CHECKER.manual_region_errors({"derived": "auto"}, base), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -32,8 +32,16 @@ def validate(report, stage, case_id=None):
         errors.append('报告阶段与当前放行阶段不一致')
     creator = report.get('creator_context_id')
     reviewer = report.get('reviewer_context_id')
-    if not creator or not reviewer or creator == reviewer:
-        errors.append('缺少隔离审核上下文')
+    # v0.4.5-local：本 Skill 不创建审核 agent。作者自检模式无需 reviewer；
+    # 旧报告若声明了 reviewer，仍须与创作者不同，避免冒称独立审核。
+    author_mode = report.get('review_mode') == 'author_self_check'
+    if author_mode:
+        if not creator:
+            errors.append('缺少创作者上下文')
+        if reviewer and reviewer == creator:
+            errors.append('作者自检不得冒称独立审核')
+    elif not creator or not reviewer or creator == reviewer:
+        errors.append('缺少隔离审核上下文；本 Skill 不派发审核 agent，请改用 review_mode=author_self_check')
     if not report.get('page_id'):
         errors.append('缺少页面标识')
     if case_id is None and (report.get('three_methods_passed') is not True or not report.get('method_evidence')):
@@ -169,7 +177,7 @@ def main():
     errors = validate(report, args.stage, args.case_id)
     print(json.dumps({'stage': args.stage, 'page_id': report.get('page_id'),
                       'progression_allowed': not errors, 'errors': errors,
-                      'semantic_judgment': 'independent_reviewer_required'}, ensure_ascii=False))
+                      'semantic_judgment': 'author_self_check_then_user_review' if report.get('review_mode') == 'author_self_check' else 'legacy_independent_review'}, ensure_ascii=False))
     return 1 if errors else 0
 
 

@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.4.4-local",
+  "version": "0.4.5-local",
   "private": true,
   "type": "module",
   "scripts": {
@@ -33,7 +33,11 @@
     "layout:budget": "python3 scripts/layout_budget.py",
     "layout:margins": "python3 scripts/audit_overlap_margins.py",
     "test:python": "python3 -m unittest discover -s development/tests -p '*.py'",
-    "render:scene:checked": "npm run build && node scripts/render-scene-checked.mjs"
+    "render:scene:checked": "npm run build && node scripts/render-scene-checked.mjs",
+    "preflight:bump": "python3 scripts/bump_preflight.py",
+    "overrides:check": "python3 scripts/check_project_overrides.py",
+    "overrides:scan": "python3 scripts/check_project_overrides.py --scan",
+    "outline:regions": "python3 scripts/check_outline_body_alignment.py"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

@@ -1,3 +1,17 @@
+# v0.4.5-local（仅本地，2026-10-21）
+
+来自 6ad48f83 复盘（05-qa/RETRO_6ad48f83.md），Cassie 批准全部 10 项：
+1. 陌生读者必查清单（梗/英文/字面矛盾/提醒对象在页/例子有结果感受/一句说明一个例子且相邻/图标签对应正文/副标题是读者结论）＋逐句白话复述表；`visual:closeout` 缺项拒绝（cold_reader_check.md）。
+2. 先锁字号与终稿文字再精修图形：自检必填 `text_and_scale_lock`（visual_pack_execution.md）。
+3. check_reader_facing_text 拦截编辑过程用语（本页整理、分组、松散、归类、归属由…）；提醒只写读者事实（design_gates.md）。
+4. 并列项不得画成路径/旅程/时间线，除非台账授权顺序（overview_page_production.md、page_quality_check R19）。
+5. 用户批准只需作者自检通过＋`--user-approved`（作者路径已存在，补测试）；check_visual_progression 支持 `review_mode: author_self_check`，不再要求隔离审核者。
+6. check_typography：≤5 级字号、相邻差 ≥2px、390px 预览最小字高 ≥7.1px；历史参考用 `--legacy-scale`。
+7. 项目覆盖：固定登记 `02-visual-plan/project_overrides.json`；未登记的非默认 tokens 渲染拒绝；`overrides:scan` 提示 ≥2 集复用的覆盖升级为默认（project_overrides.md）。
+8. `npm run preflight:bump`：生成新版预检，重算哈希、继承观察、记录 previous 与修订说明。
+9. 提纲/正文区域默认从 scene 自动推导（`--regions auto`，render:scene:checked 默认）；手工区域须 `manual_reason`＋`overlay_screenshot`。
+10. intake 抓取时下载专辑封面到 `00-source/brand/` 并写 `album_cover.json`（sha256）；渲染核对右上角素材与登记文件一致。
+
 # v0.4.4-local（仅本地，2026-10-21）
 
 - 默认字号改为 Cassie 标准：主标题 48（overview/deep_title、typography.title）；整页结论与模块标题 32（page_conclusion、section_entry、overview_section）；副标题 26（overview/deep_thesis、subheading、section、object_name）；正文与必要图内标签 24（body、diagram_label）；辅助注释、导航、页眉页脚 22。去掉 45/30/28/27/25/23 级。

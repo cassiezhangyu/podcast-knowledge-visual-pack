@@ -18,3 +18,11 @@ export function checkAlbumCoverSource({ metadata, sourceUrl }) {
   if (src !== album) throw new Error('品牌素材来源与专辑封面不一致：' + src + ' ≠ ' + album);
   return { status: 'pass', podcast_cover_url: album, source_url: src };
 }
+
+/** v0.4.5-local：抓取时登记的专辑封面文件（00-source/brand/album_cover.json）是唯一来源。 */
+export function checkAlbumCoverFile({ record, assetSha256 }) {
+  if (!record) return { status: 'not_recorded' };
+  const allowed = [record.asset_sha256, record.png_sha256].filter(Boolean);
+  if (!allowed.includes(assetSha256)) throw new Error('右上角素材不是抓取时登记的专辑封面文件（sha256 不一致）；请用 00-source/brand/album_cover.json 记录的文件');
+  return { status: 'pass', sha256: assetSha256, source_url: record.source_url };
+}

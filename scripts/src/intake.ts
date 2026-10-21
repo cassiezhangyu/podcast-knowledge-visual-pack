@@ -91,6 +91,30 @@ export class AudioAcquirer {
   }
 }
 
+/** v0.4.5-local：抓取时就把专辑（播客）封面落盘并记 sha256；后续合成只用这份文件。 */
+export async function acquireAlbumCover(metadata: EpisodeMetadata, workspace: string, fetchImpl: FetchLike = fetch, logger?: JsonLogger): Promise<Record<string, unknown> | null> {
+  const url = (metadata.episode as { podcast_cover_url?: string | null }).podcast_cover_url;
+  const brandDir = join(workspace, "00-source", "brand"), recordPath = join(brandDir, "album_cover.json");
+  if (!url) { logger?.info("album_cover.missing_url", {}); return null; }
+  if (existsSync(recordPath)) {
+    const old = readJson<Record<string, unknown>>(recordPath);
+    if (old.source_url === url && typeof old.original_path === "string" && existsSync(old.original_path as string) && hashFile(old.original_path as string) === old.original_sha256) return old;
+  }
+  const response = await fetchImpl(url);
+  if (!response.ok) throw new Error(`专辑封面下载失败：${response.status} ${url}`);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  const type = response.headers.get("content-type") ?? "";
+  const ext = type.includes("png") ? ".png" : type.includes("webp") ? ".webp" : ".jpg";
+  mkdirSync(brandDir, { recursive: true });
+  const original = join(brandDir, "album_cover.original" + ext);
+  writeFileSync(original, bytes);
+  const record: Record<string, unknown> = { kind: "album_cover", source_url: url, original_path: original, original_sha256: hashFile(original), acquired_at: new Date().toISOString(), asset_path: original, asset_sha256: hashFile(original), png_path: null, png_sha256: null, note: "合成只用 asset_path 或其无损转换的 png_path；转换后须把 png_path/png_sha256 写回本文件" };
+  if (ext === ".png") { const png = join(brandDir, "album_art.png"); writeFileSync(png, bytes); record.png_path = png; record.png_sha256 = hashFile(png); }
+  writeJson(recordPath, record);
+  logger?.info("album_cover.saved", { source_url: url, sha256: record.original_sha256 });
+  return record;
+}
+
 export async function runIntake(episodeUrl: string, workspace: string, fetchImpl: FetchLike = fetch): Promise<{ metadata: EpisodeMetadata; manifest: AudioManifest; logger: JsonLogger }> {
   const logger = new JsonLogger();
   const { canonicalUrl } = canonicalizeEpisodeUrl(episodeUrl);
@@ -111,6 +135,7 @@ export async function runIntake(episodeUrl: string, workspace: string, fetchImpl
     writeJson(metadataPath, metadata);
     logger.info("metadata.resolved", { canonical_url: metadata.source_identity.canonical_url, episode_id: metadata.episode.id });
   }
+  try { await acquireAlbumCover(metadata, workspace, fetchImpl, logger); } catch (error) { logger.info("album_cover.failed", { error: String(error) }); }
   const manifest = await new AudioAcquirer(fetchImpl).acquire(metadata, workspace, logger);
   writeJson(join(workspace, "00-source", "intake.log.json"), logger.events);
   return { metadata, manifest, logger };

@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync, rmSync, existsSync } 
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { launchZh, newZhPage, ZH_HTML_HEAD } from './lib/zh_browser.mjs';
-import { findEpisodeMetadata, checkAlbumCoverSource } from './album-cover-check.mjs';
+import { findEpisodeMetadata, checkAlbumCoverSource, checkAlbumCoverFile } from './album-cover-check.mjs';
 import { auditRenderedGeometry } from './lib/rendered-geometry.mjs';
 import { assertSceneMechanics } from '../dist/scene-mechanics.js';
 if(process.env.PKVP_GLYPH_NEGATIVE_CONTROL==='1')throw new Error('字形负向对照仅可用于审计验证，禁止正式导出');
@@ -25,6 +25,8 @@ for(const key of ['content','tokens','palette','taste','positive','negative','pa
 let bindings=0;
 function checkBindings(node){if(!node||typeof node!=='object')return;if(node.path&&node.sha256){bindings++;if(sha(readFileSync(node.path))!==node.sha256)throw new Error('预检输入已变化：'+node.path);}else for(const v of Object.values(node))checkBindings(v);}
 checkBindings(preflight.inputs);if(!bindings)throw new Error('联合预检未绑定实际输入');
+// v0.4.5-local：非 skill 默认参数必须在 02-visual-plan/project_overrides.json 登记。
+{const meta=findEpisodeMetadata(dirname(scenePath));if(meta){const ws=dirname(dirname(meta));const po=spawnSync('python3',[join(root,'scripts/check_project_overrides.py'),'--workspace',ws,'--tokens',tokensPath],{cwd:root,encoding:'utf8'});if(po.error||po.status!==0)throw new Error('项目覆盖未登记或已变化：'+(po.stdout||po.stderr||po.error));}}
 const planCheck=spawnSync('python3',[join(root,'scripts/check_reference_preflight.py'),'--scene',scenePath,'--preflight',preflightPath],{cwd:root,encoding:'utf8'});
 if(planCheck.error||planCheck.status!==0)throw new Error('绘图前预检缺项或无效：'+(planCheck.stderr||planCheck.stdout||planCheck.error));
 assertSceneMechanics(scene,tokens);
@@ -38,9 +40,11 @@ for(const [script,extra] of [['check_typography.py',['--design-tokens',tokensPat
 if(!['overview','deep_dive','cover'].includes(preflight.role))throw new Error('预检缺少有效页面角色');
 let outlineRegions;
 if(['overview','deep_dive'].includes(preflight.role)){
- if(!args.includes('--outline-regions'))throw new Error('内页必须提供当前正文/提纲区域--outline-regions，不得跳过编号检查');
- outlineRegions=resolve(value('--outline-regions'));
- const result=spawnSync('python3',[join(root,'scripts/check_outline_body_alignment.py'),scenePath,'--regions',outlineRegions],{cwd:root,encoding:'utf8'});
+ // v0.4.5-local：默认从 scene 自动推导区域；手工区域须写原因并附叠框截图。
+ const manual=args.includes('--outline-regions')&&value('--outline-regions')!=='auto';
+ mkdirSync(out,{recursive:true});
+ outlineRegions=manual?resolve(value('--outline-regions')):join(out,'outline_regions.auto.json');
+ const result=spawnSync('python3',[join(root,'scripts/check_outline_body_alignment.py'),scenePath,'--regions',manual?outlineRegions:'auto','--write-regions',manual?join(out,'outline_regions.used.json'):outlineRegions,...(manual?['--require-manual-provenance']:[])],{cwd:root,encoding:'utf8'});
  if(result.error||result.status!==0)throw new Error('提纲/正文编号检查阻断：'+(result.stderr||result.stdout||result.error));
 }
 mkdirSync(out,{recursive:true});const html=join(out,'.checked-export.html');
@@ -66,6 +70,7 @@ try{
  if(!metadataPath)throw new Error('找不到 00-source/episode_metadata.json，无法核对专辑封面');
  const albumCoverCheck=checkAlbumCoverSource({metadata:JSON.parse(readFileSync(metadataPath,'utf8')),sourceUrl:contract.brand_asset?.source_url});
  const assetBytes=readFileSync(assetPath),box=tokens.cover.brand_asset.box;
+ {const rec=join(dirname(metadataPath),'brand','album_cover.json');albumCoverCheck.file_check=checkAlbumCoverFile({record:existsSync(rec)?JSON.parse(readFileSync(rec,'utf8')):null,assetSha256:sha(assetBytes)});}
  if(contract.brand_asset?.sha256&&createHash('sha256').update(assetBytes).digest('hex')!==contract.brand_asset.sha256)throw new Error('专辑封面文件hash与页面合同不一致');
  const deliveryScale=tokens.export.scale,[deliveryWidth,deliveryHeight]=tokens.export.delivery_size;
  if(deliveryWidth!==Math.round(tokens.canvas.width*deliveryScale)||deliveryHeight!==Math.round(tokens.canvas.height*deliveryScale))throw new Error('高清导出尺寸与比例不一致');

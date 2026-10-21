@@ -55,7 +55,7 @@ class TypographyHierarchyTest(unittest.TestCase):
     def test_legacy_cli_accepted_reference_still_passes(self):
         # accepted reference was made under the pre-v0.4.4 scale; it passes with its own tokens
         result = subprocess.run([
-            sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE), '--design-tokens', str(self.LEGACY),
+            sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE), '--design-tokens', str(self.LEGACY), '--legacy-scale',
         ], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(json.loads(result.stdout)['passed'])
@@ -70,6 +70,22 @@ class TypographyHierarchyTest(unittest.TestCase):
     def test_default_scale_values(self):
         sizes = TOKENS["role_sizes"]
         self.assertEqual((sizes["overview_title"], sizes["page_conclusion"], sizes["section_entry"], sizes["overview_thesis"], sizes["body"], sizes["diagram_label"], sizes["annotation"], sizes["footer_meta"]), (48, 32, 32, 26, 24, 24, 22, 22))
+
+    def _scene(self, sizes):
+        return {'elements': [{'id': f't{i}', 'type': 'text', 'text': '字', 'fontSize': s, 'width': 100,
+                              'customData': {'typography_role': 'body'}} for i, s in enumerate(sizes)]}
+    def test_scale_five_levels_two_px_pass(self):
+        self.assertEqual(CHECKER.scale_errors(self._scene([48, 32, 26, 24, 22])), [])
+    def test_scale_rejects_six_levels(self):
+        self.assertTrue(any('超过5级' in e for e in CHECKER.scale_errors(self._scene([48, 32, 28, 26, 24, 22]))))
+    def test_scale_rejects_near_levels(self):
+        self.assertTrue(any('相差不足' in e for e in CHECKER.scale_errors(self._scene([45, 30, 25, 24]))))
+    def test_phone_min_glyph(self):
+        errs = CHECKER.scale_errors(self._scene([48, 24, 20]))
+        self.assertTrue(any('手机预览' in e and '删字' in e for e in errs))
+    def test_cli_applies_scale_checks(self):
+        result = subprocess.run([sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE), '--design-tokens', str(self.LEGACY)], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
 
     def test_accepted_reference_passes(self):
         scene = json.loads(REFERENCE.read_text())

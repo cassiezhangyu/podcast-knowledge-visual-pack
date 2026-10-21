@@ -35,6 +35,9 @@
 26b. **整体知识框架证据**：Overview 按 `overview_page_production.md` 第6节作者复述并逐条核对批准关系台账，记录 `overview_framework_check`。自检输入必须提供 `framework_basis`；创作者只核批准内容，以实际图文和批准关系为依据。点齐、局部关系成立或一段概括性复述都不能代替必要关系的当前可见证据；框架未通过时不得记录自检通过 或放行原型。不要用编号顺序、导航列表、容器网格或想象中的关联补足图中缺口。
 27. **数量语义**：逐项检查紧邻比例、次数、数量和时间数字的可清点图形。方格、点、进度段、人物或重复对象表达出的数量必须与来源数学一致；文字正确但图形给出另一数值时，按图形语义错误直接拒绝。
 28. **删除分隔后的局部重审**：若返工删除了竖线、边框、书脊或栏界，不只确认穿字消失；重新写出该区域内部的实际阅读顺序。两组窄栏若失去对应依据、层级交叉或需要猜测左右关系，按局部结构失败处理。
+29. **陌生读者理解（必做）**：按 `cold_reader_check.md` 假装没听过本期，整体检查阅读动线、各块读出与想表达的一致性、图文是否增加理解和一句话复述；只做最小修改并保留节目原话。记录 `cold_reader_check`。
+30. **排版预算与边距留白（必做）**：渲染前已按 `layout_budget_and_margins.md` 跑 `layout_budget.py`；渲染后 `audit_overlap_margins.py` 通过（无文字重叠或碰线、左右边距差 ≤6px、页眉页脚留白达标）。记录 `layout_budget`、`margin_audit`。
+31. **简体中文字形（必做）**：按 `cjk_glyphs.md`，默认 Noto Sans CJK SC（Mac 为 PingFang SC）、页面 `zh-CN`/`zh-Hans`，展示前对当前 scene 跑 `node scripts/audit_cjk_glyphs.mjs` 通过。记录 `cjk_glyph_audit`。
 
 审核必须继承用户已明确确认的视觉偏好。用户已经拒绝的人物场景、儿童画式简笔人物或位图路线，不得被创作者重新列为通过条件。来源不支持具体场景时，审核图文分工和信息载体是否准确；高质量文字型知识图可以通过，纯文字本身不是拒绝理由。仍须拒绝等权文字框、无证据的标签和依赖微字的文章排版。
 
@@ -47,4 +50,4 @@
 
 ## 记录与输出
 
-使用现有RENDERED_PAGE_CHECK.md/json记录content_coverage、visual_explanation、reference_alignment、text_geometry、mobile_readability五项真实证据；各项status为pass后，整体status记为self_check_passed。绑定当前scene、png、phone、gray、高清图及mechanical_render_record，不生成reviewer_context_id或独立评级。总览另记录overview_framework_check，用户明确条件另记录user_requirements_check。自检通过后直接输出供用户查看；正式用户批准按SKILL.md记录。
+使用现有RENDERED_PAGE_CHECK.md/json记录content_coverage、visual_explanation、reference_alignment、text_geometry、mobile_readability五项真实证据，以及必做项 cold_reader_check、layout_budget、margin_audit、cjk_glyph_audit；各项status为pass后，整体status记为self_check_passed。绑定当前scene、png、phone、gray、高清图及mechanical_render_record，不生成reviewer_context_id或独立评级。总览另记录overview_framework_check，用户明确条件另记录user_requirements_check。自检通过后直接输出供用户查看；正式用户批准按SKILL.md记录。

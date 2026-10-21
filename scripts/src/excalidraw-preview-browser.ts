@@ -5,12 +5,22 @@ type PersistedScene = { elements: readonly Record<string, unknown>[]; appState: 
 
 declare global { interface Window {
   renderPersistedExcalidrawScene: (scene: PersistedScene, tokens: Record<string, unknown>, scale?: number) => Promise<string>;
+  renderSceneLayerForAudit: (scene: PersistedScene, scale?: number) => Promise<string>;
   deriveRenderedPng: (dataUrl: string, width: number, grayscale: boolean) => Promise<string>;
   composeBrandAsset: (baseDataUrl: string, assetDataUrl: string, box: { x: number; y: number; width: number; height: number }) => Promise<string>;
 } }
 
 window.renderPersistedExcalidrawScene = async (scene, tokens, scale = 1) => {
   assertSceneMechanics(scene, tokens);
+  if (!Number.isFinite(scale) || scale <= 0) throw new Error("导出比例必须为正数。");
+  const elements = restoreElements(scene.elements, null);
+  const canvas = await exportToCanvas({ elements, appState: scene.appState, files: scene.files, exportPadding: 0,
+    getDimensions: (width: number, height: number) => ({ width: Math.round(width * scale), height: Math.round(height * scale), scale }) });
+  return canvas.toDataURL("image/png");
+};
+
+// 仅供 audit_overlap_margins.py 的诊断分层渲染：分层子集不是正式页面，不走导出机械门禁；正式导出仍用上面的函数。
+window.renderSceneLayerForAudit = async (scene, scale = 1) => {
   if (!Number.isFinite(scale) || scale <= 0) throw new Error("导出比例必须为正数。");
   const elements = restoreElements(scene.elements, null);
   const canvas = await exportToCanvas({ elements, appState: scene.appState, files: scene.files, exportPadding: 0,

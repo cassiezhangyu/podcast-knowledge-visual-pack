@@ -1,3 +1,14 @@
+# v0.4.1-local · 移植 v0.6.3 的五条本地规则（仅本地，未推送）
+
+在 v0.4.0 作者自检框架内补回，均为主会话自检必做项，不恢复审核、陌生首读或仲裁 agent：
+
+- 陌生读者理解检查：`references/rules/cold_reader_check.md`，page_quality_check 第29项，记录 `cold_reader_check`。
+- 排版预算：`scripts/layout_budget.py`（预算 JSON / `--scene` 草稿估算），规则 `references/rules/layout_budget_and_margins.md`，第30项。
+- 边距与页眉页脚留白审计：`scripts/audit_overlap_margins.py` + 诊断分层渲染器 `scripts/render_scene.mjs`（新增浏览器函数 `renderSceneLayerForAudit`，不走导出机械门禁、不用于交付图），记录 `layout_budget`、`margin_audit`。
+- 简体中文字形规则：`references/rules/cjk_glyphs.md`，第31项，记录 `cjk_glyph_audit`。
+- 只改本地：SKILL.md 顶部。
+- `visual:closeout` 作者路径现要求上述四项自检证据；测试 `development/tests/test_layout_budget_margins.py`、`author-visual-closeout.test.ts`。
+
 # v0.4.0 · 独立安装、作者自检与渲染证据更新
 
 以 v0.3.0 为基线，整合当前已维护的 Skill、运行工具与回归测试；完整 Skill 可直接放入项目发现目录，主会话完成创作与作者自检，真实渲染记录继续绑定当前工件。

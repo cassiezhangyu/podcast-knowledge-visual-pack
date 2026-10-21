@@ -27,7 +27,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     const record = checks.find(x => (x.data.manifest_page_id ?? x.data.page_id) === page.page_id);
     const c = record?.data;
     if (!c || c.status !== "self_check_passed") throw new Error("当前页面作者自检未通过。");
-    for (const name of ["content_coverage", "visual_explanation", "reference_alignment", "text_geometry", "mobile_readability"]) {
+    for (const name of ["content_coverage", "visual_explanation", "reference_alignment", "text_geometry", "mobile_readability", "cold_reader_check", "layout_budget", "margin_audit", "cjk_glyph_audit"]) {
       if (c.checks?.[name]?.status !== "pass" || typeof c.checks[name].visible_evidence !== "string" || c.checks[name].visible_evidence.trim().length < 8) throw new Error("作者自检缺少实际证据：" + name);
     }
     bound(c.mechanical_render_record);

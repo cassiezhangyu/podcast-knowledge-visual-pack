@@ -8,6 +8,10 @@
     "visual_explanation": {"status": "pass", "visible_evidence": "填写图文如何呈现必要关系的证据"},
     "reference_alignment": {"status": "pass", "visible_evidence": "填写与实际参考对照的结果"},
     "text_geometry": {"status": "pass", "visible_evidence": "填写实际字形及间隔核对结果"},
-    "mobile_readability": {"status": "pass", "visible_evidence": "填写390px实图的可读性核对结果"}
+    "mobile_readability": {"status": "pass", "visible_evidence": "填写390px实图的可读性核对结果"},
+    "cold_reader_check": {"status": "pass", "visible_evidence": "动线、各块读出vs想表达、断点与最小改法、一句话复述（见cold_reader_check.md）"},
+    "layout_budget": {"status": "pass", "visible_evidence": "layout_budget.py 命令、exit code 与 slack"},
+    "margin_audit": {"status": "pass", "visible_evidence": "audit_overlap_margins.py exit 0；左右边距差、页眉/页脚留白数值"},
+    "cjk_glyph_audit": {"status": "pass", "visible_evidence": "audit_cjk_glyphs.mjs exit 0；实际平台字体（Noto Sans CJK SC / PingFang SC）"}
   }
 }

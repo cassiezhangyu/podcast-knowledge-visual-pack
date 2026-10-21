@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.4.0",
+  "version": "0.4.1-local",
   "private": true,
   "type": "module",
   "scripts": {
@@ -30,6 +30,8 @@
     "workflow:status": "npm run build && node dist/workflow-cli.js",
     "accepted-artwork:import": "tsc -p tsconfig.json && node dist/accepted-artwork-import-cli.js",
     "content:assemble": "npm run build && python3 scripts/assemble_content_package.py",
+    "layout:budget": "python3 scripts/layout_budget.py",
+    "layout:margins": "python3 scripts/audit_overlap_margins.py",
     "test:python": "python3 -m unittest discover -s development/tests -p '*.py'",
     "render:scene:checked": "npm run build && node scripts/render-scene-checked.mjs"
   },

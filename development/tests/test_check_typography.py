@@ -50,17 +50,32 @@ class TypographyHierarchyTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn(str(missing), result.stderr)
 
-    def test_default_cli_accepted_reference_still_passes(self):
+    LEGACY = ROOT / 'development/tests/fixtures/design_tokens_v0.4.3_legacy.json'
+
+    def test_legacy_cli_accepted_reference_still_passes(self):
+        # accepted reference was made under the pre-v0.4.4 scale; it passes with its own tokens
         result = subprocess.run([
-            sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE),
+            sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE), '--design-tokens', str(self.LEGACY),
         ], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(json.loads(result.stdout)['passed'])
 
+    def test_default_scale_rejects_old_45px_title(self):
+        result = subprocess.run([
+            sys.executable, str(ROOT / 'scripts/check_typography.py'), str(REFERENCE),
+        ], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('expected=48', result.stdout + result.stderr)
+
+    def test_default_scale_values(self):
+        sizes = TOKENS["role_sizes"]
+        self.assertEqual((sizes["overview_title"], sizes["page_conclusion"], sizes["section_entry"], sizes["overview_thesis"], sizes["body"], sizes["diagram_label"], sizes["annotation"], sizes["footer_meta"]), (48, 32, 32, 26, 24, 24, 22, 22))
+
     def test_accepted_reference_passes(self):
         scene = json.loads(REFERENCE.read_text())
+        legacy = json.loads(self.LEGACY.read_text())["typography"]
         count, errors = CHECKER.validate_scene(
-            scene, TOKENS["role_sizes"], set(TOKENS["strong_inner_roles"])
+            scene, legacy["role_sizes"], set(legacy["strong_inner_roles"])
         )
         self.assertGreater(count, 0)
         self.assertEqual(errors, [])

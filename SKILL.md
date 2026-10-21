@@ -183,6 +183,8 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 执行references/rules/page_quality_check.md、visual_reasoning的共同判据、同版taste和页型合同。主会话实际查看原图、390px、灰度与高清局部，检查来源、整体框架、图文关系、案例和限定、字体/笔触、导航及可读性；按最早失败层修复并重渲。保留原型充分性与完成度检查，不调用其他agent。
 
+字号默认标准（v0.4.4-local）：主标题48；整页结论与模块标题32；副标题26；正文与必要图内标签24；辅助注释、导航、页眉页脚22；放不下时删字或重排，不缩字。
+
 自检必做项（v0.4.2-local，均由主会话完成）：渲染前 `layout_budget.py`、渲染后 `audit_overlap_margins.py`（`references/rules/layout_budget_and_margins.md`）；`node scripts/audit_cjk_glyphs.mjs` 简体字形审计（`references/rules/cjk_glyphs.md`）；展示前的陌生读者理解检查（`references/rules/cold_reader_check.md`）。构图前参考硬门禁（正反例逐图观察＋REFERENCE_PREFLIGHT，渲染脚本强制）；自检须含 side_by_side_reference_comparison（含 R11/R17/R18 证据）、visual_gain_counterproof，总览另须 overview_framework_check，visual:closeout 强制。任一未通过不得记 self_check_passed 或展示给用户。
 
 在RENDERED_PAGE_CHECK.json中记录status:self_check_passed、当前scene/png/phone/gray及高清图、mechanical_render_record和五项真实证据；总览记录overview_framework_check，用户条件记录user_requirements_check。格式见templates/author_page_check.json。

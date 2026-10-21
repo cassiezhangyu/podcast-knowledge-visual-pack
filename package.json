@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.4.3-local",
+  "version": "0.4.4-local",
   "private": true,
   "type": "module",
   "scripts": {

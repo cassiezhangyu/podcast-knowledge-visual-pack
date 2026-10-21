@@ -34,7 +34,7 @@ def fixture(layout="legacy"):
         else:
             x, y = 930, 1015 + (number - 1) * 64
         elements.extend([text(str(number), x, y, 22, "annotation"),
-                         text(f"提纲名称{number}", x + 40, y + 2, 23, "diagram_label")])
+                         text(f"提纲名称{number}", x + 40, y + 2, 24, "diagram_label")])
     if layout == "legacy":
         regions = None
     else:

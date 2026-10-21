@@ -1,3 +1,8 @@
+# v0.4.4-local（仅本地，2026-10-21）
+
+- 默认字号改为 Cassie 标准：主标题 48（overview/deep_title、typography.title）；整页结论与模块标题 32（page_conclusion、section_entry、overview_section）；副标题 26（overview/deep_thesis、subheading、section、object_name）；正文与必要图内标签 24（body、diagram_label）；辅助注释、导航、页眉页脚 22。去掉 45/30/28/27/25/23 级。
+- typography_hierarchy.md、SKILL.md 增加规则：以实际 PNG 校准；放不下时删字或重排，不缩到标准以下。inner_page_module_contract 提纲条目改为 diagram_label 24；相关测试同步。
+
 # v0.4.3-local（仅本地，2026-10-21）
 
 - 修复：小宇宙适配器把单集封面（episode.image）记成 `cover_url` 并被当作专辑封面合成。现分别记录 `podcast_cover_url`（专辑封面，取 podcast.image）与 `episode_cover_url`；`cover_url` 保留兼容，含义为单集封面。

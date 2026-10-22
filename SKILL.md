@@ -183,7 +183,7 @@ v0.4.5-local 顺序：先锁字号与终稿文字（过陌生读者必查清单�
 
 ## 10. Phase 8 — 作者自检与技术检查
 
-执行references/rules/page_quality_check.md、visual_reasoning的共同判据、同版taste和页型合同。主会话实际查看原图、390px、灰度与高清局部，检查来源、整体框架、图文关系、案例和限定、字体/笔触、导航及可读性；按最早失败层修复并重渲。保留原型充分性与完成度检查，不调用其他agent。
+执行references/rules/page_quality_check.md、visual_reasoning的共同判据、同版taste和页型合同。主会话实际查看原图、390px、灰度与高清局部，发给用户看的一律是 @2x 图，检查来源、整体框架、图文关系、案例和限定、字体/笔触、导航及可读性；按最早失败层修复并重渲。保留原型充分性与完成度检查，不调用其他agent。
 
 字号默认标准（v0.4.4-local）：主标题48；整页结论与模块标题32；副标题26；正文与必要图内标签24；辅助注释、导航、页眉页脚22；放不下时删字或重排，不缩字。
 
@@ -241,6 +241,7 @@ v0.4.5-local 顺序：先锁字号与终稿文字（过陌生读者必查清单�
 - `construction_human_approval.json`
 - `construction_gate.json`
 - 每张内页的 `RENDERED_PAGE_CHECK.md`、作者自检记录与用户审批记录
+- 同一 scene 2 倍重渲的 P01@2x.png（2400×3200）：给用户看图与交付的默认图；1x P01.png 仅内部检查（坐标与字号按 1200×1600 定义）
 - 原尺寸、390px 与灰度 PNG，以及同一受检 scene 重渲的 2880×3840 高清交付图；字形、布局/曲线与像素诊断按 `references/rules/render_diagnostics.md` 绑定
 - `render_gate.json`
 - `xiaohongshu-draft.md`、`xiaohongshu.md`、`xiaohongshu-review.md`

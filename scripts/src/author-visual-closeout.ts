@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { checkReview2x, pngSize, REVIEW_SIZE } from "./review-2x.js";
 import { validateArtifact } from "./validate.js";
 import { assertSceneMechanics } from "./scene-mechanics.js";
 import { assertOverviewFrameworkCheck } from "./overview-framework-check.js";
@@ -75,6 +76,8 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     const outputKeys: R = { scene: [null, "scene_sha256"], png: ["png", "png_sha256"], phone: ["phone_png", "phone_png_sha256"], gray: ["grayscale_png", "grayscale_png_sha256"] };
     if (page.delivery_png) outputKeys.delivery = ["delivery_png", "delivery_png_sha256"];
     if (mechanical.current?.delivery && !page.delivery_png) throw new Error("清单遗漏高清图。");
+    checkReview2x(mechanical, page, (p) => resolve(workspace, p));
+    if (page.review_png && c.current?.review2x) outputKeys.review2x = ["review_png", "review_png_sha256"];
     for (const [key, [pathKey, hashKey]] of Object.entries(outputKeys) as [string, [string | null, string]][]) {
       const actual = c.current?.[key]; bound(actual);
       if (actual.sha256 !== page[hashKey] || mechanical.current?.[key]?.sha256 !== actual.sha256 || resolve(mechanical.current[key].path) !== resolve(actual.path) || (pathKey && resolve(workspace, page[pathKey]) !== resolve(actual.path))) throw new Error("作者自检、机械记录与当前渲染不一致：" + key);

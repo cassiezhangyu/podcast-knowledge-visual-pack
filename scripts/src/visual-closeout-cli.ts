@@ -1,7 +1,8 @@
 import { closeoutAuthorPages } from "./author-visual-closeout.js";
 import { createHash } from "node:crypto";
 import { readFileSync, rmSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { checkReview2x, pngSize, REVIEW_SIZE } from "./review-2x.js";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
 import { assertUnfamiliarReaderCheck } from "./unfamiliar-reader-check.js";
@@ -78,6 +79,7 @@ try {
     nested.push(...Object.values((mechanical.diagnostics as R | undefined) ?? {}));
     if (page.delivery_png && ((current.delivery as R)?.sha256 !== page.delivery_png_sha256 || mechanical.delivery_scale !== page.delivery_scale)) throw new Error("高清交付图与审核包或导出比例不一致。");
     if ((mechanical.current as R).delivery && !page.delivery_png) throw new Error("渲染清单遗漏了当前高清交付图。");
+    checkReview2x(mechanical, page, (p) => resolve(workspace, p));
     if (role === "overview" || role === "deep_dive") {
       if (outline?.status !== "pass" || !outline.regions) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "内页缺少提纲区域核验。", false);
       nested.push(outline.regions);
@@ -85,7 +87,7 @@ try {
     for (const item of nested as R[]) {
       if (typeof item?.path !== "string" || typeof item?.sha256 !== "string" || fileHash(item.path) !== item.sha256) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "机械检查绑定输入或工件已变化。", false, { path: item?.path });
     }
-    for (const key of ["scene", "png", "phone", "gray", ...((mechanical.current as R).delivery ? ["delivery"] : [])]) {
+    for (const key of ["scene", "png", "phone", "gray", ...((mechanical.current as R).delivery ? ["delivery"] : []), ...((mechanical.current as R).review2x && current.review2x ? ["review2x"] : [])]) {
       const actual = (mechanical.current as R)[key] as R, expected = current[key] as R;
       if (actual?.path !== expected?.path || actual?.sha256 !== expected?.sha256) throw new PipelineError("CONSTRUCTION_GATE_FAILED", "construction_gate", "机械导出与送审工件不一致。", false, { key });
     }

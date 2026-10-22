@@ -54,8 +54,9 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
     if (result.error || result.status !== 0) fail("正式导出被统一机械门禁阻断。", { page_id: item.page_id, reason: result.stderr || result.stdout || String(result.error) });
     const mechanicalPath = join(checked, "MECHANICAL_RENDER_RECORD.json");
     const mechanical = read<R>(mechanicalPath), current = mechanical.current as R;
-    const destinations = { png: join(out, `${slug}.png`), phone: join(out, `${slug}-phone.png`), gray: join(out, `${slug}-grayscale.png`), delivery: join(out, `${slug}-hd.png`) };
+    const destinations = { png: join(out, `${slug}.png`), phone: join(out, `${slug}-phone.png`), gray: join(out, `${slug}-grayscale.png`), delivery: join(out, `${slug}-hd.png`), review2x: join(out, `${slug}@2x.png`) };
     for (const [key, destination] of Object.entries(destinations)) {
+      if (!current[key]) continue;
       copyFileSync((current[key] as R).path as string, destination);
       current[key] = { path: resolve(destination), sha256: hashBuffer(readFileSync(destination)) };
     }
@@ -65,6 +66,7 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
     record.delivery_png = relative(workspace, destinations.delivery);
     record.delivery_png_sha256 = (current.delivery as R).sha256;
     record.delivery_scale = mechanical.delivery_scale;
+    if (current.review2x) { record.review_png = relative(workspace, destinations.review2x); record.review_png_sha256 = (current.review2x as R).sha256; record.review_scale = (mechanical.review_2x as R).scale; }
     writeFileSync(join(out, "checks", `${slug}.md`), `# RENDERED_PAGE_CHECK\n\n- 页面：${item.page_id}\n- 机械记录：checks/${slug}/MECHANICAL_RENDER_RECORD.json\n- 规则到像素：待检查\n- 遮字、压线与越界：待检查\n- 内容差异：待检查\n- 手机阅读：待检查\n- 作者整页质量自检：待检查\n`);
   }
   const renderManifest: R = { schema_version: "1.0", kind: "render_manifest", status: "completed", scene_manifest_sha256: hashJson(manifest), pages: rendered, created_at: new Date().toISOString() };

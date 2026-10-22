@@ -80,12 +80,15 @@ try{
  let delivery=await page.evaluate(async({scene,tokens,scale})=>window.renderPersistedExcalidrawScene(scene,tokens,scale),{scene,tokens,scale:deliveryScale});
  delivery=await page.evaluate(async o=>window.composeBrandAsset(o.base,o.asset,o.box),{base:delivery,asset:assetUrl,box:Object.fromEntries(Object.entries(box).map(([k,v])=>[k,v*deliveryScale]))});
  original=await page.evaluate(async o=>window.composeBrandAsset(o.base,o.asset,o.box),{base:original,asset:'data:image/'+(/\.jpe?g$/i.test(assetPath)?'jpeg':'png')+';base64,'+assetBytes.toString('base64'),box});
+ const reviewScale=2;if(Math.round(tokens.canvas.width*reviewScale)!==2400||Math.round(tokens.canvas.height*reviewScale)!==3200)throw new Error('@2x看图尺寸必须为2400×3200');
+ let review2x=await page.evaluate(async({scene,tokens,scale})=>window.renderPersistedExcalidrawScene(scene,tokens,scale),{scene,tokens,scale:reviewScale});
+ review2x=await page.evaluate(async o=>window.composeBrandAsset(o.base,o.asset,o.box),{base:review2x,asset:assetUrl,box:Object.fromEntries(Object.entries(box).map(([k,v])=>[k,v*reviewScale]))});
  const phone=await page.evaluate(async u=>window.deriveRenderedPng(u,390,false),original),gray=await page.evaluate(async u=>window.deriveRenderedPng(u,1200,true),original);
  const geometryPath=join(out,'RENDERED_GEOMETRY_DIAGNOSTIC.json');
  writeFileSync(geometryPath,JSON.stringify(await page.evaluate(auditRenderedGeometry,{scene,tokens}),null,2)+'\n');
  if(sha(readFileSync(scenePath))!==sha(sceneBytes))throw new Error('导出期间scene已变化，禁止保存混合版本');
  const artifacts={scene:bind(scenePath)};
- for(const[k,name,url,width,height]of[['png','P01.png',original,1200,1600],['phone','P01-phone.png',phone,390,520],['gray','P01-grayscale.png',gray,1200,1600],['delivery','P01-hd.png',delivery,deliveryWidth,deliveryHeight]]){
+ for(const[k,name,url,width,height]of[['png','P01.png',original,1200,1600],['phone','P01-phone.png',phone,390,520],['gray','P01-grayscale.png',gray,1200,1600],['delivery','P01-hd.png',delivery,deliveryWidth,deliveryHeight],['review2x','P01@2x.png',review2x,2400,3200]]){
   const bytes=Buffer.from(url.split(',')[1],'base64');if(bytes.toString('hex',0,8)!=='89504e470d0a1a0a'||bytes.readUInt32BE(16)!==width||bytes.readUInt32BE(20)!==height)throw new Error('真实导出尺寸异常：'+k);
   const p=join(out,name);writeFileSync(p,bytes);artifacts[k]=bind(p);
  }
@@ -94,5 +97,6 @@ try{
  record.chrome_check=chromeCheck;
  if(chromeCheck.status==='pass')record.checks.push({name:'declared_fixed_chrome',status:'pass'});
  record.delivery_scale=deliveryScale;
+ record.review_2x={scale:2,size:[2400,3200],scene_sha256:artifacts.scene.sha256,role:'user_review_and_delivery',note:'给用户看图与交付用@2x；P01.png仅内部检查'};
  writeFileSync(join(out,'MECHANICAL_RENDER_RECORD.json'),JSON.stringify(record,null,2)+'\n');console.log(JSON.stringify({status:'rendered_needs_review',output:out,record:join(out,'MECHANICAL_RENDER_RECORD.json')}));
 }finally{if(browser)await browser.close();rmSync(html,{force:true});}

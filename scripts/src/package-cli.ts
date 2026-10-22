@@ -2,6 +2,7 @@ import { verifyAuthorPageChecks } from "./author-visual-closeout.js";
 import { createHash } from "node:crypto";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join, resolve, sep } from "node:path";
+import { checkReview2x, pngSize, REVIEW_SIZE } from "./review-2x.js";
 import { PipelineError } from "./contracts.js";
 import { validateArtifact } from "./validate.js";
 import { verifyAcceptedImport } from "./accepted-artwork-import.js";
@@ -113,6 +114,11 @@ try {
     if (!scene || scene.sha256 !== page.scene_sha256 || hashBuffer(readFileSync(join(workspace, scene.file as string))) !== scene.sha256) stop("当前 Excalidraw 场景与渲染记录不一致。", { page_id: page.page_id });
     for (const [pathKey, hashKey] of [["png", "png_sha256"], ["phone_png", "phone_png_sha256"], ["grayscale_png", "grayscale_png_sha256"]]) if (hashBuffer(readFileSync(join(workspace, page[pathKey] as string))) !== page[hashKey]) stop("当前 PNG 与渲染记录不一致。", { page_id: page.page_id, path: page[pathKey] });
     if (page.delivery_png && hashBuffer(readFileSync(join(workspace, page.delivery_png as string))) !== page.delivery_png_sha256) stop("高清交付图与当前渲染记录不一致。", { page_id: page.page_id });
+    if (page.review_png) {
+      if (!existsSync(join(workspace, page.review_png as string)) || hashBuffer(readFileSync(join(workspace, page.review_png as string))) !== page.review_png_sha256) stop("@2x 交付图缺失或与当前渲染记录不一致。", { page_id: page.page_id });
+      const [w, h] = pngSize(join(workspace, page.review_png as string)), [w1, h1] = pngSize(join(workspace, page.png as string));
+      if (w !== REVIEW_SIZE[0] || h !== REVIEW_SIZE[1] || w * h1 !== h * w1) stop("@2x 交付图尺寸或比例与 1x 不一致。", { page_id: page.page_id, size: [w, h] });
+    }
   }
   const visualApproval = read<R>(join(workspace, "04-rendered", "visual_page_human_approval.json"));
   validateArtifact("human_approval", visualApproval);
@@ -145,6 +151,7 @@ try {
     const page = (renderManifest.pages as R[])[index], scene = (sceneManifest.pages as R[]).find((item) => item.page_id === page.page_id)!;
     const pageName = deliveryPageName(editorialPlan, page.page_id as string, index);
     for (const [role, source, extension] of [["page_png", page.png, ".png"], ["page_phone_png", page.phone_png, "-phone.png"], ["page_grayscale_png", page.grayscale_png, "-grayscale.png"], ["page_scene", scene.file, ".excalidraw"]] as string[][]) addFile(`${role}:${page.page_id}`, join(workspace, source), `${pageName}${extension}`);
+    if (page.review_png) addFile(`page_png_2x:${page.page_id}`, join(workspace, page.review_png as string), `${pageName}@2x.png`);
     if (page.delivery_png) addFile(`page_hd_png:${page.page_id}`, join(workspace, page.delivery_png as string), `${pageName}-hd.png`);
     const renderSlug = basename(page.png as string, ".png");
     addFile(`rendered_page_check:${page.page_id}`, join(workspace, "04-rendered", "checks", `${renderSlug}.md`), `qa-${pageName}.md`);

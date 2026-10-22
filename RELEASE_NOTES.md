@@ -1,3 +1,9 @@
+# v0.4.6-local（仅本地，2026-10-22）
+
+- 文字像素感修复：每次受检渲染同一 scene 另按 2 倍重渲 `P01@2x.png`（2400×3200）。给用户看图、送审和交付默认用 @2x；1x `P01.png` 只作内部检查，坐标与字号（48/32/26/24/22）仍按 1200×1600 定义。
+- 机械记录 `review_2x`、渲染清单 `review_png/review_png_sha256/review_scale`；visual:closeout（含作者自检路径）与 package 核验 @2x 存在、哈希、同 scene、2400×3200 且比例与 1x 一致；package 交付 `<页名>@2x.png`。
+- 向后兼容：v0.4.6 之前的记录没有 @2x 时按 legacy_1x_only 放行，不追认。
+
 # v0.4.5-local（仅本地，2026-10-21）
 
 来自 6ad48f83 复盘（05-qa/RETRO_6ad48f83.md），Cassie 批准全部 10 项：

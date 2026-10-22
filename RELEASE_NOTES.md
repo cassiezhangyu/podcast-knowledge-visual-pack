@@ -1,12 +1,47 @@
-# docs: architecture fold（仅本地，未改发版号）
+# v0.5.0（2026-10-22）
 
-文档架构收拢，**不改变出图／渲染行为**：
-- 将 v0.4.7／v0.4.8 本地补丁规范全文并入对应 `references/rules/*`，删除 `v047_local_rules.md`、`v048_local_rules.md`。
-- 精简 `SKILL.md`（入口只保留读取顺序、阶段表与合同要点）。
-- `independent_visual_review` 规则迁至 `references/legacy/`（兼容／已弃用）；模板加弃用头。
-- 新增根目录 `RELEASE_GUIDE.md`（正式发版流程；本提交不执行远程发布）。
-- 更新 `README.md` 目录树与版本标注为 0.4.8-local。
-- `package.json` 版本仍为 `0.4.8-local`。
+相对正式版 [v0.4.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.4.0)（`7a70652`），合并本地 0.4.1–0.4.8 积累、文档架构收拢与案例库重整。按 0.x 约定：门禁与合同语义有不兼容变化，定为 **MINOR**。
+
+## 新增功能
+
+- 审图与交付默认使用同 scene 重渲的 `@2x`（2400×3200）；1x 仅内部检查；closeout／package 核验 `@2x`。
+- 陌生读者／逐句冷读必做；比喻只撑主图、数字溯源、标签撞名、提纲不含括号等写入自检与登记。
+- 死白审计、箭头逐条记录、改版并排 diff、内容字≥24、孤行检查、批准后勘误（`erratum:apply`）、一页多交付版本登记（`visual:register-versions`，只改字可沿用箭头记录）。
+- 禁止简笔画；构图前参考硬门禁；字号默认 48/32/26/24/22；专辑封面与单集封面分记并核对。
+- 排版预算、边距审计、简体字形、项目覆盖登记、预检 bump、提纲区域自动推导等。
+- 根目录 `RELEASE_GUIDE.md`：正式发版标准流程。
+
+## 优化／文档
+
+- 将 v0.4.7／v0.4.8 等本地补丁全文并入 `references/rules/*`，删除版本号补丁文件；精简 `SKILL.md` 为读取顺序与阶段入口。
+- `independent_visual_review` 迁至 `references/legacy/`（兼容／已弃用）。
+- README 目录树与版本标注对齐仓库。
+
+## 案例库
+
+- **正式正例**仅保留：EP88 封面、EP88 总览三版（A-V16／B-V18／C-V20）、另辟西径 VOL69 总览三版。
+- 其余原正例迁入 `assets/examples/retired/` 并停用，不作为必看基准。
+- 新增负例：EP88／VOL69 标题变体页（排版混乱、文字堆砌、简笔画）。
+
+## 不兼容变更／迁移
+
+1. 新制作须满足现行自检门禁（冷读、`@2x`、死白／箭头、参考硬门禁等）；缺少对应记录时 `visual:closeout`／`visual:register-versions` 会拒绝。
+2. 默认字号与「放不下删字不缩字」已写入 tokens／规则；旧规格若字号不合须按当前标准重排，不得批量补签。
+3. 参考案例门禁改为只认上述正式正例；旧 EP59／e248 等正例路径已 retired，脚本与索引已更新。
+4. 安装／升级：解压本版安装 ZIP 到空目录后 `npm ci && npm run build`；勿覆盖已有安装；工作区仍放在 Skill 之外。
+5. 正式 Tag／`package.json` 版本为 `0.5.0`（无 `-local`）。
+
+## 验证
+
+发版前提交上运行：`npm run build`、`npm test`、`npm run test:python`、`python3 scripts/check_skill_layout.py`（结果写入本条发布时的验证段／Release Assets manifest）。
+
+上一正式版本：[v0.4.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.4.0)。比较：https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/compare/v0.4.0...v0.5.0
+
+---
+
+# docs: architecture fold（已并入 v0.5.0，原仅本地）
+
+文档架构收拢（不改变出图／渲染行为）：v047／v048 并入 rules、精简 SKILL、legacy 独立审核、新增 RELEASE_GUIDE；当时 package 仍为 0.4.8-local。
 
 # v0.4.8-local（仅本地，2026-10-22）
 

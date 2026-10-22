@@ -35,7 +35,7 @@
 26b. **整体知识框架证据**：Overview 按 `overview_page_production.md` 第6节作者复述并逐条核对批准关系台账，记录 `overview_framework_check`。自检输入必须提供 `framework_basis`；创作者只核批准内容，以实际图文和批准关系为依据。点齐、局部关系成立或一段概括性复述都不能代替必要关系的当前可见证据；框架未通过时不得记录自检通过 或放行原型。不要用编号顺序、导航列表、容器网格或想象中的关联补足图中缺口。
 27. **数量语义**：逐项检查紧邻比例、次数、数量和时间数字的可清点图形。方格、点、进度段、人物或重复对象表达出的数量必须与来源数学一致；文字正确但图形给出另一数值时，按图形语义错误直接拒绝。
 28. **删除分隔后的局部重审**：若返工删除了竖线、边框、书脊或栏界，不只确认穿字消失；重新写出该区域内部的实际阅读顺序。两组窄栏若失去对应依据、层级交叉或需要猜测左右关系，按局部结构失败处理。
-29. **陌生读者理解（必做）**：按 `cold_reader_check.md` 假装没听过本期，整体检查阅读动线、各块读出与想表达的一致性、图文是否增加理解和一句话复述；只做最小修改并保留节目原话。记录 `cold_reader_check`。
+29. **陌生读者理解（必做）**：按 `cold_reader_check.md` 完成整页冷读、必查清单、逐句白话复述，以及逐句冷读／比喻正文／数字溯源／标签撞名／提纲只写章节名；记录 `cold_reader_check` 与自检 `checks.sentence_cold_read` 等。缺项或仍 flagged 未解释不得记 `self_check_passed`、不得给用户看图。
 30. **排版预算与边距留白（必做）**：渲染前已按 `layout_budget_and_margins.md` 跑 `layout_budget.py`；渲染后 `audit_overlap_margins.py` 通过（无文字重叠或碰线、左右边距差 ≤6px、页眉页脚留白达标）。记录 `layout_budget`、`margin_audit`。
 31. **简体中文字形（必做）**：按 `cjk_glyphs.md`，默认 Noto Sans CJK SC（Mac 为 PingFang SC）、页面 `zh-CN`/`zh-Hans`，展示前对当前 scene 跑 `node scripts/audit_cjk_glyphs.mjs` 通过。记录 `cjk_glyph_audit`。
 
@@ -64,3 +64,16 @@
 
 - **R19 并列不成路径（v0.4.5-local）**：台账未授权顺序时，把并列项画成路径／旅程／时间线即结构失败。
 - **R20 读者文字**：执行 `cold_reader_check.md` 必查清单与逐句白话复述；提醒只写页面上出现的对象和读者事实。
+
+
+## 死白、箭头、内容字号与改版证据（作者自检必做）
+
+下列项由主会话完成；缺绑定或失败时 `visual:closeout`／`visual:register-versions` 拒绝。
+
+32. **死白审计（必做）**：`python3 scripts/audit_dead_space.py <P01@2x.png> --out DEAD_SPACE_AUDIT.json`（`render:scene:checked` 对非封面页自动写出）。规则：在 1200×1600 坐标的正文区（默认 x80–1120、y330–1470；标题／结论块与页脚在区外，标题／结论行尾的参差空白不算）找无墨矩形；纸色与浅色底纹（如 #EDF2F7）算空；**面积 ≥45000px² 且两边都 ≥90px** 判死白。作者自检 `checks.dead_whitespace_audit.record` 须绑定当前图的通过记录。补死白用延长图、重分配内容或调栏高，不用放大字号。给用户看图与交付一律用同 scene 重渲的 `P01@2x.png`（见 `render_diagnostics.md`）。
+
+33. **箭头逐条记录（必做）**：自检 `checks.arrow_audit.arrows[]` 每条写 `start`、`via`（经过什么、碰不碰别的物件）、`end`、`reads_as`（陌生人会读成什么）、`misread:false`。场景里有箭头就不能标 not_applicable；条数少于场景箭头数即拒绝。例：回环箭头若“经过考试抽屉”，reads_as 会是“长成的植物变成考试笔记”——这就是误读，须改路线。只改字且几何指纹未变时，可按 `visual_pack_execution.md`「只改字路线」沿用上一登记版本的箭头记录。
+
+34. **按内容定字号**：图内承载内容的文字（例子、步骤说明、结论）不低于 24px，不论放在哪里；22px 只给页眉页脚、导航、出处、指示短标签。`check_typography.py` 对 `customData.content_bearing=true` 且 <24px 直接判错；其余 <24px 且未在 `customData.text_function` 声明 navigation/chrome/source/pointer/meta 的文字列入 `small_text_needs_author_ruling`，作者须在自检 `checks.content_text_min_size` 逐条判定（`--strict-content-size` 可直接判错）。细则见 `typography_hierarchy.md`。
+
+35. **改版并排差异**：有 `revision_of` 时须附 `round_diff.py` 产出的并排图与可见改动清单（见 `visual_pack_execution.md`）；清单空或像素差 <0.1% 即拒。

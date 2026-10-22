@@ -47,3 +47,8 @@ Pass only when:
 4. JSON 使用 JSON 序列化；`.md` 直接写 UTF-8 文本并保留真实换行。缓存命中仍重建派生 Markdown 和 QA，不重新执行 ASR，不修改 Raw 或 provider 回执。旧工作区缺新 QA 时先走缓存重建，再重新执行内容 check；不会自动批准内容。
 5. DIRECT 运行依次报告 starting、decoding、transcribing、saving、completed / failed；每 10 秒写入心跳并输出 stderr 日志，包含阶段、耗时、更新时间和 PID。completed 表示 provider 回执已经写入；之后另行报告 checking / QA 结果。
 6. 心跳只表示进程存活。provider 未暴露完成量时，百分比和已处理音频长度为 null。`workflow:status` 展示最近观察及观察年龄；非终态超过 30 秒无更新标为 stale_needs_verification，核实进程后再判断中断，不能自动重启或改换策略。对用户用中文说明当前阶段、累计耗时及下一步；心跳不替代工作进展解释。
+
+
+## 已有转写缓存与 --provider-python
+
+`00-source/transcript_grounded.json` 与 `grounded_transcript_qa.json` 都在且 QA 不是 fail 时，`intake --until transcript` 直接复用缓存，不再要求 `--provider-python`（见 `scripts/src/transcript-cache.ts`）。缓存不可用或 QA 失败时仍须提供本地 MLX provider。

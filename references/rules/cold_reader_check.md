@@ -34,7 +34,7 @@
 **逐句白话复述表** `cold_reader_check.plain_restatement`：页面上每个句子／标签组一行 `{page_text, stranger_restatement, clear}`（至少3行，覆盖副标题、结论、每个案例说明）。以从没听过节目的人口吻转述；转述需要补上下文、出现“？”或与原意不同，`clear=false`，修好再记。任何一行 `clear=false` 都不能记 `self_check_passed`。
 
 
-## 逐句冷读与四项补充（v0.4.8-local，必做）
+## 逐句冷读与四项补充（必做）
 
 来自 EP88 6ab11c95-v045 R7 改字轮（`05-qa/R7_TEXT_CHANGES.diff`）：整页冷读放过了「像森林，不像房子」「破了不会马上立」。整页能懂 ≠ 每句能懂。
 

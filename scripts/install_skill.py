@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 RESOURCE_DIRS = ("references", "assets", "rules", "schemas", "templates", "examples", "docs")
-ENTRY_FILES = ("SKILL.md", "taste.md", "design_tokens.json", "README.md", "RELEASE_NOTES.md", "LICENSE", "LICENSING.md")
+ENTRY_FILES = ("SKILL.md", "taste.md", "design_tokens.json", "README.md", "RELEASE_NOTES.md", "RELEASE_GUIDE.md", "LICENSE", "LICENSING.md")
 CODE_DIRS = ("scripts", "src", "workers")
 CODE_FILES = ("package.json", "package-lock.json", "tsconfig.json")
 

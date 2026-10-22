@@ -1,4 +1,4 @@
-# 播客知识视觉材料包 · 0.4.1-local
+# 播客知识视觉材料包 · 0.4.8-local
 
 将小宇宙单集转成可追溯的《内容梳理》《内容拆分》、封面、节目总览、深度解读信息图、原生可编辑 Excalidraw 与配套文案。语义理解、构图与审美由执行 Skill 的模型完成；工具承担抓取、转写、校验、哈希绑定、渲染和打包。
 
@@ -41,26 +41,32 @@ python3 scripts/install_skill.py --mode copy --destination <另一项目>/.agent
 
 ```text
 podcast-knowledge-visual-pack/
-├── SKILL.md                         模型入口与分阶段读取
+├── SKILL.md                         主入口：范围、读取顺序、阶段停点
+├── README.md                        安装与目录说明
+├── RELEASE_NOTES.md                 版本变更
+├── RELEASE_GUIDE.md                 正式发版流程（GitHub Tag / Release）
+├── LICENSE / LICENSING.md           许可与公开范围
 ├── references/
-│   ├── rules/                       工作流程与质量标准
-│   ├── taste.md                     用户及系列表达偏好
-│   ├── schemas/                     结构化数据合同
-│   └── environment/                 运行环境说明
+│   ├── taste.md                     用户／系列审美偏好
+│   ├── rules/                       生产规则（含 cold_reader、layout_budget、
+│   │                                cjk_glyphs、project_overrides 等现行必读）
+│   ├── schemas/                     JSON 数据合同
+│   ├── environment/                 渲染环境说明
+│   ├── examples/ → ../assets/examples
+│   └── legacy/                      已弃用兼容说明（如独立审核）
 ├── assets/
-│   ├── templates/                   生成与填写模板
-│   ├── examples/                    原字节案例和使用范围
-│   ├── design_tokens.json           绘制参数
-│   └── color-library.*              色卡
-├── scripts/
-│   ├── src/                         运行源码
-│   ├── workers/                     转写 worker
-│   └── 其他执行与安装脚本
-├── src/、workers/                    指向 scripts 内的旧路径兼容链接
-└── package.json 等                   依赖与构建配置
+│   ├── design_tokens.json / color-library.*
+│   ├── templates/                   工作文档模板
+│   └── examples/                    positive／negative 案例
+├── scripts/                         命令、检查、src、workers
+├── development/                     测试与构建工具（安装 ZIP 不含）
+├── package.json 等                  依赖与构建
+└── 根目录兼容链接
+    rules/ schemas/ templates/ examples/ taste.md
+    design_tokens.json docs/ src/ workers/
 ```
 
-`rules/`、`schemas/`、`templates/`、`examples/`、`taste.md`、`design_tokens.json` 及原环境文档路径均为指向规范位置的相对兼容链接。现有命令、历史哈希绑定和案例引用可继续通过原路径读取；编辑链接和规范路径会修改同一文件，无需两处同步。完整 Skill 直接在其根目录维护；运行回归测试及配置位于本仓库 `development/`。`npm test` 与 `npm run test:python` 从本仓库 development 目录加载测试；独立 copy 安装仅携带运行能力，不携带项目测试。开发和发布说明不要求每次生产加载。执行 `python3 scripts/check_skill_layout.py` 检查结构、兼容链接及运行资源。
+`rules/`、`schemas/`、`templates/`、`examples/`、`taste.md`、`design_tokens.json` 及原环境文档路径均为指向规范位置的相对兼容链接。现有命令、历史哈希绑定和案例引用可继续通过原路径读取；编辑链接和规范路径会修改同一文件，无需两处同步。完整 Skill 直接在其根目录维护；运行回归测试及配置位于本仓库 `development/`。`npm test` 与 `npm run test:python` 从本仓库 development 目录加载测试；独立 copy 安装仅携带运行能力，不携带项目测试。开发测试与 `RELEASE_GUIDE.md` 不要求每次生产加载；正式发版时按该指南执行。执行 `python3 scripts/check_skill_layout.py` 检查结构、兼容链接及运行资源。
 
 ## 环境与依赖
 

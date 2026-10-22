@@ -61,3 +61,7 @@ Follow `rules/cover_page_production.md` for Cover and `rules/page_visual_product
 成图文字只面向读者：生产范围、暂缓、未出页等制作状态不得出现在页面上（`scripts/check_reader_facing_text.py`）。编辑过程用语（本页整理、分组、松散、归类、归属由…）同样拦截。提醒／边界／页脚备注只写读者需要知道的事实（例：“提醒：没有标准答案，这四种来源也常常重叠。”），不解释作者如何整理或归类。
 
 `production_scope` 只决定制作哪些页面，不放宽任何门禁。范围内的每一页照常执行 Gate 0–4；范围外的页面不进入构图、渲染和交付，它们的细节在 coverage matrix 里记为 `deferred_out_of_scope`，必须可追溯。
+
+## 规则冲突
+
+排版与内容邻近冲突时，按 `visual_pack_execution.md`「规则冲突先后」：例子紧挨所属步骤优先，并先问用户。

@@ -44,3 +44,30 @@
 ## 先锁文字，再精修图形（v0.4.5-local 门禁）
 
 顺序固定：①确认字号层级（当前 tokens）→ ②完成终稿文字并通过本页陌生读者必查清单与逐句白话复述 → ③才开始放大／精修手绘物件和细调间距。精修期间改字须回到②重做清单。作者自检记录 `checks.text_and_scale_lock`（`status`+`visible_evidence`：写明字号与文字在哪一版锁定、之后只动图形），缺失则 `visual:closeout` 拒绝。原因：6ad48f83 文字理解问题拖到第6版才修，每次改字都要重排已精修的画面。
+
+
+## 规则冲突先后
+
+“例子紧挨所属步骤”优先于“每栏行数上限／版面对齐”等排版规则。遇到冲突先停下问用户，不自行取舍（例：睡眠例子被剖面图隔开时，应先问而不是牺牲相邻）。
+
+## 每轮并排差异
+
+改版自检写 `revision_of`，并用 `python3 scripts/round_diff.py --previous 上一版@2x --current 本版@2x --side-by-side 并排.png --out ROUND_DIFF.json --claims-changed --diff "改了什么" ...`。改动清单为空或两版像素差 <0.1% 即 fail，`visual:closeout` 拒绝——防止“说改了其实没改”。并排图连同改动清单一起给用户看。
+
+## 批准后勘误通道
+
+错别字／原词修正（如 ASR 误词“狐狸训练”→“壶铃训练”）用户确认后运行：
+
+`npm run erratum:apply -- --workspace <ws> --kind original_word --replace '旧=>新' --confirmed-by <用户> --confirmed-at <ISO时间>`
+
+只改 `01-understanding` 内 JSON 字符串值与 Markdown 正文（不改键／ID／哈希／路径字段），再把下游批准、门禁、预检、机械记录里的旧哈希换成新哈希直到稳定，写 `01-understanding/errata.json`。单条 ≤24 字；改意思必须重新审批。
+
+## 草图路线批准与一页多交付版本
+
+`npm run visual:register-versions -- --workspace <ws> --versions versions.json --approved-by <用户> --approved-at <日期> --approval-source sketch_route_selection --route-approval <用户选择记录> --user-approved`
+
+`versions.json` 列 `{page_id, versions:[{version_id, scene, png, review_png, self_check}]}`。命令不要求 construct 的 render_manifest，现场重跑 @2x 尺寸、死白审计、字号／孤行检查与箭头记录核对；全部通过才写 `04-rendered/<页>/delivery_versions.json` 与 `delivery_versions_human_approval.json`（键如 `OV01:A-V11`，值为 @2x 的 sha256）；任一不过则状态 blocked、不写批准。打包（package）读取多版本尚未接入，打包前另行处理。
+
+## 只改字路线（箭头记录可沿用）
+
+只改文字、不动线条箭头时，登记会算每个版本 scene 的几何指纹 `geometry_sha256`（除文字外全部元素的类型／位置／尺寸／点列／绑定）。若当前自检缺 `arrow_audit`，而上一份已登记的 `delivery_versions.json` 里有版本几何指纹相同，就自动沿用那一版自检的箭头逐条记录（写入 `arrow_audit_inherited`），不再报错。几何一变就必须重做箭头记录。逐句冷读不沿用，每版都要新做。

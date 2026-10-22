@@ -317,3 +317,8 @@ Overview 同时按 `overview_page_production.md` 第3、6节绑定批准关系�
 总览基准原图见 `rules/acceptance_case_index.md`；检查方法与返工路由以当前总览协议为准，不复制历史构图。
 
 字号层级必须执行 `typography_hierarchy.md`；每轮预检先建立文字语义台账，输出前检查前分别通过整页核心职责、角色字号及真实像素检查。只查数字合法不等于结论选择正确。全流程复盘及交付完整性见 `visual_pack_execution.md`。
+
+
+## 手写提纲区域格式
+
+提纲／正文区域默认从 scene 自动推导（`--regions auto`，`render:scene:checked` 默认）。无法自动推导时，手工区域文件须符合 `assets/templates/outline_regions.manual.example.json`：必须含 `manual_reason`（≥8 字，为什么不能自动推导）、`overlay_screenshot`（相对区域文件的叠框截图，文件须存在）、非空 `outline_regions` 与 `body_regions`（每项 `{x,y,width,height}`，正文区与提纲区不得交叉）。

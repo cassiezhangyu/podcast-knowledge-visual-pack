@@ -1,6 +1,16 @@
+# docs: architecture fold（仅本地，未改发版号）
+
+文档架构收拢，**不改变出图／渲染行为**：
+- 将 v0.4.7／v0.4.8 本地补丁规范全文并入对应 `references/rules/*`，删除 `v047_local_rules.md`、`v048_local_rules.md`。
+- 精简 `SKILL.md`（入口只保留读取顺序、阶段表与合同要点）。
+- `independent_visual_review` 规则迁至 `references/legacy/`（兼容／已弃用）；模板加弃用头。
+- 新增根目录 `RELEASE_GUIDE.md`（正式发版流程；本提交不执行远程发布）。
+- 更新 `README.md` 目录树与版本标注为 0.4.8-local。
+- `package.json` 版本仍为 `0.4.8-local`。
+
 # v0.4.8-local（仅本地，2026-10-22）
 
-来自 EP88 6ab11c95-v045 R7 改字轮（05-qa/R7_TEXT_CHANGES.diff），Cassie 批准全部六条，细则见 references/rules/v048_local_rules.md：
+来自 EP88 6ab11c95-v045 R7 改字轮（05-qa/R7_TEXT_CHANGES.diff），Cassie 批准全部六条，细则已并入 references/rules/cold_reader_check.md 与 visual_pack_execution.md（原 v048_local_rules.md 已删除）：
 1. 逐句冷读必做：自检 `checks.sentence_cold_read.items[]` 覆盖 scene 每个文字元素；仍 flagged 未解释或含已知节目内部说法即拒（visual:closeout、visual:register-versions）。
 2. 比喻只撑主图，正文直说：`metaphor_body_plain` 必填。
 3. 数字溯源：`number_trace` 逐个数字/数量词写原句+时间戳（或 structural+理由），自动扫描缺项即拒。
@@ -11,7 +21,7 @@
 
 # v0.4.7-local（仅本地，2026-10-22）
 
-来自 6ab11c95 复盘（05-qa/RETRO_6ab11c95.md），Cassie 批准全部 P0/P1/P2，细则见 references/rules/v047_local_rules.md：
+来自 6ab11c95 复盘（05-qa/RETRO_6ab11c95.md），Cassie 批准全部 P0/P1/P2，细则已并入 page_quality_check／visual_pack_execution／typography_hierarchy／page_visual_production／audio_pipeline／project_overrides／render_diagnostics 等（原 v047_local_rules.md 已删除）：
 - P0：@2x 看图沿用；新增 `scripts/audit_dead_space.py`（≥45000px² 且两边≥90px，1200 坐标，浅底纹算空，标题/结论在正文区外），render:scene:checked 自动写 DEAD_SPACE_AUDIT.json，visual:closeout 要求 `dead_whitespace_audit` 绑定通过记录；自检必填 `arrow_audit`（逐条 起点→经过→终点→读法，场景有箭头不得 not_applicable）。
 - P1：`scripts/round_diff.py` 并排图＋可见改动清单，改版（revision_of）缺记录、清单空或看不出差异被拒；规则冲突“例子紧挨步骤”优先并先问用户；check_typography 按内容定角色（content_bearing<24px 判错，未声明的小字须作者在 `content_text_min_size` 判定）；`npm run erratum:apply` 批准后勘误（哈希链跟随更新、errata.json 留痕）；`npm run visual:register-versions` 草图路线批准记为正式批准、一页多交付版本。
 - P2：手机优先字号档仅文档评估；有转写缓存时不要求 --provider-python；手写提纲区域格式模板；孤行自动检查。

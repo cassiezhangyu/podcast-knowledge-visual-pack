@@ -40,19 +40,53 @@ def scale_errors(scene,max_levels=5,min_step=2,phone_width=390,min_phone_px=7.1,
   if phone<min_phone_px:errors.append(f'最小字号{sizes[-1]}px 在{phone_width}px手机预览上约{phone:.1f}px，低于{min_phone_px}px：删字或重排，不要缩字')
  return errors
 
+CONTENT_MIN_PX=24
+LABEL_FUNCTIONS={'navigation','chrome','source','pointer','meta'}
+META_ROLES={'header_meta','footer_meta'}
+def small_text_review(scene,min_px=CONTENT_MIN_PX):
+ """v0.4.7-local：按内容而非位置判角色。返回 (errors, undeclared)：
+ - errors：customData.content_bearing=true 却 <24px（图内承载内容的文字——例子、步骤说明、结论——不低于24px）；
+ - undeclared：<24px、非页眉页脚、非1–2字编号，且没有在 customData.text_function 声明 navigation/chrome/source/pointer/meta 的文字，
+   作者须在自检 content_text_min_size 里逐条判定；加 --strict-content-size 时直接判错。"""
+ errors=[];undeclared=[]
+ for e in scene['elements']:
+  if e.get('type')!='text' or e.get('isDeleted') or e.get('fontSize',99)>=min_px:continue
+  cd=e.get('customData',{}) or {};text=str(e.get('text',''))
+  if cd.get('content_bearing') is True:errors.append(f'{e["id"]}: {e["fontSize"]}px「{text[:12]}」承载内容，须≥{min_px}px（放不下删字，不缩字）');continue
+  if cd.get('typography_role') in META_ROLES or cd.get('text_function') in LABEL_FUNCTIONS or len(text.strip())<=2 and text.strip().isdigit():continue
+  undeclared.append(f'{e["id"]}: {e["fontSize"]}px「{text[:12]}」未声明用途：若承载内容须≥{min_px}px；若只是导航/指示标签，在 customData.text_function 声明')
+ return errors,undeclared
+
+WIDOW_PUNCT=set('，。、；：！？“”‘’（）《》…—·,.;:!?()"\' ')
+def widow_errors(scene,max_chars=2):
+ """v0.4.7-local：自动查孤行——多行文字最后一行只剩1–2个字（不计标点）。"""
+ errors=[]
+ for e in scene['elements']:
+  if e.get('type')!='text' or e.get('isDeleted'):continue
+  lines=[l for l in str(e.get('text','')).split('\n') if l.strip()]
+  if len(lines)<2 or (e.get('customData',{}) or {}).get('allow_widow'):continue
+  n=sum(1 for ch in lines[-1] if ch not in WIDOW_PUNCT)
+  prev=sum(1 for ch in lines[-2] if ch not in WIDOW_PUNCT)
+  if n<=max_chars and prev>=6:errors.append(f'{e["id"]}: 末行「{lines[-1].strip()}」只剩{n}个字（孤行）：删字或手动换行')
+ return errors
+
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  parser.add_argument('scene',type=Path,help='场景文件或场景目录')
  parser.add_argument('--design-tokens',type=Path,default=Path(__file__).resolve().parents[1]/'design_tokens.json',help='当前已批准参数；省略时使用Skill内置默认参数')
+ parser.add_argument('--strict-content-size',action='store_true',help='v0.4.7-local：未声明用途的<24px文字直接判错')
  parser.add_argument('--legacy-scale',action='store_true',help='仅用于v0.4.4之前已验收的历史参考：跳过5级/2px/手机最小字高检查')
  args=parser.parse_args()
  typography=json.loads(args.design_tokens.read_text())['typography']
  sizes=typography['role_sizes'];strong_roles=set(typography['strong_inner_roles'])
- path=args.scene;files=sorted(path.glob('*.excalidraw')) if path.is_dir() else [path];errors=[];count=0
+ path=args.scene;files=sorted(path.glob('*.excalidraw')) if path.is_dir() else [path];errors=[];warnings=[];count=0
  if not files:raise SystemExit('没有可检查的场景')
  for f in files:
   sc=json.loads(f.read_text());n,issues=validate_scene(sc,sizes,strong_roles)
-  if not args.legacy_scale:issues+=scale_errors(sc)
- count+=n;errors += [f'{f.name}/{x}' for x in issues]
- print(json.dumps({'text_elements':count,'errors':errors,'passed':not errors},ensure_ascii=False,indent=2));sys.exit(bool(errors))
+  if not args.legacy_scale:
+   content_err,und=small_text_review(sc);issues+=scale_errors(sc)+content_err+widow_errors(sc)
+   if args.strict_content_size:issues+=und
+   else:warnings += [f'{f.name}/{x}' for x in und]
+  count+=n;errors += [f'{f.name}/{x}' for x in issues]
+ print(json.dumps({'text_elements':count,'errors':errors,'small_text_needs_author_ruling':warnings,'passed':not errors},ensure_ascii=False,indent=2));sys.exit(bool(errors))
 if __name__=='__main__':main()

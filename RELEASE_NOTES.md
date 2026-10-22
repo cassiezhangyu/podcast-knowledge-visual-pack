@@ -1,3 +1,11 @@
+# v0.4.7-local（仅本地，2026-10-22）
+
+来自 6ab11c95 复盘（05-qa/RETRO_6ab11c95.md），Cassie 批准全部 P0/P1/P2，细则见 references/rules/v047_local_rules.md：
+- P0：@2x 看图沿用；新增 `scripts/audit_dead_space.py`（≥45000px² 且两边≥90px，1200 坐标，浅底纹算空，标题/结论在正文区外），render:scene:checked 自动写 DEAD_SPACE_AUDIT.json，visual:closeout 要求 `dead_whitespace_audit` 绑定通过记录；自检必填 `arrow_audit`（逐条 起点→经过→终点→读法，场景有箭头不得 not_applicable）。
+- P1：`scripts/round_diff.py` 并排图＋可见改动清单，改版（revision_of）缺记录、清单空或看不出差异被拒；规则冲突“例子紧挨步骤”优先并先问用户；check_typography 按内容定角色（content_bearing<24px 判错，未声明的小字须作者在 `content_text_min_size` 判定）；`npm run erratum:apply` 批准后勘误（哈希链跟随更新、errata.json 留痕）；`npm run visual:register-versions` 草图路线批准记为正式批准、一页多交付版本。
+- P2：手机优先字号档仅文档评估；有转写缓存时不要求 --provider-python；手写提纲区域格式模板；孤行自动检查。
+- 修复：check_typography 处理目录时只累计最后一个场景的缩进错误。
+
 # v0.4.6-local（仅本地，2026-10-22）
 
 - 文字像素感修复：每次受检渲染同一 scene 另按 2 倍重渲 `P01@2x.png`（2400×3200）。给用户看图、送审和交付默认用 @2x；1x `P01.png` 只作内部检查，坐标与字号（48/32/26/24/22）仍按 1200×1600 定义。

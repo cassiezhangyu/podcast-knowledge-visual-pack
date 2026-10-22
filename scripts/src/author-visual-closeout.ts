@@ -52,6 +52,45 @@ export function assertTextLock(c: R): void {
   const lock = c.checks?.text_and_scale_lock;
   if (!lock || lock.status !== "pass" || !longText(lock.visible_evidence, 8)) throw new Error("作者自检缺少实际证据：text_and_scale_lock（字号与终稿文字须在精修图形前锁定）");
 }
+/** v0.4.7-local P0：死白审计必做——自检须绑定 audit_dead_space.py 的记录，且记录对应当前 1x 或 @2x 图并通过。 */
+export function assertDeadSpaceAudit(c: R): void {
+  const d = c.checks?.dead_whitespace_audit;
+  if (!d || d.status !== "pass" || !d.record) throw new Error("作者自检缺少实际证据：dead_whitespace_audit（运行 scripts/audit_dead_space.py 并绑定记录）");
+  bound(d.record);
+  const rec = read(d.record.path);
+  if (rec.kind !== "dead_whitespace_audit" || rec.status !== "pass" || (Array.isArray(rec.dead_zones) && rec.dead_zones.length)) throw new Error("dead_whitespace_audit 未通过：正文区仍有死白块");
+  const current = [c.current?.png?.sha256, c.current?.review2x?.sha256].filter(Boolean);
+  if (!current.includes(rec.png_sha256)) throw new Error("dead_whitespace_audit 记录不是当前图的审计结果");
+}
+/** v0.4.7-local P0：每条箭头逐条写 起点→经过→终点 与陌生人读法；场景里有箭头就不能空着。 */
+export function assertArrowAudit(c: R, scene?: R): void {
+  const a = c.checks?.arrow_audit;
+  const sceneArrows = (scene?.elements ?? []).filter((e: R) => e.type === "arrow" && !e.isDeleted).length;
+  if (!a) throw new Error("作者自检缺少 arrow_audit（逐条箭头 起点→经过→终点）");
+  if (a.status === "not_applicable") { if (sceneArrows || !longText(a.reason, 4)) throw new Error("arrow_audit 不能标 not_applicable：场景里有箭头或缺原因"); return; }
+  const list = a.arrows;
+  if (a.status !== "pass" || !Array.isArray(list) || !list.length) throw new Error("arrow_audit 未通过或没有逐条箭头记录");
+  if (list.length < sceneArrows) throw new Error(`arrow_audit 只记了 ${list.length} 条，场景里有 ${sceneArrows} 条箭头`);
+  for (const x of list) {
+    if (!x || !longText(x.start, 1) || !longText(x.end, 1) || typeof x.via !== "string" || !longText(x.reads_as, 4) || x.misread !== false) throw new Error("arrow_audit 有箭头缺 起点/经过/终点/读法，或存在误读：" + String(x?.id ?? ""));
+  }
+}
+/** v0.4.7-local P1：改版须附上一版并排图与可见改动清单；声称已改但清单为空或看不出差异即拒绝。 */
+export function assertRoundDiff(c: R): void {
+  if (!c.revision_of) return;
+  const d = c.checks?.round_diff;
+  if (!d?.record) throw new Error("改版自检缺少 round_diff（与上一版并排图＋可见改动清单）");
+  bound(d.record);
+  const rec = read(d.record.path);
+  if (rec.kind !== "round_diff" || rec.status !== "pass" || !Array.isArray(rec.visible_diffs) || !rec.visible_diffs.length) throw new Error("round_diff 未通过：声称已改但没有可见改动清单或看不出差异");
+  checkBindings({ side: rec.side_by_side, prev: rec.previous });
+  if (![c.current?.png?.sha256, c.current?.review2x?.sha256].includes(rec.current?.sha256)) throw new Error("round_diff 比较的不是当前图");
+}
+/** v0.4.7-local P1：<24px 的文字由作者按内容逐条判定；承载内容的不得 <24px。 */
+export function assertContentTextSize(c: R): void {
+  const t = c.checks?.content_text_min_size;
+  if (!t || t.status !== "pass" || !longText(t.visible_evidence, 8)) throw new Error("作者自检缺少实际证据：content_text_min_size（<24px 文字逐条判定是否承载内容）");
+}
 export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: string[]): R[] {
   const pages = manifest.pages as R[];
   if (!paths.length || paths.length !== pages.length) throw new Error("每张当前页面须有一份作者自检。");
@@ -68,6 +107,9 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     assertComparisonAndCounterproof(c);
     assertComprehensionChecklist(c);
     assertTextLock(c);
+    assertDeadSpaceAudit(c);
+    assertRoundDiff(c);
+    assertContentTextSize(c);
     bound(c.mechanical_render_record);
     const mechanical = read(c.mechanical_render_record.path);
     const required = ["preconstruction_reference_plan", "native_scene", "typography_roles_sizes_strong_weight", "stroke_roles", "static_text_geometry", "reader_facing_text", "outline_alignment", "current_input_bindings", "same_scene_real_export"];
@@ -101,7 +143,9 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     if (requirements.length && (!inputs.user_requirements || requirements.some(v => v.path !== inputs.user_requirements.path || v.sha256 !== inputs.user_requirements.sha256))) throw new Error("用户要求在创作与预检之间漏传或不一致。");
     assertUserRequirementsCheck(inputs?.user_requirements, inputs?.user_requirements ? read(inputs.user_requirements.path) : undefined, c.user_requirements_check);
     bound(mechanical.tokens);
-    assertSceneMechanics(read(c.current.scene.path) as any, read(mechanical.tokens.path) as any);
+    const sceneData = read(c.current.scene.path);
+    assertArrowAudit(c, sceneData);
+    assertSceneMechanics(sceneData as any, read(mechanical.tokens.path) as any);
   }
   return checks.map(({ path, sha256 }) => ({ path, sha256 }));
 }

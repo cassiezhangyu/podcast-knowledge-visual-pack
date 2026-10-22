@@ -153,6 +153,8 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 严格遵循 `references/rules/visual_reasoning.md`、`references/rules/page_visual_production.md`、`references/rules/page_quality_check.md` 和 `references/taste.md`。制作 Cover 时必须读取 `references/rules/cover_page_production.md`；制作 Overview 时必须读取 `references/rules/overview_page_production.md`；制作 Deep Dive 时必须读取 `references/rules/deep_dive_page_production.md`。所有内页还须执行 `references/rules/inner_page_module_contract.md`：保留页眉、标题／核心结论、主内容、整包地图、本页提纲及来源页脚的模块分工，正文构图仍由内容决定。Cover、Overview 与每张 Deep Dive 都是独立的逐页闭环。开始视觉制作、精修或整包交付时必须执行 `references/rules/visual_pack_execution.md`：默认三案选择；用户已授权整包连续制作时自主逐页完成后一次交付；要求先验一页时仅做样稿。各模式均保留内容门禁、真实渲染和作者自检，批量授权不等于用户验收。两轮返工限质例外按逐页协议记录，不能冒称页面通过。
 
+v0.4.7-local：死白审计、箭头逐条记录、改版并排差异、按内容定字号（承载内容≥24px）、孤行检查、批准后勘误、草图路线批准与一页多交付版本，见 [v047_local_rules.md](references/rules/v047_local_rules.md)；规则冲突时“例子紧挨所属步骤”优先，并先问用户。
+
 v0.4.5-local 顺序：先锁字号与终稿文字（过陌生读者必查清单），再精修图形（`visual_pack_execution.md`“先锁文字，再精修图形”）。并列项不画成路径／旅程／时间线（`overview_page_production.md`）。偏离默认参数按 `references/rules/project_overrides.md` 登记；预检改版用 `npm run preflight:bump`。专辑封面在 intake 时落盘到 `00-source/brand/` 并登记 `album_cover.json`（sha256），合成只用这份文件。
 
 每版构图或修改 scene 前，必须执行 `references/rules/page_visual_production.md` 第2节的联合预检，保存当前输入、参考观察和构图决定；缺项、过时或事后补签记录禁止送审。原型与完整构建的时间顺序执行该协议第3.1节。

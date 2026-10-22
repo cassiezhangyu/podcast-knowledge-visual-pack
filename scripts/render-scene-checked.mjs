@@ -98,5 +98,6 @@ try{
  if(chromeCheck.status==='pass')record.checks.push({name:'declared_fixed_chrome',status:'pass'});
  record.delivery_scale=deliveryScale;
  record.review_2x={scale:2,size:[2400,3200],scene_sha256:artifacts.scene.sha256,role:'user_review_and_delivery',note:'给用户看图与交付用@2x；P01.png仅内部检查'};
+ if(preflight.role!=='cover'){const dp=join(out,'DEAD_SPACE_AUDIT.json');const dr=spawnSync('python3',[join(root,'scripts/audit_dead_space.py'),artifacts.review2x.path,'--out',dp],{cwd:root,encoding:'utf8'});record.dead_whitespace_audit={status:dr.status===0?'pass':'fail',record:existsSync(dp)?bind(dp):null,note:'v0.4.7-local：作者自检 checks.dead_whitespace_audit 须绑定此记录；fail 须先改图再交'};}
  writeFileSync(join(out,'MECHANICAL_RENDER_RECORD.json'),JSON.stringify(record,null,2)+'\n');console.log(JSON.stringify({status:'rendered_needs_review',output:out,record:join(out,'MECHANICAL_RENDER_RECORD.json')}));
 }finally{if(browser)await browser.close();rmSync(html,{force:true});}

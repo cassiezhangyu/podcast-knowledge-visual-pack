@@ -60,11 +60,44 @@
         "R17": "每个模块承载意义的关系图在何处",
         "R18": "全页无任何简笔画/火柴人/简单线描图标"
       }
+    },
+    "dead_whitespace_audit": {
+      "status": "pass",
+      "record": {
+        "path": "<输出目录>/DEAD_SPACE_AUDIT.json",
+        "sha256": "<记录文件sha256>"
+      },
+      "visible_evidence": "v0.4.7-local：audit_dead_space.py 对当前 @2x 的结果；最大空块尺寸"
+    },
+    "arrow_audit": {
+      "status": "pass",
+      "arrows": [
+        {
+          "id": "loop",
+          "start": "成株落下的新种子",
+          "via": "园地上方，不碰考试抽屉",
+          "end": "漏斗口（破）",
+          "reads_as": "新种子回到下一轮的破",
+          "misread": false
+        }
+      ]
+    },
+    "content_text_min_size": {
+      "status": "pass",
+      "visible_evidence": "逐条列出 <24px 的文字并判定：仅页眉页脚/导航/编号；承载内容的（例子、步骤说明）均 ≥24px"
+    },
+    "round_diff": {
+      "record": {
+        "path": "<round_diff.py 输出的记录>",
+        "sha256": "<sha256>"
+      },
+      "note": "有 revision_of（改版）时必填：上一版并排图＋可见改动清单"
     }
   },
   "visual_gain_counterproof": {
     "simple_alternative": "同样事实用简洁文字/基本分组时会失去的具体判断依据",
     "remove_subject": "移去主图后读者须自行完成的比较、配对或追踪"
   },
-  "overview_framework_check": "总览必填：按 overview_page_production §6 逐条核对批准关系（格式见现有 overview-framework-check）"
+  "overview_framework_check": "总览必填：按 overview_page_production §6 逐条核对批准关系（格式见现有 overview-framework-check）",
+  "revision_of": "<上一版版本号；首版删去此字段>"
 }

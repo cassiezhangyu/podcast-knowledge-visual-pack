@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.4.6-local",
+  "version": "0.4.7-local",
   "private": true,
   "type": "module",
   "scripts": {
@@ -37,7 +37,11 @@
     "preflight:bump": "python3 scripts/bump_preflight.py",
     "overrides:check": "python3 scripts/check_project_overrides.py",
     "overrides:scan": "python3 scripts/check_project_overrides.py --scan",
-    "outline:regions": "python3 scripts/check_outline_body_alignment.py"
+    "outline:regions": "python3 scripts/check_outline_body_alignment.py",
+    "erratum:apply": "npm run build && node dist/erratum-cli.js",
+    "visual:register-versions": "npm run build && node dist/delivery-versions-cli.js",
+    "audit:dead-space": "python3 scripts/audit_dead_space.py",
+    "round:diff": "python3 scripts/round_diff.py"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

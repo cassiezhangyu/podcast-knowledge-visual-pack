@@ -23,11 +23,15 @@ function fixture(){
  check.checks.cold_reader_check.comprehension_checklist=Object.fromEntries(['memes_slang_plain','english_terms_chinese','no_literal_contradiction','reminder_items_on_page','example_outcome_and_feeling','one_caption_per_example_adjacent','diagram_labels_match_text','subtitle_reader_takeaway'].map(k=>[k,{status:'pass',evidence:'合成：逐项核对证据'}]));
  check.checks.cold_reader_check.plain_restatement=[{page_text:'句一',stranger_restatement:'合成白话复述一',clear:true},{page_text:'句二',stranger_restatement:'合成白话复述二',clear:true},{page_text:'句三',stranger_restatement:'合成白话复述三',clear:true}];
  check.checks.text_and_scale_lock={status:'pass',visible_evidence:'合成：字号与终稿文字先于精修锁定'};
+ const dead=write('dead.json',{kind:'dead_whitespace_audit',status:'pass',png_sha256:png.sha256,dead_zones:[]});
+ check.checks.dead_whitespace_audit={status:'pass',record:dead};
+ check.checks.arrow_audit={status:'not_applicable',reason:'合成：本页无箭头'};
+ check.checks.content_text_min_size={status:'pass',visible_evidence:'合成：<24px 只剩页眉页脚'};
  check.visual_gain_counterproof={simple_alternative:'合成：同样事实的纯文字分组会失去的对照依据',remove_subject:'合成：移去主图后读者需自行配对的工作'};
  const page=write('check.json',check);
  const manifest:any={schema_version:'1.0',kind:'render_manifest',status:'completed',scene_manifest_sha256:'a'.repeat(64),created_at:new Date().toISOString(),pages:[{page_id:'P01',scene_sha256:scene.sha256,png:'original.png',png_sha256:png.sha256,phone_png:'phone.png',phone_png_sha256:phone.sha256,grayscale_png:'gray.png',grayscale_png_sha256:gray.sha256}]};
  write('04-rendered/render_manifest.json',manifest);
- return {root,write,page,check,manifest,mechanical,png,preflight};
+ return {root,write,page,check,manifest,mechanical,png,preflight,scene};
 }
 describe('无审核代理的页面登记',()=>{
  it('作者自检可直接submit，不需要独立报告或上下文',()=>{const f=fixture();const g=closeoutAuthorPages(f.root,[f.page.path],'submit',false);expect(g.status).toBe('needs_human_review');expect(g.independent_review_required).toBe(false);expect(existsSync(join(f.root,'04-rendered/independent_visual_review.json'))).toBe(false);expect(existsSync(join(f.root,'04-rendered/visual_page_human_approval.json'))).toBe(false);});
@@ -48,4 +52,18 @@ it('白话复述有读不懂的句子被拒',()=>{const f=fixture();f.check.chec
 it('未先锁定字号与文字被拒',()=>{const f=fixture();delete f.check.checks.text_and_scale_lock;f.write('check.json',f.check);expect(()=>closeoutAuthorPages(f.root,[f.page.path],'submit',false)).toThrow('text_and_scale_lock');});
 it('作者自检通过加用户明确通过即可记录批准，不需要隔离审核',()=>{const f=fixture();const g=closeoutAuthorPages(f.root,[f.page.path],'approve',true,'用户定稿');expect(g.status).toBe('pass');expect(g.independent_review_required).toBe(false);});
 it('没有--user-approved不能记录批准',()=>{const f=fixture();expect(()=>closeoutAuthorPages(f.root,[f.page.path],'approve',false)).toThrow('--user-approved');});
+});
+
+describe('v0.4.7-local 死白/箭头/改版差异/内容字号',()=>{
+ const run=(f:any)=>{f.write('check.json',f.check);return ()=>closeoutAuthorPages(f.root,[f.page.path],'submit',false);};
+ it('缺死白审计被拒',()=>{const f=fixture();delete f.check.checks.dead_whitespace_audit;expect(run(f)).toThrow('dead_whitespace_audit');});
+ it('死白审计有死白块被拒',()=>{const f=fixture();f.check.checks.dead_whitespace_audit.record=f.write('dead.json',{kind:'dead_whitespace_audit',status:'fail',png_sha256:f.png.sha256,dead_zones:[{x:1,y:1,w:200,h:300}]});expect(run(f)).toThrow('死白');});
+ it('死白审计不是当前图被拒',()=>{const f=fixture();f.check.checks.dead_whitespace_audit.record=f.write('dead.json',{kind:'dead_whitespace_audit',status:'pass',png_sha256:'b'.repeat(64),dead_zones:[]});expect(run(f)).toThrow('当前图');});
+ it('场景有箭头却标not_applicable被拒',()=>{const f=fixture();const sc=JSON.parse(readFileSync(f.scene.path,'utf8'));sc.elements.push({id:'a1',type:'arrow',x:0,y:0,width:10,height:10,customData:{stroke_role:'fill_only'}});const s2=f.write('scene.json',sc);f.check.current={...f.check.current,scene:s2};expect(run(f)).toThrow();});
+ it('箭头记录有误读被拒',()=>{const f=fixture();f.check.checks.arrow_audit={status:'pass',arrows:[{id:'loop',start:'成株',via:'考试抽屉',end:'漏斗',reads_as:'成株变成考试笔记',misread:true}]};expect(run(f)).toThrow('arrow_audit');});
+ it('箭头逐条记录完整可过',()=>{const f=fixture();f.check.checks.arrow_audit={status:'pass',arrows:[{id:'loop',start:'成株落下的新种子',via:'园地上方',end:'漏斗口（破）',reads_as:'新种子回到下一轮的破',misread:false}]};expect(run(f)().status).toBe('needs_human_review');});
+ it('改版缺并排差异被拒',()=>{const f=fixture();f.check.revision_of='A-V10';expect(run(f)).toThrow('round_diff');});
+ it('改版差异清单为空被拒',()=>{const f=fixture();f.check.revision_of='A-V10';const prev=f.write('prev.png','prev');const sbs=f.write('sbs.png','sbs');f.check.checks.round_diff={record:f.write('diff.json',{kind:'round_diff',status:'pass',visible_diffs:[],previous:prev,side_by_side:sbs,current:f.png})};expect(run(f)).toThrow('round_diff');});
+ it('改版差异完整可过',()=>{const f=fixture();f.check.revision_of='A-V10';const prev=f.write('prev.png','prev');const sbs=f.write('sbs.png','sbs');f.check.checks.round_diff={record:f.write('diff.json',{kind:'round_diff',status:'pass',visible_diffs:['睡眠例子移到各步下方'],previous:prev,side_by_side:sbs,current:f.png})};expect(run(f)().status).toBe('needs_human_review');});
+ it('缺内容字号判定被拒',()=>{const f=fixture();delete f.check.checks.content_text_min_size;expect(run(f)).toThrow('content_text_min_size');});
 });

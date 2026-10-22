@@ -1,3 +1,14 @@
+# v0.4.8-local（仅本地，2026-10-22）
+
+来自 EP88 6ab11c95-v045 R7 改字轮（05-qa/R7_TEXT_CHANGES.diff），Cassie 批准全部六条，细则见 references/rules/v048_local_rules.md：
+1. 逐句冷读必做：自检 `checks.sentence_cold_read.items[]` 覆盖 scene 每个文字元素；仍 flagged 未解释或含已知节目内部说法即拒（visual:closeout、visual:register-versions）。
+2. 比喻只撑主图，正文直说：`metaphor_body_plain` 必填。
+3. 数字溯源：`number_trace` 逐个数字/数量词写原句+时间戳（或 structural+理由），自动扫描缺项即拒。
+4. 标签撞名：`label_collision` 必填，内置词表（木心等）命中无裁定即拒。
+5. 提纲只写章节名：`outline_items` 含括号即拒。
+6. 只改字路线：register-versions 记录 `geometry_sha256`，几何与上一已登记版本相同则自动沿用其箭头记录。
+- 新增 scripts/src/sentence-cold-read.ts、development/tests/v048-local.test.ts。
+
 # v0.4.7-local（仅本地，2026-10-22）
 
 来自 6ab11c95 复盘（05-qa/RETRO_6ab11c95.md），Cassie 批准全部 P0/P1/P2，细则见 references/rules/v047_local_rules.md：

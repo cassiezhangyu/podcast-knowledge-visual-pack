@@ -92,6 +92,38 @@
         "sha256": "<sha256>"
       },
       "note": "有 revision_of（改版）时必填：上一版并排图＋可见改动清单"
+    },
+    "sentence_cold_read": {
+      "status": "pass",
+      "items": [
+        {
+          "text": "知识要自己长成网，不是先搭框架再往里填",
+          "flagged": false,
+          "resolution": "rewritten",
+          "original": "像森林，不像房子",
+          "reason": "原句是比喻，陌生读者读不出意思"
+        }
+      ],
+      "metaphor_body_plain": {
+        "status": "pass",
+        "evidence": "土壤/树只在主图，正文直说结论"
+      },
+      "number_trace": [
+        {
+          "text": "每次最多记一到三个点",
+          "quote": "<逐字稿原句>",
+          "timestamp": "hh:mm:ss"
+        }
+      ],
+      "label_collision": {
+        "status": "pass",
+        "findings": []
+      },
+      "outline_items": [
+        "破",
+        "立",
+        "行"
+      ]
     }
   },
   "visual_gain_counterproof": {

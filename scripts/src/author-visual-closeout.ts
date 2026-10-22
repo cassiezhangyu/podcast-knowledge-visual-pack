@@ -6,6 +6,7 @@ import { validateArtifact } from "./validate.js";
 import { assertSceneMechanics } from "./scene-mechanics.js";
 import { assertOverviewFrameworkCheck } from "./overview-framework-check.js";
 import { assertUserRequirementsCheck } from "./review-packet.js";
+import { assertSentenceColdRead } from "./sentence-cold-read.js";
 type R = Record<string, any>;
 const hash = (v: unknown) => createHash("sha256").update(JSON.stringify(v)).digest("hex");
 const fileHash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
@@ -145,6 +146,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     bound(mechanical.tokens);
     const sceneData = read(c.current.scene.path);
     assertArrowAudit(c, sceneData);
+    assertSentenceColdRead(c, sceneData);
     assertSceneMechanics(sceneData as any, read(mechanical.tokens.path) as any);
   }
   return checks.map(({ path, sha256 }) => ({ path, sha256 }));

@@ -32,3 +32,19 @@
 | `subtitle_reader_takeaway` | 副标题是读者带走的一句话，不描述排版／整理方式 | 按四个来源并列整理 → 让人觉得活着真好的四种时刻 |
 
 **逐句白话复述表** `cold_reader_check.plain_restatement`：页面上每个句子／标签组一行 `{page_text, stranger_restatement, clear}`（至少3行，覆盖副标题、结论、每个案例说明）。以从没听过节目的人口吻转述；转述需要补上下文、出现“？”或与原意不同，`clear=false`，修好再记。任何一行 `clear=false` 都不能记 `self_check_passed`。
+
+
+## 逐句冷读与四项补充（v0.4.8-local，必做）
+
+来自 EP88 6ab11c95-v045 R7 改字轮（`05-qa/R7_TEXT_CHANGES.diff`）：整页冷读放过了「像森林，不像房子」「破了不会马上立」。整页能懂 ≠ 每句能懂。
+
+**1. 逐句冷读（必查，工具强制）**：页面上每个文字元素单独过一遍。比喻、自造词、节目内部说法（长进去、种子、少即是多、破了不会马上立、像森林不像房子）要么改白话，要么在页面上当场解释。写入作者自检 `checks.sentence_cold_read.items[]`：`{text, flagged, resolution: plain|rewritten|explained_on_page, original?, explanation?, reason}`。scene 里每个文字元素都必须有一行；仍 `flagged` 且未当场解释、或页面仍含已知节目内部说法时，`visual:closeout` 与 `visual:register-versions` 拒绝。没有这份记录不得给用户看图。
+  - 实例：像森林，不像房子 → 知识要自己长成网，不是先搭框架再往里填；立：长进去 → 立：消化成自己的；种子太多，一颗都长不出来 → 记太多，哪条都消化不了；少即是多 → 记得越少越好。
+
+**2. 比喻只撑主图（并入清单）**：主图可以用比喻（土壤、树），正文必须直接说结论，不能让读者解比喻。记录 `metaphor_body_plain {status, evidence}`。
+
+**3. 数字和单位溯源（并入清单，工具强制）**：页面上每个数字/数量词都要对到逐字稿原句。记录 `number_trace[]`：`{text, quote, timestamp}`；纯结构数字（“三步”）可写 `{text, kind:"structural", reason}`。实例：「每周一到三粒」错，原话是每期/每本 → 每次一到三个点。
+
+**4. 标签撞名（并入清单，工具强制）**：逐个标签查是否会被读成人名、品牌、书名。记录 `label_collision {status, findings:[{term, ruling}]}`；命中内置词表（`scripts/src/sentence-cold-read.ts` 的 `COLLISION_TERMS`，如木心）而无裁定则拒绝。实例：人生体验（木心）→ 人生体验（最里层）。
+
+**5. 提纲只写章节名（并入清单，工具强制）**：本页提纲不加括号注释，括号里的内容放正文。记录 `outline_items[]`，含（、(、【 即拒绝。实例：行（回到破）、土壤（依据）→ 行、知识体系（土壤）……注：章节名本身就是“X（Y）”的少数情况须改写为不带括号的名字。

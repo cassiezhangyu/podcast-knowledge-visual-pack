@@ -30,7 +30,7 @@
 | 总览全局关系、三策略并存与白话冷读完成度（纵横四海 EP88） | `rules/overview_page_production.md`；`examples/positive/ep88-overview-abc-user-approved-2026-10-22/case.md`；`A-V16/`、`B-V18/`、`C-V20/` 下 `P01.png`、`P01@2x.png`、`P01-phone.png` | 正式总览基准之一：三种已批准策略（横向生长／漏斗步骤／笔记本年轮），不是单一布局；不复制配色02、具体文案、坐标或物件 |
 | 总览全局关系、四来源活人感与物件完成度（另辟西径 VOL69） | `rules/overview_page_production.md`；`examples/positive/lingpixijing-vol69-overview-abc-user-approved-2026-10-22/case.md`；`A-V6/`、`B-V6/`、`C-V6/` 下 `P01.png`、`P01-hd.png`、`P01-phone.png` | 正式总览基准之一：三种已批准策略并存，不是单一布局；不复制青绿配色、具体文案、坐标或传送带／神殿等物件造型 |
 | 具象解释、原题优先与手绘完成度（封面） | 同上 EP88 封面路径 | 与封面基准同一案例；不追认整包 TARGET |
-| 负面视觉现象 | `examples/negative/e248-capwords-2026-09-20/README.md` | 用户指定四张负例，但未逐张解释原因；实际看图诊断，不补造失败理由 |
+| 负面视觉现象（排版混乱／文字堆砌／简笔画等） | `examples/negative/e248-capwords-2026-09-20/README.md`；`examples/negative/ep88-overview-title-variant-user-negative-2026-10-22/case.md`；`examples/negative/lingpixijing-vol69-overview-alt-title-user-negative-2026-10-22/case.md` | e248：用户指定四张负例且未逐张解释原因，看图诊断、不补造理由。EP88 标题变体与另辟西径 VOL69 标题变体（2026-10-22）：用户指定负向，并给出「排版混乱；文字堆砌；画简笔画」；只按用户原话记录，不另造缺陷、不自动升新通用禁令（简笔画已在现行规则禁止）。 |
 | 事实归属、虚构场景、条件与边界 | `rules/content_pipeline.md`、`rules/deep_dive_page_production.md` | 核对本页来源，案例不提供新事实 |
 | 内容丢失、装配、权重、越界与多路线 | `rules/page_visual_production.md`、`rules/visual_reasoning.md` | 按实际失败层使用 |
 | 整包迁移、返工、首读与ZIP一致性 | `rules/visual_pack_execution.md` | 不将样稿或局部通过外推为整包通过 |

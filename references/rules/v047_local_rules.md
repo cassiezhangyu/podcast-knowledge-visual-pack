@@ -14,6 +14,6 @@
 
 ## P2
 9. **手机优先字号档（只评估，不改默认）**：默认仍为 48/32/26/24/22。390px 手机上 24px 正文约 7.8px，偏小；若用户要求手机优先，可评估一档 52/36/30/28/26（须登记项目覆盖 `project_overrides.md`，并重跑版面预算）。默认不启用。
-10. **已有转写缓存不再要求 --provider-python**：`00-source/grounded_transcript.json` 与 `grounded_transcript_qa.json` 都在且 QA 不是 fail 时，`intake --until transcript` 直接复用缓存。
+10. **已有转写缓存不再要求 --provider-python**：`00-source/transcript_grounded.json` 与 `grounded_transcript_qa.json` 都在且 QA 不是 fail 时，`intake --until transcript` 直接复用缓存。
 11. **手写提纲区域格式**：见 `templates/outline_regions.manual.example.json`——必须含 `manual_reason`（≥8 字，为什么不能自动推导）、`overlay_screenshot`（相对区域文件的叠框截图，文件须存在）、非空 `outline_regions` 与 `body_regions`（每项 `{x,y,width,height}`，正文区与提纲区不得交叉）。
 12. **孤行自动检查**：多行文字末行只剩 1–2 个字（不计标点）、且上一行 ≥6 字即判孤行（`check_typography.py`）；改法：删字或手动换行。例：“只写触动你的一到三个\n点。”。确属刻意短行可设 `customData.allow_widow=true`。

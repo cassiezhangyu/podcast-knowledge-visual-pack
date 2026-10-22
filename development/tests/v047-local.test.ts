@@ -30,7 +30,7 @@ describe('批准后勘误通道',()=>{
   expect(()=>applyErratum(r,{kind:'rewrite' as any,replacements:[{old:'狐狸',new:'壶铃'}],confirmed_by:'C',confirmed_at:'2026-10-22'})).toThrow('typo');});
 });
 describe('转写缓存跳过 provider-python',()=>{
- it('有 grounded 转写与 QA 即视为可用',()=>{const r=ws();expect(cachedTranscriptReady(r)).toBe(false);writeFileSync(join(r,'00-source','grounded_transcript.json'),'{}');writeFileSync(join(r,'00-source','grounded_transcript_qa.json'),JSON.stringify({status:'pass'}));expect(cachedTranscriptReady(r)).toBe(true);writeFileSync(join(r,'00-source','grounded_transcript_qa.json'),JSON.stringify({status:'fail'}));expect(cachedTranscriptReady(r)).toBe(false);});
+ it('有 grounded 转写与 QA 即视为可用',()=>{const r=ws();expect(cachedTranscriptReady(r)).toBe(false);writeFileSync(join(r,'00-source','transcript_grounded.json'),'{}');writeFileSync(join(r,'00-source','grounded_transcript_qa.json'),JSON.stringify({status:'pass'}));expect(cachedTranscriptReady(r)).toBe(true);writeFileSync(join(r,'00-source','grounded_transcript_qa.json'),JSON.stringify({status:'fail'}));expect(cachedTranscriptReady(r)).toBe(false);});
 });
 describe('一页多交付版本登记',()=>{
  it('没有用户批准或草图路线记录则拒绝',()=>{const r=ws();

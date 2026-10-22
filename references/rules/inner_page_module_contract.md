@@ -74,7 +74,7 @@
 
 页脚预留双行 22px 来源文字及独立页码区域。完整单集标题使用《》，回听范围按 `rules/footer_source_ranges.md` 核对时段。页面按真实标题宽度与内容高度计算，不逐页缩字。渲染全尺寸和 390px 后检查标题末字、两行页脚、分隔线、页码与 x=80 / x=1120 安全线的实际字形距离；只看 scene 坐标或静态字号检查不算完成。
 
-正向校准见 `../examples/positive/mianji-p01-overview-user-approved-2026-09-29/`。借用模块合同与阅读权重，不复制本期蓝色值、三栏观察窗或具体文本。
+正向校准优先对照正式总览正例 `../examples/positive/ep88-overview-abc-user-approved-2026-10-22/` 的页眉提纲／主体／页脚权重。历史并列观察样稿见 `../examples/retired/mianji-p01-overview-user-approved-2026-09-29/`（已停用，非强制）；借用模块合同与阅读权重，不复制蓝色值、三栏观察窗或具体文本。
 
 ## 地图只面向读者
 

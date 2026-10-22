@@ -1,6 +1,6 @@
 # 正负向案例索引
 
-新页面、主结构重构或相关故障处理时，从本索引选择参考，命中后再读案例说明与实际图片。收录、修订、转正或停用案例时执行 `case_library_maintenance.md`；候选不作为正式质量基准。
+新页面、主结构重构或相关故障处理时，从本索引选择参考，命中后再读案例说明与实际图片。收录、修订、转正或停用案例时执行 `case_library_maintenance.md`；候选与已停用案例不作为正式质量基准。
 
 ## 参考选择与解读
 
@@ -12,26 +12,28 @@
 
 学习参考时保留方法与完成度，重新选择本页载体、比例和阅读结构；方框、流程、纸张或大图是否有效由它承担的解释职责决定。参考中的事实、人物与场景不成为本页来源。
 
-各页既有基准继续查看：Overview 直接打开 `examples/positive/e248-overview-accepted-2026-10-07/overview.png` 和本页相关反例；Cover 打开 `examples/positive/e248-cover-accepted-2026-09-22/cover.png`；Deep Dive 按问题选已通过内页与相应反例。下表命中的补充案例按其原图和手机图核对。基准图不替代本次用户指定参考。
+**正式必看基准（2026-10-22 用户决定）：**
+
+- **正式正面选例（2026-10-22）：**仅下列三组为 `active` 必看／正式校准；其余原正例见 `examples/retired/`。
+  1. **Cover：**`examples/positive/ep88-cover-user-confirmed-positive-2026-10-01/cover.png`（及手机图）。
+  2. **Overview（EP88 三策略）：**`examples/positive/ep88-overview-abc-user-approved-2026-10-22/` 下 `A-V16/`、`B-V18/`、`C-V20/` 的 `P01@2x.png`（或原图），并读 `case.md`。三种已批准策略对照，不是单一版式。
+  3. **Overview（另辟西径 VOL69 三策略）：**`examples/positive/lingpixijing-vol69-overview-abc-user-approved-2026-10-22/` 下 `A-V6/`、`B-V6/`、`C-V6/` 的 `P01.png`／`P01-hd.png`，并读 `case.md`。三种已批准策略对照，不是单一版式；B-V6 曾为定稿交付。
+- **Deep Dive：**按问题选已通过内页方法与相应反例；无单独正式正例基准时，以规则正文与负例为主。
+- 下表命中的补充项按其原图和手机图核对。基准图不替代本次用户指定参考。
+- 已停用案例目录见 `examples/retired/`（含路径映射）；历史方法说明可查阅，**不作为强制打开的生产基准**。
 
 ## 按问题选择补充检查
 
 | 适用问题／可学习做法 | 规则或案例入口 | 校准范围与不可迁移内容 |
 |---|---|---|
-| 封面身份、核心命题、标题与页尾层级 | `rules/cover_page_production.md`；`examples/positive/e248-cover-accepted-2026-09-22/cover.png` | 已验收封面；学习信息职责，不复制坐标、叠纸对象、文案或标题行数 |
-| 总览全局关系及完成度 | `examples/positive/e248-overview-accepted-2026-10-07/overview.png` | 原已验收总览基准；不继承内容、配色或固定布局 |
-| 具象解释、原题优先与手绘完成度 | `examples/positive/ep88-cover-user-confirmed-positive-2026-10-01/cover.png` | 用户确认正例用途；不追认整包TARGET，不复制绿色、笔记本或排版 |
-| 长原题与完整条件的对照 | `examples/positive/mianji-p00-cover-user-confirmed-positive-2026-10-01/cover.png` | 用户确认封面正例；不补签逐页TARGET，不复制配色、纸片或坐标 |
-| 总览全局模型、案例解释及局部修复 | `rules/overview_page_production.md`；`examples/positive/ep88-overview-accepted-2026-09-24/01-overview.png`、`01-overview-phone.png` | 用户通过总览；不复制笔记本、材料盒、三栏或配色 |
-| 总览三案并存、白话冷读后的交付完成度、土壤／破立行框架 | `examples/positive/ep88-overview-abc-user-approved-2026-10-22/case.md`；`A-V16/`、`B-V18/`、`C-V20/` 下 `P01.png`、`P01@2x.png`、`P01-phone.png` | 用户登记的三交付版本补充正例，不替换上列 EP88／E248 总览基准；不复制配色02、具体文案、坐标、三栏／漏斗／笔记本／年轮物件 |
-| 并列观察、独立回应、辅助导航 | `examples/positive/mianji-p01-overview-user-approved-2026-09-29/P01.png`、`P01-phone.png` | 校准已认可内页职责与阅读权重；不继承蓝色、三栏观察窗或具体文本 |
-| 字号职责、自然笔触与对象结构 | `rules/typography_hierarchy.md`、`rules/handdrawn_strokes.md`；`examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/P13.png` | 用户通过局部样稿；不外推为整包验收，不从历史图反推当前字号或模板 |
-| 从来源、内容到整包交付的链路 | `examples/positive/ep59-user-confirmed-full-reference-2026-10-07/README.md` | 用户确认文字与17页整包为正向参考；公开副本清单不替代原审批，不继承页数或节目事实 |
+| 封面身份、核心命题、标题与页尾层级 | `rules/cover_page_production.md`；`examples/positive/ep88-cover-user-confirmed-positive-2026-10-01/cover.png` | 正式封面基准；学习信息职责与完成度，不复制绿色、笔记本对象、坐标或排版 |
+| 总览全局关系、三策略并存与白话冷读完成度（纵横四海 EP88） | `rules/overview_page_production.md`；`examples/positive/ep88-overview-abc-user-approved-2026-10-22/case.md`；`A-V16/`、`B-V18/`、`C-V20/` 下 `P01.png`、`P01@2x.png`、`P01-phone.png` | 正式总览基准之一：三种已批准策略（横向生长／漏斗步骤／笔记本年轮），不是单一布局；不复制配色02、具体文案、坐标或物件 |
+| 总览全局关系、四来源活人感与物件完成度（另辟西径 VOL69） | `rules/overview_page_production.md`；`examples/positive/lingpixijing-vol69-overview-abc-user-approved-2026-10-22/case.md`；`A-V6/`、`B-V6/`、`C-V6/` 下 `P01.png`、`P01-hd.png`、`P01-phone.png` | 正式总览基准之一：三种已批准策略并存，不是单一布局；不复制青绿配色、具体文案、坐标或传送带／神殿等物件造型 |
+| 具象解释、原题优先与手绘完成度（封面） | 同上 EP88 封面路径 | 与封面基准同一案例；不追认整包 TARGET |
 | 负面视觉现象 | `examples/negative/e248-capwords-2026-09-20/README.md` | 用户指定四张负例，但未逐张解释原因；实际看图诊断，不补造失败理由 |
 | 事实归属、虚构场景、条件与边界 | `rules/content_pipeline.md`、`rules/deep_dive_page_production.md` | 核对本页来源，案例不提供新事实 |
 | 内容丢失、装配、权重、越界与多路线 | `rules/page_visual_production.md`、`rules/visual_reasoning.md` | 按实际失败层使用 |
 | 整包迁移、返工、首读与ZIP一致性 | `rules/visual_pack_execution.md` | 不将样稿或局部通过外推为整包通过 |
-
-
+| 历史停用正例（非强制） | `examples/retired/README.md` | 仅历史对照；打开前确认任务是否需要，不得当作必看基准 |
 
 历史开发复盘留在开发档案，不作为公开 Skill 的运行时依赖。案例用于方法与完成度校准，不提供新的来源事实。

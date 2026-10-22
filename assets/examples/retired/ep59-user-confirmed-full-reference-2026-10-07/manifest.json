@@ -762,5 +762,12 @@
     }
   ],
   "delivery_copy": "sanitized_public_reference",
-  "original_local_package_gate_not_included": true
+  "original_local_package_gate_not_included": true,
+  "status": "retired",
+  "retired_on": "2026-10-22",
+  "retired_reason": "User Cassie: formal positive library keep only EP88 overview ABC + EP88 cover",
+  "path_mapping": {
+    "old": "examples/positive/ep59-user-confirmed-full-reference-2026-10-07/",
+    "new": "examples/retired/ep59-user-confirmed-full-reference-2026-10-07/"
+  }
 }

@@ -1,5 +1,8 @@
 # E248 封面正面校准案例
 
+- 状态：`retired`（2026-10-22 退出正式正面选例）
+- 路径映射：`examples/positive/e248-cover-accepted-2026-09-22/` → `examples/retired/e248-cover-accepted-2026-09-22/`
+
 ## 身份
 
 - 用户通过时间：2026-09-22
@@ -45,3 +48,11 @@
 ## 品牌资产边界
 
 `cover.excalidraw` 保持 `image=0`、`files=0`。`official-album-mark.png` 只在最终 PNG 导出时按原样合成；它不能成为允许位图插画、纹理或背景进入封面的先例。
+
+## 停用记录（2026-10-22）
+
+- 状态：`retired`
+- 用户决定：Cassie 2026-10-22，正式正面案例库仅保留 `ep88-overview-abc-user-approved-2026-10-22` 与 `ep88-cover-user-confirmed-positive-2026-10-01`。
+- 旧路径：`examples/positive/e248-cover-accepted-2026-09-22/`
+- 新路径：`examples/retired/e248-cover-accepted-2026-09-22/`
+- 原字节保留；退出正式选例与必看基准，不删除历史依据。

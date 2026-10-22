@@ -128,7 +128,7 @@ class OutlineAlignmentTest(unittest.TestCase):
         self.assertEqual(self.run_check(scene, regions)['status'], 'pass')
 
     def test_approved_legacy_reference_passes(self):
-        reference = ROOT / "examples/positive/mianji-p01-overview-user-approved-2026-09-29/P01.excalidraw"
+        reference = ROOT / "examples/retired/mianji-p01-overview-user-approved-2026-09-29/P01.excalidraw"
         result = CHECKER.check(reference)
         self.assertEqual(result["status"], "pass", result)
         self.assertEqual([r["number"] for r in result["mapping"]], [1, 2, 3, 4])

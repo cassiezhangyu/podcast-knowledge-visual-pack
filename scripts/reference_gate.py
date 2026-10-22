@@ -29,8 +29,15 @@ def check_reference_notes(plan: dict) -> None:
         _text(r.get("observed"), f"references[{i}].observed")
         _text(r.get("effect_on_page"), f"references[{i}].effect_on_page", 10)
     if plan.get("role") == "overview":
-        if not any("e248-overview" in str(r.get("path", "")) for r in refs if r.get("kind") == "positive"):
-            raise SystemExit("参考硬门禁：总览必须实际查看基准 e248-overview。")
+        # 2026-10-22：正式总览基准为 EP88 三案与／或另辟西径 VOL69 三案；e248-overview 已 retired。
+        overview_markers = ("ep88-overview-abc", "lingpixijing-vol69-overview-abc")
+        if not any(any(m in str(r.get("path", "")) for m in overview_markers) for r in refs if r.get("kind") == "positive"):
+            raise SystemExit(
+                "参考硬门禁：总览必须实际查看正式基准 ep88-overview-abc 或 lingpixijing-vol69-overview-abc。"
+            )
+    if plan.get("role") == "cover":
+        if not any("ep88-cover-user-confirmed-positive" in str(r.get("path", "")) for r in refs if r.get("kind") == "positive"):
+            raise SystemExit("参考硬门禁：封面必须实际查看正式基准 ep88-cover-user-confirmed-positive。")
     for field in ("allowed_graphic_language", "forbidden_graphic_language"):
         value = plan.get(field)
         if not isinstance(value, list) or not value or not all(isinstance(v, str) and v.strip() for v in value):

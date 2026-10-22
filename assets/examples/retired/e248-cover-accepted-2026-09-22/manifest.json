@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "example_id": "e248-cover-accepted-2026-09-22",
-  "status": "accepted",
+  "status": "retired",
   "user_accepted_at": "2026-09-22",
   "canvas": {
     "width": 1200,
@@ -24,5 +24,11 @@
     "phone": "5bed3d9e12583130f52512010996cdc80bf088e79360014f2c2a7b1d7ca80959",
     "scene": "1ba2f738a548b171050f76b3d1436ba5ff4991bee7161497b61f6ee49cbc1a9f",
     "official_album_mark": "efd299be57d7baa688a587cae6630d8836f64210492a87236a15ef9cc61c3b7e"
+  },
+  "retired_on": "2026-10-22",
+  "retired_reason": "User Cassie: formal positive library keep only EP88 overview ABC + EP88 cover",
+  "path_mapping": {
+    "old": "examples/positive/e248-cover-accepted-2026-09-22/",
+    "new": "examples/retired/e248-cover-accepted-2026-09-22/"
   }
 }

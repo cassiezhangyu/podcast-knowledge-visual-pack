@@ -8,7 +8,7 @@
 
 圆弧、环形箭头等曲线用 `curve` 角色，参数读取当前 tokens；用 4–6 个控制点并开启平滑（Excalidraw roundness type 2），不以密集折线叠加抖动。
 
-实图校准见 `../examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/` 与 `../examples/positive/mianji-p01-overview-user-approved-2026-09-29/`：比较对象笔触、曲线和信息框单线效果，不复制案例的对象、构图或历史参数。
+实图校准优先打开正式正例 `../examples/positive/ep88-cover-user-confirmed-positive-2026-10-01/` 与 `../examples/positive/ep88-overview-abc-user-approved-2026-10-22/` 的物件与信息框完成度。历史笔触样稿见 `../examples/retired/ep88-p13-rough-stroke-accepted-2026-09-26/`（已停用，非强制基准）：比较对象笔触、曲线和信息框单线效果，不复制案例的对象、构图或历史参数。
 
 ## 角色
 数值以design_tokens.json为唯一来源：object为较大的具体对象轮廓；object_simple为小幅、简单物件的单线轮廓；detail为对象内部部件；accent_detail为需更明显笔触的内圈、进度线等局部细节；relation为有来源且需要较强动态笔触的关系箭头；connector为抽象对象之间的简单直线连接；emphasis为批注或划除；heavy_detail为有动作含义的粗段；rule为排版分隔；surface为弱背景底板；frame为信息框及显示区域；fill_only为无描边色块。物件轮廓保持object或object_simple，不因元素类型为line而降级。纸张、衣物、镜子等允许局部自然复描；信息框不应与真实物件使用同样强的复描。

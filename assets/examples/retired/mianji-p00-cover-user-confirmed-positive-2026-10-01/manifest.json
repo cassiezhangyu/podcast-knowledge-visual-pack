@@ -33,5 +33,12 @@
       "bytes": 59769,
       "sha256": "e4b093de68b4cc85a978e108248b1dba4b00483a722f7efe2b28828f82c223ab"
     }
-  ]
+  ],
+  "status": "retired",
+  "retired_on": "2026-10-22",
+  "retired_reason": "User Cassie: formal positive library keep only EP88 overview ABC + EP88 cover",
+  "path_mapping": {
+    "old": "examples/positive/mianji-p00-cover-user-confirmed-positive-2026-10-01/",
+    "new": "examples/retired/mianji-p00-cover-user-confirmed-positive-2026-10-01/"
+  }
 }

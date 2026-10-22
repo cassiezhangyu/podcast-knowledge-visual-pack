@@ -14,7 +14,7 @@ SPEC = importlib.util.spec_from_file_location("check_typography", ROOT / "script
 CHECKER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECKER)
 TOKENS = json.loads((ROOT / "design_tokens.json").read_text())["typography"]
-REFERENCE = ROOT / "examples/positive/mianji-p01-overview-user-approved-2026-09-29/P01.excalidraw"
+REFERENCE = ROOT / "examples/retired/mianji-p01-overview-user-approved-2026-09-29/P01.excalidraw"
 
 
 class TypographyHierarchyTest(unittest.TestCase):

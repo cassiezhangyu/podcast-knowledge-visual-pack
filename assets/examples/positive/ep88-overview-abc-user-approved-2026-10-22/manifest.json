@@ -12,7 +12,7 @@
   "palette": "02",
   "title": "T1",
   "user_words": "可以，登记 A-V16、B-V18、C-V20",
-  "approval_scope": "整页×三交付版本；补充正例，不替换 ep88-overview-accepted-2026-09-24 或 e248 总览基准；未纳入 USAGE_NOTICE 公开展示列表",
+  "approval_scope": "整页×三交付版本；2026-10-22 起为正式总览必看基准（三策略并存）；未纳入 USAGE_NOTICE 公开展示列表",
   "workspace_source": "/workspace/podcast/6ab11c95-v045",
   "reuse_boundary": "校准三案并存、白话冷读完成度、土壤/破立行框架；不复制配色02、文案、坐标、漏斗/笔记本/年轮物件",
   "files": [
@@ -94,5 +94,6 @@
       "bytes": 241507,
       "sha256": "edad9275a0bda7b9a70b68043e4d7bc1a5514cee2d8535d87ca17e49450c112d"
     }
-  ]
+  ],
+  "baseline_role": "formal_overview_required_open"
 }

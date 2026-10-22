@@ -4,7 +4,7 @@
 - 类型：正向
 - 来源：本项目工件 `/workspace/podcast/6ab11c95-v045`（纵横四海 EP88，episode `6ab11c95f04646b3a954fbe0`）；发现／登记日期 2026-10-22（Asia/Shanghai）
 - 判断依据：用户 Cassie 原话「可以，登记 A-V16、B-V18、C-V20」（记录于 `05-qa/VISUAL_USER_APPROVAL_R7.json` 与 `04-rendered/OV01/delivery_versions_human_approval.json`）；此前同轮三方向已作为交付版本通过。色卡 02，标题 T1。
-- 认可或诊断范围：整页 × 三交付版本（A-V16／B-V18／C-V20）；实际验收状态为正式登记交付。本案例为补充正例，不替换 `ep88-overview-accepted-2026-09-24` 或 `e248-overview-accepted-2026-10-07` 总览基准。
+- 认可或诊断范围：整页 × 三交付版本（A-V16／B-V18／C-V20）；实际验收状态为正式登记交付。2026-10-22 用户决定：本案例为**正式总览必看基准**（三种已批准策略，非单一布局）；旧总览正例已迁入 `examples/retired/`。
 
 | 文件 | 用途与实际尺寸／截图范围 | SHA-256 |
 | --- | --- | --- |
@@ -34,10 +34,11 @@
 ## 不可迁移与待核事项
 
 - 不可照搬：配色 02 色值、具体文案、坐标、三栏／漏斗／笔记本／年轮等具体物件与版式。
-- 不替代必看总览基准：`examples/positive/ep88-overview-accepted-2026-09-24/`、`e248-overview-accepted-2026-10-07/` 仍按其原范围使用。
+- 本案例即正式总览必看基准；已停用的旧总览正例见 `examples/retired/ep88-overview-accepted-2026-09-24/`、`examples/retired/e248-overview-accepted-2026-10-07/`。
 - 公开范围：用户本次确认的是**正面案例库收录**，未另行确认公开展示；故不写入 `USAGE_NOTICE.md` 已确认公开列表。仓库外复制／再分发仍按 `LICENSING.md` 与 `examples/USAGE_NOTICE.md` 限制。
 - 案例标签不替代本页审核。
 
 ## 维护记录
 
 - 2026-10-22：首次收录。自工作区交付登记版本复制原字节（含 1×／@2x／phone／scene）；哈希与 `delivery_versions.json` 一致；索引新增一行；未停用旧 EP88 总览正例。
+- 2026-10-22：用户决定升为正式总览必看基准；同日其余正例迁入 `examples/retired/`。

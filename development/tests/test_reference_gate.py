@@ -5,9 +5,9 @@ from reference_gate import check_reference_notes
 
 BASE = {
     'role': 'overview',
-    'inputs': {'positive': [{'path': '/x/e248-overview/overview.png'}], 'negative': [{'path': '/x/capwords/01.png'}]},
+    'inputs': {'positive': [{'path': '/x/ep88-overview-abc/A-V16/P01@2x.png'}], 'negative': [{'path': '/x/capwords/01.png'}]},
     'references': [
-        {'kind': 'positive', 'path': '/x/e248-overview/overview.png', 'observed': '中央流程面板承担主解释，周边小物件贴近对应判断，文字贴在发生处', 'effect_on_page': '本页用关系结构做主体'},
+        {'kind': 'positive', 'path': '/x/ep88-overview-abc/A-V16/P01@2x.png', 'observed': '中央流程面板承担主解释，周边小物件贴近对应判断，文字贴在发生处', 'effect_on_page': '本页用关系结构做主体'},
         {'kind': 'negative', 'path': '/x/capwords/01.png', 'observed': '粗糙人物与散落标签，大图占面积却没有相称解释，线条随意', 'effect_on_page': '禁止简笔人物和散落标签'},
     ],
     'allowed_graphic_language': ['并列关系结构', '来源具体物件的完整轮廓'],
@@ -33,9 +33,22 @@ class ReferenceGate(unittest.TestCase):
         def m(p): p['references'][1]['observed'] = '已看'
         with self.assertRaisesRegex(SystemExit, 'observed'): self.run_gate(m)
 
-    def test_overview_requires_e248_baseline(self):
+    def test_overview_requires_formal_baseline(self):
         def m(p): p['references'][0]['path'] = '/x/other.png'
-        with self.assertRaisesRegex(SystemExit, 'e248-overview'): self.run_gate(m)
+        with self.assertRaisesRegex(SystemExit, 'ep88-overview-abc|lingpixijing-vol69-overview-abc'): self.run_gate(m)
+
+    def test_overview_accepts_vol69_baseline(self):
+        def m(p):
+            p['inputs']['positive'] = [{'path': '/x/lingpixijing-vol69-overview-abc/B-V6/P01.png'}]
+            p['references'][0]['path'] = '/x/lingpixijing-vol69-overview-abc/B-V6/P01.png'
+        self.run_gate(m)
+
+    def test_cover_requires_ep88_cover_baseline(self):
+        def m(p):
+            p['role'] = 'cover'
+            p['references'][0]['path'] = '/x/other.png'
+            p['inputs']['positive'] = [{'path': '/x/other.png'}]
+        with self.assertRaisesRegex(SystemExit, 'ep88-cover-user-confirmed-positive'): self.run_gate(m)
 
     def test_forbidden_language_must_ban_stick_figures(self):
         def m(p): p['forbidden_graphic_language'] = ['扁平SVG图标']
@@ -45,7 +58,7 @@ class ReferenceGate(unittest.TestCase):
         def m(p): del p['allowed_graphic_language']
         with self.assertRaisesRegex(SystemExit, 'allowed_graphic_language'): self.run_gate(m)
 
-    def test_deep_dive_does_not_need_e248(self):
+    def test_deep_dive_does_not_need_overview_baseline(self):
         def m(p): p['role'] = 'deep_dive'; p['references'][0]['path'] = '/x/other.png'
         self.run_gate(m)
 

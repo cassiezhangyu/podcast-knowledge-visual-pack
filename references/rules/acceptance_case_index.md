@@ -23,6 +23,7 @@
 | 具象解释、原题优先与手绘完成度 | `examples/positive/ep88-cover-user-confirmed-positive-2026-10-01/cover.png` | 用户确认正例用途；不追认整包TARGET，不复制绿色、笔记本或排版 |
 | 长原题与完整条件的对照 | `examples/positive/mianji-p00-cover-user-confirmed-positive-2026-10-01/cover.png` | 用户确认封面正例；不补签逐页TARGET，不复制配色、纸片或坐标 |
 | 总览全局模型、案例解释及局部修复 | `rules/overview_page_production.md`；`examples/positive/ep88-overview-accepted-2026-09-24/01-overview.png`、`01-overview-phone.png` | 用户通过总览；不复制笔记本、材料盒、三栏或配色 |
+| 总览三案并存、白话冷读后的交付完成度、土壤／破立行框架 | `examples/positive/ep88-overview-abc-user-approved-2026-10-22/case.md`；`A-V16/`、`B-V18/`、`C-V20/` 下 `P01.png`、`P01@2x.png`、`P01-phone.png` | 用户登记的三交付版本补充正例，不替换上列 EP88／E248 总览基准；不复制配色02、具体文案、坐标、三栏／漏斗／笔记本／年轮物件 |
 | 并列观察、独立回应、辅助导航 | `examples/positive/mianji-p01-overview-user-approved-2026-09-29/P01.png`、`P01-phone.png` | 校准已认可内页职责与阅读权重；不继承蓝色、三栏观察窗或具体文本 |
 | 字号职责、自然笔触与对象结构 | `rules/typography_hierarchy.md`、`rules/handdrawn_strokes.md`；`examples/positive/ep88-p13-rough-stroke-accepted-2026-09-26/P13.png` | 用户通过局部样稿；不外推为整包验收，不从历史图反推当前字号或模板 |
 | 从来源、内容到整包交付的链路 | `examples/positive/ep59-user-confirmed-full-reference-2026-10-07/README.md` | 用户确认文字与17页整包为正向参考；公开副本清单不替代原审批，不继承页数或节目事实 |

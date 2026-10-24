@@ -15,6 +15,12 @@ const executablePath = process.env.PODCAST_MAP_CHROME_PATH
   || (process.platform === "darwin" && existsSync(macChrome) ? macChrome : undefined);
 let browser;
 
+export function browserHint(kind) {
+  if (kind === "BROWSER_HOST_LAUNCH_BLOCKED") return "命令沙箱不允许启动浏览器：用宿主权限重跑同一命令（Cursor: required_permissions [\"all\"]；Codex: sandbox_permissions \"require_escalated\"；Claude Code: 允许该命令在沙箱外运行）。";
+  if (kind === "BROWSER_NOT_INSTALLED") return "找不到浏览器：安装 Google Chrome，或运行 npx playwright install chromium，或设置 PODCAST_MAP_CHROME_PATH 指向已安装的 Chrome/Chromium。Linux 还需 Noto Sans CJK SC 字体。";
+  return "Excalidraw 导出失败：先运行 npm run build，再看 message；见 references/environment/RENDER_BROWSER_ENVIRONMENT.md。";
+}
+
 function dimensions(dataUrl) {
   const png = Buffer.from(dataUrl.replace(/^data:image\/png;base64,/, ""), "base64");
   if (png.toString("hex", 0, 8) !== "89504e470d0a1a0a") throw new Error("导出结果不是 PNG");
@@ -61,9 +67,9 @@ try {
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
   const kind = message.includes("Executable doesn't exist") ? "BROWSER_NOT_INSTALLED"
-    : /SIGABRT|MachPortRendezvousServer|bootstrap_check_in.*Permission denied/.test(message) ? "BROWSER_HOST_LAUNCH_BLOCKED"
+    : /SIGABRT|SIGTRAP|kill EPERM|MachPortRendezvousServer|bootstrap_check_in.*Permission denied/.test(message) ? "BROWSER_HOST_LAUNCH_BLOCKED"
       : "EXCALIDRAW_EXPORT_FAILED";
-  console.error(JSON.stringify({ status: "fail", kind, browser: executablePath ?? "playwright-bundled", message: message.split("\n")[0] }));
+  console.error(JSON.stringify({ status: "fail", kind, browser: executablePath ?? "playwright-bundled", message: message.split("\n")[0], hint: browserHint(kind) }));
   process.exitCode = 1;
 } finally {
   if (browser) await browser.close();

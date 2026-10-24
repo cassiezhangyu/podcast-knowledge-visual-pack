@@ -32,14 +32,26 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 | 转写与来源复核 | `references/rules/audio_pipeline.md` |
 | 内容梳理、拆分与页面规划 | `references/rules/content_pipeline.md`、`references/rules/page_content_planning.md` |
 | 新页或主结构重构 | `references/rules/visual_creation_context.md`、`references/rules/visual_reasoning.md`、对应页型协议（`cover_`／`overview_`／`deep_dive_page_production.md`） |
-| 构建、精修和导出 | `visual_reasoning.md` 第1节、`taste.md` 与当前合同；`page_visual_production.md`；外围合同 `inner_page_module_contract.md`；技术诊断 `render_diagnostics.md`；字号 `typography_hierarchy.md`；笔触 `handdrawn_strokes.md`；项目偏离 `project_overrides.md` |
+| 构建、精修和导出 | `visual_reasoning.md` 第1节、`taste.md` 与当前合同；`page_visual_production.md`；绘图工具包 `scene_kit_usage.md`；外围合同 `inner_page_module_contract.md`；技术诊断 `render_diagnostics.md`；字号 `typography_hierarchy.md`；笔触 `handdrawn_strokes.md`；项目偏离 `project_overrides.md` |
 | 作者自检与选图 | 同一共同标准、`taste.md`；`page_quality_check.md`、`cold_reader_check.md`、`layout_budget_and_margins.md`、`cjk_glyphs.md`、`visual_pack_execution.md` |
 | 最终文案与交付 | `public_copy_production.md`、`visual_pack_execution.md` |
 | 案例库维护（独立） | `case_library_maintenance.md`、`acceptance_case_index.md` |
 
 历史独立审核说明已迁至 `references/legacy/independent_visual_review.md`，**不是**当前必读路径。
 
-自 v0.5.0 起，原本地 0.4.5–0.4.8 补丁（@2x、死白／箭头、并排差异、内容字号≥24、孤行、勘误、多版本登记、逐句冷读、只改字沿用箭头等）已并入上表对应规则，不再单独维护版本号补丁文件。
+规则正文不写版本号；每条规则何时加入、为什么加入，记在 `RELEASE_NOTES.md`。
+
+### 只做一页总览的最短路径
+
+已有获批转写和内容时，按这个顺序读和做，其余规则遇到问题再查：
+
+1. `page_content_planning.md` 第0节「总览的统一载体」：写出载体、各部位对应和关系台账（含 `unified_carrier`），做反目录自检，**先把框架发给用户确认**，再画三案。
+2. 同时产出本期术语表 `01-understanding/READER_JARGON.json`（`cold_reader_check.md`「本期术语表」）。
+3. `overview_page_production.md` 与 `visual_reasoning.md` 第1节：定三案的组织方式；实际打开正反例（`assets/examples/positive|negative`）。
+4. 用 `scripts/lib/scene_kit.py` 绘制（`scene_kit_usage.md`）；副标题只写内容陈述。
+5. `npm run render:scene:checked -- --scene … --preflight … --output … --brand … --design-tokens assets/design_tokens.json`（启动浏览器需宿主权限，见 `references/environment/RENDER_BROWSER_ENVIRONMENT.md`）。版面预算、压线和边距不通过时不出图。
+6. 按 `visual_pack_execution.md`「给用户看图」生成无 `@` 副本和并排对比图，确认用户真的看到了，再请用户选。
+7. 选定后：`npm run author-check:init` → 逐项填写判断字段 → `npm run render:manifest` → `npm run visual:closeout -- --action submit`；用户确认看过并通过后再 `--action approve --user-approved`。
 
 ## 0. Mission
 
@@ -98,7 +110,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 | 5 | Information Budget | [`page_visual_production.md`](references/rules/page_visual_production.md) §5C；必要性 × 证据 × 论证；超预算先图承担再精简文字 |
 | 6 | Visual Reasoning | 色卡确认 → [`visual_reasoning.md`](references/rules/visual_reasoning.md)、[`page_visual_production.md`](references/rules/page_visual_production.md)、页型协议、[`inner_page_module_contract.md`](references/rules/inner_page_module_contract.md)、[`visual_pack_execution.md`](references/rules/visual_pack_execution.md)；顺序：先锁字号与终稿文字（含冷读），再精修图形 |
 | 7 | Excalidraw Construction | `typography_hierarchy` + `handdrawn_strokes`；`render:scene:checked`／`render:checked`；[`render_diagnostics.md`](references/rules/render_diagnostics.md)；`construction:closeout` |
-| 8 | 作者自检与技术检查 | [`page_quality_check.md`](references/rules/page_quality_check.md)、[`cold_reader_check.md`](references/rules/cold_reader_check.md)、layout／CJK 审计；看原图／390px／灰度；**发给用户一律 @2x**；`visual:closeout` |
+| 8 | 作者自检与技术检查 | [`page_quality_check.md`](references/rules/page_quality_check.md)、[`cold_reader_check.md`](references/rules/cold_reader_check.md)；看原图／390px／灰度；**发给用户一律 @2x，并确认用户真的看到了**；`author-check:init` → `render:manifest` → `visual:closeout` |
 | 9 | Package Review | [`visual_pack_execution.md`](references/rules/visual_pack_execution.md) 整包横审；[`public_copy_production.md`](references/rules/public_copy_production.md)；`public-copy:check`／`package` |
 | 10 | Taste Discovery | 仅明确的 Taste Feedback 进长期候选；先入 Discovered Preferences |
 
@@ -117,6 +129,6 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 ## 12. Hard Stops
 
-禁止假装完成：音频／转写不足；台账缺口；梳理或拆分未获用户确认却进入下游；哈希与审批不匹配；Construction／可编辑性未过；归因不明；Overview 只是目录；作者自检或必要技术检查失败；严重溢出／遮挡／不可读字号；scene 含非法位图；缺联合预检或预检声明的失败模式仍在 PNG；默认三案／逐页模式下未达展示门槛或未获选定却推进；批量模式未按 `visual_pack_execution` 质量关卡却擅写 accepted／RELEASED。
+禁止假装完成：音频／转写不足；总览未经用户确认统一载体就画三案；用户没看到图就记 approve；台账缺口；梳理或拆分未获用户确认却进入下游；哈希与审批不匹配；Construction／可编辑性未过；归因不明；Overview 只是目录；作者自检或必要技术检查失败；严重溢出／遮挡／不可读字号；scene 含非法位图；缺联合预检或预检声明的失败模式仍在 PNG；默认三案／逐页模式下未达展示门槛或未获选定却推进；批量模式未按 `visual_pack_execution` 质量关卡却擅写 accepted／RELEASED。
 
 返工时按故障类型选择性读取 `acceptance_case_index.md`，不要默认加载全部历史案例。

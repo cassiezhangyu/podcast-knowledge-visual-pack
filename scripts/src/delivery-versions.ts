@@ -1,4 +1,4 @@
-/** v0.4.7-local P1：一页可登记多个交付版本；草图路线的用户批准可直接记作正式批准。
+/** 一页可登记多个交付版本；草图路线的用户批准可直接记作正式批准。
  * 不要求 construct 产出的 render_manifest：以每个版本自己的 scene、1x、@2x 与作者自检为准，
  * 现场重跑 @2x 尺寸、死白审计、字号/孤行检查，并核对箭头逐条记录。 */
 import { createHash } from "node:crypto";
@@ -21,7 +21,7 @@ function py(script: string, args: string[]): R {
   const r = spawnSync("python3", [join(ROOT, "scripts", script), ...args], { encoding: "utf8" });
   try { return { code: r.status, out: JSON.parse(r.stdout) }; } catch { return { code: r.status, out: null, err: r.stderr }; }
 }
-/** v0.4.8-local：只改字路线——几何指纹与上一已登记版本相同时，箭头记录自动沿用该版本。 */
+/** 只改字路线——几何指纹与上一已登记版本相同时，箭头记录自动沿用该版本。 */
 export type PrevVersion = { version_id: string; geometry_sha256: string; self_check: string };
 export function checkVersion(workspace: string, v: VersionInput, prev: PrevVersion[] = []): R {
   const abs = (p: string) => resolve(workspace, p);

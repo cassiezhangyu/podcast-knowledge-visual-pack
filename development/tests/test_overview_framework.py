@@ -16,7 +16,10 @@ class FrameworkReadback(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.path = Path(self.tmp.name) / 'approved-plan.json'
-        self.path.write_text(json.dumps({'overview_relation_ledger': [
+        self.carrier = {'statement': '一次投资决策从进场到退出', 'basis': 'synthesis',
+                        'parts': [{'part': '收益', 'content': '进场理由'}, {'part': '人的约束', 'content': '执行约束'}],
+                        'user_confirmed': True}
+        self.path.write_text(json.dumps({'unified_carrier': self.carrier, 'overview_relation_ledger': [
             {'page_id': 'P01', 'from_component': '收益', 'to_component': '退出', 'relation_type': '解释'},
             {'page_id': 'P01', 'from_component': '人的约束', 'to_component': '执行', 'relation_type': '限制'},
             {'page_id': 'P02', 'from_component': '另一页', 'to_component': '边界', 'relation_type': '并列'}
@@ -62,6 +65,14 @@ class FrameworkReadback(unittest.TestCase):
         self.assertTrue(module.framework_errors(self.check, None, 'P01'))
         self.path.write_text('{}')
         self.assertTrue(module.framework_errors(self.check, self.basis, 'P01'))
+
+    def test_missing_or_unconfirmed_carrier_rejected(self):
+        ledger = json.loads(self.path.read_text())
+        for carrier in [None, {**self.carrier, 'user_confirmed': False}, {**self.carrier, 'parts': self.carrier['parts'][:1]}]:
+            with self.subTest(carrier=carrier):
+                self.path.write_text(json.dumps({**ledger, 'unified_carrier': carrier}, ensure_ascii=False))
+                basis = {'path': str(self.path), 'sha256': hashlib.sha256(self.path.read_bytes()).hexdigest()}
+                self.assertTrue(any('unified_carrier' in e for e in module.framework_errors(self.check, basis, 'P01')))
 
     def test_old_readback_cannot_be_silently_upgraded(self):
         self.assertTrue(module.framework_errors(None, self.basis, 'P01'))

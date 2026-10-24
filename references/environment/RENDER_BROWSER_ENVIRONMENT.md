@@ -1,5 +1,19 @@
 # Excalidraw 浏览器渲染环境诊断与恢复
 
+## 换平台时先看这里
+
+| 现象 | 原因 | 处理 |
+|---|---|---|
+| `kill EPERM`、`SIGABRT`、`SIGTRAP`、`MachPortRendezvousServer … Permission denied` | 代理的命令沙箱不允许启动浏览器 | 用宿主权限重跑**同一条**命令：Cursor 用 `required_permissions: ["all"]`；Codex 用 `sandbox_permissions: "require_escalated"`；Claude Code 等允许该命令在沙箱外运行。不要先在沙箱里反复试 |
+| `Executable doesn't exist` / `BROWSER_NOT_INSTALLED` | 找不到浏览器 | 安装 Google Chrome，或 `npx playwright install chromium`，或设 `PODCAST_MAP_CHROME_PATH` |
+| 中文字形像日文（门、骨、直写法不同） | Linux 字体回退到 Noto Sans CJK JP | 安装 Noto Sans CJK SC；`scripts/fontconfig/pkvp-fonts.conf` 会优先选它；`CJK_GLYPH_AUDIT.json` 会报失败 |
+| `渲染代码或构建产物过期` | 改过脚本未重建 | `npm run build` |
+| `audit_overlap_margins` 报 `No module named numpy/PIL` | Python 依赖缺失 | `python3 -m pip install numpy pillow` |
+
+浏览器路径按这个顺序选：环境变量 `PODCAST_MAP_CHROME_PATH` → macOS 的 `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome` → Playwright 自带 Chromium。Linux 常用 `export PODCAST_MAP_CHROME_PATH=/usr/bin/google-chrome` 或 `/usr/bin/chromium`；Windows 常用 `C:\Program Files\Google\Chrome\Application\chrome.exe`。Linux 与 Windows 尚未做过整包端到端验证，第一次使用时先跑 `npm run render:preflight`。
+
+`render-scene-checked.mjs`、`audit_overlap_margins.py` 和 `render:preflight` 都会启动浏览器，三者都需要上面的宿主权限。`render:preflight` 失败时输出 `kind` 和 `hint` 两个字段，按 `hint` 处理。
+
 ## 已核实的故障层
 
 2026-09-23，同一台 macOS 主机使用 Node 24.19.0、Playwright 1.63.0、Chrome 153.0.8010.53：

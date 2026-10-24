@@ -8,7 +8,7 @@ export function pngSize(path: string): [number, number] {
   if (b.toString("hex", 0, 8) !== "89504e470d0a1a0a") throw new Error("不是PNG：" + path);
   return [b.readUInt32BE(16), b.readUInt32BE(20)];
 }
-/** v0.4.6：@2x 是给用户看图和交付的版本；1x 仅内部检查。旧记录（无 review_2x）按历史版本放行，标注 legacy。 */
+/** @2x 是给用户看图和交付的版本；1x 仅内部检查。旧记录（无 review_2x）按历史版本放行，标注 legacy。 */
 export function checkReview2x(mechanical: R, page?: R, resolvePath: (p: string) => string = (p) => p): { status: "pass" | "legacy_1x_only" } {
   const current = mechanical.current as R;
   if (!mechanical.review_2x && !current?.review2x && !page?.review_png) return { status: "legacy_1x_only" };

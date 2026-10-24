@@ -91,7 +91,7 @@ export class AudioAcquirer {
   }
 }
 
-/** v0.4.5-local：抓取时就把专辑（播客）封面落盘并记 sha256；后续合成只用这份文件。 */
+/** 抓取时就把专辑（播客）封面落盘并记 sha256；后续合成只用这份文件。 */
 export async function acquireAlbumCover(metadata: EpisodeMetadata, workspace: string, fetchImpl: FetchLike = fetch, logger?: JsonLogger): Promise<Record<string, unknown> | null> {
   const url = (metadata.episode as { podcast_cover_url?: string | null }).podcast_cover_url;
   const brandDir = join(workspace, "00-source", "brand"), recordPath = join(brandDir, "album_cover.json");

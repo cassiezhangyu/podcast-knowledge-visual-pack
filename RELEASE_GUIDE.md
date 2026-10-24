@@ -8,13 +8,13 @@
 
 ## 0. 仓库位置（必读）
 
-| 角色 | 路径 |
+| 角色 | 说明 |
 |---|---|
-| **正式源码（唯一发版源）** | `/home/box/skills-src/podcast-knowledge-visual-pack` |
-| 远程 | `cassiezhangyu/podcast-knowledge-visual-pack`（以 `git remote -v` 为准） |
-| 安装副本（不可从此发版） | `/home/box/agent-data/workflows/podcast-knowledge-visual-pack`（copy 安装结果） |
+| **正式源码（唯一发版源）** | GitHub 仓库 `cassiezhangyu/podcast-knowledge-visual-pack` 的 `main`；以本机 `git remote -v` 指向该仓库的克隆为准 |
+| 安装副本／工作区拷贝 | 例如各项目 `.agents/skills/podcast-knowledge-visual-pack/`；不可从安装副本发版 |
+| 生产成果 | 各项目 `outputs/`、`maintenance/`，不纳入发版 |
 
-发版、打 Tag、写 Release **只在 skills-src 仓库**进行。改完正式源后，再按需把安装副本备份并 copy 重装。
+发版、打 Tag、写 Release **只在上述正式源码仓库**进行。改完正式源后，再按需把安装副本备份并 copy 重装。
 
 ---
 
@@ -104,7 +104,7 @@ python3 scripts/check_skill_layout.py
    ```
 
 2. **禁止**覆盖、移动、删除已有正式版本 Tag。
-3. **不要**把 `*-local` Tag 推到远程。
+3. **不要**把 `*-local` Tag 推到远程。正式 Tag 与 `package.json` 只写 `X.Y.Z`。
 
 ---
 

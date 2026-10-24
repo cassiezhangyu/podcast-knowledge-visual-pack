@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -24,6 +24,9 @@
     "render:checked": "node scripts/render-checked.mjs",
     "visual:review:prepare": "python3 scripts/prepare_independent_review.py",
     "visual:closeout": "npm run build && node dist/visual-closeout-cli.js",
+    "render:manifest": "npm run build && node dist/render-manifest-cli.js",
+    "author-check:init": "npm run build && node dist/author-check-init-cli.js",
+    "preview:copies": "python3 scripts/make_preview_copies.py",
     "public-copy:check": "npm run build && node dist/public-copy-cli.js",
     "public-copy:bundle-check": "node scripts/check-companion-copy.mjs",
     "package": "npm run build && node dist/package-cli.js",
@@ -33,6 +36,7 @@
     "layout:budget": "python3 scripts/layout_budget.py",
     "layout:margins": "python3 scripts/audit_overlap_margins.py",
     "test:python": "python3 -m unittest discover -s development/tests -p '*.py'",
+    "test:guards": "npm run build && node --test development/tests/closeout_guards.test.mjs",
     "render:scene:checked": "npm run build && node scripts/render-scene-checked.mjs",
     "preflight:bump": "python3 scripts/bump_preflight.py",
     "overrides:check": "python3 scripts/check_project_overrides.py",

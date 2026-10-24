@@ -1,4 +1,4 @@
-/** v0.4.8-local：逐句冷读（必做）、数字溯源、标签撞名、提纲只写章节名、比喻只放主图；以及“只改字”路线的几何指纹。
+/** 逐句冷读（必做）、数字溯源、标签撞名、提纲只写章节名、比喻只放主图；以及“只改字”路线的几何指纹。
  * 来自 EP88 6ab11c95-v045 R7 改字轮（05-qa/R7_TEXT_CHANGES.diff）。 */
 import { createHash } from "node:crypto";
 type R = Record<string, any>;
@@ -8,7 +8,7 @@ export const norm = (s: unknown) => String(s ?? "").replace(/\s+/g, "");
 export const SHORTHAND_EXAMPLES = ["像森林", "不像房子", "长进去", "种子", "少即是多", "破了不会马上立"];
 /** 容易被读成人名、品牌、书名的词（示例，作者须逐条扫描并记录）。 */
 export const COLLISION_TERMS = ["木心", "鲁迅", "三毛", "老舍", "冰心", "金庸", "三体", "活着", "围城", "小米", "华为", "苹果", "得到", "知乎", "樊登", "罗辑思维", "原则"];
-const NUM_RE = /[0-9０-９]+(?:\.[0-9]+)?|[一二两三四五六七八九十百千万半]+(?=[个次周天本期粒年月日分小条步层种点遍份倍成%])/g;
+export const NUM_RE = /[0-9０-９]+(?:\.[0-9]+)?|[一二两三四五六七八九十百千万半]+(?=[个次周天本期粒年月日分小条步层种点遍份倍成%])/g;
 export function sceneTexts(scene: R): string[] {
   return (scene?.elements ?? []).filter((e: R) => e?.type === "text" && !e.isDeleted && norm(e.text)).map((e: R) => String(e.text));
 }
@@ -25,7 +25,7 @@ export function geometryHash(scene: R): string {
  *  label_collision: {status:"pass", findings:[{term, ruling}]}
  *  metaphor_body_plain: {status:"pass", evidence}
  *  outline_items: [章节名…] */
-export function assertSentenceColdRead(c: R, scene: R): void {
+export function assertSentenceColdRead(c: R, scene: R, jargon: string[] = []): void {
   const s = c.checks?.sentence_cold_read;
   if (!s || s.status !== "pass") throw new Error("作者自检缺少逐句冷读 sentence_cold_read（必做，未通过不得展示或登记）");
   const items: R[] = Array.isArray(s.items) ? s.items : [];
@@ -40,6 +40,10 @@ export function assertSentenceColdRead(c: R, scene: R): void {
     if (x.resolution === "rewritten" && !longText(x.original, 1)) throw new Error("rewritten 须写 original（原句）：" + x.text);
   }
   const all = texts.join("\n");
+  for (const term of jargon) for (const t of texts.filter((x) => norm(x).includes(norm(term)))) {
+    const ok = items.some((x) => norm(x.text) === norm(t) && x.flagged === true && x.resolution === "explained_on_page" && longText(x.explanation, 4));
+    if (!ok) throw new Error(`本期术语“${term}”出现在“${t.replace(/\n/g, "")}”，须改白话，或标 flagged 并写明页面上哪里解释了它`);
+  }
   const left = SHORTHAND_EXAMPLES.filter((w) => all.includes(w) && !items.some((x) => norm(x.text).includes(w) && x.resolution === "explained_on_page"));
   if (left.length) throw new Error("页面含已知节目内部说法，须改白话或标 explained_on_page：" + left.join("、"));
   if (s.metaphor_body_plain?.status !== "pass" || !longText(s.metaphor_body_plain?.evidence, 6)) throw new Error("缺 metaphor_body_plain：比喻只放主图，正文须直说结论");

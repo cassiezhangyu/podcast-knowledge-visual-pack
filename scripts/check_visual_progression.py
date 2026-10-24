@@ -32,7 +32,7 @@ def validate(report, stage, case_id=None):
         errors.append('报告阶段与当前放行阶段不一致')
     creator = report.get('creator_context_id')
     reviewer = report.get('reviewer_context_id')
-    # v0.4.5-local：本 Skill 不创建审核 agent。作者自检模式无需 reviewer；
+    # 本 Skill 不创建审核 agent。作者自检模式无需 reviewer；
     # 旧报告若声明了 reviewer，仍须与创作者不同，避免冒称独立审核。
     author_mode = report.get('review_mode') == 'author_self_check'
     if author_mode:

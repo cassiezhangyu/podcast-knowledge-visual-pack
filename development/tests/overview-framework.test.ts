@@ -10,7 +10,7 @@ describe("总览关系读回", () => {
     const dir = mkdtempSync(join(tmpdir(), "framework-"));
     try {
       const path = join(dir, "approved.json");
-      const ledger = { overview_relation_ledger: [
+      const ledger: any = { unified_carrier: { statement: "一次投资决策从进场到退出", basis: "synthesis", parts: [{ part: "收益", content: "进场理由" }, { part: "心理", content: "执行约束" }], user_confirmed: true }, overview_relation_ledger: [
         { page_id: "P01", from_component: "收益", to_component: "退出", relation_type: "解释" },
         { page_id: "P01", from_component: "心理", to_component: "执行", relation_type: "约束" },
         { page_id: "P02", from_component: "其他", to_component: "页面", relation_type: "并列" }
@@ -25,6 +25,10 @@ describe("总览关系读回", () => {
       expect(() => assertOverviewFrameworkCheck({ ...check, relations: check.relations.map(r => ({ ...r, match: false })) }, basis, "P01")).toThrow();
       expect(() => assertOverviewFrameworkCheck({ ...check, missing_relations: ["遗漏"] }, basis, "P01")).toThrow();
       expect(() => assertOverviewFrameworkCheck(undefined, basis, "P01")).toThrow();
+      for (const carrier of [undefined, { ...ledger.unified_carrier, user_confirmed: false }, { ...ledger.unified_carrier, parts: ledger.unified_carrier.parts.slice(0, 1) }]) {
+        const alt = JSON.stringify({ ...ledger, unified_carrier: carrier }); writeFileSync(path, alt);
+        expect(() => assertOverviewFrameworkCheck(check, { path, sha256: createHash("sha256").update(alt).digest("hex") }, "P01")).toThrow("unified_carrier");
+      }
       writeFileSync(path, "{}");
       expect(() => assertOverviewFrameworkCheck(check, basis, "P01")).toThrow();
     } finally { rmSync(dir, { recursive: true, force: true }); }

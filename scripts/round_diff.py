@@ -1,4 +1,4 @@
-"""v0.4.7-local 每轮改动核验：上一版与本版并排图 + 可见改动清单。
+"""每轮改动核验：上一版与本版并排图 + 可见改动清单。
 声称"已改"却没有改动清单，或两图几乎无像素差，判 fail（防止"说改了其实没改"）。
 用法：python3 scripts/round_diff.py --previous prev.png --current cur.png --side-by-side out.png --out record.json \
         [--diff "A：睡眠例子移到各步正文下方" ...] [--claims-changed]"""

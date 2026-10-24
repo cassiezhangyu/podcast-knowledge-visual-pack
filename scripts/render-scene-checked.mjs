@@ -25,7 +25,7 @@ for(const key of ['content','tokens','palette','taste','positive','negative','pa
 let bindings=0;
 function checkBindings(node){if(!node||typeof node!=='object')return;if(node.path&&node.sha256){bindings++;if(sha(readFileSync(node.path))!==node.sha256)throw new Error('预检输入已变化：'+node.path);}else for(const v of Object.values(node))checkBindings(v);}
 checkBindings(preflight.inputs);if(!bindings)throw new Error('联合预检未绑定实际输入');
-// v0.4.5-local：非 skill 默认参数必须在 02-visual-plan/project_overrides.json 登记。
+// 非 skill 默认参数必须在 02-visual-plan/project_overrides.json 登记。
 {const meta=findEpisodeMetadata(dirname(scenePath));if(meta){const ws=dirname(dirname(meta));const po=spawnSync('python3',[join(root,'scripts/check_project_overrides.py'),'--workspace',ws,'--tokens',tokensPath],{cwd:root,encoding:'utf8'});if(po.error||po.status!==0)throw new Error('项目覆盖未登记或已变化：'+(po.stdout||po.stderr||po.error));}}
 const planCheck=spawnSync('python3',[join(root,'scripts/check_reference_preflight.py'),'--scene',scenePath,'--preflight',preflightPath],{cwd:root,encoding:'utf8'});
 if(planCheck.error||planCheck.status!==0)throw new Error('绘图前预检缺项或无效：'+(planCheck.stderr||planCheck.stdout||planCheck.error));
@@ -33,21 +33,34 @@ assertSceneMechanics(scene,tokens);
 const chromeRun=spawnSync('python3',[join(root,'scripts/check_fixed_chrome.py'),scenePath,'--contract',preflight.inputs.page_contract.path],{cwd:root,encoding:'utf8'});
 if(chromeRun.error||chromeRun.status!==0)throw new Error('固定外围合同阻断导出：'+(chromeRun.stderr||chromeRun.stdout||chromeRun.error));
 const chromeCheck=JSON.parse(chromeRun.stdout);
-for(const [script,extra] of [['check_typography.py',['--design-tokens',tokensPath]],['check_strokes.py',[]],['check_reader_facing_text.py',[]]]){
+const episodeMetadataPath=findEpisodeMetadata(dirname(scenePath));
+for(const [script,extra] of [['check_typography.py',['--design-tokens',tokensPath]],['check_strokes.py',[]],['check_reader_facing_text.py',episodeMetadataPath?['--metadata',episodeMetadataPath]:[]]]){
  const result=spawnSync('python3',[join(root,'scripts',script),scenePath,...extra],{cwd:root,encoding:'utf8'});
  if(result.error||result.status!==0)throw new Error(`${script}阻断导出：${result.stderr||result.stdout||result.error}`);
 }
 if(!['overview','deep_dive','cover'].includes(preflight.role))throw new Error('预检缺少有效页面角色');
 let outlineRegions;
 if(['overview','deep_dive'].includes(preflight.role)){
- // v0.4.5-local：默认从 scene 自动推导区域；手工区域须写原因并附叠框截图。
+ // 默认从 scene 自动推导区域；手工区域须写原因并附叠框截图。
  const manual=args.includes('--outline-regions')&&value('--outline-regions')!=='auto';
  mkdirSync(out,{recursive:true});
  outlineRegions=manual?resolve(value('--outline-regions')):join(out,'outline_regions.auto.json');
  const result=spawnSync('python3',[join(root,'scripts/check_outline_body_alignment.py'),scenePath,'--regions',manual?outlineRegions:'auto','--write-regions',manual?join(out,'outline_regions.used.json'):outlineRegions,...(manual?['--require-manual-provenance']:[])],{cwd:root,encoding:'utf8'});
  if(result.error||result.status!==0)throw new Error('提纲/正文编号检查阻断：'+(result.stderr||result.stdout||result.error));
 }
-mkdirSync(out,{recursive:true});const html=join(out,'.checked-export.html');
+mkdirSync(out,{recursive:true});
+const budgetPath=join(out,'LAYOUT_BUDGET.txt'),overlapPath=join(out,'OVERLAP_MARGIN_AUDIT.json');
+if(preflight.role!=='cover'){
+ const budget=spawnSync('python3',[join(root,'scripts/layout_budget.py'),'--scene',scenePath],{cwd:root,encoding:'utf8'});
+ writeFileSync(budgetPath,(budget.stdout||'')+(budget.stderr||''));
+ if(budget.error||budget.status!==0)throw new Error('版面预算未通过，未生成候选图（删字或重排，不缩字号）：\n'+(budget.stdout||budget.stderr||budget.error));
+}
+{
+ const overlap=spawnSync('python3',[join(root,'scripts/audit_overlap_margins.py'),scenePath],{cwd:root,encoding:'utf8'});
+ writeFileSync(overlapPath,overlap.stdout||JSON.stringify({pass:false,error:overlap.stderr||String(overlap.error)}));
+ if(overlap.error||overlap.status!==0)throw new Error('压线/边距审计未通过，未生成候选图（文字下的底色须足够浅；手绘图形离安全区边缘留3–5px）：\n'+(overlap.stdout||overlap.stderr||overlap.error).slice(0,4000));
+}
+const html=join(out,'.checked-export.html');
 const layoutPath=join(out,'SCENE_LAYOUT_DIAGNOSTIC.json'),glyphPath=join(out,'CJK_GLYPH_AUDIT.json');
 for(const command of [['python3',[join(root,'scripts/audit_scene_layout.py'),scenePath,'--design-tokens',tokensPath,'--output',layoutPath]],
  ['node',[join(root,'scripts/audit_cjk_glyphs.mjs'),scenePath,glyphPath]]]){
@@ -59,7 +72,7 @@ let browser;
 try{
  const macChrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
  const executablePath=process.env.PODCAST_MAP_CHROME_PATH||(process.platform==='darwin'&&existsSync(macChrome)?macChrome:undefined);
- browser=await launchZh({... (executablePath?{executablePath}:{})});
+ try{browser=await launchZh({... (executablePath?{executablePath}:{})});}catch(error){const m=String(error?.message??error);throw new Error((/Executable doesn't exist/.test(m)?'找不到浏览器：安装 Google Chrome、运行 npx playwright install chromium，或设置 PODCAST_MAP_CHROME_PATH。':/SIGABRT|SIGTRAP|kill EPERM|MachPortRendezvousServer|Permission denied/.test(m)?'命令沙箱不允许启动浏览器：用宿主权限重跑同一命令（Cursor: required_permissions ["all"]；Codex: require_escalated）。':'浏览器启动失败。')+'详见 references/environment/RENDER_BROWSER_ENVIRONMENT.md。原始错误：'+m.split('\n')[0]);}
  const page=await newZhPage(browser,{viewport:{width:1200,height:1600},deviceScaleFactor:1});await page.goto(pathToFileURL(html).href);
  let original=await page.evaluate(async({scene,tokens})=>window.renderPersistedExcalidrawScene(scene,tokens),{scene,tokens});
  const assetArg=args.includes('--brand')?value('--brand'):null;
@@ -94,10 +107,13 @@ try{
  }
  const record={kind:'mechanical_render_record',status:'pass',page_id:preflight.page_id,created_at:new Date().toISOString(),checks:['preconstruction_reference_plan','native_scene','typography_roles_sizes_strong_weight','stroke_roles','static_text_geometry','reader_facing_text','outline_alignment','current_input_bindings','same_scene_real_export'].map(name=>({name,status:'pass'})),outline_check: outlineRegions ? {status:'pass',regions:bind(outlineRegions)} : {status:'not_applicable',reason:'cover'},tokens:bind(tokensPath),preflight:bind(preflightPath),renderer:bind(bundle),brand_asset:{...bind(assetPath),source_url:albumCoverCheck.source_url,album_cover_check:albumCoverCheck},current:artifacts,visual_quality:'needs_independent_review',pixel_geometry:'needs_rendered_review',semantic_roles:'needs_rendered_review'};
  record.diagnostics={layout:bind(layoutPath),glyphs:bind(glyphPath),geometry:bind(geometryPath)};
+ record.overlap_margin_audit={status:'pass',command:'python3 scripts/audit_overlap_margins.py <scene>',record:bind(overlapPath)};
+ record.checks.push({name:'overlap_margin_audit',status:'pass'});
+ if(preflight.role!=='cover'){record.layout_budget={status:'pass',command:'python3 scripts/layout_budget.py --scene <scene>',record:bind(budgetPath)};record.checks.push({name:'layout_budget',status:'pass'});}
  record.chrome_check=chromeCheck;
  if(chromeCheck.status==='pass')record.checks.push({name:'declared_fixed_chrome',status:'pass'});
  record.delivery_scale=deliveryScale;
  record.review_2x={scale:2,size:[2400,3200],scene_sha256:artifacts.scene.sha256,role:'user_review_and_delivery',note:'给用户看图与交付用@2x；P01.png仅内部检查'};
- if(preflight.role!=='cover'){const dp=join(out,'DEAD_SPACE_AUDIT.json');const dr=spawnSync('python3',[join(root,'scripts/audit_dead_space.py'),artifacts.review2x.path,'--out',dp],{cwd:root,encoding:'utf8'});record.dead_whitespace_audit={status:dr.status===0?'pass':'fail',record:existsSync(dp)?bind(dp):null,note:'v0.4.7-local：作者自检 checks.dead_whitespace_audit 须绑定此记录；fail 须先改图再交'};}
+ if(preflight.role!=='cover'){const dp=join(out,'DEAD_SPACE_AUDIT.json');const dr=spawnSync('python3',[join(root,'scripts/audit_dead_space.py'),artifacts.review2x.path,'--out',dp],{cwd:root,encoding:'utf8'});record.dead_whitespace_audit={status:dr.status===0?'pass':'fail',record:existsSync(dp)?bind(dp):null,note:'作者自检 checks.dead_whitespace_audit 须绑定此记录；fail 须先改图再交'};}
  writeFileSync(join(out,'MECHANICAL_RENDER_RECORD.json'),JSON.stringify(record,null,2)+'\n');console.log(JSON.stringify({status:'rendered_needs_review',output:out,record:join(out,'MECHANICAL_RENDER_RECORD.json')}));
 }finally{if(browser)await browser.close();rmSync(html,{force:true});}

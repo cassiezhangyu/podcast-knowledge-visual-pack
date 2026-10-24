@@ -29,7 +29,7 @@ def validate_scene(scene,sizes,strong_roles):
  return count,errors
 
 def scale_errors(scene,max_levels=5,min_step=2,phone_width=390,min_phone_px=7.1,canvas_width=1200):
- """v0.4.5-local：整页最多5级字号、相邻级至少差2px；390px手机预览上最小字高不低于min_phone_px。放不下就删字，不缩字。"""
+ """整页最多5级字号、相邻级至少差2px；390px手机预览上最小字高不低于min_phone_px。放不下就删字，不缩字。"""
  errors=[]
  sizes=sorted({e['fontSize'] for e in scene['elements'] if e.get('type')=='text' and not e.get('isDeleted')},reverse=True)
  if len(sizes)>max_levels:errors.append(f'字号层级{len(sizes)}级 {sizes}，超过{max_levels}级：合并相近层级')
@@ -44,7 +44,7 @@ CONTENT_MIN_PX=24
 LABEL_FUNCTIONS={'navigation','chrome','source','pointer','meta'}
 META_ROLES={'header_meta','footer_meta'}
 def small_text_review(scene,min_px=CONTENT_MIN_PX):
- """v0.4.7-local：按内容而非位置判角色。返回 (errors, undeclared)：
+ """按内容而非位置判角色。返回 (errors, undeclared)：
  - errors：customData.content_bearing=true 却 <24px（图内承载内容的文字——例子、步骤说明、结论——不低于24px）；
  - undeclared：<24px、非页眉页脚、非1–2字编号，且没有在 customData.text_function 声明 navigation/chrome/source/pointer/meta 的文字，
    作者须在自检 content_text_min_size 里逐条判定；加 --strict-content-size 时直接判错。"""
@@ -59,7 +59,7 @@ def small_text_review(scene,min_px=CONTENT_MIN_PX):
 
 WIDOW_PUNCT=set('，。、；：！？“”‘’（）《》…—·,.;:!?()"\' ')
 def widow_errors(scene,max_chars=2):
- """v0.4.7-local：自动查孤行——多行文字最后一行只剩1–2个字（不计标点）。"""
+ """自动查孤行——多行文字最后一行只剩1–2个字（不计标点）。"""
  errors=[]
  for e in scene['elements']:
   if e.get('type')!='text' or e.get('isDeleted'):continue
@@ -74,7 +74,7 @@ def main():
  parser=argparse.ArgumentParser(description=__doc__)
  parser.add_argument('scene',type=Path,help='场景文件或场景目录')
  parser.add_argument('--design-tokens',type=Path,default=Path(__file__).resolve().parents[1]/'design_tokens.json',help='当前已批准参数；省略时使用Skill内置默认参数')
- parser.add_argument('--strict-content-size',action='store_true',help='v0.4.7-local：未声明用途的<24px文字直接判错')
+ parser.add_argument('--strict-content-size',action='store_true',help='未声明用途的<24px文字直接判错')
  parser.add_argument('--legacy-scale',action='store_true',help='仅用于v0.4.4之前已验收的历史参考：跳过5级/2px/手机最小字高检查')
  args=parser.parse_args()
  typography=json.loads(args.design_tokens.read_text())['typography']

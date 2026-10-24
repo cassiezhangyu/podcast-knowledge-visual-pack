@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v0.4.5-local：项目覆盖登记与升级提示。
+"""项目覆盖登记与升级提示。
 固定位置：<单集工作区>/02-visual-plan/project_overrides.json
 {"overrides":[{"id":"type-scale-48","what":"字号：标题48/结论32…","file":"02-visual-plan/design_tokens.override.json",
   "sha256":"…","why":"为什么不能用 skill 默认","user_authorization":"用户原话或确认位置","date":"2026-10-21"}]}

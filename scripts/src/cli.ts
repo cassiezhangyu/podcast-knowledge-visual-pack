@@ -23,7 +23,7 @@ try {
   await runIntake(url, workspace);
   if (until === "transcript") {
     const pythonPath = pythonIndex === -1 ? process.env.PODCAST_MLX_PYTHON : args[pythonIndex + 1];
-    // v0.4.7-local P2：已有可用的转写缓存（grounded 转写＋QA）时，不再要求 --provider-python。
+    // 已有可用的转写缓存（grounded 转写＋QA）时，不再要求 --provider-python。
     if (!pythonPath && cachedTranscriptReady(workspace)) { process.stdout.write(`${JSON.stringify({ status: "ok", workspace, transcript: "cached", provider_python_required: false })}\n`); process.exit(0); }
     if (!pythonPath) throw new PipelineError("ASR_PROVIDER_UNAVAILABLE", "transcribe", "--provider-python or PODCAST_MLX_PYTHON is required for the local MLX provider.", false);
     const batchSize = batchIndex === -1 ? 1 : Number(args[batchIndex + 1]);

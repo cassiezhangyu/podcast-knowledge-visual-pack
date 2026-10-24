@@ -1,3 +1,46 @@
+# v0.6.0（2026-10-24）
+
+相对正式版 [v0.5.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.5.0)（`0263312`），把依赖模型临场发挥的总览交付环节改成规则或工具。按 0.x 约定：总览收尾门禁新增必填项、导出新增阻断条件，定为 **MINOR**。
+
+## 新增功能
+
+- 总览统一载体必答：关系台账顶层 `unified_carrier`（`statement` / `basis` / `parts` / `user_confirmed`），三案前须经用户确认；`visual:closeout` 与 `check_overview_framework.py` 缺失即拒绝。
+- 绘图工具包 `scripts/lib/scene_kit.py`：按色卡派生字号、笔触、可放文字的浅底色；提供页眉／提纲／页脚合同件和少量物件示范；`finish()` 检查文字互叠、压实心图形、粗笔触贴边。不提供构图模板。
+- 导出前自动跑版面预算与压线边距检查，失败不出 PNG。
+- `author-check:init`、`render:manifest`、`preview:copies`：从机械记录生成自检草稿、真实渲染清单、可打开的 @2x 副本与并排对比。
+- 内容阶段产出本期术语表 `01-understanding/READER_JARGON.json`；内页出现术语须标出并解释。
+- 副标题只写内容陈述：导出时拦截节目名、单集标题、期号与“本期／节目／播客／专辑”。
+
+## 优化／文档
+
+- `SKILL.md` 增加「只做一页总览的最短路径」；Hard Stops 增加“未确认统一载体就画三案”“用户没看到图就记 approve”。
+- 看图交付规则、换平台排障表；规则正文去掉版本号补丁标注。
+- 案例库：EP86 总览批准版正例、第一轮目录式总览负例（不是必看基准）。公开展示范围见下方确认项。
+
+## 问题修复
+
+- 占位与套话检查改到结构检查之后，避免盖掉具体缺项报错。
+- scene_kit 文字宽度估算与轻笔触贴边误报已校准。
+- 补回安装副本缺失的 `development/`，使 `npm test` 可在源码仓库运行。
+
+## 不兼容变更／迁移
+
+1. 总览台账必须有已确认的 `unified_carrier`；旧工作区补字段并经用户确认后才能收尾。
+2. `render-scene-checked` 在预算或压线失败时不再出图；文字下底色须 R+G+B ≥ 725，roughness ≥1.6 的图形离安全区留 3–5px。
+3. 内页收尾必须有本期术语表；冷读清单新增 `highlighted_example_labeled`、`title_reference_specific`、`theory_named_explained_inline`。
+4. `visual:closeout` 拒绝占位词、同一理由套用超过 3 条、两项检查共用同一段证据。
+5. 副标题不得出现节目名或期号。
+6. 安装／升级：解压本版安装 ZIP 到空目录后 `npm ci && npm run build`；勿覆盖已有安装；工作区仍放在 Skill 之外。
+7. 正式 Tag／`package.json` 版本为 `0.6.0`（无 `-local`）。
+
+## 验证
+
+发版候选上隔离安装后运行：`npm ci`、`npm run build`、`npm test`、`npm run test:python`、`npm run test:guards`、`python3 scripts/check_skill_layout.py`。结果写入本条发布时的验证段／Release Assets manifest。
+
+未纳入：`1022-播客可视化` 在 v0.5.0 之后的 5 个未推送提交；远程 `release/v0.6.3`（从 v0.3.0 分叉的仅本地线）。
+
+上一正式版本：[v0.5.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.5.0)。比较：https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/compare/v0.5.0...v0.6.0
+
 # v0.5.0（2026-10-22）
 
 相对正式版 [v0.4.0](https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/releases/tag/v0.4.0)（`7a70652`），合并本地 0.4.1–0.4.8 积累、文档架构收拢与案例库重整。按 0.x 约定：门禁与合同语义有不兼容变化，定为 **MINOR**。

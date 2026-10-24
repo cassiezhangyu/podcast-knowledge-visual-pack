@@ -16,9 +16,19 @@
 
 1. 由来源关系确定图文分工、对象、状态、比较依据与阅读路径；用完整正常字号草图自检框架、构图和容量，再精修。
 2. 默认三案分别完成真实草图，先精修完成潜力最强的一案并自检，再完成其余两案，比较含义覆盖和视觉策略差异；不把未完成草图冒称完整备选。
-3. 受检导出使用render:scene:checked或render:checked，保持原生可编辑scene、官方专辑图受控合成、当前字号/笔触及原图、390px、灰度和高清输出。
-4. 按page_quality_check和当前页型协议实看整页及高风险局部，完成RENDERED_PAGE_CHECK.md/json。自检覆盖内容、解释、参考、几何、手机可读；Overview逐条核批准关系，用户条件逐项核实。缺项先修复，不伪造pass或独立证据。
-5. 自检和技术检查通过后，用visual:closeout --page-check登记并展示结果；不派发审核任务。用户确认当前版本后，才记录approve。
+3. 绘制 scene 优先用 `scripts/lib/scene_kit.py`（见 `scene_kit_usage.md`），`finish()` 在写文件前拦下文字碰撞和图形贴边。受检导出使用 render:scene:checked 或 render:checked，保持原生可编辑 scene、官方专辑图受控合成、当前字号/笔触及原图、390px、灰度和高清输出；版面预算与压线/边距审计在导出内自动执行，不通过不生成候选图。
+4. 按 page_quality_check 和当前页型协议实看整页及高风险局部，完成 RENDERED_PAGE_CHECK.json。先运行 `npm run author-check:init -- --workspace <ws> --record <render目录>/MECHANICAL_RENDER_RECORD.json --out <页目录>/RENDERED_PAGE_CHECK.json` 生成草稿：机械项（版面预算、边距、字形、死白、绑定）自动填好，判断项留“待作者填写”。逐项对着当前 @2x 改成具体观察；同一句理由不能套在多条文字上，不同检查不能共用一段证据，残留占位会被收尾门禁拒绝。Overview 逐条核批准关系，用户条件逐项核实。
+5. 运行 `npm run render:manifest -- --workspace <ws> --record <render目录>/MECHANICAL_RENDER_RECORD.json` 生成 `03-excalidraw/scene_manifest.json` 与 `04-rendered/render_manifest.json`（不手写、不合成哈希），再用 `visual:closeout --page-check` 登记并按下文「给用户看图」展示；不派发审核任务。用户看过并确认当前版本后，才记录 approve。
+
+### 给用户看图
+
+不同平台的聊天界面不一定能显示本地图片，不能假定用户已经看到。
+
+- 运行 `npm run preview:copies -- --out <ws>/05-qa/preview <标签>=<P01@2x.png> [...]`：把每张 @2x 复制成文件名不含 `@` 的副本（部分界面无法打开带 `@` 的路径）；两张及以上时同时生成并排对比图 `compare-<标签们>.png`。
+- 依次尝试：在回复里用图片语法嵌入副本；用编辑器打开副本（例如 Cursor 的 open_resource）；macOS 上用 `open -a Preview <副本>`。说明用的是哪种方式，并给出副本路径。
+- 用户说没看到图时，先换一种方式展示，不继续讨论图的内容。
+- 多案选择时先给并排对比图，再给单张大图。
+- 用户没有明确表示看过并确认的版本，不记 approve，也不写入 `visual_page_human_approval.json`。
 
 ## 4. 选择、返修与停止
 
@@ -41,9 +51,9 @@
 沿用TASK_STATE或等价唯一当前指针记录版本、输入、用户要求、实际完成步骤及待办。作者自检、技术检查和用户验收分别记账；不产生独立评级。旧工件和批准保持原版本，用户否定后退出当前依据。输入变化按受影响范围复核。恢复时先核实际工件与当前反馈，不按文件日期选择基线。
 
 
-## 先锁文字，再精修图形（v0.4.5-local 门禁）
+## 先锁文字，再精修图形
 
-顺序固定：①确认字号层级（当前 tokens）→ ②完成终稿文字并通过本页陌生读者必查清单与逐句白话复述 → ③才开始放大／精修手绘物件和细调间距。精修期间改字须回到②重做清单。作者自检记录 `checks.text_and_scale_lock`（`status`+`visible_evidence`：写明字号与文字在哪一版锁定、之后只动图形），缺失则 `visual:closeout` 拒绝。原因：6ad48f83 文字理解问题拖到第6版才修，每次改字都要重排已精修的画面。
+顺序固定：①确认字号层级（当前 tokens）→ ②完成终稿文字并通过本页陌生读者必查清单与逐句白话复述 → ③才开始放大／精修手绘物件和细调间距。精修期间改字须回到②重做清单。作者自检记录 `checks.text_and_scale_lock`（`status`+`visible_evidence`：写明字号与文字在哪一版锁定、之后只动图形），缺失则 `visual:closeout` 拒绝。文字理解问题拖到精修之后再修，每次改字都要重排已精修的画面。
 
 
 ## 规则冲突先后

@@ -53,7 +53,7 @@
 使用现有RENDERED_PAGE_CHECK.md/json记录content_coverage、visual_explanation、reference_alignment、text_geometry、mobile_readability五项真实证据，以及必做项 cold_reader_check、layout_budget、margin_audit、cjk_glyph_audit；各项status为pass后，整体status记为self_check_passed。绑定当前scene、png、phone、gray、高清图及mechanical_render_record，不生成reviewer_context_id或独立评级。总览另记录overview_framework_check，用户明确条件另记录user_requirements_check。自检通过后直接输出供用户查看；正式用户批准按SKILL.md记录。
 
 
-## 视觉质量硬线（自 v0.6 R11/R17 恢复，v0.4.2-local）
+## 视觉质量硬线
 
 - **R11 稳定手绘线**：所有线条和填充都用 `stroke.role_settings` 的手绘参数，不能退成平直的 SVG 或几何图，也不能抖成乱线。参考正式正例（EP88 封面／总览三案）的物件线感；历史样稿见 `examples/retired/ep88-p13-rough-stroke-accepted-2026-09-26/`（非强制）。扁平通用 SVG 式图形（等粗几何线框、无部件的符号图标）直接拒绝。
 - **R17 画机制，不画文字**：每个模块至少有一个承载意义的图（流程、对照、状态切换、数量比较、包含/分叉等关系结构）；装饰性小图标不算。
@@ -62,7 +62,7 @@
 
 - 右上角封面核对：对照 episode_metadata，确认素材是专辑（播客）封面 `podcast_cover_url`，不是单集封面 `episode_cover_url`/`cover_url`；合成前比对，不一致即拦下。
 
-- **R19 并列不成路径（v0.4.5-local）**：台账未授权顺序时，把并列项画成路径／旅程／时间线即结构失败。
+- **R19 并列不成路径**：台账未授权顺序时，把并列项画成路径／旅程／时间线即结构失败。
 - **R20 读者文字**：执行 `cold_reader_check.md` 必查清单与逐句白话复述；提醒只写页面上出现的对象和读者事实。
 
 

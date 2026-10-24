@@ -2,7 +2,7 @@
 // Vendored scene renderer (ported v0.6.3 -> v0.4.1-local; used by audit_overlap_margins.py).
 // Diagnostic layer renderer only: skips the export mechanics gate. Never use it for delivery PNGs. usage: node scripts/render_scene.mjs in.excalidraw out.png scale [in out scale ...]
 // Resolves the bundle relative to this script (or $PKVP_RUNTIME), so it works from any cwd.
-// v0.6.1: CJK text must use Simplified Chinese glyphs: Chromium gets a fontconfig that prefers
+// CJK text must use Simplified Chinese glyphs: Chromium gets a fontconfig that prefers
 // Noto Sans CJK SC (scripts/fontconfig/pkvp-fonts.conf), --lang=zh-CN, and <html lang="zh-Hans">.
 import { launchZh, newZhPage, ZH_HTML_HEAD } from "./lib/zh_browser.mjs";
 import { readFileSync, writeFileSync, mkdtempSync, existsSync } from "node:fs";
@@ -13,7 +13,7 @@ const root = process.env.PKVP_RUNTIME || resolve(dirname(fileURLToPath(import.me
 const bundle = join(root, "dist/excalidraw-preview-browser.js");
 if (!existsSync(bundle)) { console.error(`missing ${bundle}: run npm run build in the runtime root or set PKVP_RUNTIME`); process.exit(2); }
 let args = process.argv.slice(2);
-// v0.4.2-local hard gate: no scene may be rendered before a passing REFERENCE_PREFLIGHT.
+// hard gate: no scene may be rendered before a passing REFERENCE_PREFLIGHT.
 // Only the internal layered audit (audit_overlap_margins.py) sets PKVP_AUDIT_LAYER=1.
 import { spawnSync } from "node:child_process";
 let preflight = null;

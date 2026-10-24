@@ -4,6 +4,17 @@ type R = Record<string, unknown>;
 const text = (v: unknown): v is string => typeof v === "string" && v.trim().length > 0;
 const key = (r: R) => [r.from_component ?? r.from, r.to_component ?? r.to, r.relation_type];
 
+/** 台账须写明全期共用的载体及各部位对应内容；载体是否成立由用户在框架确认停点判断。 */
+export function assertUnifiedCarrier(value: unknown, fail: (message: string) => never): void {
+  const c = value as R | undefined;
+  if (!c || typeof c !== "object") fail("批准关系台账缺少 unified_carrier（全期放在同一个什么对象或系统上看）");
+  if (!text(c!.statement)) fail("unified_carrier.statement 为空");
+  if (c!.basis !== "source" && c!.basis !== "synthesis") fail("unified_carrier.basis 须为 source 或 synthesis");
+  const parts = c!.parts;
+  if (!Array.isArray(parts) || parts.length < 2 || parts.some(p => !p || !text((p as R).part) || !text((p as R).content))) fail("unified_carrier.parts 须至少两项，每项写明 part 与 content");
+  if (c!.user_confirmed !== true) fail("unified_carrier 尚未经用户在三案前确认（user_confirmed 须为 true）");
+}
+
 /** 只核必要关系的逐条记录与当前绑定；图上语义由隔离首读者判断。 */
 export function assertOverviewFrameworkCheck(value: unknown, basisValue: unknown, pageId: string): void {
   const fail = (message: string): never => { throw new Error(`整体框架检查失败：${message}`); };
@@ -14,6 +25,7 @@ export function assertOverviewFrameworkCheck(value: unknown, basisValue: unknown
   const data = JSON.parse(raw.toString()) as R | R[];
   const ledger = Array.isArray(data) ? data : data.overview_relation_ledger ?? data.relations;
   if (!Array.isArray(ledger)) fail("批准关系台账格式无效");
+  assertUnifiedCarrier(Array.isArray(data) ? undefined : (data as R).unified_carrier, fail);
   const expected = (ledger as R[]).filter(r => (r.page_id ?? pageId) === pageId).map(key);
   const expectedKeys = expected.map(k => JSON.stringify(k));
   if (!expected.length || expected.some(k => !k.every(text)) || new Set(expectedKeys).size !== expected.length) fail("本页批准关系缺失、重复或标识无效");

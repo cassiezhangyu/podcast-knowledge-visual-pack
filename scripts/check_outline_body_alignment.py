@@ -214,7 +214,7 @@ OUTLINE_TITLE = "本页提纲"
 
 
 def derive_regions(scene: dict, canvas_w: float = 1200, margin: float = 60) -> dict:
-    """v0.4.5-local：从 scene 自动推导区域。提纲区＝包住“本页提纲”的最小矩形；
+    """从 scene 自动推导区域。提纲区＝包住“本页提纲”的最小矩形；
     正文区＝核心结论下方到页脚线上方、去掉提纲区后的上下左右四块。"""
     els = [e for e in scene.get("elements", []) if not e.get("isDeleted")]
     title = next((e for e in els if e.get("type") == "text" and str(e.get("text", "")).strip() == OUTLINE_TITLE), None)

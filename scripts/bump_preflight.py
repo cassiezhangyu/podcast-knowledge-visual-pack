@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v0.4.5-local：由上一版预检生成新版预检（preflight:bump）。
+"""由上一版预检生成新版预检（preflight:bump）。
 重算所有已绑定输入的 sha256 与 design_tokens_sha256，继承参考观察和构图决定，
 写入 version、previous 链与必填的修订说明。只在内容/参数变化后、重画 scene 之前使用；
 构图决定本身变化时，应重写对应字段而不是只 bump。

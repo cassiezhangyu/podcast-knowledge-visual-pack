@@ -1,4 +1,4 @@
-# 播客知识视觉材料包 · 0.5.0
+# 播客知识视觉材料包 · 0.6.0
 
 将小宇宙单集转成可追溯的《内容梳理》《内容拆分》、封面、节目总览、深度解读信息图、原生可编辑 Excalidraw 与配套文案。语义理解、构图与审美由执行 Skill 的模型完成；工具承担抓取、转写、校验、哈希绑定、渲染和打包。
 
@@ -102,6 +102,12 @@ npm run content:gate -- --workspace <工作区> --stage split --action check
 npm run content:assemble -- --workspace <工作区>
 npm run construct -- --workspace <工作区>
 npm run render:checked -- --workspace <工作区>
+# 单页（scene-checked）路线：导出 → 自检草稿 → 渲染清单 → 登记
+npm run render:scene:checked -- --scene <P01.excalidraw> --preflight <REFERENCE_PREFLIGHT.json> --output <render目录> --brand <专辑封面> --design-tokens assets/design_tokens.json
+npm run author-check:init -- --workspace <工作区> --record <render目录>/MECHANICAL_RENDER_RECORD.json --out <RENDERED_PAGE_CHECK.json>
+npm run render:manifest -- --workspace <工作区> --record <render目录>/MECHANICAL_RENDER_RECORD.json
+npm run visual:closeout -- --workspace <工作区> --page-check <RENDERED_PAGE_CHECK.json> --action submit
+npm run preview:copies -- --out <工作区>/05-qa/preview A=<P01@2x.png> B=<P01@2x.png>
 ```
 
 这些命令之间需要模型生成相应语义工件与真实审批，不是直接连跑的自动产图流水线。作者自检字段见 `rules/page_quality_check.md`，页面登记使用 `visual:closeout --page-check`；默认三案、逐页/整包授权、两轮返工与限质边界见 `rules/visual_pack_execution.md`。机器校验不承担视觉判断。

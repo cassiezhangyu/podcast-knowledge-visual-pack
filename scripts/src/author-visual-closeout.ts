@@ -20,7 +20,7 @@ function checkBindings(v: any): void {
   else for (const item of Object.values(v)) checkBindings(item);
 }
 const longText = (v: unknown, n = 12) => typeof v === "string" && v.trim().length >= n;
-/** v0.4.2-local：没有正反例并排比较与视觉收益反证，不能记self_check_passed。 */
+/** 没有正反例并排比较与视觉收益反证，不能记self_check_passed。 */
 export function assertComparisonAndCounterproof(c: R): void {
   const cmp = c.checks?.side_by_side_reference_comparison;
   if (!cmp || cmp.status !== "pass" || !longText(cmp.visible_evidence)) throw new Error("作者自检缺少实际证据：side_by_side_reference_comparison");
@@ -32,8 +32,39 @@ export function assertComparisonAndCounterproof(c: R): void {
   const proof = c.visual_gain_counterproof;
   if (!proof || !longText(proof.simple_alternative) || !longText(proof.remove_subject)) throw new Error("作者自检缺少 visual_gain_counterproof（simple_alternative 与 remove_subject）");
 }
-/** v0.4.5-local：陌生读者必查清单与逐句白话复述（来自 6ad48f83 复盘）。 */
-export const COMPREHENSION_ITEMS = ["memes_slang_plain", "english_terms_chinese", "no_literal_contradiction", "reminder_items_on_page", "example_outcome_and_feeling", "one_caption_per_example_adjacent", "diagram_labels_match_text", "subtitle_reader_takeaway"] as const;
+/** 陌生读者必查清单与逐句白话复述。 */
+export const COMPREHENSION_ITEMS = ["memes_slang_plain", "english_terms_chinese", "no_literal_contradiction", "reminder_items_on_page", "example_outcome_and_feeling", "one_caption_per_example_adjacent", "diagram_labels_match_text", "subtitle_reader_takeaway", "highlighted_example_labeled", "title_reference_specific", "theory_named_explained_inline"] as const;
+export const PLACEHOLDER_RE = /待作者填写|待填|待补|占位|TODO|TBD|FIXME|^\s*(?:\.\.\.|…+|x+|-)\s*$/i;
+const SKIP_KEYS = new Set(["path", "sha256", "id", "page_id", "manifest_page_id", "kind", "schema_version", "status", "case", "version", "resolution"]);
+/** author-check:init 留下的判断字段必须由作者按当前图填写；占位词或空串一律拒绝。 */
+export function assertNoPlaceholders(c: R): void {
+  const walk = (v: unknown, where: string): void => {
+    if (typeof v === "string") { if (PLACEHOLDER_RE.test(v)) throw new Error("作者自检仍有占位内容：" + where); return; }
+    if (Array.isArray(v)) { v.forEach((x, i) => walk(x, `${where}[${i}]`)); return; }
+    if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) if (!SKIP_KEYS.has(k)) walk(x, where ? `${where}.${k}` : k);
+  };
+  walk(c, "");
+}
+/** 同一句理由批量套用到多条不同文字，或多个检查共用同一段证据，说明没有逐项看图。 */
+export function assertNotBoilerplate(c: R): void {
+  const reused = (rows: R[], field: string, limit: number) => {
+    const counts = new Map<string, number>();
+    for (const r of rows) if (typeof r?.[field] === "string" && String(r.text ?? "").replace(/\s+/g, "").length > 4) counts.set(r[field].trim(), (counts.get(r[field].trim()) ?? 0) + 1);
+    return [...counts].find(([, n]) => n > limit)?.[0];
+  };
+  const s = c.checks?.sentence_cold_read ?? {};
+  const item = reused(Array.isArray(s.items) ? s.items : [], "reason", 3);
+  if (item) throw new Error("逐句冷读把同一句理由套在多条文字上，须逐句写：" + item);
+  const trace = reused(Array.isArray(s.number_trace) ? s.number_trace : [], "reason", 3);
+  if (trace) throw new Error("数字溯源把同一句理由套在多处数字上，须逐条写：" + trace);
+  const seen = new Map<string, string>();
+  for (const [name, v] of Object.entries(c.checks ?? {}) as [string, R][]) {
+    const e = typeof v?.visible_evidence === "string" ? v.visible_evidence.trim() : "";
+    if (!e) continue;
+    if (seen.has(e)) throw new Error(`作者自检 ${seen.get(e)} 与 ${name} 共用同一段证据，须分别按图填写`);
+    seen.set(e, name);
+  }
+}
 export function assertComprehensionChecklist(c: R): void {
   const cold = c.checks?.cold_reader_check;
   const list = cold?.comprehension_checklist;
@@ -48,12 +79,12 @@ export function assertComprehensionChecklist(c: R): void {
     if (!r || !longText(r.page_text, 2) || !longText(r.stranger_restatement, 4) || r.clear !== true) throw new Error("plain_restatement 有读不懂或缺复述的句子：" + String(r?.page_text ?? ""));
   }
 }
-/** v0.4.5-local：先锁字号和终稿文字，再精修图形。 */
+/** 先锁字号和终稿文字，再精修图形。 */
 export function assertTextLock(c: R): void {
   const lock = c.checks?.text_and_scale_lock;
   if (!lock || lock.status !== "pass" || !longText(lock.visible_evidence, 8)) throw new Error("作者自检缺少实际证据：text_and_scale_lock（字号与终稿文字须在精修图形前锁定）");
 }
-/** v0.4.7-local P0：死白审计必做——自检须绑定 audit_dead_space.py 的记录，且记录对应当前 1x 或 @2x 图并通过。 */
+/** 死白审计必做——自检须绑定 audit_dead_space.py 的记录，且记录对应当前 1x 或 @2x 图并通过。 */
 export function assertDeadSpaceAudit(c: R): void {
   const d = c.checks?.dead_whitespace_audit;
   if (!d || d.status !== "pass" || !d.record) throw new Error("作者自检缺少实际证据：dead_whitespace_audit（运行 scripts/audit_dead_space.py 并绑定记录）");
@@ -63,7 +94,7 @@ export function assertDeadSpaceAudit(c: R): void {
   const current = [c.current?.png?.sha256, c.current?.review2x?.sha256].filter(Boolean);
   if (!current.includes(rec.png_sha256)) throw new Error("dead_whitespace_audit 记录不是当前图的审计结果");
 }
-/** v0.4.7-local P0：每条箭头逐条写 起点→经过→终点 与陌生人读法；场景里有箭头就不能空着。 */
+/** 每条箭头逐条写 起点→经过→终点 与陌生人读法；场景里有箭头就不能空着。 */
 export function assertArrowAudit(c: R, scene?: R): void {
   const a = c.checks?.arrow_audit;
   const sceneArrows = (scene?.elements ?? []).filter((e: R) => e.type === "arrow" && !e.isDeleted).length;
@@ -76,7 +107,7 @@ export function assertArrowAudit(c: R, scene?: R): void {
     if (!x || !longText(x.start, 1) || !longText(x.end, 1) || typeof x.via !== "string" || !longText(x.reads_as, 4) || x.misread !== false) throw new Error("arrow_audit 有箭头缺 起点/经过/终点/读法，或存在误读：" + String(x?.id ?? ""));
   }
 }
-/** v0.4.7-local P1：改版须附上一版并排图与可见改动清单；声称已改但清单为空或看不出差异即拒绝。 */
+/** 改版须附上一版并排图与可见改动清单；声称已改但清单为空或看不出差异即拒绝。 */
 export function assertRoundDiff(c: R): void {
   if (!c.revision_of) return;
   const d = c.checks?.round_diff;
@@ -87,10 +118,20 @@ export function assertRoundDiff(c: R): void {
   checkBindings({ side: rec.side_by_side, prev: rec.previous });
   if (![c.current?.png?.sha256, c.current?.review2x?.sha256].includes(rec.current?.sha256)) throw new Error("round_diff 比较的不是当前图");
 }
-/** v0.4.7-local P1：<24px 的文字由作者按内容逐条判定；承载内容的不得 <24px。 */
+/** <24px 的文字由作者按内容逐条判定；承载内容的不得 <24px。 */
 export function assertContentTextSize(c: R): void {
   const t = c.checks?.content_text_min_size;
   if (!t || t.status !== "pass" || !longText(t.visible_evidence, 8)) throw new Error("作者自检缺少实际证据：content_text_min_size（<24px 文字逐条判定是否承载内容）");
+}
+export const READER_JARGON_PATH = "01-understanding/READER_JARGON.json";
+/** 内容阶段产出的本期术语表；内页收尾必须有，空表须写明原因。 */
+export function readerJargon(workspace: string): string[] {
+  let data: R;
+  try { data = read(join(workspace, READER_JARGON_PATH)); } catch { throw new Error(`缺少本期术语表 ${READER_JARGON_PATH}（内容阶段产出，见 cold_reader_check.md「本期术语表」）`); }
+  if (data.kind !== "reader_jargon" || !Array.isArray(data.terms)) throw new Error("本期术语表格式无效：须为 {kind:\"reader_jargon\", terms:[{term, plain}]}");
+  if (!data.terms.length && !longText(data.empty_reason, 4)) throw new Error("本期术语表为空时须写 empty_reason");
+  if (data.terms.some((t: R) => !longText(t?.term, 1) || !longText(t?.plain, 2))) throw new Error("本期术语表每项须有 term 与 plain");
+  return data.terms.map((t: R) => String(t.term));
 }
 export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: string[]): R[] {
   const pages = manifest.pages as R[];
@@ -111,6 +152,8 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     assertDeadSpaceAudit(c);
     assertRoundDiff(c);
     assertContentTextSize(c);
+    assertNoPlaceholders(c);
+    assertNotBoilerplate(c);
     bound(c.mechanical_render_record);
     const mechanical = read(c.mechanical_render_record.path);
     const required = ["preconstruction_reference_plan", "native_scene", "typography_roles_sizes_strong_weight", "stroke_roles", "static_text_geometry", "reader_facing_text", "outline_alignment", "current_input_bindings", "same_scene_real_export"];
@@ -146,7 +189,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     bound(mechanical.tokens);
     const sceneData = read(c.current.scene.path);
     assertArrowAudit(c, sceneData);
-    assertSentenceColdRead(c, sceneData);
+    assertSentenceColdRead(c, sceneData, preflight.role === "cover" ? [] : readerJargon(workspace));
     assertSceneMechanics(sceneData as any, read(mechanical.tokens.path) as any);
   }
   return checks.map(({ path, sha256 }) => ({ path, sha256 }));

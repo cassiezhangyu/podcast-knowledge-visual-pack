@@ -1,0 +1,40 @@
+{
+  "case_id": "ep86-overview-delivery-flow-user-approved-2026-10-24",
+  "kind": "user_approved_positive_overview",
+  "confirmed_on": "2026-10-24",
+  "episode_url": "https://www.xiaoyuzhoufm.com/episode/6a8eb50eef65145dfcc5c072",
+  "page_id": "P01",
+  "palette": "04",
+  "workspace_source": "/Users/admin/podcast-test/outputs/6a8eb50eef65145dfcc5c072",
+  "user_words": "仍然喜欢第一版，请你检查一下页面内文字，是否有首读读者理解不了或者核心内容覆盖不全的部分，若有，则继续优化后完成最终交付",
+  "approval_scope": "整页单版本（第二轮A案按冷读改七处措辞后的定稿）；不是总览必看基准；未纳入 USAGE_NOTICE 公开展示列表",
+  "reuse_boundary": "校准统一载体（整期放在一条交付流上）、实践挂在载体部位、物件完成度；不复制配色04、文案、坐标、管道/漏斗/包裹/茶具物件",
+  "files": [
+    {
+      "path": "P01.png",
+      "bytes": 530022,
+      "sha256": "98d9fd3b18903f49daef399922d8336481ee37a804b4e5fdfb0ec0cac9e2b3b7",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "P01@2x.png",
+      "bytes": 1136461,
+      "sha256": "27081abe5c7412acdf01cd01070512c82076d4c291ee1631d55195d2efae24d5",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "path": "P01-phone.png",
+      "bytes": 175232,
+      "sha256": "e9332e3e8447fd20ca4bb92d1d58fd0800a258a2330d4c4270ec8c6105b83303",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "P01.excalidraw",
+      "bytes": 199222,
+      "sha256": "381500f4f742aba75a04e23be2d64e6ee74ffa400c4f23c9d253d9e67feae007"
+    }
+  ]
+}

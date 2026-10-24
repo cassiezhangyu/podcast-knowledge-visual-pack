@@ -19,7 +19,7 @@ export function checkAlbumCoverSource({ metadata, sourceUrl }) {
   return { status: 'pass', podcast_cover_url: album, source_url: src };
 }
 
-/** v0.4.5-local：抓取时登记的专辑封面文件（00-source/brand/album_cover.json）是唯一来源。 */
+/** 抓取时登记的专辑封面文件（00-source/brand/album_cover.json）是唯一来源。 */
 export function checkAlbumCoverFile({ record, assetSha256 }) {
   if (!record) return { status: 'not_recorded' };
   const allowed = [record.asset_sha256, record.png_sha256].filter(Boolean);

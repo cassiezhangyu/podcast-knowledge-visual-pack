@@ -6,7 +6,15 @@
 
 ## 安装
 
-将仓库克隆到目标项目的 `.agents/skills/podcast-knowledge-visual-pack/`，或将 Release 安装包解压到该位置。根目录可直接找到 `SKILL.md`。
+源码安装：将仓库克隆到目标项目的 `.agents/skills/podcast-knowledge-visual-pack/`，或将 Release 安装包解压到该位置。根目录可直接找到 `SKILL.md`。
+
+标准安装器使用单独的 `install` 分发分支，其中 `skills/podcast-knowledge-visual-pack/` 由同一源码的 copy 模式生成，包含普通文件和目录，不含符号链接。该分支按发版指南发布后，可向 Codex 发送：
+
+```text
+使用 skill-installer，从 https://github.com/cassiezhangyu/podcast-knowledge-visual-pack/tree/install/skills/podcast-knowledge-visual-pack 安装到当前项目的 .agents/skills，并安装依赖、完成构建。
+```
+
+源码的 `main`／旧正式标签仍含兼容链接，不能作为标准安装器入口。标准安装器负责下载 Skill；运行依赖与构建仍按以下说明完成。
 
 进入 Skill 根目录安装依赖并构建：
 
@@ -23,7 +31,7 @@ npm run build
 python3 scripts/install_skill.py --mode copy --destination <另一项目>/.agents/skills/podcast-knowledge-visual-pack
 ```
 
-目标必须尚不存在，并位于当前 Skill 目录之外。copy 携带规则、资源、运行源码、脚本、worker、依赖声明与构建配置；不携带 node_modules、dist、开发测试或生产工作区。进入目标目录执行 `npm ci` 和 `npm run build`，音频转写仍需独立 MLX 环境。案例迁移范围受 `LICENSING.md` 约束。
+目标必须尚不存在，并位于当前 Skill 目录之外。copy 将包内兼容链接展开为普通文件和目录，携带规则、资源、运行源码、脚本、worker、依赖声明与构建配置；不携带 node_modules、dist、开发测试或生产工作区。进入目标目录执行 `npm ci` 和 `npm run build`，音频转写仍需独立 MLX 环境。案例迁移范围受 `LICENSING.md` 约束。
 
 安装器保留 link 与 legacy 以兼容旧调用；本项目使用直接存放，新增独立安装使用 copy。官方目录说明见 [Codex Skill 文档](https://learn.chatgpt.com/docs/build-skills)。
 
@@ -66,7 +74,7 @@ podcast-knowledge-visual-pack/
     design_tokens.json docs/ src/ workers/
 ```
 
-`rules/`、`schemas/`、`templates/`、`examples/`、`taste.md`、`design_tokens.json` 及原环境文档路径均为指向规范位置的相对兼容链接。现有命令、历史哈希绑定和案例引用可继续通过原路径读取；编辑链接和规范路径会修改同一文件，无需两处同步。完整 Skill 直接在其根目录维护；运行回归测试及配置位于本仓库 `development/`。`npm test` 与 `npm run test:python` 从本仓库 development 目录加载测试；独立 copy 安装仅携带运行能力，不携带项目测试。开发测试与 `RELEASE_GUIDE.md` 不要求每次生产加载；正式发版时按该指南执行。执行 `python3 scripts/check_skill_layout.py` 检查结构、兼容链接及运行资源。
+`rules/`、`schemas/`、`templates/`、`examples/`、`taste.md`、`design_tokens.json` 及原环境文档路径均为指向规范位置的相对兼容链接。现有命令、历史哈希绑定和案例引用可继续通过原路径读取；源码中编辑链接和规范路径会修改同一文件，无需两处同步。copy 分发包中的兼容路径是生成副本；维护时修改源码并重新生成，不单独编辑副本。完整 Skill 直接在其根目录维护；运行回归测试及配置位于本仓库 `development/`。`npm test` 与 `npm run test:python` 从本仓库 development 目录加载测试；独立 copy 安装仅携带运行能力，不携带项目测试。开发测试与 `RELEASE_GUIDE.md` 不要求每次生产加载；正式发版时按该指南执行。执行 `python3 scripts/check_skill_layout.py` 检查结构、兼容链接及运行资源。
 
 ## 环境与依赖
 

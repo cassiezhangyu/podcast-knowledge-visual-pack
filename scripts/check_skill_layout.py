@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """检查 Skill 资源、兼容链接及 copy 安装所需代码；不审批内容或图片。"""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -15,7 +16,20 @@ ALIASES = {
     "docs/RENDER_BROWSER_ENVIRONMENT.md": "references/environment/RENDER_BROWSER_ENVIRONMENT.md",
     "references/examples": "assets/examples",
     "assets/LICENSING.md": "LICENSING.md",
+    "src": "scripts/src",
+    "workers": "scripts/workers",
 }
+
+
+def resource_hashes(path):
+    if path.is_file():
+        return {".": hashlib.sha256(path.read_bytes()).hexdigest()}
+    if path.is_dir():
+        return {str(item.relative_to(path)): hashlib.sha256(item.read_bytes()).hexdigest()
+                for item in path.rglob("*") if item.is_file()
+                and "__pycache__" not in item.parts and item.suffix != ".pyc"
+                and item.name != "build-color-library.mjs"}
+    return None
 
 
 def check(root):
@@ -25,8 +39,10 @@ def check(root):
         alias, target = root / old, root / current
         if not target.exists():
             errors.append("缺少规范资源：" + current)
-        if not alias.is_symlink() or alias.resolve() != target.resolve():
-            errors.append("兼容路径未连接规范资源：" + old)
+        if not (alias.is_symlink() and alias.resolve() == target.resolve()):
+            if (alias.is_file() != target.is_file() or alias.is_dir() != target.is_dir()
+                    or resource_hashes(alias) != resource_hashes(target)):
+                errors.append("兼容路径与规范资源不一致：" + old)
     for name in ["SKILL.md", "RELEASE_GUIDE.md", "package.json", "package-lock.json", "tsconfig.json",
                  "scripts/install_skill.py", "scripts/src/validate.ts", "scripts/workers/mlx_whisper_provider.py"]:
         if not (root / name).is_file():

@@ -13,6 +13,28 @@ CODE_DIRS = ("scripts", "src", "workers")
 CODE_FILES = ("package.json", "package-lock.json", "tsconfig.json")
 
 
+def copy_portable(source, item, target, ancestors=()):
+    """将包内链接展开为普通文件，拒绝外部、失效和循环链接。"""
+    try:
+        resolved = item.resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise ValueError(f"可迁移安装包含失效或外部资源链接：{item}") from error
+    if (item.is_symlink() and os.path.isabs(os.readlink(item))) or source not in resolved.parents:
+        raise ValueError(f"可迁移安装包含失效或外部资源链接：{item}")
+    if resolved in ancestors:
+        raise ValueError(f"可迁移安装包含循环资源链接：{item}")
+    if resolved.is_dir():
+        target.mkdir()
+        for child in sorted(resolved.iterdir()):
+            if child.name == "__pycache__" or child.suffix == ".pyc" or child.name == "build-color-library.mjs":
+                continue
+            copy_portable(source, child, target / child.name, ancestors + (resolved,))
+    elif resolved.is_file():
+        shutil.copyfile(resolved, target)
+    else:
+        raise ValueError(f"可迁移安装包含不支持的文件：{item}")
+
+
 def install(source, destination, mode="legacy"):
     source = Path(source).resolve()
     destination = Path(os.path.abspath(Path(destination).expanduser()))
@@ -43,10 +65,10 @@ def install(source, destination, mode="legacy"):
         for name in names:
             item = source / name
             target = staging / name
-            if item.is_symlink():
-                # 只保留包内相对链接，拒绝将本机外部路径混入可迁移包。
-                if mode == "copy" and (os.path.isabs(os.readlink(item)) or source not in item.resolve().parents):
-                    raise ValueError(f"可迁移安装不能包含外部资源链接：{name}")
+            if mode == "copy":
+                if item.exists() or item.is_symlink():
+                    copy_portable(source, item, target)
+            elif item.is_symlink():
                 target.symlink_to(os.readlink(item), target_is_directory=item.is_dir())
             elif item.is_dir():
                 shutil.copytree(item, target, symlinks=True,
@@ -58,12 +80,6 @@ def install(source, destination, mode="legacy"):
                 "runtime_root": str(source),
                 "note": "旧精简入口：命令在runtime_root运行。新安装优先使用--mode link或copy。",
             }, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
-        if mode == "copy":
-            for path in staging.rglob("*"):
-                if path.is_symlink() and (os.path.isabs(os.readlink(path))
-                                          or not path.exists()
-                                          or staging not in path.resolve().parents):
-                    raise ValueError("可迁移安装包含失效或外部资源链接：" + str(path.relative_to(staging)))
         if destination.exists() or destination.is_symlink():
             raise ValueError("安装目标已存在；未覆盖现有入口。")
         staging.rename(destination)

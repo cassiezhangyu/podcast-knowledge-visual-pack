@@ -126,14 +126,28 @@ python3 scripts/check_skill_layout.py
 
 与 `scripts/install_skill.py` 的 copy 模式一致，至少：
 
-- 入口：`SKILL.md`、`README.md`、`RELEASE_NOTES.md`、`LICENSE`、`LICENSING.md`、`taste.md`、`design_tokens.json`（含兼容链接目标）
+- 入口：`SKILL.md`、`README.md`、`RELEASE_NOTES.md`、`LICENSE`、`LICENSING.md`、`taste.md`、`design_tokens.json`（兼容链接展开为普通文件）
 - `RELEASE_GUIDE.md`（建议纳入，便于下游按同一规范再发）
-- 资源：`references/`、`assets/`、以及根上指向它们的兼容链接目录／文件
-- 代码：`scripts/`、`package.json`、`package-lock.json`、`tsconfig.json`、兼容用的 `src/`／`workers/` 链接
+- 资源：`references/`、`assets/`、以及根上展开后的兼容目录／文件
+- 代码：`scripts/`、`package.json`、`package-lock.json`、`tsconfig.json`、兼容用的 `src/`／`workers/` 普通目录
 
 ### 必须排除
 
 `.git/`、`node_modules/`、`dist/`、`development/`、缓存、临时文件、密钥／私密配置、生产工作区、无关大文件。
+
+### 标准安装器分发入口
+
+源码保留兼容链接。使用 copy 模式从已验证的发版提交生成分发目录：
+
+```bash
+python3 scripts/install_skill.py --mode copy --destination <临时目录>/skills/podcast-knowledge-visual-pack
+```
+
+copy 展开所有包内链接，并拒绝失效、包外和循环链接。检查产物不含符号链接，通过 layout、标准安装器实际安装与安装后构建，再用它生成 ZIP。
+
+同一产物同时用于单独的 `install` 分支，其根下只维护 `skills/podcast-knowledge-visual-pack/`。这是自动生成的分发快照，不在该分支修改规则或代码；版本仍由源码 main 的正式 Tag 管理。提交说明记录对应源码完整 Commit，供追溯。更新使用普通提交和快进 push，保留旧快照；不强制推送。
+
+`install` 分支的创建或更新属于远程写入，须纳入第5节确认卡片；确认卡片同时列出源码 Commit、分发 Commit、包版本、验证结果和拟执行的 push 命令。获得针对该方案的明确确认后才发布。发布后 README 的标准安装器链接才可对外使用。
 
 ### 校验
 

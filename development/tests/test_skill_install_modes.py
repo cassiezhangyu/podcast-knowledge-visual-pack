@@ -3,6 +3,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -10,6 +11,9 @@ ROOT = (Path(__file__).resolve().parents[2])
 spec = importlib.util.spec_from_file_location("layout_installer", ROOT / "scripts/install_skill.py")
 installer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(installer)
+layout_spec = importlib.util.spec_from_file_location("skill_layout", ROOT / "scripts/check_skill_layout.py")
+layout = importlib.util.module_from_spec(layout_spec)
+layout_spec.loader.exec_module(layout)
 
 
 class InstallationModes(unittest.TestCase):
@@ -44,6 +48,7 @@ class InstallationModes(unittest.TestCase):
             base = Path(temp)
             source = self.fixture(base)
             target = installer.install(source, base / "installed", "copy")
+            self.assertFalse(any(path.is_symlink() for path in target.rglob("*")))
             source.rename(base / "unavailable-source")
             moved = target.rename(base / "relocated")
             self.assertEqual((moved / "rules/check.md").read_text(), "现行规则")
@@ -51,6 +56,37 @@ class InstallationModes(unittest.TestCase):
             self.assertFalse((moved / "RUNTIME_ROOT.json").exists())
             for name in ["node_modules", "dist", "workspace", "tests"]:
                 self.assertFalse((moved / name).exists())
+
+
+    def test_copy_expands_nested_file_and_directory_links(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            source = self.fixture(base)
+            (source / "references/alias").symlink_to("rules", target_is_directory=True)
+            (source / "references/check.md").symlink_to("rules/check.md")
+            target = installer.install(source, base / "installed", "copy")
+            self.assertEqual((target / "references/alias/check.md").read_text(), "现行规则")
+            self.assertEqual((target / "references/check.md").read_text(), "现行规则")
+            self.assertFalse(any(path.is_symlink() for path in target.rglob("*")))
+
+    def test_copy_rejects_circular_directory_link(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            source = self.fixture(base)
+            (source / "references/rules/loop").symlink_to("..", target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "循环"):
+                installer.install(source, base / "installed", "copy")
+            self.assertFalse((base / "installed").exists())
+            self.assertEqual(list(base.glob(".skill-install-*")), [])
+
+    def test_layout_accepts_copies_and_detects_modified_alias(self):
+        with tempfile.TemporaryDirectory() as temp:
+            source = self.fixture(Path(temp))
+            target = installer.install(source, Path(temp) / "installed", "copy")
+            with unittest.mock.patch.dict(layout.ALIASES, {"rules": "references/rules"}, clear=True):
+                self.assertFalse(any("兼容路径" in error for error in layout.check(target)))
+                (target / "rules/check.md").write_text("意外变更", encoding="utf8")
+                self.assertIn("兼容路径与规范资源不一致：rules", layout.check(target))
 
     def test_legacy_retains_runtime_binding(self):
         with tempfile.TemporaryDirectory() as temp:

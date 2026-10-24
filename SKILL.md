@@ -11,7 +11,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 ## 安装入口与工具位置
 
-本项目直接在 `.agents/skills/podcast-knowledge-visual-pack/` 维护完整 Skill；所有 npm 与 scripts 命令在该根目录执行；源码与转写 worker 分别位于 `scripts/src/` 和 `scripts/workers/`。copy 安装包含同一套代码与资源，在复制后的根目录安装依赖并构建。仅旧精简入口仍读取 `RUNTIME_ROOT.json → runtime_root` 定位程序。规范资料按本 Skill 根目录解析；`references/` 保存规则与数据合同，`assets/` 保存模板、参数和案例。旧 `rules/`、`schemas/`、`templates/`、`examples/`、`taste.md` 和 `design_tokens.json` 是兼容链接，不另行维护。生产工作区放在 Skill 之外。
+本项目直接在 `.agents/skills/podcast-knowledge-visual-pack/` 维护完整 Skill；所有 npm 与 scripts 命令在该根目录执行；源码与转写 worker 分别位于 `scripts/src/` 和 `scripts/workers/`。copy 安装将兼容链接展开为普通文件和目录，包含同一套代码与资源，在复制后的根目录安装依赖并构建。仅旧精简入口仍读取 `RUNTIME_ROOT.json → runtime_root` 定位程序。规范资料按本 Skill 根目录解析；`references/` 保存规则与数据合同，`assets/` 保存模板、参数和案例。旧 `rules/`、`schemas/`、`templates/`、`examples/`、`taste.md` 和 `design_tokens.json` 在源码中是兼容链接，在 copy 分发包中是生成副本；维护时修改规范资源并重新生成分发包。生产工作区放在 Skill 之外。
 
 ## 执行边界：主会话完成绘制与自检
 

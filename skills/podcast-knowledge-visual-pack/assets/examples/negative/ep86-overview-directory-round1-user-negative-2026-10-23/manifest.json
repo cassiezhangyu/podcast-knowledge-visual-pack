@@ -1,0 +1,39 @@
+{
+  "case_id": "ep86-overview-directory-round1-user-negative-2026-10-23",
+  "kind": "user_rejected_negative_overview",
+  "confirmed_on": "2026-10-23",
+  "episode_url": "https://www.xiaoyuzhoufm.com/episode/6a8eb50eef65145dfcc5c072",
+  "page_id": "P01",
+  "palette": "04",
+  "user_words": "三图都不合格，对比正面案例相差甚远，既没有体现知识框架，视觉逻辑，和版面设计审美，重做",
+  "approval_scope": "整页；用户否定第一轮三案，本记录只收A案作目录式总览负例",
+  "files": [
+    {
+      "path": "P01.png",
+      "bytes": 598935,
+      "sha256": "54b4f5a52ad11c1a4da32c3b388c1ad5e49922a7a93975b25606eeb347faf215",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "P01@2x.png",
+      "bytes": 1281688,
+      "sha256": "bfd23ada4fa861b85e3e0ebb1090d64a7d6f0deaa087515b3aec45e6b8edc7d8",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "path": "P01-phone.png",
+      "bytes": 174712,
+      "sha256": "e2262aeca85700a4b0f54d4b546f0b9fa6f99e285c85d34c1821bcb9885f6a9e",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "P01.excalidraw",
+      "bytes": 117694,
+      "sha256": "dbb73ad9be7c634fccf257c59ed73484ace97dbc6953a59060d8aae0b8bd4a57"
+    }
+  ],
+  "source_note": "本地单期产物；不随分发记录原工作区绝对路径。"
+}

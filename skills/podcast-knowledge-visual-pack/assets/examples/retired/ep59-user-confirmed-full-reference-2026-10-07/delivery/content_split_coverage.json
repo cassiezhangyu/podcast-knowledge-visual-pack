@@ -1,0 +1,752 @@
+{
+  "schema_version": "1.0",
+  "kind": "content_split_coverage",
+  "status": "completed",
+  "episode_content_inventory_sha256": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+  "content_split_sha256": "527ea76c947099a7abb7c2f92a37b496cd54a02e2b9a64543c687705449978e3",
+  "unit_dispositions": [
+    {
+      "source_id": "cu_001",
+      "destination": "module",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+    },
+    {
+      "source_id": "cu_002",
+      "destination": "module",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+    },
+    {
+      "source_id": "cu_003",
+      "destination": "module",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+    },
+    {
+      "source_id": "cu_004",
+      "destination": "module",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+    },
+    {
+      "source_id": "cu_005",
+      "destination": "module",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+    },
+    {
+      "source_id": "cu_006",
+      "destination": "module",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+    },
+    {
+      "source_id": "cu_007",
+      "destination": "module",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+    },
+    {
+      "source_id": "cu_008",
+      "destination": "module",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+    },
+    {
+      "source_id": "cu_009",
+      "destination": "module",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+    },
+    {
+      "source_id": "cu_010",
+      "destination": "module",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+    },
+    {
+      "source_id": "cu_011",
+      "destination": "module",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+    },
+    {
+      "source_id": "cu_012",
+      "destination": "module",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+    },
+    {
+      "source_id": "cu_013",
+      "destination": "module",
+      "module_ids": [
+        "mod_04"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 为何只按时间长短安排生活还不够？"
+    },
+    {
+      "source_id": "cu_014",
+      "destination": "module",
+      "module_ids": [
+        "mod_05"
+      ],
+      "role": "主论证",
+      "rationale": "该单元回答 当人生计划或热门路径失效，怎样给自己留选择余地？"
+    },
+    {
+      "source_id": "cu_015",
+      "destination": "module",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 主动配置会不会变成另一种自我束缚？"
+    },
+    {
+      "source_id": "cu_016",
+      "destination": "module",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 主动配置会不会变成另一种自我束缚？"
+    },
+    {
+      "source_id": "cu_017",
+      "destination": "module",
+      "module_ids": [
+        "mod_07"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 当伴侣持续焦虑又不愿接受建议，能做的是什么？"
+    },
+    {
+      "source_id": "cu_018",
+      "destination": "module",
+      "module_ids": [
+        "mod_08"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 思辨能力怎样在读书与日常生活中练习？"
+    },
+    {
+      "source_id": "cu_019",
+      "destination": "module",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？"
+    },
+    {
+      "source_id": "cu_020",
+      "destination": "module",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？"
+    },
+    {
+      "source_id": "cu_021",
+      "destination": "module",
+      "module_ids": [
+        "mod_10"
+      ],
+      "role": "平行问答",
+      "rationale": "该单元回答 改变缓慢、现实压力很强时，怎样重新看待进度？"
+    }
+  ],
+  "detail_dispositions": [
+    {
+      "source_id": "det_001_01",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_01 的example：麦当劳套餐有汉堡、鸡翅、薯条与饮料，偏好随当天状态变化"
+    },
+    {
+      "source_id": "det_001_02",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_01 的example：成都饮品一次点几杯、分别尝试，以有限停留时间分散试错"
+    },
+    {
+      "source_id": "det_001_03",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_01 的boundary：ETF 是类比，节目重点随后转向主动配置人生，而非教买基金"
+    },
+    {
+      "source_id": "det_002_01",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_01 的mechanism：短视频平台持续设计让人刷下去；主讲人借争地策略说明先占时间"
+    },
+    {
+      "source_id": "det_002_02",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_01 的example：去苏州河南岸散步需要比较步行、骑行、地铁和打车的成本"
+    },
+    {
+      "source_id": "det_002_03",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_01 的boundary：刷剧刷手机也有短暂解压作用，问题在持续占据与权重"
+    },
+    {
+      "source_id": "det_003_01",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_01 的mechanism：FOMO 与推荐算法把热门信息不断推到面前"
+    },
+    {
+      "source_id": "det_003_02",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_01 的example：Catch-22 要理解小说里的循环困局，单记中文标签不够"
+    },
+    {
+      "source_id": "det_003_03",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_01 的boundary：平台前半小时也可提供信息与社交价值，批评的是持续摄取注意力"
+    },
+    {
+      "source_id": "det_003_04",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "context",
+      "rationale": "保留为 mod_01 的context：人生 ETF 更接近跨行业的主题组合"
+    },
+    {
+      "source_id": "det_003_05",
+      "module_ids": [
+        "mod_01"
+      ],
+      "role": "context",
+      "rationale": "保留为 mod_01 的context：主讲人区分行业、宽基、主题 ETF，人生组合主要借用主题 ETF 的跨领域视角"
+    },
+    {
+      "source_id": "det_004_01",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "claim",
+      "rationale": "保留为 mod_02 的claim：饮食、睡眠、运动被列为生理健康三板块"
+    },
+    {
+      "source_id": "det_004_02",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：壶铃视频鼓励反复甩动，主讲人质疑是否实现增肌目的"
+    },
+    {
+      "source_id": "det_004_03",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_02 的boundary：训练重量、骨质疏松比例等具体说法尚未独立医学核实"
+    },
+    {
+      "source_id": "det_005_01",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "claim",
+      "rationale": "保留为 mod_02 的claim：原生家庭会留下烙印，但不必每个问题都彻底解决"
+    },
+    {
+      "source_id": "det_005_02",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_02 的mechanism：主讲人用未完成的发展任务解释某些成年困境"
+    },
+    {
+      "source_id": "det_005_03",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_02 的uncertainty：ADHD 与创伤的关系被明确介绍为一种理论"
+    },
+    {
+      "source_id": "det_006_01",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：主讲人比较自己在打工与创业阶段感受到的资源差别"
+    },
+    {
+      "source_id": "det_006_02",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：女性投资人听男性创始人展示资历，却希望先谈项目本身"
+    },
+    {
+      "source_id": "det_006_03",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_02 的mechanism：女性持续被要求满足多种角色，容易形成永远不够的感受"
+    },
+    {
+      "source_id": "det_006_04",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_02 的boundary：关于性别、稀缺心态与智商分数的推断未在本期独立验证"
+    },
+    {
+      "source_id": "det_006_05",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：主讲人认为男性也可能因被要求压抑情感而难以学习亲密关系"
+    },
+    {
+      "source_id": "det_007_01",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "claim",
+      "rationale": "保留为 mod_02 的claim：升职、加薪、生育等正面变化也被主讲人列为压力"
+    },
+    {
+      "source_id": "det_007_02",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：亲人离世的痛苦无法抹去，但可学习与之共存"
+    },
+    {
+      "source_id": "det_007_03",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_02 的boundary：职业倦怠和压力后效不能仅凭节目叙述诊断个人"
+    },
+    {
+      "source_id": "det_008_01",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：主讲人自述佩戴血糖仪时不同食物出现不同反应"
+    },
+    {
+      "source_id": "det_008_02",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_02 的example：主讲人提到经期不适可尝试调整，但未提供可推广疗效证据"
+    },
+    {
+      "source_id": "det_008_03",
+      "module_ids": [
+        "mod_02"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_02 的boundary：三倍、五倍、三千倍等提升幅度不得当作已证实效果"
+    },
+    {
+      "source_id": "det_009_01",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_03 的example：国企改革后部分人转向个体经营，被用于类比结构性变迁"
+    },
+    {
+      "source_id": "det_009_02",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "claim",
+      "rationale": "保留为 mod_03 的claim：主讲人列举定制摄影、旅游、情感陪伴与线下活动"
+    },
+    {
+      "source_id": "det_009_03",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_03 的boundary：超级个体成为主流及岗位变化是主讲人预测"
+    },
+    {
+      "source_id": "det_010_01",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_03 的example：营销从定位和客户关系一直延伸到细分市场与推广"
+    },
+    {
+      "source_id": "det_010_02",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_03 的example：合伙人五五分、激励和投资人偏好被用来说明股权设计复杂"
+    },
+    {
+      "source_id": "det_010_03",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_03 的boundary：70% 持股等判断是节目举例，需专业法律财税意见"
+    },
+    {
+      "source_id": "det_011_01",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_03 的mechanism：阅读提供架构、上下文和完整推理过程"
+    },
+    {
+      "source_id": "det_011_02",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_03 的boundary：观点一致不代表照搬；推理也想清楚才算自己的判断"
+    },
+    {
+      "source_id": "det_012_01",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_03 的example：主讲人批评只展示花哨结果却省略步骤的 AI 教程"
+    },
+    {
+      "source_id": "det_012_02",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "counterpoint",
+      "rationale": "保留为 mod_03 的counterpoint：若从零做自媒体，十小时详解可能难以获得起步受众"
+    },
+    {
+      "source_id": "det_012_03",
+      "module_ids": [
+        "mod_03"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_03 的boundary：用噱头吸引的人与愿意深入学习的人可能并非同一群"
+    },
+    {
+      "source_id": "det_013_01",
+      "module_ids": [
+        "mod_04"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_04 的example：主讲人讲述硬币大小估计实验来说明注意力影响感受"
+    },
+    {
+      "source_id": "det_013_02",
+      "module_ids": [
+        "mod_04"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_04 的example：通勤时看植物、在秋千上撸猫是短时间专注休息例子"
+    },
+    {
+      "source_id": "det_013_03",
+      "module_ids": [
+        "mod_04"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_04 的boundary：硬币实验细节和效果幅度尚未查原研究"
+    },
+    {
+      "source_id": "det_014_01",
+      "module_ids": [
+        "mod_05"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_05 的mechanism：只剩 Plan A 时试图消除不可能消除的风险会加剧焦虑"
+    },
+    {
+      "source_id": "det_014_02",
+      "module_ids": [
+        "mod_05"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_05 的example：出租车司机与空乘谈股票被主讲人视作过热信号"
+    },
+    {
+      "source_id": "det_014_03",
+      "module_ids": [
+        "mod_05"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_05 的boundary：转码和公考前景是个人推断，不构成职业或投资建议"
+    },
+    {
+      "source_id": "det_014_04",
+      "module_ids": [
+        "mod_05"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_05 的mechanism：她用转码与公考热度说明跟风时也要估计周期位置"
+    },
+    {
+      "source_id": "det_015_01",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_06 的example：主讲人说开播时并未先规划百万订阅用户画像"
+    },
+    {
+      "source_id": "det_015_02",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_06 的example：前一年半尚无商务合作，最初按爱好做节目"
+    },
+    {
+      "source_id": "det_015_03",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_06 的boundary：听众问题的建议是主讲人经验，不是所有人的无风险路径"
+    },
+    {
+      "source_id": "det_016_01",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_06 的example：听众减少 WIP 后从预期加班变成准时下班"
+    },
+    {
+      "source_id": "det_016_02",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_06 的example：苏州河散步被举为流程空出的自由时间"
+    },
+    {
+      "source_id": "det_016_03",
+      "module_ids": [
+        "mod_06"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_06 的boundary：流程不是僵化线路，爱好可以不以效率或赚钱为目标"
+    },
+    {
+      "source_id": "det_017_01",
+      "module_ids": [
+        "mod_07"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_07 的example：听众把社交应用移到平板，减少工作时刷手机"
+    },
+    {
+      "source_id": "det_017_02",
+      "module_ids": [
+        "mod_07"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_07 的mechanism：主讲人区分伴侣的焦虑倾向与两人可协商的交流时间"
+    },
+    {
+      "source_id": "det_017_03",
+      "module_ids": [
+        "mod_07"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_07 的boundary：HRV、压力与创作缓解焦虑等建议不等于诊断或保证有效"
+    },
+    {
+      "source_id": "det_017_04",
+      "module_ids": [
+        "mod_07"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_07 的example：主讲人提出可把难以掌控的感受转入写作、绘画等创作活动"
+    },
+    {
+      "source_id": "det_018_01",
+      "module_ids": [
+        "mod_08"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_08 的example：主讲人阅读《稀缺》时想象若由自己组织内容会如何调整"
+    },
+    {
+      "source_id": "det_018_02",
+      "module_ids": [
+        "mod_08"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_08 的example：两百多篇日记用于逐步梳理亲密关系困惑"
+    },
+    {
+      "source_id": "det_018_03",
+      "module_ids": [
+        "mod_08"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_08 的boundary：没有想清楚时可以明确说不知道，不应以自信语气替代推理"
+    },
+    {
+      "source_id": "det_019_01",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_09 的example：听众说朋友的人生选择越来越远，自己也愤怒于性别限制"
+    },
+    {
+      "source_id": "det_019_02",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_09 的mechanism：主讲人建议不只在同龄人中找支持，也可向年长者交流"
+    },
+    {
+      "source_id": "det_019_03",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_09 的boundary：植物生命周期只用作理解关系变化的类比"
+    },
+    {
+      "source_id": "det_020_01",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_09 的example：主讲人用雌雄交配策略讲群体行为的博弈，比例并不确定"
+    },
+    {
+      "source_id": "det_020_02",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "claim",
+      "rationale": "保留为 mod_09 的claim：她认为女性的苦难也可能增加对关系和意义的理解"
+    },
+    {
+      "source_id": "det_020_03",
+      "module_ids": [
+        "mod_09"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_09 的boundary：群体性别比较和进化类比不能推出个体优劣"
+    },
+    {
+      "source_id": "det_021_01",
+      "module_ids": [
+        "mod_10"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_10 的example：木匠精进时最后一步会再分出更细的目标"
+    },
+    {
+      "source_id": "det_021_02",
+      "module_ids": [
+        "mod_10"
+      ],
+      "role": "example",
+      "rationale": "保留为 mod_10 的example：主讲人以土壤中的跳虫说明微观观察的趣味"
+    },
+    {
+      "source_id": "det_021_03",
+      "module_ids": [
+        "mod_10"
+      ],
+      "role": "boundary",
+      "rationale": "保留为 mod_10 的boundary：宏微视角是心理与意义框架，不替代健康治疗"
+    },
+    {
+      "source_id": "det_021_04",
+      "module_ids": [
+        "mod_10"
+      ],
+      "role": "mechanism",
+      "rationale": "保留为 mod_10 的mechanism：向上看生命意义、向下看微观细节，离开单一社会时钟的评判"
+    }
+  ]
+}

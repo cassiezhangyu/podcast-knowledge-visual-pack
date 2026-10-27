@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SourceRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "locator", "retrieved_at"],
+  "properties": {
+    "kind": {"enum": ["input_url", "html_meta", "embedded_json", "http_header", "audio_download"]},
+    "locator": {"type": "string", "minLength": 1},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "note": {"type": "string"}
+  }
+}

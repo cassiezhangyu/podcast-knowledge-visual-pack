@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "kind": "knowledge_gate",
+  "status": "pass",
+  "knowledge_graph_sha256": "ea0808e1e69950caf19e36b178480a2361008086c3b94592b8c2dfdd8e605751",
+  "checks": [
+    {
+      "name": "approved_source_chain",
+      "status": "pass",
+      "details": {
+        "inventory": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+        "split": "527ea76c947099a7abb7c2f92a37b496cd54a02e2b9a64543c687705449978e3",
+        "grounded": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2"
+      }
+    },
+    {
+      "name": "detail_and_anchor_resolution",
+      "status": "pass",
+      "details": {
+        "details": 69
+      }
+    }
+  ],
+  "high_impact_inference_ids": [],
+  "human_review_required": false,
+  "human_review": {
+    "status": "pass",
+    "reviewed_on": "2026-10-06",
+    "scope": "已批准内容的重排与身份校验，不证明全音频人工听证或外部事实成立。"
+  }
+}

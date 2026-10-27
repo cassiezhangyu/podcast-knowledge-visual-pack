@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IndependentVisualReview", "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "render_manifest_sha256", "reviewer_context", "reviewer_context_id", "pages", "reviewed_at"],
+  "properties": {
+    "schema_version": {"enum": ["1.0", "1.1"]}, "kind": {"const": "independent_visual_review"}, "status": {"const": "completed"},
+    "render_manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "reviewer_context": {"const": "isolated_read_only"},
+    "reviewer_context_id": {"type": "string", "minLength": 2},
+    "pages": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["page_id", "png_sha256", "review_packet_sha256", "verdict", "findings", "unfamiliar_reader_check"], "properties": {"page_id": {"type": "string"}, "png_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "review_packet_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "unfamiliar_reader_check": {"$ref": "#/$defs/unfamiliar_reader_check"}, "user_requirements_check": {"$ref": "#/$defs/user_requirements_check"}, "verdict": {"enum": ["TARGET", "REJECT-A", "REJECT-B"]}, "findings": {"type": "array", "items": {"type": "string"}}}}},
+    "reviewed_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [{"if": {"properties": {"schema_version": {"const": "1.1"}}}, "then": {"properties": {"pages": {"items": {"properties": {"unfamiliar_reader_check": {"required": ["review_mode", "prior_exposure", "readback_scope"]}}}}}}}],
+  "$defs": {
+  "user_requirements_check": {"type": "object", "additionalProperties": false, "required": ["basis", "results"], "properties": {"basis": {"$ref": "#/$defs/overview_framework_check/properties/basis"}, "results": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "status", "visible_evidence"], "properties": {"id": {"type": "string", "minLength": 1}, "status": {"enum": ["pass", "fail"]}, "visible_evidence": {"type": "string", "minLength": 1}}}}}},
+  "unfamiliar_reader_check": {
+    "allOf": [{"if": {"required": ["review_mode"], "properties": {"review_mode": {"const": "first_read"}}}, "then": {"required": ["prior_exposure"], "properties": {"prior_exposure": {"const": "none"}}}}],
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "status",
+      "entry_and_path",
+      "block_readback",
+      "graphic_text_gain",
+      "whole_page_summary",
+      "summary_matches_approved_content",
+      "breakpoints",
+      "repairs"
+    ],
+    "properties": {
+      "review_mode": {"enum": ["first_read", "informed_regression"]},
+      "prior_exposure": {"enum": ["none", "content_or_draft", "unknown"]},
+      "readback_scope": {"type": "string", "minLength": 1},
+      "status": {
+        "enum": [
+          "pass",
+          "fail"
+        ]
+      },
+      "entry_and_path": {
+        "type": "string",
+        "minLength": 8
+      },
+      "graphic_text_gain": {
+        "type": "string",
+        "minLength": 8
+      },
+      "whole_page_summary": {
+        "type": "string",
+        "minLength": 8
+      },
+      "summary_matches_approved_content": {
+        "type": "boolean"
+      },
+      "breakpoints": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "repairs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "block_readback": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "block",
+            "observed",
+            "expected",
+            "match"
+          ],
+          "properties": {
+            "block": {
+              "type": "string",
+              "minLength": 1
+            },
+            "observed": {
+              "type": "string",
+              "minLength": 1
+            },
+            "expected": {
+              "type": "string",
+              "minLength": 1
+            },
+            "match": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "overview_framework_check": {
+        "$ref": "#/$defs/overview_framework_check"
+      }
+    }
+  },
+  "overview_framework_check": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "status",
+      "basis",
+      "framework_readback",
+      "relations",
+      "missing_relations",
+      "misread_relations"
+    ],
+    "properties": {
+      "status": {
+        "enum": [
+          "pass",
+          "fail"
+        ]
+      },
+      "basis": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      },
+      "framework_readback": {
+        "type": "string",
+        "minLength": 1
+      },
+      "relations": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "from",
+            "to",
+            "relation_type",
+            "observed",
+            "visible_evidence",
+            "match"
+          ],
+          "properties": {
+            "from": {
+              "type": "string",
+              "minLength": 1
+            },
+            "to": {
+              "type": "string",
+              "minLength": 1
+            },
+            "relation_type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "observed": {
+              "type": "string",
+              "minLength": 1
+            },
+            "visible_evidence": {
+              "type": "string",
+              "minLength": 1
+            },
+            "match": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "missing_relations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "misread_relations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
+}

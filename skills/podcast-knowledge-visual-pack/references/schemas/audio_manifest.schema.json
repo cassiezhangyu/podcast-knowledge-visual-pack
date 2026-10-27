@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AudioManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_identity", "status", "content_identity", "asset", "retrieval", "source_refs"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_identity": {
+      "type": "object", "additionalProperties": false, "required": ["canonical_url", "adapter_version"],
+      "properties": {"canonical_url": {"type": "string", "format": "uri"}, "adapter_version": {"type": "string"}}
+    },
+    "status": {"enum": ["acquired", "cache_hit"]},
+    "content_identity": {"type": "object", "additionalProperties": false, "required": ["sha256"], "properties": {"sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}},
+    "asset": {"type": "object", "additionalProperties": false, "required": ["relative_path", "byte_length", "mime_type"], "properties": {"relative_path": {"type": "string", "minLength": 1}, "byte_length": {"type": "integer", "minimum": 1}, "mime_type": {"type": ["string", "null"]}}},
+    "retrieval": {"type": "object", "additionalProperties": false, "required": ["audio_url", "retrieved_at", "http_status"], "properties": {"audio_url": {"type": "string", "format": "uri"}, "retrieved_at": {"type": "string", "format": "date-time"}, "http_status": {"type": "integer", "minimum": 200, "maximum": 299}}},
+    "source_refs": {"type": "array", "minItems": 1, "items": {"$ref": "source_ref.schema.json"}}
+  }
+}

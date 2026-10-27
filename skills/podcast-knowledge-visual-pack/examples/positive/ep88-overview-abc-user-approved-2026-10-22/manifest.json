@@ -1,0 +1,99 @@
+{
+  "case_id": "ep88-overview-abc-user-approved-2026-10-22",
+  "kind": "user_approved_positive_overview_multi_version",
+  "confirmed_on": "2026-10-22",
+  "episode_url": "https://www.xiaoyuzhoufm.com/episode/6ab11c95f04646b3a954fbe0",
+  "page_id": "OV01",
+  "versions": [
+    "A-V16",
+    "B-V18",
+    "C-V20"
+  ],
+  "palette": "02",
+  "title": "T1",
+  "user_words": "可以，登记 A-V16、B-V18、C-V20",
+  "approval_scope": "整页×三交付版本；2026-10-22 起为正式总览必看基准（三策略并存）；未纳入 USAGE_NOTICE 公开展示列表",
+  "workspace_source": "/workspace/podcast/6ab11c95-v045",
+  "reuse_boundary": "校准三案并存、白话冷读完成度、土壤/破立行框架；不复制配色02、文案、坐标、漏斗/笔记本/年轮物件",
+  "files": [
+    {
+      "path": "A-V16/P01.png",
+      "bytes": 422695,
+      "sha256": "dae4f43b9f291e706ebc783cdf822338ae49dce7f51641e4a79474218b55b009",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "A-V16/P01@2x.png",
+      "bytes": 984628,
+      "sha256": "080e5d11acdf5d6efa182e0e3538e0a79c6c1d62b1129d0f8ed2b710d866a8b9",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "path": "A-V16/P01-phone.png",
+      "bytes": 167714,
+      "sha256": "540c348386f1fb66372f460c26e77879b6f8d1c6b718ff18898d246ee11082ff",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "A-V16/OV01-A-V16.excalidraw",
+      "bytes": 227980,
+      "sha256": "78cc3daa3c53260e7f33bba493804b35825cdeb60df5ac175e872e4d1bf1afe8"
+    },
+    {
+      "path": "B-V18/P01.png",
+      "bytes": 377799,
+      "sha256": "0f868e157e9ef0570c896898f0ea384d0b5423b2930204783d8d027a8e718c79",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "B-V18/P01@2x.png",
+      "bytes": 879993,
+      "sha256": "27de8423fc8f9e3c2d0c8892547e08098bf2aca940b22471b276bff7a6e74c5b",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "path": "B-V18/P01-phone.png",
+      "bytes": 161073,
+      "sha256": "6704e12c4705c732842db2880d17d48d08c57b9f473a4dfe9b9d39283b499cbc",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "B-V18/OV01-B-V18.excalidraw",
+      "bytes": 213033,
+      "sha256": "81b7e9948519d03fb7dcf7a5d5926769cc43125fa6faffc80771fa74363ec087"
+    },
+    {
+      "path": "C-V20/P01.png",
+      "bytes": 449213,
+      "sha256": "cdb7a5f9dc23810dde181990b5d5719526aa3512eb011119ef0e57aaea6d3dd9",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "path": "C-V20/P01@2x.png",
+      "bytes": 1045647,
+      "sha256": "5e055c11fbf6b8cb836db1dc5698b484831648496f35c1c775f40d4a23cf841e",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "path": "C-V20/P01-phone.png",
+      "bytes": 182555,
+      "sha256": "3428a1453cdb2f2736e72bdf89c6c88a375abaae9c11671c3fb5c645d90f4087",
+      "width": 390,
+      "height": 520
+    },
+    {
+      "path": "C-V20/OV01-C-V20.excalidraw",
+      "bytes": 241507,
+      "sha256": "edad9275a0bda7b9a70b68043e4d7bc1a5514cee2d8535d87ca17e49450c112d"
+    }
+  ],
+  "baseline_role": "formal_overview_required_open"
+}

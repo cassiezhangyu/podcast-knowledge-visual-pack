@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "status": "human_review_required",
+  "checks": [
+    {
+      "name": "timestamp_monotonicity",
+      "status": "pass"
+    },
+    {
+      "name": "tail_coverage",
+      "status": "pass",
+      "last_end_ms": 10853500
+    },
+    {
+      "name": "abnormal_asr_segments",
+      "status": "pass",
+      "count": 0,
+      "spans": []
+    }
+  ],
+  "warnings": [
+    "speaker identity unavailable; labels remain null",
+    "corrections require human evidence review"
+  ],
+  "high_risk_candidates": [
+    "ETF",
+    "ETF",
+    "ETF",
+    "AI",
+    "ETF",
+    "ETF",
+    "ETF",
+    "Plan A",
+    "Melody",
+    "AI",
+    "Plan B     01",
+    "amp",
+    "amp",
+    "SOP",
+    "amp",
+    "amp"
+  ]
+}

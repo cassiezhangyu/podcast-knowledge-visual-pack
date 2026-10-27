@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HumanApproval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "stage", "status", "artifact_hashes", "reviewed_by", "reviewed_at", "note"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "kind": {"const": "human_approval"},
+    "stage": {"enum": ["content_review", "content_split", "construction", "visual_page", "package"]},
+    "status": {"const": "accepted"},
+    "artifact_hashes": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "reviewed_by": {"type": "string", "minLength": 1},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "note": {"type": "string"}
+  }
+}

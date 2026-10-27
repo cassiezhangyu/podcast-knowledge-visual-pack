@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"TranscriptQa","type":"object","required":["schema_version","status","checks","warnings"],"properties":{"schema_version":{"const":"1.0"},"status":{"enum":["pass","needs_grounding","fail","human_review_required"]},"checks":{"type":"array"},"warnings":{"type":"array"},"high_risk_candidates":{"type":"array"}}}

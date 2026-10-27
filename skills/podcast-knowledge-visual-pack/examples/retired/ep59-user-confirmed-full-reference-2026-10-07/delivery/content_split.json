@@ -1,0 +1,716 @@
+{
+  "schema_version": "1.0",
+  "kind": "content_split",
+  "status": "completed",
+  "episode_content_inventory_sha256": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+  "overall_question": "在商业平台、工作变化与生活惯性都会替人安排选择的环境里，怎样主动配置重要的人生资源并保留应对变化的余地？",
+  "thesis": "节目借 ETF 的‘一篮子’作类比，主张先看见人生中已有的时间与注意力配置，再主动选择健康、能力、注意力和风险缓冲的组合；后半段问答展示这一思路在具体人生困境中的不同应用。",
+  "thesis_boundaries": [
+    "ETF 是类比，不是具体投资建议，也没有普遍适用的固定权重。",
+    "四根支柱是主讲人提出的组织方式；问答是并列应用，不是第五支柱或因果必经步骤。",
+    "健康、心理、商业、性别和 AI 未来的具体数字、科学解释及预测在本期未经独立核实。",
+    "个人经历与现场建议不能直接推广为每个人都适用的行动处方。"
+  ],
+  "structure_rationale": "开场先定义一篮子与主动选择，随后按主讲人明确提出的四个主题展开；每一主题内保持其独立问题和证据。主讲结束后按现场提问的实际问题拆为五个平行问答模块，避免把松散呼应误标为递进因果，也避免用固定页数反推模块。",
+  "module_order": [
+    "mod_01",
+    "mod_02",
+    "mod_03",
+    "mod_04",
+    "mod_05",
+    "mod_06",
+    "mod_07",
+    "mod_08",
+    "mod_09",
+    "mod_10"
+  ],
+  "modules": [
+    {
+      "id": "mod_01",
+      "title": "人生 ETF 的核心：一篮子与主动配置",
+      "thread": "main_argument",
+      "role": "建立节目总问题与选择原则",
+      "question": "为什么已有许多选择，还要主动构建自己的人生组合？",
+      "conclusion": "人生中的娱乐与资讯原本就由多个选项构成；先看清权重，再主动安排想保留的活动，才能减少单一依赖和被平台默认填满的风险。",
+      "relationship_to_previous": "起点；定义类比并提出主动配置问题。",
+      "source_unit_ids": [
+        "cu_001",
+        "cu_002",
+        "cu_003"
+      ],
+      "required_detail_ids": [
+        "det_001_01",
+        "det_001_02",
+        "det_001_03",
+        "det_002_01",
+        "det_002_02",
+        "det_002_03",
+        "det_003_01",
+        "det_003_02",
+        "det_003_03",
+        "det_003_04",
+        "det_003_05"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "observation",
+          "statement": "套餐和饮品先说明：已有选择可以作为有权重的一篮子来观察。",
+          "source_unit_ids": [
+            "cu_001"
+          ],
+          "detail_ids": [
+            "det_001_01",
+            "det_001_02",
+            "det_001_03"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "娱乐选择会被习惯和平台填满，因此要主动安排想保留的活动并降低执行门槛。",
+          "source_unit_ids": [
+            "cu_002"
+          ],
+          "detail_ids": [
+            "det_002_01",
+            "det_002_02",
+            "det_002_03"
+          ]
+        },
+        {
+          "order": 3,
+          "function": "implication",
+          "statement": "资讯也需主动选择；带上下文的阅读与碎片推送承担不同作用。",
+          "source_unit_ids": [
+            "cu_003"
+          ],
+          "detail_ids": [
+            "det_003_01",
+            "det_003_02",
+            "det_003_03",
+            "det_003_04",
+            "det_003_05"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "套餐和成都饮品的一篮子类比",
+        "苏州河散步的执行成本",
+        "Catch-22 与阅读上下文"
+      ],
+      "boundaries": [
+        "ETF 在此主要是人生选择的比喻，不是金融产品配置建议。",
+        "商业平台可以提供价值；问题在超出需要的持续占用。"
+      ],
+      "open_questions": [
+        "读者自己的默认娱乐与资讯来源是什么？"
+      ]
+    },
+    {
+      "id": "mod_02",
+      "title": "深度健康：知识、心理、压力与个体化",
+      "thread": "main_argument",
+      "role": "解释第一根支柱的内部分层",
+      "question": "把健康当优先事项，具体需要配置哪些能力与做法？",
+      "conclusion": "节目把健康从饮食睡眠运动扩展到心理、社会结构与压力管理，主张先学习辨别知识，再观察个人反应并调整；个体案例与健康数字不可当成普适处方。",
+      "relationship_to_previous": "从主动配置原则转到第一项具体主题；其内部是并列的健康领域与从知识到个体化的学习层次。",
+      "source_unit_ids": [
+        "cu_004",
+        "cu_005",
+        "cu_006",
+        "cu_007",
+        "cu_008"
+      ],
+      "required_detail_ids": [
+        "det_004_01",
+        "det_004_02",
+        "det_004_03",
+        "det_005_01",
+        "det_005_02",
+        "det_005_03",
+        "det_006_01",
+        "det_006_02",
+        "det_006_03",
+        "det_006_04",
+        "det_006_05",
+        "det_007_01",
+        "det_007_02",
+        "det_007_03",
+        "det_008_01",
+        "det_008_02",
+        "det_008_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "生理健康先辨认饮食、睡眠、运动的知识，再选择适合目标的做法。",
+          "source_unit_ids": [
+            "cu_004"
+          ],
+          "detail_ids": [
+            "det_004_01",
+            "det_004_02",
+            "det_004_03"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "boundary",
+          "statement": "心理经历需看是否妨碍当下生活，不把每种家庭烙印都当成必须治疗的问题。",
+          "source_unit_ids": [
+            "cu_005"
+          ],
+          "detail_ids": [
+            "det_005_01",
+            "det_005_02",
+            "det_005_03"
+          ]
+        },
+        {
+          "order": 3,
+          "function": "observation",
+          "statement": "主讲人用自己的职业经历与投资人案例说明结构性角色要求可能被内化。",
+          "source_unit_ids": [
+            "cu_006"
+          ],
+          "detail_ids": [
+            "det_006_01",
+            "det_006_02",
+            "det_006_03",
+            "det_006_04",
+            "det_006_05"
+          ]
+        },
+        {
+          "order": 4,
+          "function": "mechanism",
+          "statement": "压力源未必能消除，仍可辨认滞后影响并尝试管理应对方式。",
+          "source_unit_ids": [
+            "cu_007"
+          ],
+          "detail_ids": [
+            "det_007_01",
+            "det_007_02",
+            "det_007_03"
+          ]
+        },
+        {
+          "order": 5,
+          "function": "implication",
+          "statement": "掌握共通知识后，再观察自己的饮食、运动、睡眠反应并调整。",
+          "source_unit_ids": [
+            "cu_008"
+          ],
+          "detail_ids": [
+            "det_008_01",
+            "det_008_02",
+            "det_008_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "壶铃训练短视频",
+        "原生家庭对成年功能的影响",
+        "女性投资人遇到的资历展示",
+        "压力事件后效",
+        "血糖仪个体观察"
+      ],
+      "boundaries": [
+        "ADHD、压力、运动效果和性别结构相关数字未独立核实。",
+        "个人经历和主讲人的解释不等于诊断、治疗或社会群体定律。"
+      ],
+      "open_questions": [
+        "哪些健康说法值得查原研究或由专业人员审阅？"
+      ]
+    },
+    {
+      "id": "mod_03",
+      "title": "AI 时代护城河：看懂生态并练复合能力",
+      "thread": "main_argument",
+      "role": "解释第二根支柱的推理链",
+      "question": "如果 AI 改变工作，什么能力能帮助人创造价值？",
+      "conclusion": "主讲人先推测小团队与超级个体机会增加，再提出商业全链路知识、深度阅读思辨和务实协调理想与现实三个能力；关于未来岗位与效率的判断仍是预测。",
+      "relationship_to_previous": "与深度健康并列，是第二项主题；先讲生态假设，才讲能力配置，不把预测写成既成事实。",
+      "source_unit_ids": [
+        "cu_009",
+        "cu_010",
+        "cu_011",
+        "cu_012"
+      ],
+      "required_detail_ids": [
+        "det_009_01",
+        "det_009_02",
+        "det_009_03",
+        "det_010_01",
+        "det_010_02",
+        "det_010_03",
+        "det_011_01",
+        "det_011_02",
+        "det_012_01",
+        "det_012_02",
+        "det_012_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "observation",
+          "statement": "先提出 AI 改变工作结构的假设和超级个体机会，而非断言未来已定。",
+          "source_unit_ids": [
+            "cu_009"
+          ],
+          "detail_ids": [
+            "det_009_01",
+            "det_009_02",
+            "det_009_03"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "经营与工作价值需要把营销、运营、财税、合同等环节连起来看。",
+          "source_unit_ids": [
+            "cu_010"
+          ],
+          "detail_ids": [
+            "det_010_01",
+            "det_010_02",
+            "det_010_03"
+          ]
+        },
+        {
+          "order": 3,
+          "function": "mechanism",
+          "statement": "深度阅读训练重建推理，不只囤积他人的结论。",
+          "source_unit_ids": [
+            "cu_011"
+          ],
+          "detail_ids": [
+            "det_011_01",
+            "det_011_02"
+          ]
+        },
+        {
+          "order": 4,
+          "function": "implication",
+          "statement": "务实主义要求在扎实表达与现实获客之间持续调整。",
+          "source_unit_ids": [
+            "cu_012"
+          ],
+          "detail_ids": [
+            "det_012_01",
+            "det_012_02",
+            "det_012_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "国企改革与个体户的历史类比",
+        "营销到财税股权的商业链路",
+        "阅读完整推理",
+        "AI 教程短视频的噱头与扎实教学"
+      ],
+      "boundaries": [
+        "超级个体与岗位变化是节目预测，不是必然未来。",
+        "股权比例、财税和法律说法不能作具体经营建议。"
+      ],
+      "open_questions": [
+        "历史类比能说明哪些可能性，又有哪些条件不同？"
+      ]
+    },
+    {
+      "id": "mod_04",
+      "title": "注意力：把有限感受投向哪里",
+      "thread": "main_argument",
+      "role": "解释第三根支柱",
+      "question": "为何只按时间长短安排生活还不够？",
+      "conclusion": "主讲人认为注意力会改变学习与休息的主观体验，因此建议主动决定聚焦对象；硬币实验及效果幅度需另行核实，不能由单个例子推出确定心理规律。",
+      "relationship_to_previous": "与前两项并列，是第三项主题；回应开篇被平台争夺注意力的问题。",
+      "source_unit_ids": [
+        "cu_013"
+      ],
+      "required_detail_ids": [
+        "det_013_01",
+        "det_013_02",
+        "det_013_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "同样的时间因注意力投入不同而有不同体验",
+          "source_unit_ids": [
+            "cu_013"
+          ],
+          "detail_ids": [
+            "det_013_01"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "主动给学习、休息、娱乐分配注意力",
+          "source_unit_ids": [
+            "cu_013"
+          ],
+          "detail_ids": [
+            "det_013_02",
+            "det_013_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "硬币大小估计",
+        "通勤看植物与秋千撸猫"
+      ],
+      "boundaries": [
+        "注意力影响体验的具体实验和效果尚未核实。",
+        "时间与注意力都有限，节目没有提供唯一正确的日程比例。"
+      ],
+      "open_questions": [
+        "哪些活动真正使读者恢复，而不是只消耗注意力？"
+      ]
+    },
+    {
+      "id": "mod_05",
+      "title": "风险：备选方案与过热意识",
+      "thread": "main_argument",
+      "role": "解释第四根支柱并收束主论证",
+      "question": "当人生计划或热门路径失效，怎样给自己留选择余地？",
+      "conclusion": "主讲人主张准备 Plan B，并警惕因从众而只看热门选择的收益；备选方案意在减轻只押 Plan A 的焦虑，周期案例是个人观察，不能视为就业或投资预测。",
+      "relationship_to_previous": "与前三项并列，是第四项主题；收束为一篮子与主动两个关键词。",
+      "source_unit_ids": [
+        "cu_014"
+      ],
+      "required_detail_ids": [
+        "det_014_01",
+        "det_014_02",
+        "det_014_03",
+        "det_014_04"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "为不确定性准备备选方案，并警惕跟随最热门路径",
+          "source_unit_ids": [
+            "cu_014"
+          ],
+          "detail_ids": [
+            "det_014_01",
+            "det_014_02"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "接受最坏可能后可把注意力转向可执行的备选选择",
+          "source_unit_ids": [
+            "cu_014"
+          ],
+          "detail_ids": [
+            "det_014_03",
+            "det_014_04"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "2007 年股市热潮的亲历观察",
+        "转码与考公热度的类比"
+      ],
+      "boundaries": [
+        "就业前景、投资周期与可依靠家人两年等设想高度依赖个人条件。",
+        "风险管理不等于断言最坏情形一定可轻松承担。"
+      ],
+      "open_questions": [
+        "读者现实可用的缓冲与备选资源有哪些？"
+      ]
+    },
+    {
+      "id": "mod_06",
+      "title": "问答：自我设限与 SOP 下的自由",
+      "thread": "parallel_reflection",
+      "role": "把主动性应用到身份与日常流程",
+      "question": "主动配置会不会变成另一种自我束缚？",
+      "conclusion": "两个问答从不同角度回答：不要把已有标签当能力边界；SOP 若由自己选择并动态调整，可腾出散步和创作等不求产出的时间。播客起步与减少 WIP 的经历仅作例子。",
+      "relationship_to_previous": "主讲后的平行问答；与四根支柱呼应，不构成第五根支柱，也不是前四项的因果结果。",
+      "source_unit_ids": [
+        "cu_015",
+        "cu_016"
+      ],
+      "required_detail_ids": [
+        "det_015_01",
+        "det_015_02",
+        "det_015_03",
+        "det_016_01",
+        "det_016_02",
+        "det_016_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "个人标签和行业默认形式不必先成为行动的边界。",
+          "source_unit_ids": [
+            "cu_015"
+          ],
+          "detail_ids": [
+            "det_015_01",
+            "det_015_02",
+            "det_015_03"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "自己设计的 SOP 可以减少忙乱，并留出不求产出的自由时间。",
+          "source_unit_ids": [
+            "cu_016"
+          ],
+          "detail_ids": [
+            "det_016_01",
+            "det_016_02",
+            "det_016_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "未按主流播客格式起步的个人经历",
+        "听众减少 WIP 后按时下班",
+        "散步和创作的自由时间"
+      ],
+      "boundaries": [
+        "个人成功经历不能保证他人复制成功。",
+        "流程和熵减是行动框架及比喻，不能要求所有休闲活动追求效率。"
+      ],
+      "open_questions": [
+        "什么是自己愿意保留的自由时间？"
+      ]
+    },
+    {
+      "id": "mod_07",
+      "title": "问答：伴侣焦虑与双方可协商之事",
+      "thread": "parallel_reflection",
+      "role": "保留特定关系情境中的建议",
+      "question": "当伴侣持续焦虑又不愿接受建议，能做的是什么？",
+      "conclusion": "现场答复把伴侣的内在焦虑与两人可协商的交流时间分开：尊重暂时不能替对方改变的部分，同时谈出双方感到公平的相处安排；健康与心理建议仍需个体判断。",
+      "relationship_to_previous": "另一则独立听众问答；不与前一问答连成标准操作步骤。",
+      "source_unit_ids": [
+        "cu_017"
+      ],
+      "required_detail_ids": [
+        "det_017_01",
+        "det_017_02",
+        "det_017_03",
+        "det_017_04"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "接纳对方暂时不能改变的部分，同时协商双方可调整的相处安排",
+          "source_unit_ids": [
+            "cu_017"
+          ],
+          "detail_ids": [
+            "det_017_01",
+            "det_017_02"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "把改变对方的企图转为共同讨论时间、活动和公平感",
+          "source_unit_ids": [
+            "cu_017"
+          ],
+          "detail_ids": [
+            "det_017_03",
+            "det_017_04"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "社交应用移到平板的听众实践",
+        "夫妻睡前交流时间冲突",
+        "把控制感转向创作的建议"
+      ],
+      "boundaries": [
+        "不能凭节目中的 HRV 说法判断伴侣健康。",
+        "答复针对现场叙述，不能代替夫妻咨询或医疗评估。"
+      ],
+      "open_questions": [
+        "当事双方是否愿意讨论具体时间与边界？"
+      ]
+    },
+    {
+      "id": "mod_08",
+      "title": "问答：思辨是把理由想清楚",
+      "thread": "parallel_reflection",
+      "role": "展开与第二根支柱相呼应的练习",
+      "question": "思辨能力怎样在读书与日常生活中练习？",
+      "conclusion": "主讲人建议保留良性辩论的心态：重建作者的推理，与他人交换理由，或写日记检验自己的旧判断；没有想清楚时明确承认不知道。",
+      "relationship_to_previous": "独立问答，呼应商业与 AI 模块里的深度思考；不是另一个护城河条目。",
+      "source_unit_ids": [
+        "cu_018"
+      ],
+      "required_detail_ids": [
+        "det_018_01",
+        "det_018_02",
+        "det_018_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "思辨不等于逞口舌，而是主动检验推理",
+          "source_unit_ids": [
+            "cu_018"
+          ],
+          "detail_ids": [
+            "det_018_01"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "阅读时提出异议、与人讨论、写日记与自己的旧判断辩论",
+          "source_unit_ids": [
+            "cu_018"
+          ],
+          "detail_ids": [
+            "det_018_02",
+            "det_018_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "重排《稀缺》的书写结构",
+        "两百多篇日记梳理关系困惑"
+      ],
+      "boundaries": [
+        "辩论指检验理由，不是到处挑刺。",
+        "个人日记体验不是保证人人适用的心理干预。"
+      ],
+      "open_questions": [
+        "如何区分自信陈述与未经论证的断言？"
+      ]
+    },
+    {
+      "id": "mod_09",
+      "title": "问答：朋友变化与性别愤怒",
+      "thread": "parallel_reflection",
+      "role": "保留同一位听众的两层问题",
+      "question": "在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？",
+      "conclusion": "主讲人先建议接纳友谊可能改变、跨年龄寻找理解，再用自然和博弈类比回应性别愤怒，最终落到仍可选择抗争；其中的进化与群体智慧判断不能作为科学结论。",
+      "relationship_to_previous": "同一位听众的两个相关困境，按问答顺序展开；与伴侣问答仅是平行主题。",
+      "source_unit_ids": [
+        "cu_019",
+        "cu_020"
+      ],
+      "required_detail_ids": [
+        "det_019_01",
+        "det_019_02",
+        "det_019_03",
+        "det_020_01",
+        "det_020_02",
+        "det_020_03"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "observation",
+          "statement": "先区分旧友渐远的事实与仍需支持的需求。",
+          "source_unit_ids": [
+            "cu_019"
+          ],
+          "detail_ids": [
+            "det_019_01",
+            "det_019_02",
+            "det_019_03"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "boundary",
+          "statement": "再讨论性别愤怒和抗争选择，但把自然与博弈论留在类比层。",
+          "source_unit_ids": [
+            "cu_020"
+          ],
+          "detail_ids": [
+            "det_020_01",
+            "det_020_02",
+            "det_020_03"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "跨年龄寻找同频朋友",
+        "植物生命周期的类比",
+        "雌雄策略与群体博弈类比"
+      ],
+      "boundaries": [
+        "自然/进化例子只用作主讲人的思考框架。",
+        "群体性别判断不能推断个人能力或价值。"
+      ],
+      "open_questions": [
+        "如何在不否认不公的前提下寻找新的支持？"
+      ]
+    },
+    {
+      "id": "mod_10",
+      "title": "问答：过渡期的宏观与微观视角",
+      "thread": "parallel_reflection",
+      "role": "节目最后的独立收束",
+      "question": "改变缓慢、现实压力很强时，怎样重新看待进度？",
+      "conclusion": "主讲人建议从宏观意义与微观细节两个方向暂离社会时钟：看更大的生命背景，也看手艺与自然中的小进展，从而重新感到可以选择；这不是对健康问题的治疗承诺。",
+      "relationship_to_previous": "最后一个独立问答，以视角转换呼应整期主动选择；不是所有前文模块的必然终点。",
+      "source_unit_ids": [
+        "cu_021"
+      ],
+      "required_detail_ids": [
+        "det_021_01",
+        "det_021_02",
+        "det_021_03",
+        "det_021_04"
+      ],
+      "logic_steps": [
+        {
+          "order": 1,
+          "function": "claim",
+          "statement": "不只用现实层面的进度评判过渡期",
+          "source_unit_ids": [
+            "cu_021"
+          ],
+          "detail_ids": [
+            "det_021_01",
+            "det_021_02"
+          ]
+        },
+        {
+          "order": 2,
+          "function": "mechanism",
+          "statement": "交替使用宏观理解与微观专注，重新看见可选择之处",
+          "source_unit_ids": [
+            "cu_021"
+          ],
+          "detail_ids": [
+            "det_021_03",
+            "det_021_04"
+          ]
+        }
+      ],
+      "supporting_cases": [
+        "木匠越精进越看见细节",
+        "土壤中跳虫的微观趣味"
+      ],
+      "boundaries": [
+        "意义与专注可帮助理解体验，不替代医疗处理。"
+      ],
+      "open_questions": [
+        "读者正在进步却未注意到的细节是什么？"
+      ]
+    }
+  ]
+}

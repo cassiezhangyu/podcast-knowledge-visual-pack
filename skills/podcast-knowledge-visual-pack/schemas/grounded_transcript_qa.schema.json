@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroundedTranscriptQa",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "status",
+    "input_hashes",
+    "audio_sha256",
+    "evidence_fingerprints",
+    "anomalies",
+    "errors",
+    "warnings",
+    "checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "kind": {
+      "const": "grounded_transcript_qa"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail"
+      ]
+    },
+    "input_hashes": {
+      "type": "object",
+      "minProperties": 7,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "required": [
+        "transcript_raw",
+        "transcript_clean",
+        "transcript_grounded",
+        "corrections",
+        "audio_manifest",
+        "audio_preflight",
+        "episode_metadata"
+      ]
+    },
+    "audio_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "evidence_fingerprints": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "anomalies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "raw_span_id",
+          "status",
+          "correction_ids"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "resolved",
+              "unresolved"
+            ]
+          }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

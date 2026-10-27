@@ -1,0 +1,117 @@
+{
+  "case_id": "lingpixijing-vol69-overview-abc-user-approved-2026-10-22",
+  "status": "active",
+  "kind": "user_approved_positive_overview_abc",
+  "series": "另辟西径",
+  "episode_label": "VOL69",
+  "title": "人生不一定要高光，但总得有些亮点",
+  "workspace": "/workspace/podcast/6ad48f83",
+  "versions": [
+    "A-V6",
+    "B-V6",
+    "C-V6"
+  ],
+  "baseline_role": "formal_overview_required_open_alongside_ep88_abc",
+  "approval_scope": "整页×三策略；2026-10-22 纳入正式正面库；B-V6 曾为定稿交付",
+  "chat_attachments_note": "re-encoded; att1≈C att2≈A att3≈B; workspace bytes authoritative",
+  "files": {
+    "A-V6/P01.png": {
+      "sha256": "f90f079e825595bb9fe1aaa4aade22217c19327a0c0675f70c3603ec00070eb6",
+      "bytes": 409993,
+      "width": 1200,
+      "height": 1600
+    },
+    "A-V6/P01-hd.png": {
+      "sha256": "06ad6ae1121c04adcf90d64354c67f651bcff9549de868bb409e136b334d45ef",
+      "bytes": 1289581,
+      "width": 2880,
+      "height": 3840
+    },
+    "A-V6/P01-phone.png": {
+      "sha256": "123d76774e546ffffcb86d7925c227575307417ec0a8d437ea5d68dab83b1178",
+      "bytes": 169727,
+      "width": 390,
+      "height": 520
+    },
+    "A-V6/P01-grayscale.png": {
+      "sha256": "60ecfedf22c929b8b617365d540c81017223f25dd332e4c0b88ecc7335ea7a36",
+      "bytes": 337823,
+      "width": 1200,
+      "height": 1600
+    },
+    "A-V6/OV03-A-V6.excalidraw": {
+      "sha256": "8a8edefadb3369dede6f237a76554d3b1a360f13b9c8d15fc761361abf1bae7b",
+      "bytes": 156605
+    },
+    "B-V6/P01.png": {
+      "sha256": "e4a11ea1baaa0a16c839733251bef6a2bb06f720f6bc2860daa8b1679f65d813",
+      "bytes": 422500,
+      "width": 1200,
+      "height": 1600
+    },
+    "B-V6/P01-hd.png": {
+      "sha256": "b3acffbe76bdf1b946eb806f233bc3aeacb542267120915322d3a054bb674c8c",
+      "bytes": 1326028,
+      "width": 2880,
+      "height": 3840
+    },
+    "B-V6/P01-phone.png": {
+      "sha256": "3ce66e6fbc565568c4fe34ccb7f5c9de38512472445b137c3f457333ecb05e66",
+      "bytes": 172523,
+      "width": 390,
+      "height": 520
+    },
+    "B-V6/P01-grayscale.png": {
+      "sha256": "f16f1b293297431b753f00103ac3a5597642a10dcdbe61d14a91c5e158e1808f",
+      "bytes": 341852,
+      "width": 1200,
+      "height": 1600
+    },
+    "B-V6/OV03-B-V6.excalidraw": {
+      "sha256": "e373efd391c116ff7d8e3594e0858f3800764b06e55a54576c16cb49e17d669c",
+      "bytes": 153116
+    },
+    "C-V6/P01.png": {
+      "sha256": "d2d967436b5cdec075678c0d619d97814b4b48dcd081f5f6c52c3ff410c47cf2",
+      "bytes": 395351,
+      "width": 1200,
+      "height": 1600
+    },
+    "C-V6/P01-hd.png": {
+      "sha256": "a5fa2e70027eec1cedff2f92dd1ec234476e6d86d118a2196869df2b930180b1",
+      "bytes": 1258891,
+      "width": 2880,
+      "height": 3840
+    },
+    "C-V6/P01-phone.png": {
+      "sha256": "7b76716691851f9e587e0f0aec89c244a4ba9e1d5d4887cc172944461ae793e0",
+      "bytes": 167369,
+      "width": 390,
+      "height": 520
+    },
+    "C-V6/P01-grayscale.png": {
+      "sha256": "f676af03267222e51ec2643c6889f85bd4d83c54a989ec5c6d3c056340a54602",
+      "bytes": 326998,
+      "width": 1200,
+      "height": 1600
+    },
+    "C-V6/OV03-C-V6.excalidraw": {
+      "sha256": "a0469528ae12679d69451d48e668070b95d0b4024f686a3873176db96c2fe169",
+      "bytes": 156494
+    }
+  },
+  "chat_attachments": {
+    "att1-closest-C.png": {
+      "sha256": "520f6440728812ca1ac58a940d583e5999a00692fe42e14e06d929740c04aa91",
+      "bytes": 234230
+    },
+    "att2-closest-A.png": {
+      "sha256": "cb3b2a3543b3fe80837ec041190c7b17a63b981d3e6edd84562ca028e559ae36",
+      "bytes": 234034
+    },
+    "att3-closest-B.png": {
+      "sha256": "6ced7ee31055b31884280e6a2d3ef944f5cfeede237b25affe0bab78b53e4a54",
+      "bytes": 239164
+    }
+  }
+}

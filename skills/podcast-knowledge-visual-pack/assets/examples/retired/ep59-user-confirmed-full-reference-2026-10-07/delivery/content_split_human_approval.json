@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "kind": "human_approval",
+  "stage": "content_split",
+  "status": "accepted",
+  "artifact_hashes": {
+    "episode_content_inventory": "8bdf242103f741a5e2183b296a5acfc1cdc8917f221802e583b51a3042ffaf81",
+    "content_split": "527ea76c947099a7abb7c2f92a37b496cd54a02e2b9a64543c687705449978e3",
+    "content_split_coverage": "ca558907617817eb33b05225dc62c1c6f528257b1d7fae207bc6bd6362e68d92",
+    "content_split_document": "95f8f6eeac07f1c0d75aa7c3984864dd05531a09374bef9955d2740b5ec28af6"
+  },
+  "reviewed_by": "user",
+  "reviewed_at": "2026-10-02T00:55:23.553Z",
+  "note": "用户在当前对话中确认本版《内容拆分》；未批准图片内容规划或图片。"
+}

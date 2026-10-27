@@ -1,0 +1,1276 @@
+{
+  "schema_version": "1.0",
+  "kind": "editorial_plan",
+  "status": "completed",
+  "editorial_plan_id": "edp_6ab61d4b195d838e2ae9fc1e_approved",
+  "editorial_cache_key": "97b72c4db454119bd099438830afbc1aa8e33f6b737f3e0bb3f1383a08bd68d0",
+  "pipeline_version": "approved-content-neutral-1.0",
+  "input": {
+    "knowledge_graph_sha256": "ea0808e1e69950caf19e36b178480a2361008086c3b94592b8c2dfdd8e605751",
+    "knowledge_gate_sha256": "d2183d0b16f3c352cfd3453eeba1d6f96192b779eb5bfa52093dbbee5f2a6286",
+    "knowledge_base_sha256": "b967287d04a8d90c898cc36baced618e4e1ee8e6b9b66ead69a9ca424cd6f28c",
+    "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+    "episode_metadata_sha256": "baa346fd1ca2c2f07aa5d5c53685865ab4341b5c1ad8e2235648fce60a4fa636"
+  },
+  "execution": {
+    "kind": "current_skill_execution_model",
+    "model_id": null,
+    "runtime_id": null,
+    "identity_status": "not_exposed_by_host"
+  },
+  "policy": {
+    "focus": null,
+    "audience": null,
+    "max_deep_dive_pages": null,
+    "output_language": "zh-CN",
+    "selection_policy_version": "approved-content-neutral-1.0"
+  },
+  "package": {
+    "package_thesis": {
+      "statement": "节目借 ETF 的‘一篮子’作类比，主张先看见人生中已有的时间与注意力配置，再主动选择健康、能力、注意力和风险缓冲的组合；后半段问答展示这一思路在具体人生困境中的不同应用。",
+      "epistemic_status": "episode_synthesis",
+      "derived_from_ids": [
+        "clm_episode_thesis"
+      ],
+      "evidence_anchor_ids": [
+        "ea_001_01",
+        "ea_001_02",
+        "ea_001_03",
+        "ea_002_01",
+        "ea_002_02",
+        "ea_002_03",
+        "ea_003_01",
+        "ea_003_02",
+        "ea_003_03",
+        "ea_003_04",
+        "ea_003_05",
+        "ea_004_01",
+        "ea_004_02",
+        "ea_004_03",
+        "ea_005_01",
+        "ea_005_02",
+        "ea_005_03",
+        "ea_006_01",
+        "ea_006_02",
+        "ea_006_03",
+        "ea_006_04",
+        "ea_006_05",
+        "ea_007_01",
+        "ea_007_02",
+        "ea_007_03",
+        "ea_008_01",
+        "ea_008_02",
+        "ea_008_03",
+        "ea_009_01",
+        "ea_009_02",
+        "ea_009_03",
+        "ea_010_01",
+        "ea_010_02",
+        "ea_010_03",
+        "ea_011_01",
+        "ea_011_02",
+        "ea_012_01",
+        "ea_012_02",
+        "ea_012_03",
+        "ea_013_01",
+        "ea_013_02",
+        "ea_013_03",
+        "ea_014_01",
+        "ea_014_02",
+        "ea_014_03",
+        "ea_014_04",
+        "ea_015_01",
+        "ea_015_02",
+        "ea_015_03",
+        "ea_016_01",
+        "ea_016_02",
+        "ea_016_03",
+        "ea_017_01",
+        "ea_017_02",
+        "ea_017_03",
+        "ea_017_04",
+        "ea_018_01",
+        "ea_018_02",
+        "ea_018_03",
+        "ea_019_01",
+        "ea_019_02",
+        "ea_019_03",
+        "ea_020_01",
+        "ea_020_02",
+        "ea_020_03",
+        "ea_021_01",
+        "ea_021_02",
+        "ea_021_03",
+        "ea_021_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "节目综合与开放宏观解释，不冒称事实因果模型。"
+    },
+    "cover": {
+      "page_id": "edp_cover_6ab61d4b195d838e2ae9fc1e",
+      "display_order": 0,
+      "role": "package_entry",
+      "title": "EP59：我们都活在指数里",
+      "subtitle": "把重要的事，放进自己的组合",
+      "derived_from_ids": [
+        "clm_mod_01",
+        "clm_mod_02",
+        "clm_mod_03",
+        "clm_mod_04",
+        "clm_mod_05",
+        "clm_mod_06",
+        "clm_mod_07",
+        "clm_mod_08",
+        "clm_mod_09",
+        "clm_mod_10"
+      ],
+      "evidence_anchor_ids": [
+        "ea_001_01",
+        "ea_001_02",
+        "ea_001_03",
+        "ea_002_01",
+        "ea_002_02",
+        "ea_002_03",
+        "ea_003_01",
+        "ea_003_02",
+        "ea_003_03",
+        "ea_003_04",
+        "ea_003_05",
+        "ea_004_01",
+        "ea_004_02",
+        "ea_004_03",
+        "ea_005_01",
+        "ea_005_02",
+        "ea_005_03",
+        "ea_006_01",
+        "ea_006_02",
+        "ea_006_03",
+        "ea_006_04",
+        "ea_006_05",
+        "ea_007_01",
+        "ea_007_02",
+        "ea_007_03",
+        "ea_008_01",
+        "ea_008_02",
+        "ea_008_03",
+        "ea_009_01",
+        "ea_009_02",
+        "ea_009_03",
+        "ea_010_01",
+        "ea_010_02",
+        "ea_010_03",
+        "ea_011_01",
+        "ea_011_02",
+        "ea_012_01",
+        "ea_012_02",
+        "ea_012_03",
+        "ea_013_01",
+        "ea_013_02",
+        "ea_013_03",
+        "ea_014_01",
+        "ea_014_02",
+        "ea_014_03",
+        "ea_014_04",
+        "ea_015_01",
+        "ea_015_02",
+        "ea_015_03",
+        "ea_016_01",
+        "ea_016_02",
+        "ea_016_03",
+        "ea_017_01",
+        "ea_017_02",
+        "ea_017_03",
+        "ea_017_04",
+        "ea_018_01",
+        "ea_018_02",
+        "ea_018_03",
+        "ea_019_01",
+        "ea_019_02",
+        "ea_019_03",
+        "ea_020_01",
+        "ea_020_02",
+        "ea_020_03",
+        "ea_021_01",
+        "ea_021_02",
+        "ea_021_03",
+        "ea_021_04"
+      ],
+      "epistemic_status": "episode_synthesis",
+      "confidence": "medium",
+      "uncertainty": "原标题保留完整；副标题是已批准编辑提炼。"
+    },
+    "overview": {
+      "page_id": "edp_overview_6ab61d4b195d838e2ae9fc1e",
+      "display_order": 1,
+      "role": "whole_picture",
+      "page_question": "怎样从既有配置，走向四方向和具体处境中的主动判断？",
+      "takeaway": "看清已有配置，再在四个方向和具体处境中主动判断。",
+      "mental_model_statement": "复述已有配置与主动选择的关系、健康/AI能力/注意力/风险余地四方向各自的判断，以及现场问答的具体处境边界。四方向并列，不定权重；问答不是第五根支柱。",
+      "model_components": [
+        {
+          "id": "omc_1",
+          "role": "judgment",
+          "knowledge_ids": [
+            "bnd_det_001_03",
+            "mech_det_002_01",
+            "bnd_det_002_03",
+            "mech_det_003_01",
+            "bnd_det_003_03"
+          ],
+          "evidence_anchor_ids": [
+            "ea_001_03",
+            "ea_002_01",
+            "ea_002_03",
+            "ea_003_01",
+            "ea_003_03"
+          ],
+          "statement": "组合分散单项风险；时间与资讯已有去向，判断活动保留或调整、降低门槛；资讯看完整上下文。ETF仅作类比，无固定配比，娱乐可保留。"
+        },
+        {
+          "id": "omc_2",
+          "role": "judgment",
+          "knowledge_ids": [
+            "clm_det_004_01",
+            "bnd_det_004_03",
+            "clm_det_005_01",
+            "mech_det_005_02",
+            "mech_det_006_03",
+            "bnd_det_006_04",
+            "clm_det_007_01",
+            "bnd_det_007_03",
+            "bnd_det_008_03"
+          ],
+          "evidence_anchor_ids": [
+            "ea_004_01",
+            "ea_004_03",
+            "ea_005_01",
+            "ea_005_02",
+            "ea_006_03",
+            "ea_006_04",
+            "ea_007_01",
+            "ea_007_03",
+            "ea_008_03"
+          ],
+          "statement": "先懂身心知识、观察个人反应、调整做法；家庭烙印若妨碍生活应面对，辨认角色负担，压力难消时调整应对。"
+        },
+        {
+          "id": "omc_3",
+          "role": "judgment",
+          "knowledge_ids": [
+            "clm_det_009_02",
+            "bnd_det_009_03",
+            "bnd_det_010_03",
+            "mech_det_011_01",
+            "bnd_det_011_02",
+            "bnd_det_012_03"
+          ],
+          "evidence_anchor_ids": [
+            "ea_009_02",
+            "ea_009_03",
+            "ea_010_03",
+            "ea_011_01",
+            "ea_011_02",
+            "ea_012_03"
+          ],
+          "statement": "工作变化、小团队机会仍是可能；学习整门生意、阅读完整推理，练自己的判断，在理想与现实之间务实取舍。"
+        },
+        {
+          "id": "omc_4",
+          "role": "judgment",
+          "knowledge_ids": [
+            "bnd_det_013_03"
+          ],
+          "evidence_anchor_ids": [
+            "ea_013_03"
+          ],
+          "statement": "投入与时长分开看；主动选聚焦对象，看体验质量。"
+        },
+        {
+          "id": "omc_5",
+          "role": "judgment",
+          "knowledge_ids": [
+            "mech_det_014_01",
+            "bnd_det_014_03",
+            "mech_det_014_04"
+          ],
+          "evidence_anchor_ids": [
+            "ea_014_01",
+            "ea_014_03",
+            "ea_014_04"
+          ],
+          "statement": "备选减少单押焦虑，不保证结果；结合现实，辨认周期与从众。"
+        },
+        {
+          "id": "omc_6",
+          "role": "judgment",
+          "knowledge_ids": [
+            "bnd_det_015_03",
+            "bnd_det_016_03",
+            "mech_det_017_02",
+            "bnd_det_017_03",
+            "bnd_det_018_03",
+            "mech_det_019_02",
+            "bnd_det_019_03",
+            "clm_det_020_02",
+            "bnd_det_020_03",
+            "bnd_det_021_03",
+            "mech_det_021_04"
+          ],
+          "evidence_anchor_ids": [
+            "ea_015_03",
+            "ea_016_03",
+            "ea_017_02",
+            "ea_017_03",
+            "ea_018_03",
+            "ea_019_02",
+            "ea_019_03",
+            "ea_020_02",
+            "ea_020_03",
+            "ea_021_03",
+            "ea_021_04"
+          ],
+          "statement": "身份标签不等于能力边界，自选流程为自由留空间；伴侣内在改变难代改、共同相处可协商；朋友关系变化时拓展支持，理解性别困境并保留抗争，过渡期换尺度看进度。个人建议不是通用处方。"
+        }
+      ],
+      "model_connectors": [
+        {
+          "from_component_id": "omc_1",
+          "to_component_id": "omc_2",
+          "kind": "parallel_context",
+          "relationship_id": null,
+          "reason": "节目提出的并列配置主题；四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+        },
+        {
+          "from_component_id": "omc_1",
+          "to_component_id": "omc_3",
+          "kind": "parallel_context",
+          "relationship_id": null,
+          "reason": "节目提出的并列配置主题；四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+        },
+        {
+          "from_component_id": "omc_1",
+          "to_component_id": "omc_4",
+          "kind": "parallel_context",
+          "relationship_id": null,
+          "reason": "节目提出的并列配置主题；四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+        },
+        {
+          "from_component_id": "omc_1",
+          "to_component_id": "omc_5",
+          "kind": "parallel_context",
+          "relationship_id": null,
+          "reason": "节目提出的并列配置主题；四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+        },
+        {
+          "from_component_id": "omc_1",
+          "to_component_id": "omc_6",
+          "kind": "parallel_context",
+          "relationship_id": null,
+          "reason": "具体处境中的平行应用；现场问答不是第五根支柱，不把不同听众的个人建议连成因果或通用处方。"
+        }
+      ],
+      "deep_dive_map": [
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p02",
+          "component_ids": [
+            "omc_1"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p03",
+          "component_ids": [
+            "omc_1"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p04",
+          "component_ids": [
+            "omc_2"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p05",
+          "component_ids": [
+            "omc_2"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p06",
+          "component_ids": [
+            "omc_2"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p07",
+          "component_ids": [
+            "omc_2"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p08",
+          "component_ids": [
+            "omc_3"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p09",
+          "component_ids": [
+            "omc_3",
+            "omc_6"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p10",
+          "component_ids": [
+            "omc_3"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p11",
+          "component_ids": [
+            "omc_4"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p12",
+          "component_ids": [
+            "omc_5"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p13",
+          "component_ids": [
+            "omc_6"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p14",
+          "component_ids": [
+            "omc_6"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p15",
+          "component_ids": [
+            "omc_6"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        },
+        {
+          "deep_dive_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p16",
+          "component_ids": [
+            "omc_6"
+          ],
+          "reason": "批准页面问题与总览维度的交叉位置，不假定一一对应。"
+        }
+      ],
+      "derived_from_ids": [
+        "clm_episode_thesis",
+        "clm_mod_01",
+        "clm_mod_02",
+        "clm_mod_03",
+        "clm_mod_04",
+        "clm_mod_05",
+        "clm_mod_06",
+        "clm_mod_07",
+        "clm_mod_08",
+        "clm_mod_09",
+        "clm_mod_10"
+      ],
+      "evidence_anchor_ids": [
+        "ea_001_01",
+        "ea_001_02",
+        "ea_001_03",
+        "ea_002_01",
+        "ea_002_02",
+        "ea_002_03",
+        "ea_003_01",
+        "ea_003_02",
+        "ea_003_03",
+        "ea_003_04",
+        "ea_003_05",
+        "ea_004_01",
+        "ea_004_02",
+        "ea_004_03",
+        "ea_005_01",
+        "ea_005_02",
+        "ea_005_03",
+        "ea_006_01",
+        "ea_006_02",
+        "ea_006_03",
+        "ea_006_04",
+        "ea_006_05",
+        "ea_007_01",
+        "ea_007_02",
+        "ea_007_03",
+        "ea_008_01",
+        "ea_008_02",
+        "ea_008_03",
+        "ea_009_01",
+        "ea_009_02",
+        "ea_009_03",
+        "ea_010_01",
+        "ea_010_02",
+        "ea_010_03",
+        "ea_011_01",
+        "ea_011_02",
+        "ea_012_01",
+        "ea_012_02",
+        "ea_012_03",
+        "ea_013_01",
+        "ea_013_02",
+        "ea_013_03",
+        "ea_014_01",
+        "ea_014_02",
+        "ea_014_03",
+        "ea_014_04",
+        "ea_015_01",
+        "ea_015_02",
+        "ea_015_03",
+        "ea_016_01",
+        "ea_016_02",
+        "ea_016_03",
+        "ea_017_01",
+        "ea_017_02",
+        "ea_017_03",
+        "ea_017_04",
+        "ea_018_01",
+        "ea_018_02",
+        "ea_018_03",
+        "ea_019_01",
+        "ea_019_02",
+        "ea_019_03",
+        "ea_020_01",
+        "ea_020_02",
+        "ea_020_03",
+        "ea_021_01",
+        "ea_021_02",
+        "ea_021_03",
+        "ea_021_04"
+      ],
+      "information_budget": {
+        "primary_proposition_max": 1,
+        "max_independent_ideas": 5,
+        "required_elements": [
+          "question",
+          "claim",
+          "mechanism",
+          "relationship",
+          "boundary"
+        ]
+      }
+    },
+    "deep_dives": [
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p02",
+        "display_order": 2,
+        "role": "opening",
+        "page_question": "为什么已有选择还需要主动配置？",
+        "takeaway": "已有娱乐选择本就占据时间；先看权重，再为想保留的活动降低执行门槛。",
+        "primary_knowledge_ids": [
+          "clm_mod_01"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_001_01",
+          "ex_det_001_02",
+          "bnd_det_001_03",
+          "mech_det_002_01",
+          "ex_det_002_02",
+          "bnd_det_002_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_001_01",
+          "ea_001_02",
+          "ea_001_03",
+          "ea_002_01",
+          "ea_002_02",
+          "ea_002_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p02",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P01。从总览转入第一张深度页；案例解释默认选择与执行门槛，不把总览重复画一遍。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p03",
+        "display_order": 3,
+        "role": "deepen",
+        "page_question": "资讯组合怎样避免只剩算法推送？",
+        "takeaway": "热搜和推荐可提供即时信息，但完整阅读补足推理与上下文；要留意持续摄取注意力。",
+        "primary_knowledge_ids": [
+          "clm_mod_01"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "mech_det_003_01",
+          "ex_det_003_02",
+          "bnd_det_003_03",
+          "obs_det_003_04",
+          "obs_det_003_05"
+        ],
+        "evidence_anchor_ids": [
+          "ea_003_01",
+          "ea_003_02",
+          "ea_003_03",
+          "ea_003_04",
+          "ea_003_05"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p03",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P02。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p04",
+        "display_order": 4,
+        "role": "deepen",
+        "page_question": "健康建议怎样从共通知识走到适合自己的做法？",
+        "takeaway": "先辨认饮食、睡眠与运动建议，再观察个人反应并小范围调整；流量训练和个人监测都不是通用处方。",
+        "primary_knowledge_ids": [
+          "clm_mod_02"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "clm_det_004_01",
+          "ex_det_004_02",
+          "bnd_det_004_03",
+          "ex_det_008_01",
+          "ex_det_008_02",
+          "bnd_det_008_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_004_01",
+          "ea_004_02",
+          "ea_004_03",
+          "ea_008_01",
+          "ea_008_02",
+          "ea_008_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p04",
+            "coverage": "explain",
+            "reason": "两处原页面的论点、案例和来源边界均分别保留；不得通过微字、删细节或假造因果满足18页上限。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P03。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p05",
+        "display_order": 5,
+        "role": "deepen",
+        "page_question": "原生家庭留下的影响，什么时候值得处理？",
+        "takeaway": "不必把每个烙印都视为必须治愈；当它持续妨碍关系、工作或独立发展时，才有明确的处理问题。",
+        "primary_knowledge_ids": [
+          "clm_mod_02"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "clm_det_005_01",
+          "mech_det_005_02",
+          "obs_det_005_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_005_01",
+          "ea_005_02",
+          "ea_005_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p05",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P04。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p06",
+        "display_order": 6,
+        "role": "deepen",
+        "page_question": "性别角色怎样增加心理负担？",
+        "takeaway": "主讲人用女性被反复评判和男性情感表达受限的例子，说明社会角色期待也会进入个人的心理感受。",
+        "primary_knowledge_ids": [
+          "clm_mod_02"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_006_01",
+          "ex_det_006_02",
+          "mech_det_006_03",
+          "bnd_det_006_04",
+          "ex_det_006_05"
+        ],
+        "evidence_anchor_ids": [
+          "ea_006_01",
+          "ea_006_02",
+          "ea_006_03",
+          "ea_006_04",
+          "ea_006_05"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p06",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P05。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p07",
+        "display_order": 7,
+        "role": "deepen",
+        "page_question": "压力源消不掉时，还能调整什么？",
+        "takeaway": "正面变化也可能带来压力；区分无法消除的事件与可以调整的应对方式，避免把后效简单归咎性格。",
+        "primary_knowledge_ids": [
+          "clm_mod_02"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "clm_det_007_01",
+          "ex_det_007_02",
+          "bnd_det_007_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_007_01",
+          "ea_007_02",
+          "ea_007_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p07",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P06。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p08",
+        "display_order": 8,
+        "role": "deepen",
+        "page_question": "AI 可能改变工作，眼下可练哪种判断？",
+        "takeaway": "岗位冲击和微型服务机会仍是主讲人预测；眼下可练的是理解定位、营销、运营、财务和股权怎样连成一门生意，并在现实约束里做取舍。",
+        "primary_knowledge_ids": [
+          "clm_mod_03"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_009_01",
+          "clm_det_009_02",
+          "bnd_det_009_03",
+          "ex_det_010_01",
+          "ex_det_010_02",
+          "bnd_det_010_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_009_01",
+          "ea_009_02",
+          "ea_009_03",
+          "ea_010_01",
+          "ea_010_02",
+          "ea_010_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p08",
+            "coverage": "explain",
+            "reason": "旧 P08 与旧 P09 的六条细节各在预测、案例或商业判断论证中保留；两种来源边界用正文级文字表达，不以微字合页。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P07。与前页并列换题；本页内部的预测和商业能力相关但不构成成功保证。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p09",
+        "display_order": 9,
+        "role": "deepen",
+        "page_question": "思辨能力怎样从阅读走到自己的判断？",
+        "takeaway": "读完整推理，追问理由，并在讨论和写作中修正；可以暂时说不知道。",
+        "primary_knowledge_ids": [
+          "clm_mod_03",
+          "clm_mod_08"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "mech_det_011_01",
+          "bnd_det_011_02",
+          "ex_det_018_01",
+          "ex_det_018_02",
+          "bnd_det_018_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_011_01",
+          "ea_011_02",
+          "ea_018_01",
+          "ea_018_02",
+          "ea_018_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p09",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P08。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p10",
+        "display_order": 10,
+        "role": "deepen",
+        "page_question": "有理想又要面对现实，内容创作怎么取舍？",
+        "takeaway": "扎实讲解与获取初始受众之间要不断权衡；短视频和长教程各有代价，没有固定模板。",
+        "primary_knowledge_ids": [
+          "clm_mod_03"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_012_01",
+          "ctr_det_012_02",
+          "bnd_det_012_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_012_01",
+          "ea_012_02",
+          "ea_012_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p10",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P09。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p11",
+        "display_order": 11,
+        "role": "deepen",
+        "page_question": "同样的时间，注意力放在哪里为何不同？",
+        "takeaway": "主讲人认为专注会改变主观感受；短时集中学习或休息，有时比漫长分心更有价值。",
+        "primary_knowledge_ids": [
+          "clm_mod_04"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_013_01",
+          "ex_det_013_02",
+          "bnd_det_013_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_013_01",
+          "ea_013_02",
+          "ea_013_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p11",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P10。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p12",
+        "display_order": 12,
+        "role": "deepen",
+        "page_question": "只押 Plan A 的风险该怎么处理？",
+        "takeaway": "备选方案可减少只押一种结果的焦虑；看热门路径时还要估计自己处在周期的哪个位置。",
+        "primary_knowledge_ids": [
+          "clm_mod_05"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "mech_det_014_01",
+          "ex_det_014_02",
+          "bnd_det_014_03",
+          "mech_det_014_04"
+        ],
+        "evidence_anchor_ids": [
+          "ea_014_01",
+          "ea_014_02",
+          "ea_014_03",
+          "ea_014_04"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p12",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P11。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p13",
+        "display_order": 13,
+        "role": "deepen",
+        "page_question": "已有标签和自定流程，怎样分别影响选择权？",
+        "takeaway": "开播经历提示不必先被身份标签限制；自己设计与调整的 SOP 可腾出自由时间。这是两种平行应用，并非一套必经步骤。",
+        "primary_knowledge_ids": [
+          "clm_mod_06"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_015_01",
+          "ex_det_015_02",
+          "bnd_det_015_03",
+          "ex_det_016_01",
+          "ex_det_016_02",
+          "bnd_det_016_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_015_01",
+          "ea_015_02",
+          "ea_015_03",
+          "ea_016_01",
+          "ea_016_02",
+          "ea_016_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p13",
+            "coverage": "explain",
+            "reason": "两处原页面的论点、案例和来源边界均分别保留；不得通过微字、删细节或假造因果满足18页上限。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P12。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p14",
+        "display_order": 14,
+        "role": "deepen",
+        "page_question": "面对伴侣的焦虑，什么能一起协商？",
+        "takeaway": "不能替对方改变内在焦虑，却可以讨论相处时间和共同活动；个人监测与创作建议需谨慎。",
+        "primary_knowledge_ids": [
+          "clm_mod_07"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_017_01",
+          "mech_det_017_02",
+          "bnd_det_017_03",
+          "ex_det_017_04"
+        ],
+        "evidence_anchor_ids": [
+          "ea_017_01",
+          "ea_017_02",
+          "ea_017_03",
+          "ea_017_04"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p14",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P13。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p15",
+        "display_order": 15,
+        "role": "deepen",
+        "page_question": "面对朋友变化与性别愤怒，怎样分别保留行动位置？",
+        "takeaway": "同一位听众的两项困境需要分开回应：旧友渐远时寻找新的理解，面对不公时保留自己的行动选择；群体与自然类比不能当事实。",
+        "primary_knowledge_ids": [
+          "clm_mod_09"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_019_01",
+          "mech_det_019_02",
+          "bnd_det_019_03",
+          "ex_det_020_01",
+          "clm_det_020_02",
+          "bnd_det_020_03"
+        ],
+        "evidence_anchor_ids": [
+          "ea_019_01",
+          "ea_019_02",
+          "ea_019_03",
+          "ea_020_01",
+          "ea_020_02",
+          "ea_020_03"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p15",
+            "coverage": "explain",
+            "reason": "两处原页面的论点、案例和来源边界均分别保留；不得通过微字、删细节或假造因果满足18页上限。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P14。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      },
+      {
+        "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p16",
+        "display_order": 16,
+        "role": "closing",
+        "page_question": "过渡期进展缓慢，怎样离开单一社会时钟？",
+        "takeaway": "向上看意义，向下专注手艺与自然细节，可帮助保留主体性；它不替代具体健康问题的处理。",
+        "primary_knowledge_ids": [
+          "clm_mod_10"
+        ],
+        "primary_relationship_ids": [],
+        "supporting_knowledge_ids": [
+          "ex_det_021_01",
+          "ex_det_021_02",
+          "bnd_det_021_03",
+          "mech_det_021_04"
+        ],
+        "evidence_anchor_ids": [
+          "ea_021_01",
+          "ea_021_02",
+          "ea_021_03",
+          "ea_021_04"
+        ],
+        "coverage": [
+          {
+            "page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p16",
+            "coverage": "explain",
+            "reason": "所有必留细节分别进入论证、案例或边界；不能为适应一页而缩成微字或省去来源限定。"
+          }
+        ],
+        "argument_preconditions": [
+          "edp_overview_6ab61d4b195d838e2ae9fc1e"
+        ],
+        "order_rationale": "当前前页为P15。本页与前页按主题或问答并列；编号仅供阅读，不表示因果或必经步骤。",
+        "information_budget": {
+          "primary_proposition_max": 1,
+          "max_independent_ideas": 4,
+          "required_elements": [
+            "claim",
+            "mechanism",
+            "example",
+            "boundary",
+            "question"
+          ]
+        }
+      }
+    ]
+  },
+  "coverage_matrix_sha256": "9319674e606fb45154917494eec30de0eeed2cea994e7e1156a115945e01806f",
+  "review_status": "accepted",
+  "created_at": "2026-10-06T09:52:29.437965+00:00"
+}

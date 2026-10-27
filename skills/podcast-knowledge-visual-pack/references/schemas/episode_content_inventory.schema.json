@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EpisodeContentInventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "input", "evidence_anchors", "coverage_segments", "content_units"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "kind": {"const": "episode_content_inventory"},
+    "status": {"enum": ["partial", "completed"]},
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audio_sha256", "grounded_transcript_sha256", "corrections_sha256"],
+      "properties": {
+        "audio_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "grounded_transcript_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "corrections_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "evidence_anchors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source_kind", "artifact_path", "artifact_sha256", "locator", "audio_sha256", "start_ms", "end_ms", "raw_span_refs", "excerpt", "support_role"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ea_"},
+          "source_kind": {"const": "grounded_span"},
+          "artifact_path": {"const": "00-source/transcript_grounded.json"},
+          "artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "locator": {"type": "string", "minLength": 1},
+          "audio_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "start_ms": {"type": "integer", "minimum": 0},
+          "end_ms": {"type": "integer", "minimum": 0},
+          "raw_span_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "excerpt": {"type": "string", "minLength": 1},
+          "support_role": {"enum": ["direct", "context", "illustration", "counterevidence", "correction_provenance"]}
+        }
+      }
+    },
+    "coverage_segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "start_span_id", "end_span_id", "disposition", "content_unit_ids", "rationale"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^seg_"},
+          "start_span_id": {"type": "string", "minLength": 1},
+          "end_span_id": {"type": "string", "minLength": 1},
+          "disposition": {"enum": ["semantic", "context_only", "non_semantic", "excluded"]},
+          "content_unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^cu_"}},
+          "rationale": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "content_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "summary", "importance", "content_types", "evidence_anchor_ids", "claims", "mechanisms", "supporting_details", "examples", "concrete_objects", "actions", "conditions", "boundaries", "counterpoints", "uncertainties"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^cu_"},
+          "title": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 20},
+          "importance": {"enum": ["core", "supporting", "context"]},
+          "content_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["question", "claim", "mechanism", "example", "observation", "boundary", "counterpoint", "biography", "process", "reflection", "context"]}},
+          "speaker_refs": {"type": "array", "items": {"type": "string"}},
+          "evidence_anchor_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+          "claims": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "mechanisms": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "supporting_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "kind", "statement", "importance", "evidence_anchor_ids"],
+              "properties": {
+                "id": {"type": "string", "pattern": "^det_"},
+                "kind": {"enum": ["claim", "mechanism", "support", "example", "object_action", "condition", "boundary", "counterpoint", "context", "uncertainty"]},
+                "statement": {"type": "string", "minLength": 1},
+                "importance": {"enum": ["core", "supporting", "context"]},
+                "evidence_anchor_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+              }
+            }
+          },
+          "examples": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "concrete_objects": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "actions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "conditions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "boundaries": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "counterpoints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "uncertainties": {"type": "array", "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    }
+  }
+}

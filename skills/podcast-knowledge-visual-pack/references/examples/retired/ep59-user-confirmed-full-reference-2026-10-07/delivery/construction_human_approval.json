@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "kind": "human_approval",
+  "stage": "construction",
+  "status": "accepted",
+  "artifact_hashes": {
+    "construction_plan": "f1cda60d9471b3adbac0435a94d80e19f1be6a85fe5b5f79d4ca7efbd27fc4b6",
+    "scene_manifest": "f669b81354706bf843bb31a6f8e3fa8612743c57a8f01333a724d9f36ff2c7c9",
+    "editor_review": "4efa84464bcef4a4aad214bd2d49cebb9f9fe79c8dd2a01a1db99fdcc661d275"
+  },
+  "reviewed_by": "Codex：用户授权的真实编辑器交互检查",
+  "reviewed_at": "2026-10-07T03:29:08.165Z",
+  "note": "检查记录明确由Codex执行，不冒称用户亲自操作；工件不变。整包仍需当前材料验收。"
+}

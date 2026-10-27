@@ -1,0 +1,822 @@
+{
+  "schema_version": "1.0",
+  "kind": "accepted_artwork_import",
+  "status": "completed",
+  "authorization": {
+    "path": "[本地工作区]/outputs/GitHub开源发布收尾-2026-10-07/latest-EP59/IMPORT_AUTHORIZATION.json",
+    "sha256": "92e3987d596f7547410e4003eb22a1eb10f53dd772aa47a99de60099c003541c"
+  },
+  "adapter_version": "0.18.1",
+  "input_hashes": {
+    "episode_metadata": "baa346fd1ca2c2f07aa5d5c53685865ab4341b5c1ad8e2235648fce60a4fa636",
+    "content_review_gate": "331d8c80ad247f8bd26e9159100adc6ea2d8bc6595347f610eb01ea62135d57d",
+    "content_split_gate": "e65191080a4eb463ba3f0bfdcd371236d9469c6b87c261e8dfe3a54b6d4c33b7",
+    "knowledge_graph": "ea0808e1e69950caf19e36b178480a2361008086c3b94592b8c2dfdd8e605751",
+    "knowledge_gate": "d2183d0b16f3c352cfd3453eeba1d6f96192b779eb5bfa52093dbbee5f2a6286",
+    "editorial_plan": "f3fa934f160eba7ffcc18f73257bc1d3668ce53aeb819e4aee99d27aad62249f",
+    "editorial_gate": "47c00151e4ee6a5922d5d1e0faf296a66c415f2a0ddb855339c30332789928ac",
+    "coverage_matrix": "9319674e606fb45154917494eec30de0eeed2cea994e7e1156a115945e01806f",
+    "design_tokens": "92c3026483d1e8d50145895f380e614f8b5aeb8156c96e4132377c4122994474"
+  },
+  "pages": [
+    {
+      "page_id": "P00",
+      "source_page_id": "edp_cover_6ab61d4b195d838e2ae9fc1e",
+      "selected_case": "A",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/P00-cover-three-choice-2026-10-04/PAGE_VARIANT_SELECTION.json",
+        "sha256": "46d9663b44a46622cf3d78992be37702e49e3fb9760b684e47210de87bc05330"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P00.excalidraw",
+          "sha256": "52891194e46d22621d0f26b31db88abfc3f0277d962107c180b2ed45d05bc943"
+        },
+        "png": {
+          "path": "04-rendered/P00.png",
+          "sha256": "99bdf2c43f73d6cb2529594dba66eb49de5406f248201a4a74a3e1e5eb8a692d"
+        },
+        "phone": {
+          "path": "04-rendered/P00-phone.png",
+          "sha256": "6fb59d77364029d65aeb8f1ec45e87c4c04f6f7c01b7fb4e94ea6e5c73068127"
+        },
+        "gray": {
+          "path": "04-rendered/P00-gray.png",
+          "sha256": "16d6edbd5c130be7b73405863d9c029e350731b92489ac1476ef6f3f03f78020"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P00/closeout-workspace/04-rendered/render_gate.json",
+          "sha256": "8527ce618179e88c36a100119403a94939d4ad279060bdf8e83a8a97ac776027"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P00/closeout-workspace/04-rendered/render_manifest.json",
+          "sha256": "e6ea7fe69295f1a2087639a1d8465632d5f07caf6b4d40fdf33f04dce7ff419f"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P00/closeout-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "664cd8dd27757d351ae31f725b2376a0cc647c4365aa145b952203c46a9dfad5"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P00/closeout-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "bd3161f6b26cb27df24848ad3b6db43f3b6586f318101fa862d4751c4a1f6e1e"
+        }
+      }
+    },
+    {
+      "page_id": "P01",
+      "source_page_id": "edp_overview_6ab61d4b195d838e2ae9fc1e",
+      "selected_case": "C",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P01/PAGE_VARIANT_SELECTION.json",
+        "sha256": "7f35c5de114ed875ea81941eb31cb164a26620460e35a7b779f319b97de27896"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P01.excalidraw",
+          "sha256": "c32569a4e3c9d2142cf82d61a49d214759df004a32fde4ba0c57752b8455d0ee"
+        },
+        "png": {
+          "path": "04-rendered/P01.png",
+          "sha256": "53cd62848b1a2a42680958464868f4967631f66eb79cd2e8751a381a07086774"
+        },
+        "phone": {
+          "path": "04-rendered/P01-phone.png",
+          "sha256": "d2fd8caa68a202d13ee87280b4e87db10626ef7d91f9def7d77967c662408705"
+        },
+        "gray": {
+          "path": "04-rendered/P01-gray.png",
+          "sha256": "d9ab59d467324f9f9d44bd17f3abb8ecddf349824853257c2a88787514d62874"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P01/full-C-v1/review-workspace/04-rendered/render_gate.json",
+          "sha256": "42366cbbb3cadcecd67bc16cb8bef1188ac8af7513088520dc4bf51c69023720"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P01/full-C-v1/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "91f92980c9f580fc49377f51988ead1df35a18928a046905a040e9e6627a37ed"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P01/full-C-v1/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "917deae0d64e9e3d4f0b0abb95f1e48d03ea6cef69bba08fba8bb94c6d7f2a55"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P01/full-C-v1/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "2888be9096df8bac13951fd93e219f87a10e6c42d6336c904aab8cfd3b2e0d68"
+        }
+      }
+    },
+    {
+      "page_id": "P02",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p02",
+      "selected_case": "B",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P02/USER_FINAL_SELECTION_B.json",
+        "sha256": "13fb304cb41da4f4482247b53586d31339a9adb7c562ad75cab24250a2f6a0f8"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P02.excalidraw",
+          "sha256": "120c7c16b7eb587a042a08d193fac7551d0d9c6e37f7ae4e8fcd8c7bf44ed1e1"
+        },
+        "png": {
+          "path": "04-rendered/P02.png",
+          "sha256": "11356fa9d1c312918ea8c460d34b124258331af0fadb114a96a26e72b8f62d76"
+        },
+        "phone": {
+          "path": "04-rendered/P02-phone.png",
+          "sha256": "7b5e07e2ba71112e8d69480277ad48b99f96f39aac44f7769b09e283798d412d"
+        },
+        "gray": {
+          "path": "04-rendered/P02-gray.png",
+          "sha256": "13889eec56c41a8a28edacc2dc3d1176bbd5b60fcfeaef94210173f4c8fc48d4"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P02/closeout-workspace/04-rendered/render_gate.json",
+          "sha256": "697f0ea729e0c3c23dfd5e4bca799f1db786037d9835997dec1919ebc643dd5d"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P02/closeout-workspace/04-rendered/render_manifest.json",
+          "sha256": "8bca43c02b3f7939d2da61a558a49a25ec39a3d7c1b128b9f94055f0a71802d1"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P02/closeout-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "f73a67519e5a7f566543399e8fda432031a20a07e5cb31c64b5a81847e1d35fc"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/current-review-inputs/P02/closeout-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "d9b67218981b17c561077abd083622f64214448d36533162751f4d34b2a42a61"
+        }
+      }
+    },
+    {
+      "page_id": "P03",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p03",
+      "selected_case": "C",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/USER_P03_P05_REPAIR_APPROVAL.json",
+        "sha256": "e60fa8ec567c414e964c3d3759cdf0dfc16383613fb061c9ee97e02167495923"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P03.excalidraw",
+          "sha256": "7093bfaa58d83271a47ff1f8ac21e6bca7edb5f937211ce2be93b4f8742706d0"
+        },
+        "png": {
+          "path": "04-rendered/P03.png",
+          "sha256": "906a816a2d931fba5271daca2d2107fe960c949eef18e29077f9acdafff335cc"
+        },
+        "phone": {
+          "path": "04-rendered/P03-phone.png",
+          "sha256": "fe130a9b09b56602e32a6df7dd3206b654c7f92f2ad9834a14c2710c2903e9ec"
+        },
+        "gray": {
+          "path": "04-rendered/P03-gray.png",
+          "sha256": "8361d018b6a5dca01e90ca605d805977767bcf76a0b1cf322e31cbd79d521d53"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P03-scoped-repair-v1/review-workspace/04-rendered/render_gate.json",
+          "sha256": "4dff5dc7ba65947e7a6412c60ec010e7d25c4a5b6e2edbcc3a16767be24a14f5"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P03-scoped-repair-v1/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "94a1c404e0007282379f0945cc6519ff47f7e60ed574872438577b0281213318"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P03-scoped-repair-v1/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "3bb8ff7aa715e35187c43e41ae3f4bbd608431692e36929a8b4b1887b631e4c3"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P03-scoped-repair-v1/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "519eb83c1c98a72f76ce15f471bf74ccd846bd9693d7efe35c6652845f0e8c80"
+        }
+      }
+    },
+    {
+      "page_id": "P04",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p04",
+      "selected_case": "A",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P04/USER_FINAL_APPROVAL_A.json",
+        "sha256": "4ec5541b938d27111623fac5ffc90b156ef9a42ceb78db8ae5cd10cf4e012f5d"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P04.excalidraw",
+          "sha256": "709fb8d024a3dd7e71bb0a594e3d93ecd8871cd00e470b6d72aa64447db95d36"
+        },
+        "png": {
+          "path": "04-rendered/P04.png",
+          "sha256": "74c9c697a02b9b3ffb824d8c19faefc7567bd30d52c7e91ab12776357dda207c"
+        },
+        "phone": {
+          "path": "04-rendered/P04-phone.png",
+          "sha256": "fa3fb85f388c9334b66c5d0af2acdb4db35d9b5aa5a694a495ab3db40febc0bc"
+        },
+        "gray": {
+          "path": "04-rendered/P04-gray.png",
+          "sha256": "a99a8055be8174bcea66c058a95f81ddb2bee358ce13a53b5d060113beb9f5ea"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P04/scoped-repair-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "880eafdc6abef81a9d42ca232d33907bea281beada7c49f41861c5cf1c999aec"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P04/scoped-repair-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "82c4542ed9b029516c4fecd61b74a9bf9d971513ef7e806c2915e8c79baa1350"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P04/scoped-repair-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "b16a5cd7af3ecbf929bcea2ed028110cf5053161c38905e4db4deb4626804e61"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/P04/scoped-repair-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "9ab559fb82df5ad55429457451439363345d29d4f15a1755e85c29558081e846"
+        }
+      }
+    },
+    {
+      "page_id": "P05",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p05",
+      "selected_case": "A",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/USER_P03_P05_REPAIR_APPROVAL.json",
+        "sha256": "e60fa8ec567c414e964c3d3759cdf0dfc16383613fb061c9ee97e02167495923"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P05.excalidraw",
+          "sha256": "85129d9d9659a51a7719a2ea473b3724077b7955e90d2b05ff03d1332cc630ed"
+        },
+        "png": {
+          "path": "04-rendered/P05.png",
+          "sha256": "76fc3538348a0f39a32eb0df5ef093653bf2fb701e95f1d34a4fd06387b82864"
+        },
+        "phone": {
+          "path": "04-rendered/P05-phone.png",
+          "sha256": "61417e306925285056f538affe6e1809699cdbd847f05a21547958dd886d62f9"
+        },
+        "gray": {
+          "path": "04-rendered/P05-gray.png",
+          "sha256": "71a7fce45a44e043a9116a910f9395d1481c982d8434eefac35d9adceaf24945"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P05-scoped-repair-v1/review-workspace/04-rendered/render_gate.json",
+          "sha256": "0a9fb49b18b6b192d1b4eae1eb49581bda7b0107e389a85e165234eddb0204cb"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P05-scoped-repair-v1/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "0616786addaad7d3eb56f742c857a9821616872ca9ea768c2f84a1c662302339"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P05-scoped-repair-v1/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "b87301e9993dd4e6361061e0e233269be73e4a0dca034d4f872b306b007dc692"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/P05-scoped-repair-v1/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "7d59cb4d48bfeea017d38ff2c2f99cb36ddcb4b1e7e132bb2fc1d19fc574bf85"
+        }
+      }
+    },
+    {
+      "page_id": "P06",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p06",
+      "selected_case": "B",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-优化后单页重设计-2026-10-07/USER_FINAL_APPROVAL_B.json",
+        "sha256": "3fce85ee63e9b43c5d7c58c6451c886b2b7a4bb91f4bccb3455aeee1e9299fe7"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P06.excalidraw",
+          "sha256": "c10aded51055d198d6b30ae5e7e3dbef6a0c875702ba933884380140beca3ef9"
+        },
+        "png": {
+          "path": "04-rendered/P06.png",
+          "sha256": "f604db9fb0abfa918b5950e0e8b810c65c52d723f8c7d516c743f601f969ed5f"
+        },
+        "phone": {
+          "path": "04-rendered/P06-phone.png",
+          "sha256": "324ba4c9b0f287a98e2faa493571a03d46ad30814fdc6fc595374039e149bcf7"
+        },
+        "gray": {
+          "path": "04-rendered/P06-gray.png",
+          "sha256": "57427a3793f23ce00e4d879a466ad473d8c9ab8ab7a07d6d986d4fbd2c25c2d3"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-优化后单页重设计-2026-10-07/P06/case-B/full-v1/review-workspace/04-rendered/render_gate.json",
+          "sha256": "21da83ca1c665c0d2606899bd1e265c82ceeb113e24d183b153d0d46af69e938"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-优化后单页重设计-2026-10-07/P06/case-B/full-v1/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "42186132192b99b432bf7a343760ab61dc1e528ca2634134c12f29eea9582f71"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-优化后单页重设计-2026-10-07/P06/case-B/full-v1/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "c3127b423d75454ee9dd78dac25ba2e274e4cd4ac168ad13b8e354b37b6870cf"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-优化后单页重设计-2026-10-07/P06/case-B/full-v1/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "34dc68e9ae7ee4ea6c5c7f749fb19d122d3bee519bf278d7868d4acc0c12ab41"
+        }
+      }
+    },
+    {
+      "page_id": "P07",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p07",
+      "selected_case": "A",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P07/content-driven-macro-v6-2026-10-06/USER_SELECTION_A_APPROVAL.json",
+        "sha256": "0dc19ce8bc66ddd2fc30f5a7e173091c1cc672bdb3860bf36d8027efd262a1a0"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P07.excalidraw",
+          "sha256": "73bb407a9696aab1029cc27bd00c4ca672364d38c656c73d8e5cd116ddd402eb"
+        },
+        "png": {
+          "path": "04-rendered/P07.png",
+          "sha256": "b6e91a52a01af797f19097e2271bb278684bf2fc8a6d8e06de145b0cd108ced6"
+        },
+        "phone": {
+          "path": "04-rendered/P07-phone.png",
+          "sha256": "465759fd8a57473da56b69c5b16b3354d98017215e9be04900881e99118a26b0"
+        },
+        "gray": {
+          "path": "04-rendered/P07-gray.png",
+          "sha256": "058e7f821aa2aa649404e13935da8580199bfd962f539480dded218c3d56b144"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P07/content-driven-macro-v6-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "22c2c120c18ac87a81a610ae60237161c2b4ad0bc300473088f7164025f8f81c"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P07/content-driven-macro-v6-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "55dc79d27905b31dedadf48009dd16abc97e56a8b138bf796d1e0a6f4e249e09"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P07/content-driven-macro-v6-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "ef255513bf0b5c5dc9f0486ace6bb46fd5876615ece204af95f9a3ca44e6713a"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P07/content-driven-macro-v6-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "fdb4f7d560cde681b60995910cbe12353c6c205d9fb753a08e3ca4f607c77801"
+        }
+      }
+    },
+    {
+      "page_id": "P08",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p08",
+      "selected_case": "B",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P08/content-driven-macro-v1-2026-10-05/USER_SELECTION_B_APPROVAL.json",
+        "sha256": "07fb1406f52be0fb6e6acebba1e9575cc5e4c90f89f41ffaebfb2c7ace7b4df6"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P08.excalidraw",
+          "sha256": "9159a00bf274746485ca07f2d9d25efde240310faa486d2849e35442f958f90c"
+        },
+        "png": {
+          "path": "04-rendered/P08.png",
+          "sha256": "6bef58812cb4cdbb2508ca04cdb4bd48f32637a391bc3a32918391693a269217"
+        },
+        "phone": {
+          "path": "04-rendered/P08-phone.png",
+          "sha256": "b7b9ebb87ac9e281a3ad8ec54fe8969ff5f6da535e8c9d8439238677d8823b23"
+        },
+        "gray": {
+          "path": "04-rendered/P08-gray.png",
+          "sha256": "633995e30d4d6cff295c0019d6c98f384e7382e83d15dc4437dc4c2880614c7a"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P08/content-driven-macro-v1-2026-10-05/full-B-user-support-reading-order-corrected/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "268efbc88658bdfa96371b31cc875641e2eaa68d8f47969cefe4053888fec16b"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P08/content-driven-macro-v1-2026-10-05/full-B-user-support-reading-order-corrected/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "f2f577c242822a5b3904f6d310ebce46c29204574315fc2dbe34fbde87a0d347"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P08/content-driven-macro-v1-2026-10-05/full-B-user-support-reading-order-corrected/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "d15cb7bdfa97ff0d7375de3386da5ec019a6e79a93e59ad9f9dfdb54a600ce86"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P08/content-driven-macro-v1-2026-10-05/full-B-user-support-reading-order-corrected/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "a7fca0ad5c61f19868bb6b8715bdbc245c4d15e65ec716effce26ddc85943702"
+        }
+      }
+    },
+    {
+      "page_id": "P09",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p09",
+      "selected_case": "C",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P09/PAGE_VARIANT_SELECTION.json",
+        "sha256": "31e63216e520392fc058f1f74f5d6a58a3469f8f2be07e521bb58d3f4157ef0b"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P09.excalidraw",
+          "sha256": "ea026c3ce0d7aba1725fb7f5f7ba4b4a598589fed100bff33120c717c8d43336"
+        },
+        "png": {
+          "path": "04-rendered/P09.png",
+          "sha256": "d22ba0cdeb1772c948d815d117c13881eb3157852dd7b62b51ca4a0ed233e07e"
+        },
+        "phone": {
+          "path": "04-rendered/P09-phone.png",
+          "sha256": "e1fec9660bb85a21ee134fb98514d043ac4d9f0bdf62b9537076b733c9d10fca"
+        },
+        "gray": {
+          "path": "04-rendered/P09-gray.png",
+          "sha256": "7df8616aec3a684aaa0c012b70f38b268cc1112b3b8f9de673420ab8e52d529f"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P09/case-C/full-v5/review-workspace/04-rendered/render_gate.json",
+          "sha256": "98359efa52070c513187fe78239da93d641b83ee7106a0a9a5f0679c2baf5b0c"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P09/case-C/full-v5/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "a378cc7b16eaaf55cfb448a8f8e316b20d38f12e476ebce52ebc3fb480222115"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P09/case-C/full-v5/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "1e84da586017fd3f8c4baaed790b5d2e961762d0eccd4701006728aca65ce73a"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P09/case-C/full-v5/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "071819e7edeb9f1a063edc36d633357b77465ec3a43abdc7b2e3e2f202589358"
+        }
+      }
+    },
+    {
+      "page_id": "P10",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p10",
+      "selected_case": "C",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/GitHub开源发布收尾-2026-10-07/latest-EP59/P10_CURRENT_SELECTION_BINDING.json",
+        "sha256": "f03685177cb91c1d656cf03fec9578509ef727d2b15bd35b0f2212ef40771e91"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P10.excalidraw",
+          "sha256": "58baf1749ba848c99bc3116bb71be4132feaea97d18e612b4b34e2de2455cd30"
+        },
+        "png": {
+          "path": "04-rendered/P10.png",
+          "sha256": "9cfd326505ed66f389827e83dce539b91d8022633b93948b06d22bedbd38b9e7"
+        },
+        "phone": {
+          "path": "04-rendered/P10-phone.png",
+          "sha256": "22f29972841092c7c46d09682074274f1a2c4a6c6df5c6d1c6dab73286440fab"
+        },
+        "gray": {
+          "path": "04-rendered/P10-gray.png",
+          "sha256": "728c692288ae18db0b5849068ed98b046327111e841dc53f087865b017a6df1c"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P10/full-C-v2/review-workspace/04-rendered/render_gate.json",
+          "sha256": "c3142eb56a42fd23c6b023efb84a3fd26274fbdacb1ffab18f2e7a9e4539234c"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P10/full-C-v2/review-workspace/04-rendered/render_manifest.json",
+          "sha256": "c08b05858d0d82d6d323add5d81ebce8518aaacd5e63efeabea0856d92ea2e47"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P10/full-C-v2/review-workspace/04-rendered/independent_visual_review.json",
+          "sha256": "13bbcf219a67103d351e0a93e811efe768246749ae6aa65a15a50b030f78aa6b"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/EP59-三页设计重构-2026-10-06/P10/full-C-v2/review-workspace/04-rendered/visual_page_human_approval.json",
+          "sha256": "f65c320c138ef9c24c84ad9545b3f17466c566d08c3647c0f881824fd806f96d"
+        }
+      }
+    },
+    {
+      "page_id": "P11",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p11",
+      "selected_case": "B",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P11/content-driven-v1-2026-10-05/USER_SELECTION_B_APPROVAL.json",
+        "sha256": "43cda9329e2a264125264d3eaef7c2d4a20f7f5aa14bb5bfb12d6658663f47b9"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P11.excalidraw",
+          "sha256": "cab29c4e1f12a6d8b5969657d6e91fcf416ecfc9a1f029e3f12ac3f0b710afe5"
+        },
+        "png": {
+          "path": "04-rendered/P11.png",
+          "sha256": "405d073d8227e008791a86dbeafdfb785088528f83ae78a4006a6ea82eef2388"
+        },
+        "phone": {
+          "path": "04-rendered/P11-phone.png",
+          "sha256": "82dcca97fdb16dcf3c82a71fb61b4fc6890ba5f26b57581017452fd7de193698"
+        },
+        "gray": {
+          "path": "04-rendered/P11-gray.png",
+          "sha256": "5515099fb59ed8a9b59d14fdd28a2a64d807e8002822dfc9b7ce3375da396092"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P11/content-driven-v1-2026-10-05/full-B-v2/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "79fcee2ad58aec6dca3bb6847db95ad07f4249687330afc3f9441a8e2f235c93"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P11/content-driven-v1-2026-10-05/full-B-v2/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "2d576466ca9dfa3c31a3ecb4568715ca55e74a3bbc8a8829a3ccb81981377a97"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P11/content-driven-v1-2026-10-05/full-B-v2/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "72b6d51b7d29e65e2124c8318048c03afe17352f0a1bb10cbc5ee2f5890c9571"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P11/content-driven-v1-2026-10-05/full-B-v2/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "b432196a097b9e83e6f371b7dda654701bfab41931110c1bf47c6cd32c0a8df8"
+        }
+      }
+    },
+    {
+      "page_id": "P12",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p12",
+      "selected_case": "A",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P12/content-driven-v1-2026-10-06/USER_SELECTION_A_APPROVAL.json",
+        "sha256": "f7ecffde1c0d6ac8daa6d9e99ff074ecfc3496e596cdee9a00667c3fb61b0fbd"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P12.excalidraw",
+          "sha256": "2b9eb27bdf2f8f45fda23410eb3897bf7280d3c2ff48abae57d2e058cab0cd86"
+        },
+        "png": {
+          "path": "04-rendered/P12.png",
+          "sha256": "a8f4873457e6d140198dade3e8d9ba2e0ebefa88079860f7cc706a5b02d8ff5e"
+        },
+        "phone": {
+          "path": "04-rendered/P12-phone.png",
+          "sha256": "9155878dc6e295f072e8296b320a3d9b911a9280e7618d8dba3d48551417b8c1"
+        },
+        "gray": {
+          "path": "04-rendered/P12-gray.png",
+          "sha256": "5c839fd9e8794671ae93e2a244439f7f2a61f4fbb02d2f80e1b561eadf470989"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P12/content-driven-v1-2026-10-06/full-A-v3/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "aa6f581fd926becfa107a2c591569268a0f620f4cd36d077b051c745cc1dc3fa"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P12/content-driven-v1-2026-10-06/full-A-v3/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "b8736b0a49239f154ab486a14a5587417ef50458d385eaeede5cdf951cb4aa1d"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P12/content-driven-v1-2026-10-06/full-A-v3/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "a7d44884ea3e55a8874f8815e04e53807529c66016598032d85ce6c8a8c679c1"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P12/content-driven-v1-2026-10-06/full-A-v3/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "beee5ccd18feb5f81b9e5e6ebfd7e72db5c4ef833a05bf145997adc5db45dffa"
+        }
+      }
+    },
+    {
+      "page_id": "P13",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p13",
+      "selected_case": "C",
+      "selection_mode": "accepted_selected_variant",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P13/content-driven-v1-2026-10-06/USER_SELECTION_C_APPROVAL.json",
+        "sha256": "eb0cc0a4625752df7d81d6506d3cbeeb5f0bd16cee0bc783450b9fb82e8a433a"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P13.excalidraw",
+          "sha256": "1dd3371f930cabc3fdddb3a9e54253d79f6d336e3e6dbc100f8888f7962509e5"
+        },
+        "png": {
+          "path": "04-rendered/P13.png",
+          "sha256": "3d1b16f6c06a55228e86e5a6f0d123050f8df231335fec46184b67ec7b986f0c"
+        },
+        "phone": {
+          "path": "04-rendered/P13-phone.png",
+          "sha256": "98f4a7b284090b2e0a8760873efcdaabc564cc9133487e02b3a731e744902ed3"
+        },
+        "gray": {
+          "path": "04-rendered/P13-gray.png",
+          "sha256": "bc5cd360a44852551ef9cf451699a8e94d2ca44c43115868c0379cd1c18d3db7"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P13/content-driven-v1-2026-10-06/full-C-v2/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "48663d1e090387c7358a008d6d3cb7643b968c9395985e5be788ad04040b3ffa"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P13/content-driven-v1-2026-10-06/full-C-v2/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "382e6fe4f0ae6732224b9210db3ee5a21b944e84ef97fb4112318769b5bc5bee"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P13/content-driven-v1-2026-10-06/full-C-v2/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "a6f12398f54302894afa3e8e5918a81cce41551356fe45afb94a78bb13fee436"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P13/content-driven-v1-2026-10-06/full-C-v2/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "8576d701d89e4ac2d3aebe36a44babcf10bc0c2012916d71d4f0ca0e37aa52b6"
+        }
+      }
+    },
+    {
+      "page_id": "P14",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p14",
+      "selected_case": "A",
+      "selection_mode": "authorized_single_case",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P14/single-run-v1-2026-10-06/USER_APPROVAL_A.json",
+        "sha256": "fa65b39c53532d55211c1d6a758b21ef52174e328afcd14b85f0f076c5609558"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P14.excalidraw",
+          "sha256": "5c8b27bde9b37dfcf05ea37dcf4687ac70ca9c008cb27e1d4142af62bf15e8fb"
+        },
+        "png": {
+          "path": "04-rendered/P14.png",
+          "sha256": "c694a4f494c3e4f52f8f61ab96a8452fcc69491d59d454b91e98d3d085db8ae0"
+        },
+        "phone": {
+          "path": "04-rendered/P14-phone.png",
+          "sha256": "bc2d0c9c7ee1e4250a64507eeb2066a4f7ca9961bfde94e8b8b8c9a58362bacd"
+        },
+        "gray": {
+          "path": "04-rendered/P14-gray.png",
+          "sha256": "188c69c49ee1780d769eaf3953d93e91b0f9d6bf79c858c9c708c7ba567810bf"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P14/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "6fc4776fccd7ed7c329af5a8e1d2dc98c65042d0a77cd1d55bafa986aaeee149"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P14/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "584c40a42e8a2cb5388f9ff503df3a7aa563d02308a818aa1e87d5c4a7b2a529"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P14/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "66d3c82dbb3a2263836f5de7256f412c576cb658afba809816a9930daa05b849"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P14/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "61d257326a181a1aacdf6b96d3c86a2e44af323f281f8c054dca0b9e3a7c1fca"
+        }
+      },
+      "single_case_authorization": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/accepted-native-import-2026-10-06/SINGLE_CASE_EXCEPTION.json",
+        "sha256": "6c7ac5d80e5fdc78777468272f2cd7215cfcedc40047bf084dd67b0ad5f6aac5"
+      }
+    },
+    {
+      "page_id": "P15",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p15",
+      "selected_case": "A",
+      "selection_mode": "authorized_single_case",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P15/single-run-v1-2026-10-06/USER_APPROVAL_A.json",
+        "sha256": "25512975ac5bc7b884f0b6ef625632b055deed08566c65f39869aa6f1a04b2f8"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P15.excalidraw",
+          "sha256": "d7f733cc52a84411cca892d93187a845fdbcb67e362df9876828cb5912b97eaa"
+        },
+        "png": {
+          "path": "04-rendered/P15.png",
+          "sha256": "cf0b6bd61b109991a861bbb4c53fdf2b9c687a6c4171aa38750529419eb2e6bd"
+        },
+        "phone": {
+          "path": "04-rendered/P15-phone.png",
+          "sha256": "3ed5ebaacf30b4560cf788518915c853f9ec7219626db2bfadc300b24e9ce469"
+        },
+        "gray": {
+          "path": "04-rendered/P15-gray.png",
+          "sha256": "fe618f000af28c9033468e75628eaea70565bd43c16746234c89257207cecc05"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P15/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "f9ac5d0f185d8fa7cb5fd57a4b689e7766b44d521f0d2a2352202a89613bc5ee"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P15/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "ebdaf9dac26ab630508f16621e2bc5b0c5ec64406e17cd83deca0b0a9302cec4"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P15/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "88df5aca546b5b2267d5206a12c7b20782a9866ce5e004a68efe0deff0a0bdef"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P15/single-run-v1-2026-10-06/full-A-v2/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "93b89e940394697abfd221592a0e7939022543536412aea07a61005d0a94b2e0"
+        }
+      },
+      "single_case_authorization": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/accepted-native-import-2026-10-06/SINGLE_CASE_EXCEPTION.json",
+        "sha256": "6c7ac5d80e5fdc78777468272f2cd7215cfcedc40047bf084dd67b0ad5f6aac5"
+      }
+    },
+    {
+      "page_id": "P16",
+      "source_page_id": "edp_dd_6ab61d4b195d838e2ae9fc1e_p16",
+      "selected_case": "A",
+      "selection_mode": "authorized_single_case",
+      "selection_approval": {
+        "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P16/single-run-v1-2026-10-06/USER_APPROVAL_A.json",
+        "sha256": "6dbd5346ef2624b0139d565411699df93d9bc1d5a43776d2c3da302e433da2d2"
+      },
+      "artifacts": {
+        "scene": {
+          "path": "03-excalidraw/P16.excalidraw",
+          "sha256": "1dea640d3296d3a34518a0087362eee2526e30aae46c78e8b20e262219c00166"
+        },
+        "png": {
+          "path": "04-rendered/P16.png",
+          "sha256": "a42d59be08bb389d98fcbddefc282b0eb612cb9c4abab2491870a58e7573f5f9"
+        },
+        "phone": {
+          "path": "04-rendered/P16-phone.png",
+          "sha256": "9a8ee04510824b6d25388b559a2d0b6231eb081686a8cf9128beb6ce000b9677"
+        },
+        "gray": {
+          "path": "04-rendered/P16-gray.png",
+          "sha256": "1da608eb0836c04f29616f684c74a1342743e6ce204cc9d0c189401f180983ee"
+        }
+      },
+      "proof": {
+        "gate": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P16/single-run-v1-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/render_gate.json",
+          "sha256": "251c5e720434731f29b0b942553b8d618f876a6c69b8c06eb22c58c9f86d55ef"
+        },
+        "manifest": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P16/single-run-v1-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/render_manifest.json",
+          "sha256": "5825191abb2419901db742e5d521a84e6178117d8bfc10e7562b7d3824324662"
+        },
+        "review": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P16/single-run-v1-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/independent_visual_review.json",
+          "sha256": "56940f6fa96b197da01c7b85e78f242e2be0ce51061d410f8b25805082138f76"
+        },
+        "approval": {
+          "path": "[本地工作区]/outputs/github-release-slim-review-2026-10-01/e2e-6ab61d4b195d838e2ae9fc1e/02-visual-plan/deep-recreation-quality-restart-2026-10-04/P16/single-run-v1-2026-10-06/full-A-v1/coordinator-review-current/scoped-submit/04-rendered/visual_page_human_approval.json",
+          "sha256": "e7db30f69b8fc3559904ecfc01616aee393b7a10be69468baa26fe960a8844f2"
+        }
+      },
+      "single_case_authorization": {
+        "path": "[本地工作区]/outputs/EP59-交付待办逐项确认-2026-10-06/正式缺口修复-2026-10-06/accepted-native-import-2026-10-06/SINGLE_CASE_EXCEPTION.json",
+        "sha256": "6c7ac5d80e5fdc78777468272f2cd7215cfcedc40047bf084dd67b0ad5f6aac5"
+      }
+    }
+  ],
+  "created_at": "2026-10-07T03:20:39.057134+00:00",
+  "editor_review": {
+    "path": "[本地工作区]/outputs/GitHub开源发布收尾-2026-10-07/latest-EP59/editor-validation/EDITOR_INTERACTION_REVIEW.json",
+    "sha256": "4efa84464bcef4a4aad214bd2d49cebb9f9fe79c8dd2a01a1db99fdcc661d275"
+  }
+}

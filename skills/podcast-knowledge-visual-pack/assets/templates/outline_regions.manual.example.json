@@ -1,0 +1,9 @@
+{
+  "manual_reason": "提纲放在正文两栏之间，自动推导会把右栏正文并进提纲区",
+  "overlay_screenshot": "outline_regions.overlay.png",
+  "outline_regions": [{"x": 900, "y": 990, "width": 230, "height": 460}],
+  "body_regions": [
+    {"x": 60, "y": 350, "width": 820, "height": 1100},
+    {"x": 900, "y": 350, "width": 230, "height": 620}
+  ]
+}

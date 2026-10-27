@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "kind": "accepted_artwork_visual_gate",
+  "status": "pass",
+  "accepted_artwork_import_sha256": "a68dc85a852a7a481a9a5c35937f43275bbf8739c0813c4c859a75b33508f2e5",
+  "scope": "只继承当前完整TARGET及已绑定用户验收；不追认三案历史"
+}

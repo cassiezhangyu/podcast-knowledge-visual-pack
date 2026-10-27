@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvidenceAnchor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source_kind", "artifact_path", "artifact_sha256", "locator", "support_role"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^ea_[a-z0-9_]+$"},
+    "source_kind": {"enum": ["grounded_span", "raw_span", "episode_metadata", "show_notes", "correction"]},
+    "artifact_path": {"type": "string", "minLength": 1},
+    "artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "locator": {"type": "string", "minLength": 1},
+    "audio_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "start_ms": {"type": ["integer", "null"], "minimum": 0},
+    "end_ms": {"type": ["integer", "null"], "minimum": 0},
+    "raw_span_refs": {"type": "array", "items": {"type": "string"}},
+    "excerpt": {"type": "string", "maxLength": 400},
+    "support_role": {"enum": ["direct", "context", "illustration", "counterevidence", "correction_provenance"]}
+  }
+}

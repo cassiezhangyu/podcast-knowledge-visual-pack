@@ -1,0 +1,126 @@
+{
+  "version": "3.2",
+  "ink": "#273348",
+  "paper": "#FFFFFF",
+  "surface_blend": {
+    "primary_with_white": 0.92,
+    "accent_with_white": 0.9
+  },
+  "ranking_note": "按清亮冷主色、局部暖辅色和白底阅读舒适度排序；主色覆盖绿、青、蓝、靛、紫与冷莓，辅色覆盖灰紫、铜橙、暖粉、杏桃、暖沙、鹅黄、蜂蜜金与珊瑚。暖色浅底配深色文字。每期仍需真实页面和手机图验证。",
+  "palettes": [
+    {
+      "id": "01",
+      "name": "青松绿 × 灰紫",
+      "mood": "清透 · 沉稳",
+      "primary": "#346F64",
+      "accent": "#806477"
+    },
+    {
+      "id": "02",
+      "name": "亮钴蓝 × 铜橙",
+      "mood": "鲜明 · 有力",
+      "primary": "#235D9F",
+      "accent": "#A95728"
+    },
+    {
+      "id": "03",
+      "name": "孔雀青 × 暖粉",
+      "mood": "通透 · 亲近",
+      "primary": "#0E728A",
+      "accent": "#96576B",
+      "accent_surface": "#FBEAF0"
+    },
+    {
+      "id": "04",
+      "name": "海湾蓝 × 杏桃",
+      "mood": "清晰 · 温暖",
+      "primary": "#296B91",
+      "accent": "#9D5D3F",
+      "accent_surface": "#FFF0E4"
+    },
+    {
+      "id": "05",
+      "name": "冷杉绿 × 暖沙",
+      "mood": "自然 · 利落",
+      "primary": "#2E6F56",
+      "accent": "#8C643D",
+      "accent_surface": "#F8EEDB"
+    },
+    {
+      "id": "06",
+      "name": "靛蓝 × 陶橙",
+      "mood": "醒目 · 稳定",
+      "primary": "#4B60A0",
+      "accent": "#9B5A48",
+      "accent_surface": "#FAEAE5"
+    },
+    {
+      "id": "07",
+      "name": "蓝紫 × 浅铜",
+      "mood": "灵动 · 清晰",
+      "primary": "#6656A6",
+      "accent": "#94603F",
+      "accent_surface": "#FCEEDD"
+    },
+    {
+      "id": "08",
+      "name": "紫罗兰 × 鹅黄",
+      "mood": "清亮 · 轻快",
+      "primary": "#8A4FA0",
+      "accent": "#8A641C",
+      "accent_surface": "#FFF3D3"
+    },
+    {
+      "id": "09",
+      "name": "冷莓红 × 蜂蜜金",
+      "mood": "鲜活 · 细腻",
+      "primary": "#A44B71",
+      "accent": "#896215",
+      "accent_surface": "#F9EAC6"
+    },
+    {
+      "id": "10",
+      "name": "海玻璃青 × 珊瑚",
+      "mood": "明亮 · 轻盈",
+      "primary": "#2D756F",
+      "accent": "#A45747",
+      "accent_surface": "#FFECE8"
+    },
+    {
+      "id": "11",
+      "name": "宝石蓝 × 暖玫瑰",
+      "mood": "鲜明 · 活泼",
+      "primary": "#325DAD",
+      "accent": "#9B5365",
+      "accent_surface": "#FBE8ED"
+    },
+    {
+      "id": "12",
+      "name": "兰紫 × 奶油杏",
+      "mood": "柔亮 · 有层次",
+      "primary": "#8B5293",
+      "accent": "#986158",
+      "accent_surface": "#FFF0EA"
+    }
+  ],
+  "not_recommended": [
+    {
+      "name": "浅色直接写小字",
+      "primary": "#BED2DA",
+      "accent": "#EAC9BB",
+      "reason": "浅色适合铺面，不适合做正文"
+    },
+    {
+      "name": "冷暖等面积铺满",
+      "primary": "#CBE1EA",
+      "accent": "#F0D4C6",
+      "reason": "暖色会抢走主视觉"
+    },
+    {
+      "name": "高饱和蓝橙",
+      "primary": "#00B8D9",
+      "accent": "#FF6B40",
+      "reason": "满页使用容易刺眼"
+    }
+  ]
+}

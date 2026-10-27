@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "kind": "human_approval",
+  "stage": "visual_page",
+  "status": "accepted",
+  "artifact_hashes": {
+    "render_manifest": "7427db63eb65ab6f1f86de488642c2303a440528265605f02b56f63d98cc0dfe",
+    "P00": "99bdf2c43f73d6cb2529594dba66eb49de5406f248201a4a74a3e1e5eb8a692d",
+    "P01": "53cd62848b1a2a42680958464868f4967631f66eb79cd2e8751a381a07086774",
+    "P02": "11356fa9d1c312918ea8c460d34b124258331af0fadb114a96a26e72b8f62d76",
+    "P03": "906a816a2d931fba5271daca2d2107fe960c949eef18e29077f9acdafff335cc",
+    "P04": "74c9c697a02b9b3ffb824d8c19faefc7567bd30d52c7e91ab12776357dda207c",
+    "P05": "76fc3538348a0f39a32eb0df5ef093653bf2fb701e95f1d34a4fd06387b82864",
+    "P06": "f604db9fb0abfa918b5950e0e8b810c65c52d723f8c7d516c743f601f969ed5f",
+    "P07": "b6e91a52a01af797f19097e2271bb278684bf2fc8a6d8e06de145b0cd108ced6",
+    "P08": "6bef58812cb4cdbb2508ca04cdb4bd48f32637a391bc3a32918391693a269217",
+    "P09": "d22ba0cdeb1772c948d815d117c13881eb3157852dd7b62b51ca4a0ed233e07e",
+    "P10": "9cfd326505ed66f389827e83dce539b91d8022633b93948b06d22bedbd38b9e7",
+    "P11": "405d073d8227e008791a86dbeafdfb785088528f83ae78a4006a6ea82eef2388",
+    "P12": "a8f4873457e6d140198dade3e8d9ba2e0ebefa88079860f7cc706a5b02d8ff5e",
+    "P13": "3d1b16f6c06a55228e86e5a6f0d123050f8df231335fec46184b67ec7b986f0c",
+    "P14": "c694a4f494c3e4f52f8f61ab96a8452fcc69491d59d454b91e98d3d085db8ae0",
+    "P15": "cf0b6bd61b109991a861bbb4c53fdf2b9c687a6c4171aa38750529419eb2e6bd",
+    "P16": "a42d59be08bb389d98fcbddefc282b0eb612cb9c4abab2491870a58e7573f5f9"
+  },
+  "reviewed_by": "user：当前各页既有明确批准的合并绑定",
+  "reviewed_at": "2026-10-07T03:36:17.131Z",
+  "note": "不新增或代签验收；全部图片与逐页批准保持原字节，原批准及隔离审核出处保存在accepted_artwork_import.json。"
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "kind": "grounded_transcript_qa",
+  "status": "pass",
+  "input_hashes": {
+    "transcript_raw": "d60e7e3dad274897a5dc6134d88f891aaf77447098e80bae94e51b865a346b08",
+    "transcript_clean": "435801f69cb86efee745b9ef234b7d7dad529d37fd4c7088597f2222ffa64c03",
+    "transcript_grounded": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+    "corrections": "6afab690c3bf3671fea6e5cdfcbd83baab5ced35cabb1f8fd4ccd21bb9b2a0f4",
+    "audio_manifest": "50cceffc4924d578d8496a59ceecbc8505cedc6a50540b61ae2cfd3c867ae8a4",
+    "audio_preflight": "9cd5b9ec8773a56bde096da9e9bb8f077942169b13a791c0622f1418481f80c6",
+    "episode_metadata": "baa346fd1ca2c2f07aa5d5c53685865ab4341b5c1ad8e2235648fce60a4fa636"
+  },
+  "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+  "evidence_fingerprints": [
+    {
+      "correction_id": "verbatim_raw_direct_02168",
+      "path": "05-qa/user-verbatim-55m.txt",
+      "sha256": "cba97a5e87657f5c6da88a85d832b1085ff30186e4450be1b6fa62d069387760",
+      "resolution": "verbatim_confirmed"
+    },
+    {
+      "correction_id": "verbatim_raw_direct_04230",
+      "path": "05-qa/user-verbatim-106m.txt",
+      "sha256": "9a83bfb71f84ed4a131acbf3dea8d3e85504ca423f7e19dbd4f4bf925372ef54",
+      "resolution": "verbatim_confirmed"
+    }
+  ],
+  "anomalies": [
+    {
+      "raw_span_id": "raw_direct_02168",
+      "start_ms": 3334480,
+      "end_ms": 3335920,
+      "status": "resolved",
+      "resolution": "verbatim_confirmed",
+      "correction_ids": [
+        "verbatim_raw_direct_02168"
+      ]
+    },
+    {
+      "raw_span_id": "raw_direct_04230",
+      "start_ms": 6373900,
+      "end_ms": 6375040,
+      "status": "resolved",
+      "resolution": "verbatim_confirmed",
+      "correction_ids": [
+        "verbatim_raw_direct_04230"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "本QA检查证据完整性及生产文本异常，不替代语义审阅、说话人确认或完整音频人工听证。",
+    "语音间隔待结合音频理解：raw_direct_00000–raw_direct_00001",
+    "语音间隔待结合音频理解：raw_direct_07154–raw_direct_07155"
+  ],
+  "checks": [
+    {
+      "name": "production_integrity_and_correction_evidence",
+      "status": "pass"
+    }
+  ]
+}

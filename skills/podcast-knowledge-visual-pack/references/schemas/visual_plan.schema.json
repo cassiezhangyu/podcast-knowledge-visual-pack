@@ -1,0 +1,9 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"VisualPlan","type":"object","required":["page_id","page_question","candidates","selected"],
+  "properties":{
+    "page_id":{"type":"string"},"page_question":{"type":"string"},
+    "candidates":{"type":"array","minItems":3,"items":{"type":"object","required":["mode","concept","hero_diagram","explanatory_logic"],"properties":{"mode":{"enum":["safe","adaptive","wildcard"]},"concept":{"type":"string"},"hero_diagram":{"type":"string"},"explanatory_logic":{"type":"string"},"objects":{"type":"array","items":{"type":"string"}},"actions":{"type":"array","items":{"type":"string"}},"spaces_states":{"type":"array","items":{"type":"string"}},"risks":{"type":"array","items":{"type":"string"}}}}},
+    "selected":{"type":"object","properties":{"mode":{"type":"string"},"reason":{"type":"string"},"layout_constraints":{"type":"array","items":{"type":"string"}}}}
+  }
+}

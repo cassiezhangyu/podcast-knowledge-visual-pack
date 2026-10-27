@@ -1,0 +1,3066 @@
+{
+  "schema_version": "1.0",
+  "kind": "knowledge_graph",
+  "status": "completed",
+  "knowledge_base_sha256": "b967287d04a8d90c898cc36baced618e4e1ee8e6b9b66ead69a9ca424cd6f28c",
+  "episode_thesis": {
+    "id": "clm_episode_thesis",
+    "statement": "节目借 ETF 的‘一篮子’作类比，主张先看见人生中已有的时间与注意力配置，再主动选择健康、能力、注意力和风险缓冲的组合；后半段问答展示这一思路在具体人生困境中的不同应用。",
+    "epistemic_status": "episode_synthesis",
+    "evidence_anchor_ids": [
+      "ea_001_01",
+      "ea_001_02",
+      "ea_001_03",
+      "ea_002_01",
+      "ea_002_02",
+      "ea_002_03",
+      "ea_003_01",
+      "ea_003_02",
+      "ea_003_03",
+      "ea_003_04",
+      "ea_003_05",
+      "ea_004_01",
+      "ea_004_02",
+      "ea_004_03",
+      "ea_005_01",
+      "ea_005_02",
+      "ea_005_03",
+      "ea_006_01",
+      "ea_006_02",
+      "ea_006_03",
+      "ea_006_04",
+      "ea_006_05",
+      "ea_007_01",
+      "ea_007_02",
+      "ea_007_03",
+      "ea_008_01",
+      "ea_008_02",
+      "ea_008_03",
+      "ea_009_01",
+      "ea_009_02",
+      "ea_009_03",
+      "ea_010_01",
+      "ea_010_02",
+      "ea_010_03",
+      "ea_011_01",
+      "ea_011_02",
+      "ea_012_01",
+      "ea_012_02",
+      "ea_012_03",
+      "ea_013_01",
+      "ea_013_02",
+      "ea_013_03",
+      "ea_014_01",
+      "ea_014_02",
+      "ea_014_03",
+      "ea_014_04",
+      "ea_015_01",
+      "ea_015_02",
+      "ea_015_03",
+      "ea_016_01",
+      "ea_016_02",
+      "ea_016_03",
+      "ea_017_01",
+      "ea_017_02",
+      "ea_017_03",
+      "ea_017_04",
+      "ea_018_01",
+      "ea_018_02",
+      "ea_018_03",
+      "ea_019_01",
+      "ea_019_02",
+      "ea_019_03",
+      "ea_020_01",
+      "ea_020_02",
+      "ea_020_03",
+      "ea_021_01",
+      "ea_021_02",
+      "ea_021_03",
+      "ea_021_04"
+    ],
+    "confidence": "medium",
+    "review_status": "accepted"
+  },
+  "core_questions": [
+    "为什么已有许多选择，还要主动构建自己的人生组合？",
+    "把健康当优先事项，具体需要配置哪些能力与做法？",
+    "如果 AI 改变工作，什么能力能帮助人创造价值？",
+    "为何只按时间长短安排生活还不够？",
+    "当人生计划或热门路径失效，怎样给自己留选择余地？",
+    "主动配置会不会变成另一种自我束缚？",
+    "当伴侣持续焦虑又不愿接受建议，能做的是什么？",
+    "思辨能力怎样在读书与日常生活中练习？",
+    "在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？",
+    "改变缓慢、现实压力很强时，怎样重新看待进度？"
+  ],
+  "evidence_anchors": [
+    {
+      "id": "ea_001_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00058",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 135120,
+      "end_ms": 136760,
+      "raw_span_refs": [
+        "raw_direct_00057"
+      ],
+      "excerpt": "为什么我们要点套餐呢",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_001_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00159",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 302740,
+      "end_ms": 304260,
+      "raw_span_refs": [
+        "raw_direct_00158"
+      ],
+      "excerpt": "所以呢我就一口气",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_001_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00199",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 363060,
+      "end_ms": 364160,
+      "raw_span_refs": [
+        "raw_direct_00198"
+      ],
+      "excerpt": "那我们今天的重点",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_002_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00339",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 600040,
+      "end_ms": 601020,
+      "raw_span_refs": [
+        "raw_direct_00338"
+      ],
+      "excerpt": "他们的工作本身",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_002_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00480",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 843820,
+      "end_ms": 845420,
+      "raw_span_refs": [
+        "raw_direct_00479"
+      ],
+      "excerpt": "然后最后只能说",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_002_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00572",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 985760,
+      "end_ms": 988600,
+      "raw_span_refs": [
+        "raw_direct_00571"
+      ],
+      "excerpt": "它给你带来了短暂的解压的作用",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_003_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00621",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 1078620,
+      "end_ms": 1080740,
+      "raw_span_refs": [
+        "raw_direct_00620"
+      ],
+      "excerpt": "我害怕错过的心理",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_003_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00812",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 1387520,
+      "end_ms": 1388740,
+      "raw_span_refs": [
+        "raw_direct_00811"
+      ],
+      "excerpt": "然后比如说",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_003_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_00974",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 1631080,
+      "end_ms": 1632240,
+      "raw_span_refs": [
+        "raw_direct_00973"
+      ],
+      "excerpt": "请问后面的四个半小时",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_003_04",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01211",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 1973400,
+      "end_ms": 1975120,
+      "raw_span_refs": [
+        "raw_direct_01210"
+      ],
+      "excerpt": "其实我们人生的ETF呢",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_003_05",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01109",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 1802700,
+      "end_ms": 1804620,
+      "raw_span_refs": [
+        "raw_direct_01108"
+      ],
+      "excerpt": "它是以一个主题为基准来聚焦",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_004_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01260",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2054100,
+      "end_ms": 2056200,
+      "raw_span_refs": [
+        "raw_direct_01259"
+      ],
+      "excerpt": "饮食 睡眠和运动",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_004_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01295",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2098940,
+      "end_ms": 2101460,
+      "raw_span_refs": [
+        "raw_direct_01294"
+      ],
+      "excerpt": "好 每天我们来做100个甩狐狸",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_004_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01380",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2214520,
+      "end_ms": 2218160,
+      "raw_span_refs": [
+        "raw_direct_01379"
+      ],
+      "excerpt": "75%以上的美国老年的骨质疏松症",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_005_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01724",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2699600,
+      "end_ms": 2701040,
+      "raw_span_refs": [
+        "raw_direct_01723"
+      ],
+      "excerpt": "只要它不干扰你的生活",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_005_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01733",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2709980,
+      "end_ms": 2712000,
+      "raw_span_refs": [
+        "raw_direct_01732"
+      ],
+      "excerpt": "发展任务未完成的状态",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_005_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_01782",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 2786340,
+      "end_ms": 2787500,
+      "raw_span_refs": [
+        "raw_direct_01781"
+      ],
+      "excerpt": "有一个理论认为",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_006_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02144",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3295860,
+      "end_ms": 3296900,
+      "raw_span_refs": [
+        "raw_direct_02143"
+      ],
+      "excerpt": "唯有在你自己出来",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_006_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02160",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3319740,
+      "end_ms": 3321440,
+      "raw_span_refs": [
+        "raw_direct_02159"
+      ],
+      "excerpt": "男性创始人就不会说话了",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_006_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02347",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3620380,
+      "end_ms": 3621680,
+      "raw_span_refs": [
+        "raw_direct_02346"
+      ],
+      "excerpt": "对吧 你总有一个不够",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_006_04",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02295",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3524560,
+      "end_ms": 3526060,
+      "raw_span_refs": [
+        "raw_direct_02294"
+      ],
+      "excerpt": "13到14分这么多",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_006_05",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02436",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3739540,
+      "end_ms": 3741520,
+      "raw_span_refs": [
+        "raw_direct_02435"
+      ],
+      "excerpt": "所以其实我觉得男性也没有办法",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_007_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02492",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3824380,
+      "end_ms": 3825520,
+      "raw_span_refs": [
+        "raw_direct_02491"
+      ],
+      "excerpt": "就是正面的变换",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_007_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02537",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3898800,
+      "end_ms": 3900820,
+      "raw_span_refs": [
+        "raw_direct_02536"
+      ],
+      "excerpt": "比如说家里亲人去世",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_007_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02599",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 3995220,
+      "end_ms": 3997260,
+      "raw_span_refs": [
+        "raw_direct_02598"
+      ],
+      "excerpt": "世界卫生组织职业倦怠",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_008_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02672",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4090860,
+      "end_ms": 4092540,
+      "raw_span_refs": [
+        "raw_direct_02671"
+      ],
+      "excerpt": "因为我带了那个血糖仪",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_008_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02712",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4152140,
+      "end_ms": 4153800,
+      "raw_span_refs": [
+        "raw_direct_02711"
+      ],
+      "excerpt": "经期前综合症是一件",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_008_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02767",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4234060,
+      "end_ms": 4235900,
+      "raw_span_refs": [
+        "raw_direct_02766"
+      ],
+      "excerpt": "你的精力会提升三倍",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_009_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_02907",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4466000,
+      "end_ms": 4468760,
+      "raw_span_refs": [
+        "raw_direct_02906"
+      ],
+      "excerpt": "是国企改革的那个浪潮",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_009_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03079",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4708280,
+      "end_ms": 4709680,
+      "raw_span_refs": [
+        "raw_direct_03078"
+      ],
+      "excerpt": "定制摄影增加了",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_009_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03076",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4703420,
+      "end_ms": 4705420,
+      "raw_span_refs": [
+        "raw_direct_03075"
+      ],
+      "excerpt": "微生态将来一定会出现的",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_010_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03198",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4877820,
+      "end_ms": 4879020,
+      "raw_span_refs": [
+        "raw_direct_03197"
+      ],
+      "excerpt": "从Who we are",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_010_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03254",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4971480,
+      "end_ms": 4972800,
+      "raw_span_refs": [
+        "raw_direct_03253"
+      ],
+      "excerpt": "大家是不是就五五分呢",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_010_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03262",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 4984140,
+      "end_ms": 4985760,
+      "raw_span_refs": [
+        "raw_direct_03261"
+      ],
+      "excerpt": "占70%以上的股权",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_011_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03442",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5244280,
+      "end_ms": 5245680,
+      "raw_span_refs": [
+        "raw_direct_03441"
+      ],
+      "excerpt": "读书有上下文",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_011_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03410",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5198600,
+      "end_ms": 5200200,
+      "raw_span_refs": [
+        "raw_direct_03409"
+      ],
+      "excerpt": "如果我跟别人的意见一致",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_012_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03642",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5506200,
+      "end_ms": 5507480,
+      "raw_span_refs": [
+        "raw_direct_03641"
+      ],
+      "excerpt": "网上有非常多的",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_012_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03739",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5626500,
+      "end_ms": 5628420,
+      "raw_span_refs": [
+        "raw_direct_03738"
+      ],
+      "excerpt": "从零开始的自媒体博主呢",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_012_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03767",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5666680,
+      "end_ms": 5667940,
+      "raw_span_refs": [
+        "raw_direct_03766"
+      ],
+      "excerpt": "进来以后就很割裂",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_013_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03800",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5717560,
+      "end_ms": 5718840,
+      "raw_span_refs": [
+        "raw_direct_03799"
+      ],
+      "excerpt": "穷人家的小孩",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_013_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03940",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5924100,
+      "end_ms": 5924840,
+      "raw_span_refs": [
+        "raw_direct_03939"
+      ],
+      "excerpt": "我停下来",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_013_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_03828",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 5767420,
+      "end_ms": 5768580,
+      "raw_span_refs": [
+        "raw_direct_03827"
+      ],
+      "excerpt": "实验结果正相反",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_014_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04023",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 6052920,
+      "end_ms": 6054420,
+      "raw_span_refs": [
+        "raw_direct_04022"
+      ],
+      "excerpt": "那就是为什么大家很焦虑",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_014_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04217",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 6354840,
+      "end_ms": 6357200,
+      "raw_span_refs": [
+        "raw_direct_04216"
+      ],
+      "excerpt": "那时候出租车司机在炒股",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_014_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04275",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 6438540,
+      "end_ms": 6439460,
+      "raw_span_refs": [
+        "raw_direct_04274"
+      ],
+      "excerpt": "考工这个热",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_014_04",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04171",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 6282720,
+      "end_ms": 6284980,
+      "raw_span_refs": [
+        "raw_direct_04170"
+      ],
+      "excerpt": "但是你要知道自己处在周期中的什么位置",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_015_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04693",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7037660,
+      "end_ms": 7038460,
+      "raw_span_refs": [
+        "raw_direct_04692"
+      ],
+      "excerpt": "我不知道呀",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_015_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04660",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 6999160,
+      "end_ms": 7000600,
+      "raw_span_refs": [
+        "raw_direct_04659"
+      ],
+      "excerpt": "纵恩赛海在前面一年半",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_015_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04820",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7198120,
+      "end_ms": 7200040,
+      "raw_span_refs": [
+        "raw_direct_04819"
+      ],
+      "excerpt": "越年轻的人越有机会试错",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_016_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_04859",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7277180,
+      "end_ms": 7278060,
+      "raw_span_refs": [
+        "raw_direct_04858"
+      ],
+      "excerpt": "WIP",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_016_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05067",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7600580,
+      "end_ms": 7602040,
+      "raw_span_refs": [
+        "raw_direct_05066"
+      ],
+      "excerpt": "这个是我的SOP",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_016_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05209",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7818520,
+      "end_ms": 7819440,
+      "raw_span_refs": [
+        "raw_direct_05208"
+      ],
+      "excerpt": "我画画的时候",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_017_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05258",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 7918640,
+      "end_ms": 7919960,
+      "raw_span_refs": [
+        "raw_direct_05257"
+      ],
+      "excerpt": "社交软件",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_017_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05387",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 8103540,
+      "end_ms": 8105320,
+      "raw_span_refs": [
+        "raw_direct_05386"
+      ],
+      "excerpt": "是你们俩就是要磨合出一个",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_017_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05683",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 8515880,
+      "end_ms": 8517460,
+      "raw_span_refs": [
+        "raw_direct_05682"
+      ],
+      "excerpt": "你回去看看他的HRV",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_017_04",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05756",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 8622700,
+      "end_ms": 8624680,
+      "raw_span_refs": [
+        "raw_direct_05755"
+      ],
+      "excerpt": "写小说是一种控制感的来源",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_018_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_05963",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 8973540,
+      "end_ms": 8974860,
+      "raw_span_refs": [
+        "raw_direct_05962"
+      ],
+      "excerpt": "就是如果让我写这本书的话",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_018_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06162",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9235580,
+      "end_ms": 9237400,
+      "raw_span_refs": [
+        "raw_direct_06161"
+      ],
+      "excerpt": "我通过200多篇日记",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_018_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06224",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9330920,
+      "end_ms": 9333040,
+      "raw_span_refs": [
+        "raw_direct_06223"
+      ],
+      "excerpt": "如果我没有想好的话",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_019_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06309",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9453220,
+      "end_ms": 9454540,
+      "raw_span_refs": [
+        "raw_direct_06308"
+      ],
+      "excerpt": "我现在22岁",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_019_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06503",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9753140,
+      "end_ms": 9754500,
+      "raw_span_refs": [
+        "raw_direct_06502"
+      ],
+      "excerpt": "跨年龄去找",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_019_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06463",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9699900,
+      "end_ms": 9700740,
+      "raw_span_refs": [
+        "raw_direct_06462"
+      ],
+      "excerpt": "友谊也是这样子的",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_020_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06624",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 9969120,
+      "end_ms": 9970380,
+      "raw_span_refs": [
+        "raw_direct_06623"
+      ],
+      "excerpt": "这个30%不一定准确啊",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_020_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06726",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10156260,
+      "end_ms": 10158320,
+      "raw_span_refs": [
+        "raw_direct_06725"
+      ],
+      "excerpt": "女性的智慧远远超过于男性",
+      "support_role": "direct"
+    },
+    {
+      "id": "ea_020_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06771",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10222260,
+      "end_ms": 10223400,
+      "raw_span_refs": [
+        "raw_direct_06770"
+      ],
+      "excerpt": "我们当然不是说指个体",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_021_01",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_07085",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10707160,
+      "end_ms": 10709360,
+      "raw_span_refs": [
+        "raw_direct_07084"
+      ],
+      "excerpt": "所以最后的一步在你眼中",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_021_02",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_07103",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10733400,
+      "end_ms": 10735900,
+      "raw_span_refs": [
+        "raw_direct_07102"
+      ],
+      "excerpt": "几万只的粉红色的跳蚤吗",
+      "support_role": "illustration"
+    },
+    {
+      "id": "ea_021_03",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06918",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10457280,
+      "end_ms": 10461120,
+      "raw_span_refs": [
+        "raw_direct_06917"
+      ],
+      "excerpt": "我觉得其实是往上走跟往下走",
+      "support_role": "context"
+    },
+    {
+      "id": "ea_021_04",
+      "source_kind": "grounded_span",
+      "artifact_path": "00-source/transcript_grounded.json",
+      "artifact_sha256": "2487f5940f503e0d24236e417b0f7b4ddb52e69610f9356f636293b2b07716c2",
+      "locator": "clean_06918",
+      "audio_sha256": "6ceb37e1af33ff53e288afb654562d6fa19e8b72463cf8c8fac837132c199b32",
+      "start_ms": 10457280,
+      "end_ms": 10461120,
+      "raw_span_refs": [
+        "raw_direct_06917"
+      ],
+      "excerpt": "我觉得其实是往上走跟往下走",
+      "support_role": "direct"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ex_det_001_01",
+      "kind": "example",
+      "statement": "麦当劳套餐有汉堡、鸡翅、薯条与饮料，偏好随当天状态变化",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_001_01"
+      ],
+      "derived_from_ids": [
+        "cu_001",
+        "det_001_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_001_02",
+      "kind": "example",
+      "statement": "成都饮品一次点几杯、分别尝试，以有限停留时间分散试错",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_001_02"
+      ],
+      "derived_from_ids": [
+        "cu_001",
+        "det_001_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_001_03",
+      "kind": "boundary",
+      "statement": "ETF 是类比，节目重点随后转向主动配置人生，而非教买基金",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_001_03"
+      ],
+      "derived_from_ids": [
+        "cu_001",
+        "det_001_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_002_01",
+      "kind": "mechanism",
+      "statement": "短视频平台持续设计让人刷下去；主讲人借争地策略说明先占时间",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_002_01"
+      ],
+      "derived_from_ids": [
+        "cu_002",
+        "det_002_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_002_02",
+      "kind": "example",
+      "statement": "去苏州河南岸散步需要比较步行、骑行、地铁和打车的成本",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_002_02"
+      ],
+      "derived_from_ids": [
+        "cu_002",
+        "det_002_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_002_03",
+      "kind": "boundary",
+      "statement": "刷剧刷手机也有短暂解压作用，问题在持续占据与权重",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_002_03"
+      ],
+      "derived_from_ids": [
+        "cu_002",
+        "det_002_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_003_01",
+      "kind": "mechanism",
+      "statement": "FOMO 与推荐算法把热门信息不断推到面前",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_003_01"
+      ],
+      "derived_from_ids": [
+        "cu_003",
+        "det_003_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_003_02",
+      "kind": "example",
+      "statement": "Catch-22 要理解小说里的循环困局，单记中文标签不够",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_003_02"
+      ],
+      "derived_from_ids": [
+        "cu_003",
+        "det_003_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_003_03",
+      "kind": "boundary",
+      "statement": "平台前半小时也可提供信息与社交价值，批评的是持续摄取注意力",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_003_03"
+      ],
+      "derived_from_ids": [
+        "cu_003",
+        "det_003_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "obs_det_003_04",
+      "kind": "observation",
+      "statement": "人生 ETF 更接近跨行业的主题组合",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_003_04"
+      ],
+      "derived_from_ids": [
+        "cu_003",
+        "det_003_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "obs_det_003_05",
+      "kind": "observation",
+      "statement": "主讲人区分行业、宽基、主题 ETF，人生组合主要借用主题 ETF 的跨领域视角",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_003_05"
+      ],
+      "derived_from_ids": [
+        "cu_003",
+        "det_003_05"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_det_004_01",
+      "kind": "claim",
+      "statement": "饮食、睡眠、运动被列为生理健康三板块",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_004_01"
+      ],
+      "derived_from_ids": [
+        "cu_004",
+        "det_004_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_004_02",
+      "kind": "example",
+      "statement": "壶铃视频鼓励反复甩动，主讲人质疑是否实现增肌目的",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_004_02"
+      ],
+      "derived_from_ids": [
+        "cu_004",
+        "det_004_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_004_03",
+      "kind": "boundary",
+      "statement": "训练重量、骨质疏松比例等具体说法尚未独立医学核实",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_004_03"
+      ],
+      "derived_from_ids": [
+        "cu_004",
+        "det_004_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_det_005_01",
+      "kind": "claim",
+      "statement": "原生家庭会留下烙印，但不必每个问题都彻底解决",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_005_01"
+      ],
+      "derived_from_ids": [
+        "cu_005",
+        "det_005_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_005_02",
+      "kind": "mechanism",
+      "statement": "主讲人用未完成的发展任务解释某些成年困境",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_005_02"
+      ],
+      "derived_from_ids": [
+        "cu_005",
+        "det_005_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "obs_det_005_03",
+      "kind": "observation",
+      "statement": "ADHD 与创伤的关系被明确介绍为一种理论",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_005_03"
+      ],
+      "derived_from_ids": [
+        "cu_005",
+        "det_005_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_006_01",
+      "kind": "example",
+      "statement": "主讲人比较自己在打工与创业阶段感受到的资源差别",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_006_01"
+      ],
+      "derived_from_ids": [
+        "cu_006",
+        "det_006_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_006_02",
+      "kind": "example",
+      "statement": "女性投资人听男性创始人展示资历，却希望先谈项目本身",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_006_02"
+      ],
+      "derived_from_ids": [
+        "cu_006",
+        "det_006_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_006_03",
+      "kind": "mechanism",
+      "statement": "女性持续被要求满足多种角色，容易形成永远不够的感受",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_006_03"
+      ],
+      "derived_from_ids": [
+        "cu_006",
+        "det_006_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_006_04",
+      "kind": "boundary",
+      "statement": "关于性别、稀缺心态与智商分数的推断未在本期独立验证",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_006_04"
+      ],
+      "derived_from_ids": [
+        "cu_006",
+        "det_006_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_006_05",
+      "kind": "example",
+      "statement": "主讲人认为男性也可能因被要求压抑情感而难以学习亲密关系",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_006_05"
+      ],
+      "derived_from_ids": [
+        "cu_006",
+        "det_006_05"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_det_007_01",
+      "kind": "claim",
+      "statement": "升职、加薪、生育等正面变化也被主讲人列为压力",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_007_01"
+      ],
+      "derived_from_ids": [
+        "cu_007",
+        "det_007_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_007_02",
+      "kind": "example",
+      "statement": "亲人离世的痛苦无法抹去，但可学习与之共存",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_007_02"
+      ],
+      "derived_from_ids": [
+        "cu_007",
+        "det_007_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_007_03",
+      "kind": "boundary",
+      "statement": "职业倦怠和压力后效不能仅凭节目叙述诊断个人",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_007_03"
+      ],
+      "derived_from_ids": [
+        "cu_007",
+        "det_007_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_008_01",
+      "kind": "example",
+      "statement": "主讲人自述佩戴血糖仪时不同食物出现不同反应",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_008_01"
+      ],
+      "derived_from_ids": [
+        "cu_008",
+        "det_008_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_008_02",
+      "kind": "example",
+      "statement": "主讲人提到经期不适可尝试调整，但未提供可推广疗效证据",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_008_02"
+      ],
+      "derived_from_ids": [
+        "cu_008",
+        "det_008_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_008_03",
+      "kind": "boundary",
+      "statement": "三倍、五倍、三千倍等提升幅度不得当作已证实效果",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_008_03"
+      ],
+      "derived_from_ids": [
+        "cu_008",
+        "det_008_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_009_01",
+      "kind": "example",
+      "statement": "国企改革后部分人转向个体经营，被用于类比结构性变迁",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_009_01"
+      ],
+      "derived_from_ids": [
+        "cu_009",
+        "det_009_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_det_009_02",
+      "kind": "claim",
+      "statement": "主讲人列举定制摄影、旅游、情感陪伴与线下活动",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_009_02"
+      ],
+      "derived_from_ids": [
+        "cu_009",
+        "det_009_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_009_03",
+      "kind": "boundary",
+      "statement": "超级个体成为主流及岗位变化是主讲人预测",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_009_03"
+      ],
+      "derived_from_ids": [
+        "cu_009",
+        "det_009_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_010_01",
+      "kind": "example",
+      "statement": "营销从定位和客户关系一直延伸到细分市场与推广",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_010_01"
+      ],
+      "derived_from_ids": [
+        "cu_010",
+        "det_010_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_010_02",
+      "kind": "example",
+      "statement": "合伙人五五分、激励和投资人偏好被用来说明股权设计复杂",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_010_02"
+      ],
+      "derived_from_ids": [
+        "cu_010",
+        "det_010_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_010_03",
+      "kind": "boundary",
+      "statement": "70% 持股等判断是节目举例，需专业法律财税意见",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_010_03"
+      ],
+      "derived_from_ids": [
+        "cu_010",
+        "det_010_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_011_01",
+      "kind": "mechanism",
+      "statement": "阅读提供架构、上下文和完整推理过程",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_011_01"
+      ],
+      "derived_from_ids": [
+        "cu_011",
+        "det_011_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_011_02",
+      "kind": "boundary",
+      "statement": "观点一致不代表照搬；推理也想清楚才算自己的判断",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_011_02"
+      ],
+      "derived_from_ids": [
+        "cu_011",
+        "det_011_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_012_01",
+      "kind": "example",
+      "statement": "主讲人批评只展示花哨结果却省略步骤的 AI 教程",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_012_01"
+      ],
+      "derived_from_ids": [
+        "cu_012",
+        "det_012_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ctr_det_012_02",
+      "kind": "counterpoint",
+      "statement": "若从零做自媒体，十小时详解可能难以获得起步受众",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_012_02"
+      ],
+      "derived_from_ids": [
+        "cu_012",
+        "det_012_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_012_03",
+      "kind": "boundary",
+      "statement": "用噱头吸引的人与愿意深入学习的人可能并非同一群",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_012_03"
+      ],
+      "derived_from_ids": [
+        "cu_012",
+        "det_012_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_013_01",
+      "kind": "example",
+      "statement": "主讲人讲述硬币大小估计实验来说明注意力影响感受",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_013_01"
+      ],
+      "derived_from_ids": [
+        "cu_013",
+        "det_013_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_013_02",
+      "kind": "example",
+      "statement": "通勤时看植物、在秋千上撸猫是短时间专注休息例子",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_013_02"
+      ],
+      "derived_from_ids": [
+        "cu_013",
+        "det_013_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_013_03",
+      "kind": "boundary",
+      "statement": "硬币实验细节和效果幅度尚未查原研究",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_013_03"
+      ],
+      "derived_from_ids": [
+        "cu_013",
+        "det_013_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_014_01",
+      "kind": "mechanism",
+      "statement": "只剩 Plan A 时试图消除不可能消除的风险会加剧焦虑",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_014_01"
+      ],
+      "derived_from_ids": [
+        "cu_014",
+        "det_014_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_014_02",
+      "kind": "example",
+      "statement": "出租车司机与空乘谈股票被主讲人视作过热信号",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_014_02"
+      ],
+      "derived_from_ids": [
+        "cu_014",
+        "det_014_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_014_03",
+      "kind": "boundary",
+      "statement": "转码和公考前景是个人推断，不构成职业或投资建议",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_014_03"
+      ],
+      "derived_from_ids": [
+        "cu_014",
+        "det_014_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_014_04",
+      "kind": "mechanism",
+      "statement": "她用转码与公考热度说明跟风时也要估计周期位置",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_014_04"
+      ],
+      "derived_from_ids": [
+        "cu_014",
+        "det_014_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_015_01",
+      "kind": "example",
+      "statement": "主讲人说开播时并未先规划百万订阅用户画像",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_015_01"
+      ],
+      "derived_from_ids": [
+        "cu_015",
+        "det_015_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_015_02",
+      "kind": "example",
+      "statement": "前一年半尚无商务合作，最初按爱好做节目",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_015_02"
+      ],
+      "derived_from_ids": [
+        "cu_015",
+        "det_015_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_015_03",
+      "kind": "boundary",
+      "statement": "听众问题的建议是主讲人经验，不是所有人的无风险路径",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_015_03"
+      ],
+      "derived_from_ids": [
+        "cu_015",
+        "det_015_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_016_01",
+      "kind": "example",
+      "statement": "听众减少 WIP 后从预期加班变成准时下班",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_016_01"
+      ],
+      "derived_from_ids": [
+        "cu_016",
+        "det_016_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_016_02",
+      "kind": "example",
+      "statement": "苏州河散步被举为流程空出的自由时间",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_016_02"
+      ],
+      "derived_from_ids": [
+        "cu_016",
+        "det_016_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_016_03",
+      "kind": "boundary",
+      "statement": "流程不是僵化线路，爱好可以不以效率或赚钱为目标",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_016_03"
+      ],
+      "derived_from_ids": [
+        "cu_016",
+        "det_016_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_017_01",
+      "kind": "example",
+      "statement": "听众把社交应用移到平板，减少工作时刷手机",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_017_01"
+      ],
+      "derived_from_ids": [
+        "cu_017",
+        "det_017_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_017_02",
+      "kind": "mechanism",
+      "statement": "主讲人区分伴侣的焦虑倾向与两人可协商的交流时间",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_017_02"
+      ],
+      "derived_from_ids": [
+        "cu_017",
+        "det_017_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_017_03",
+      "kind": "boundary",
+      "statement": "HRV、压力与创作缓解焦虑等建议不等于诊断或保证有效",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_017_03"
+      ],
+      "derived_from_ids": [
+        "cu_017",
+        "det_017_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_017_04",
+      "kind": "example",
+      "statement": "主讲人提出可把难以掌控的感受转入写作、绘画等创作活动",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_017_04"
+      ],
+      "derived_from_ids": [
+        "cu_017",
+        "det_017_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_018_01",
+      "kind": "example",
+      "statement": "主讲人阅读《稀缺》时想象若由自己组织内容会如何调整",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_018_01"
+      ],
+      "derived_from_ids": [
+        "cu_018",
+        "det_018_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_018_02",
+      "kind": "example",
+      "statement": "两百多篇日记用于逐步梳理亲密关系困惑",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_018_02"
+      ],
+      "derived_from_ids": [
+        "cu_018",
+        "det_018_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_018_03",
+      "kind": "boundary",
+      "statement": "没有想清楚时可以明确说不知道，不应以自信语气替代推理",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_018_03"
+      ],
+      "derived_from_ids": [
+        "cu_018",
+        "det_018_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_019_01",
+      "kind": "example",
+      "statement": "听众说朋友的人生选择越来越远，自己也愤怒于性别限制",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_019_01"
+      ],
+      "derived_from_ids": [
+        "cu_019",
+        "det_019_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_019_02",
+      "kind": "mechanism",
+      "statement": "主讲人建议不只在同龄人中找支持，也可向年长者交流",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_019_02"
+      ],
+      "derived_from_ids": [
+        "cu_019",
+        "det_019_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_019_03",
+      "kind": "boundary",
+      "statement": "植物生命周期只用作理解关系变化的类比",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_019_03"
+      ],
+      "derived_from_ids": [
+        "cu_019",
+        "det_019_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_020_01",
+      "kind": "example",
+      "statement": "主讲人用雌雄交配策略讲群体行为的博弈，比例并不确定",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_020_01"
+      ],
+      "derived_from_ids": [
+        "cu_020",
+        "det_020_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_det_020_02",
+      "kind": "claim",
+      "statement": "她认为女性的苦难也可能增加对关系和意义的理解",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_020_02"
+      ],
+      "derived_from_ids": [
+        "cu_020",
+        "det_020_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_020_03",
+      "kind": "boundary",
+      "statement": "群体性别比较和进化类比不能推出个体优劣",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_020_03"
+      ],
+      "derived_from_ids": [
+        "cu_020",
+        "det_020_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_021_01",
+      "kind": "example",
+      "statement": "木匠精进时最后一步会再分出更细的目标",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_021_01"
+      ],
+      "derived_from_ids": [
+        "cu_021",
+        "det_021_01"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "ex_det_021_02",
+      "kind": "example",
+      "statement": "主讲人以土壤中的跳虫说明微观观察的趣味",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_021_02"
+      ],
+      "derived_from_ids": [
+        "cu_021",
+        "det_021_02"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "bnd_det_021_03",
+      "kind": "boundary",
+      "statement": "宏微视角是心理与意义框架，不替代健康治疗",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_021_03"
+      ],
+      "derived_from_ids": [
+        "cu_021",
+        "det_021_03"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "mech_det_021_04",
+      "kind": "mechanism",
+      "statement": "向上看生命意义、向下看微观细节，离开单一社会时钟的评判",
+      "epistemic_status": "source_explicit",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_021_04"
+      ],
+      "derived_from_ids": [
+        "cu_021",
+        "det_021_04"
+      ],
+      "confidence": "medium",
+      "uncertainty": "已审批源梳理的转述；不自动认定逐句说话人，数字、事件与概念继续保留来源边界。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_01",
+      "kind": "claim",
+      "statement": "人生中的娱乐与资讯原本就由多个选项构成；先看清权重，再主动安排想保留的活动，才能减少单一依赖和被平台默认填满的风险。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_001_01",
+        "ea_001_02",
+        "ea_001_03",
+        "ea_002_01",
+        "ea_002_02",
+        "ea_002_03",
+        "ea_003_01",
+        "ea_003_02",
+        "ea_003_03",
+        "ea_003_04",
+        "ea_003_05"
+      ],
+      "derived_from_ids": [
+        "cu_001",
+        "cu_002",
+        "cu_003"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_02",
+      "kind": "claim",
+      "statement": "节目把健康从饮食睡眠运动扩展到心理、社会结构与压力管理，主张先学习辨别知识，再观察个人反应并调整；个体案例与健康数字不可当成普适处方。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_004_01",
+        "ea_004_02",
+        "ea_004_03",
+        "ea_005_01",
+        "ea_005_02",
+        "ea_005_03",
+        "ea_006_01",
+        "ea_006_02",
+        "ea_006_03",
+        "ea_006_04",
+        "ea_006_05",
+        "ea_007_01",
+        "ea_007_02",
+        "ea_007_03",
+        "ea_008_01",
+        "ea_008_02",
+        "ea_008_03"
+      ],
+      "derived_from_ids": [
+        "cu_004",
+        "cu_005",
+        "cu_006",
+        "cu_007",
+        "cu_008"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_03",
+      "kind": "claim",
+      "statement": "主讲人先推测小团队与超级个体机会增加，再提出商业全链路知识、深度阅读思辨和务实协调理想与现实三个能力；关于未来岗位与效率的判断仍是预测。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_009_01",
+        "ea_009_02",
+        "ea_009_03",
+        "ea_010_01",
+        "ea_010_02",
+        "ea_010_03",
+        "ea_011_01",
+        "ea_011_02",
+        "ea_012_01",
+        "ea_012_02",
+        "ea_012_03"
+      ],
+      "derived_from_ids": [
+        "cu_009",
+        "cu_010",
+        "cu_011",
+        "cu_012"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_04",
+      "kind": "claim",
+      "statement": "主讲人认为注意力会改变学习与休息的主观体验，因此建议主动决定聚焦对象；硬币实验及效果幅度需另行核实，不能由单个例子推出确定心理规律。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_013_01",
+        "ea_013_02",
+        "ea_013_03"
+      ],
+      "derived_from_ids": [
+        "cu_013"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_05",
+      "kind": "claim",
+      "statement": "主讲人主张准备 Plan B，并警惕因从众而只看热门选择的收益；备选方案意在减轻只押 Plan A 的焦虑，周期案例是个人观察，不能视为就业或投资预测。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_014_01",
+        "ea_014_02",
+        "ea_014_03",
+        "ea_014_04"
+      ],
+      "derived_from_ids": [
+        "cu_014"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_06",
+      "kind": "claim",
+      "statement": "两个问答从不同角度回答：不要把已有标签当能力边界；SOP 若由自己选择并动态调整，可腾出散步和创作等不求产出的时间。播客起步与减少 WIP 的经历仅作例子。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_015_01",
+        "ea_015_02",
+        "ea_015_03",
+        "ea_016_01",
+        "ea_016_02",
+        "ea_016_03"
+      ],
+      "derived_from_ids": [
+        "cu_015",
+        "cu_016"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_07",
+      "kind": "claim",
+      "statement": "现场答复把伴侣的内在焦虑与两人可协商的交流时间分开：尊重暂时不能替对方改变的部分，同时谈出双方感到公平的相处安排；健康与心理建议仍需个体判断。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_017_01",
+        "ea_017_02",
+        "ea_017_03",
+        "ea_017_04"
+      ],
+      "derived_from_ids": [
+        "cu_017"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_08",
+      "kind": "claim",
+      "statement": "主讲人建议保留良性辩论的心态：重建作者的推理，与他人交换理由，或写日记检验自己的旧判断；没有想清楚时明确承认不知道。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_018_01",
+        "ea_018_02",
+        "ea_018_03"
+      ],
+      "derived_from_ids": [
+        "cu_018"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_09",
+      "kind": "claim",
+      "statement": "主讲人先建议接纳友谊可能改变、跨年龄寻找理解，再用自然和博弈类比回应性别愤怒，最终落到仍可选择抗争；其中的进化与群体智慧判断不能作为科学结论。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_019_01",
+        "ea_019_02",
+        "ea_019_03",
+        "ea_020_01",
+        "ea_020_02",
+        "ea_020_03"
+      ],
+      "derived_from_ids": [
+        "cu_019",
+        "cu_020"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    },
+    {
+      "id": "clm_mod_10",
+      "kind": "claim",
+      "statement": "主讲人建议从宏观意义与微观细节两个方向暂离社会时钟：看更大的生命背景，也看手艺与自然中的小进展，从而重新感到可以选择；这不是对健康问题的治疗承诺。",
+      "epistemic_status": "episode_synthesis",
+      "speaker_ref": null,
+      "evidence_anchor_ids": [
+        "ea_021_01",
+        "ea_021_02",
+        "ea_021_03",
+        "ea_021_04"
+      ],
+      "derived_from_ids": [
+        "cu_021"
+      ],
+      "confidence": "medium",
+      "uncertainty": "用户确认的内容重组，非原文逐字陈述或已证实普遍因果。",
+      "review_status": "accepted",
+      "high_impact": false
+    }
+  ],
+  "relationships": [],
+  "coverage_audit": {
+    "bands": [
+      {
+        "id": "seg_000",
+        "start_span_id": "clean_00001",
+        "end_span_id": "clean_00035",
+        "disposition": "context_only",
+        "content_unit_ids": [],
+        "rationale": "片头预告、音效检查与主持人开场；主论证从第 36 段进入。"
+      },
+      {
+        "id": "seg_001",
+        "start_span_id": "clean_00036",
+        "end_span_id": "clean_00201",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_001"
+        ],
+        "rationale": "用一篮子解释人生 ETF"
+      },
+      {
+        "id": "seg_002",
+        "start_span_id": "clean_00202",
+        "end_span_id": "clean_00581",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_002"
+        ],
+        "rationale": "主动选择娱乐的组成"
+      },
+      {
+        "id": "seg_003",
+        "start_span_id": "clean_00582",
+        "end_span_id": "clean_01238",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_003"
+        ],
+        "rationale": "资讯来源为何需要主动构建"
+      },
+      {
+        "id": "seg_004",
+        "start_span_id": "clean_01239",
+        "end_span_id": "clean_01623",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_004"
+        ],
+        "rationale": "深度健康之一：生理健康与知识"
+      },
+      {
+        "id": "seg_005",
+        "start_span_id": "clean_01624",
+        "end_span_id": "clean_01829",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_005"
+        ],
+        "rationale": "深度健康之二：原生家庭与心理健康"
+      },
+      {
+        "id": "seg_006",
+        "start_span_id": "clean_01830",
+        "end_span_id": "clean_02471",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_006"
+        ],
+        "rationale": "深度健康之三：性别结构带来的心理负担"
+      },
+      {
+        "id": "seg_007",
+        "start_span_id": "clean_02472",
+        "end_span_id": "clean_02624",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_007"
+        ],
+        "rationale": "深度健康之四：压力管理"
+      },
+      {
+        "id": "seg_008",
+        "start_span_id": "clean_02625",
+        "end_span_id": "clean_02790",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_008"
+        ],
+        "rationale": "深度健康之五：个体化尝试"
+      },
+      {
+        "id": "seg_009",
+        "start_span_id": "clean_02791",
+        "end_span_id": "clean_03151",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_009"
+        ],
+        "rationale": "AI 变化与超级个体的判断"
+      },
+      {
+        "id": "seg_010",
+        "start_span_id": "clean_03152",
+        "end_span_id": "clean_03375",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_010"
+        ],
+        "rationale": "AI 护城河之一：商业全链路知识"
+      },
+      {
+        "id": "seg_011",
+        "start_span_id": "clean_03376",
+        "end_span_id": "clean_03552",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_011"
+        ],
+        "rationale": "AI 护城河之二：阅读与思辨"
+      },
+      {
+        "id": "seg_012",
+        "start_span_id": "clean_03553",
+        "end_span_id": "clean_03786",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_012"
+        ],
+        "rationale": "AI 护城河之三：务实地协调理想与现实"
+      },
+      {
+        "id": "seg_013",
+        "start_span_id": "clean_03787",
+        "end_span_id": "clean_04009",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_013"
+        ],
+        "rationale": "注意力分配重于时间堆积"
+      },
+      {
+        "id": "seg_014",
+        "start_span_id": "clean_04010",
+        "end_span_id": "clean_04430",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_014"
+        ],
+        "rationale": "风险 ETF：备选方案与周期意识"
+      },
+      {
+        "id": "seg_015",
+        "start_span_id": "clean_04431",
+        "end_span_id": "clean_04825",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_015"
+        ],
+        "rationale": "问答：不要把身份标签当成能力边界"
+      },
+      {
+        "id": "seg_016",
+        "start_span_id": "clean_04826",
+        "end_span_id": "clean_05237",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_016"
+        ],
+        "rationale": "问答：SOP 如何为自由留空间"
+      },
+      {
+        "id": "seg_017",
+        "start_span_id": "clean_05238",
+        "end_span_id": "clean_05858",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_017"
+        ],
+        "rationale": "问答：伴侣压力与可协商的边界"
+      },
+      {
+        "id": "seg_018",
+        "start_span_id": "clean_05859",
+        "end_span_id": "clean_06308",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_018"
+        ],
+        "rationale": "问答：思辨要敢于追问推理"
+      },
+      {
+        "id": "seg_019",
+        "start_span_id": "clean_06309",
+        "end_span_id": "clean_06542",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_019"
+        ],
+        "rationale": "问答：成长时朋友渐远怎么办"
+      },
+      {
+        "id": "seg_020",
+        "start_span_id": "clean_06543",
+        "end_span_id": "clean_06878",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_020"
+        ],
+        "rationale": "问答：面对性别愤怒的两个视角"
+      },
+      {
+        "id": "seg_021",
+        "start_span_id": "clean_06879",
+        "end_span_id": "clean_07131",
+        "disposition": "semantic",
+        "content_unit_ids": [
+          "cu_021"
+        ],
+        "rationale": "问答：从宏观意义与微观专注走出过渡焦虑"
+      },
+      {
+        "id": "seg_999",
+        "start_span_id": "clean_07132",
+        "end_span_id": "clean_07156",
+        "disposition": "context_only",
+        "content_unit_ids": [],
+        "rationale": "主持人感谢听众、邀请反馈及字幕署名。"
+      }
+    ],
+    "unit_dispositions": [
+      {
+        "source_id": "cu_001",
+        "destination": "module",
+        "module_ids": [
+          "mod_01"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+      },
+      {
+        "source_id": "cu_002",
+        "destination": "module",
+        "module_ids": [
+          "mod_01"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+      },
+      {
+        "source_id": "cu_003",
+        "destination": "module",
+        "module_ids": [
+          "mod_01"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 为什么已有许多选择，还要主动构建自己的人生组合？"
+      },
+      {
+        "source_id": "cu_004",
+        "destination": "module",
+        "module_ids": [
+          "mod_02"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+      },
+      {
+        "source_id": "cu_005",
+        "destination": "module",
+        "module_ids": [
+          "mod_02"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+      },
+      {
+        "source_id": "cu_006",
+        "destination": "module",
+        "module_ids": [
+          "mod_02"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+      },
+      {
+        "source_id": "cu_007",
+        "destination": "module",
+        "module_ids": [
+          "mod_02"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+      },
+      {
+        "source_id": "cu_008",
+        "destination": "module",
+        "module_ids": [
+          "mod_02"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 把健康当优先事项，具体需要配置哪些能力与做法？"
+      },
+      {
+        "source_id": "cu_009",
+        "destination": "module",
+        "module_ids": [
+          "mod_03"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+      },
+      {
+        "source_id": "cu_010",
+        "destination": "module",
+        "module_ids": [
+          "mod_03"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+      },
+      {
+        "source_id": "cu_011",
+        "destination": "module",
+        "module_ids": [
+          "mod_03"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+      },
+      {
+        "source_id": "cu_012",
+        "destination": "module",
+        "module_ids": [
+          "mod_03"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 如果 AI 改变工作，什么能力能帮助人创造价值？"
+      },
+      {
+        "source_id": "cu_013",
+        "destination": "module",
+        "module_ids": [
+          "mod_04"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 为何只按时间长短安排生活还不够？"
+      },
+      {
+        "source_id": "cu_014",
+        "destination": "module",
+        "module_ids": [
+          "mod_05"
+        ],
+        "role": "主论证",
+        "rationale": "该单元回答 当人生计划或热门路径失效，怎样给自己留选择余地？"
+      },
+      {
+        "source_id": "cu_015",
+        "destination": "module",
+        "module_ids": [
+          "mod_06"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 主动配置会不会变成另一种自我束缚？"
+      },
+      {
+        "source_id": "cu_016",
+        "destination": "module",
+        "module_ids": [
+          "mod_06"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 主动配置会不会变成另一种自我束缚？"
+      },
+      {
+        "source_id": "cu_017",
+        "destination": "module",
+        "module_ids": [
+          "mod_07"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 当伴侣持续焦虑又不愿接受建议，能做的是什么？"
+      },
+      {
+        "source_id": "cu_018",
+        "destination": "module",
+        "module_ids": [
+          "mod_08"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 思辨能力怎样在读书与日常生活中练习？"
+      },
+      {
+        "source_id": "cu_019",
+        "destination": "module",
+        "module_ids": [
+          "mod_09"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？"
+      },
+      {
+        "source_id": "cu_020",
+        "destination": "module",
+        "module_ids": [
+          "mod_09"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 在旧友渐远且感到性别限制时，如何寻找支持并保留主体性？"
+      },
+      {
+        "source_id": "cu_021",
+        "destination": "module",
+        "module_ids": [
+          "mod_10"
+        ],
+        "role": "平行问答",
+        "rationale": "该单元回答 改变缓慢、现实压力很强时，怎样重新看待进度？"
+      }
+    ]
+  },
+  "relationship_decisions": [
+    {
+      "candidate_id": "rel_guardrail_1",
+      "status": "rejected",
+      "reason": "四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+    },
+    {
+      "candidate_id": "rel_guardrail_2",
+      "status": "rejected",
+      "reason": "四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+    },
+    {
+      "candidate_id": "rel_guardrail_3",
+      "status": "rejected",
+      "reason": "四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+    },
+    {
+      "candidate_id": "rel_guardrail_4",
+      "status": "rejected",
+      "reason": "四个主题不是因果阶段；问答也不是第五根支柱或必经步骤。"
+    },
+    {
+      "candidate_id": "rel_guardrail_5",
+      "status": "rejected",
+      "reason": "现场问答不是第五根支柱，不把不同听众的个人建议连成因果或通用处方。"
+    }
+  ]
+}

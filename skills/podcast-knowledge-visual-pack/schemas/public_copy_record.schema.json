@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublicCopyRecord", "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "status", "content_split_human_approval_sha256", "draft_sha256", "final_sha256", "humanizer", "ai_trace_review", "fidelity_regression"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "kind": {"const": "public_copy_record"}, "status": {"const": "completed"},
+    "content_split_human_approval_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "draft_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "final_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "humanizer": {"type": "object", "additionalProperties": false, "required": ["status", "scope"], "properties": {"status": {"const": "completed"}, "scope": {"const": "expression_only"}}},
+    "ai_trace_review": {"enum": ["pass", "revise"]}, "fidelity_regression": {"enum": ["pass", "revise"]}
+  }
+}

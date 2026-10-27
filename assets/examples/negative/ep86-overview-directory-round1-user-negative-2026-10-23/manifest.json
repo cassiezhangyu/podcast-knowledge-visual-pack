@@ -5,7 +5,6 @@
   "episode_url": "https://www.xiaoyuzhoufm.com/episode/6a8eb50eef65145dfcc5c072",
   "page_id": "P01",
   "palette": "04",
-  "workspace_source": "/Users/admin/podcast-test/outputs/6a8eb50eef65145dfcc5c072",
   "user_words": "三图都不合格，对比正面案例相差甚远，既没有体现知识框架，视觉逻辑，和版面设计审美，重做",
   "approval_scope": "整页；用户否定第一轮三案，本记录只收A案作目录式总览负例",
   "files": [
@@ -35,5 +34,6 @@
       "bytes": 117694,
       "sha256": "dbb73ad9be7c634fccf257c59ed73484ace97dbc6953a59060d8aae0b8bd4a57"
     }
-  ]
+  ],
+  "source_note": "本地单期产物；不随分发记录原工作区绝对路径。"
 }

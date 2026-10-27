@@ -5,7 +5,6 @@
   "episode_url": "https://www.xiaoyuzhoufm.com/episode/6a8eb50eef65145dfcc5c072",
   "page_id": "P01",
   "palette": "04",
-  "workspace_source": "/Users/admin/podcast-test/outputs/6a8eb50eef65145dfcc5c072",
   "user_words": "仍然喜欢第一版，请你检查一下页面内文字，是否有首读读者理解不了或者核心内容覆盖不全的部分，若有，则继续优化后完成最终交付",
   "approval_scope": "整页单版本（第二轮A案按冷读改七处措辞后的定稿）；不是总览必看基准；未纳入 USAGE_NOTICE 公开展示列表",
   "reuse_boundary": "校准统一载体（整期放在一条交付流上）、实践挂在载体部位、物件完成度；不复制配色04、文案、坐标、管道/漏斗/包裹/茶具物件",
@@ -36,5 +35,6 @@
       "bytes": 199222,
       "sha256": "381500f4f742aba75a04e23be2d64e6ee74ffa400c4f23c9d253d9e67feae007"
     }
-  ]
+  ],
+  "source_note": "本地单期产物；不随分发记录原工作区绝对路径。"
 }

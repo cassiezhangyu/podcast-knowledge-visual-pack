@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateArtifact } from "./validate.js";
+import { assertRenderedMargins } from "./rendered-margins.js";
 type R = Record<string, any>;
 const hash = (v: unknown) => createHash("sha256").update(JSON.stringify(v)).digest("hex");
 const fileHash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
@@ -18,6 +19,7 @@ export function buildManifests(workspace: string, recordPaths: string[], now = n
   const ids = new Set<string>();
   for (const { path, data } of records) {
     if (data.kind !== "mechanical_render_record" || data.status !== "pass") throw new Error("机械记录未通过：" + path);
+    assertRenderedMargins(data);
     if (ids.has(data.page_id)) throw new Error("页号重复：" + data.page_id);
     ids.add(data.page_id);
     for (const [key, art] of Object.entries(data.current ?? {}) as [string, R][]) {

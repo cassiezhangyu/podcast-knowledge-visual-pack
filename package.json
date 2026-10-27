@@ -1,6 +1,6 @@
 {
   "name": "podcast-knowledge-skill",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -45,7 +45,9 @@
     "erratum:apply": "npm run build && node dist/erratum-cli.js",
     "visual:register-versions": "npm run build && node dist/delivery-versions-cli.js",
     "audit:dead-space": "python3 scripts/audit_dead_space.py",
-    "round:diff": "python3 scripts/round_diff.py"
+    "round:diff": "python3 scripts/round_diff.py",
+    "visual-quality:init": "npm run build && node dist/visual-quality-cli.js --action init",
+    "visual-quality:check": "npm run build && node dist/visual-quality-cli.js --action check"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

@@ -1,12 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { assertNoPlaceholders, assertNotBoilerplate, readerJargon } from "../../dist/author-visual-closeout.js";
 import { assertSentenceColdRead } from "../../dist/sentence-cold-read.js";
 import { assertUnifiedCarrier } from "../../dist/overview-framework-check.js";
+import {spawnSync} from "node:child_process";
+import {marginPng} from "./margin-fixture.mjs";
 import { buildManifests } from "../../dist/render-manifest-cli.js";
 
 const fail = (m) => { throw new Error(m); };
@@ -38,11 +40,12 @@ test("本期术语出现在页面上必须标出并写明解释", () => {
   assert.throws(() => readerJargon(ws), /术语表/);
   writeFileSync(join(ws, "01-understanding/READER_JARGON.json"), JSON.stringify({ kind: "reader_jargon", terms: [{ term: "瓶颈", plain: "最慢的一处" }] }));
   const terms = readerJargon(ws);
-  const scene = { elements: [{ type: "text", text: "找瓶颈" }] };
+  const scene = { elements: [{ id: "subject", type: "text", text: "找瓶颈" }, { id: "definition", type: "text", text: "瓶颈是整条流程最慢的一处" }] };
   const base = { status: "pass", metaphor_body_plain: { status: "pass", evidence: "比喻只在主图" }, number_trace: [], label_collision: { status: "pass", findings: [] }, outline_items: [] };
-  const plain = { checks: { sentence_cold_read: { ...base, items: [{ text: "找瓶颈", flagged: false, resolution: "plain", reason: "看起来能懂" }] } } };
+  const definition = {text: "瓶颈是整条流程最慢的一处", flagged: true, resolution: "explained_on_page", reason: "本句直接定义术语", explanation: "后半句说明指整条流程最慢的一处", explanation_refs: [{element_id:"definition",quote:"整条流程最慢的一处"}]};
+  const plain = { checks: { sentence_cold_read: { ...base, items: [definition, { text: "找瓶颈", flagged: false, resolution: "plain", reason: "看起来能懂" }] } } };
   assert.throws(() => assertSentenceColdRead(plain, scene, terms), /本期术语“瓶颈”/);
-  const explained = { checks: { sentence_cold_read: { ...base, items: [{ text: "找瓶颈", flagged: true, resolution: "explained_on_page", reason: "术语", explanation: "下方写明瓶颈是最慢的一处" }] } } };
+  const explained = { checks: { sentence_cold_read: { ...base, items: [definition, { text: "找瓶颈", flagged: true, resolution: "explained_on_page", reason: "术语", explanation: "下方写明瓶颈是最慢的一处", explanation_refs: [{element_id:"definition",quote:"整条流程最慢的一处"}] }] } } };
   assertSentenceColdRead(explained, scene, terms);
 });
 
@@ -52,10 +55,14 @@ test("渲染清单从机械记录生成且哈希真实", () => {
   const sha = (b) => createHash("sha256").update(b).digest("hex");
   const art = (name, bytes) => { const p = join(dir, name); writeFileSync(p, bytes); return { path: p, sha256: sha(bytes) }; };
   const scene = art("P01.excalidraw", JSON.stringify({ elements: [{ id: "a", type: "rectangle", x: 0, y: 0, width: 1, height: 1 }] }));
-  const current = { scene, png: art("P01.png", "1x"), phone: art("P01-phone.png", "ph"), gray: art("P01-grayscale.png", "g"), delivery: art("P01-hd.png", "hd"), review2x: art("P01@2x.png", "2x") };
+  const current = { scene, png: art("P01.png", "1x"), phone: art("P01-phone.png", "ph"), gray: art("P01-grayscale.png", "g"), delivery: art("P01-hd.png", marginPng(1)), review2x: art("P01@2x.png", marginPng(2)) };
   const pre = art("PREFLIGHT.json", "{}");
   const record = join(dir, "MECHANICAL_RENDER_RECORD.json");
-  writeFileSync(record, JSON.stringify({ kind: "mechanical_render_record", status: "pass", page_id: "P01", current, preflight: pre, delivery_scale: 2.4 }));
+  const tokens = art("tokens.json", readFileSync("assets/design_tokens.json"));
+  const result=spawnSync("python3",["scripts/audit_rendered_margins.py","--scene",scene.path,"--design-tokens",tokens.path,"--review-png",current.review2x.path,"--delivery-png",current.delivery.path],{encoding:"utf8"});
+  assert.equal(result.status,0,result.stdout+result.stderr);
+  const margins=art("margins.json",result.stdout);
+  writeFileSync(record, JSON.stringify({ kind: "mechanical_render_record", status: "pass", page_id: "P01", current, preflight: pre, tokens, rendered_margin_audit:{status:"pass",record:margins}, delivery_scale: 1 }));
   const { scene: sm, render } = buildManifests(ws, [record], "2026-10-24T00:00:00.000Z");
   assert.equal(render.scene_manifest_sha256, sha(JSON.stringify(sm)));
   assert.equal(render.pages[0].review_png, "03-visual/A/render/P01@2x.png");

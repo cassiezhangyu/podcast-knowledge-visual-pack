@@ -12,6 +12,48 @@ export const NUM_RE = /[0-9０-９]+(?:\.[0-9]+)?|[一二两三四五六七八�
 export function sceneTexts(scene: R): string[] {
   return (scene?.elements ?? []).filter((e: R) => e?.type === "text" && !e.isDeleted && norm(e.text)).map((e: R) => String(e.text));
 }
+/** 唯一文字组须与当前scene完全对应；重字加粗副本共用一行，短标签和数字也纳入。 */
+export function assertTextCoverage(rows: R[], texts: string[], field: string, label: string): void {
+  const expected = new Set(texts.map(norm)), seen = new Set<string>();
+  for (const row of rows) {
+    const key = norm(row?.[field]);
+    if (!expected.has(key)) throw new Error(`${label}含非当前页面文字：${row?.[field] ?? ""}`);
+    if (seen.has(key)) throw new Error(`${label}重复记录：${row[field]}`);
+    seen.add(key);
+  }
+  const missing = [...expected].filter(t => !seen.has(t));
+  if (missing.length) throw new Error(`${label}漏句：${missing.slice(0, 5).join(" / ")}`);
+}
+/** 只校验可机械核对的复述证据；通过不代表语义或真实陌生读者理解已获证明。 */
+export function assertPlainRestatements(c: R, scene: R, jargon: string[] = []): void {
+  const rows = c.checks?.cold_reader_check?.plain_restatement;
+  if (!Array.isArray(rows)) throw new Error("缺 plain_restatement 全量逐句白话复述表");
+  assertTextCoverage(rows, sceneTexts(scene), "page_text", "plain_restatement");
+  const wording = (v: string) => v.replace(/[\s\p{P}\p{S}]/gu, "");
+  for (const r of rows) {
+    if (!longText(r.stranger_restatement, 4) || r.clear !== true)
+      throw new Error("plain_restatement 有读不懂或缺复述的句子：" + r.page_text);
+    if (/[?？]/u.test(r.stranger_restatement)) throw new Error("plain_restatement 仍需追问：" + r.page_text);
+    const repeated = jargon.filter(term => norm(r.page_text).includes(norm(term)) && norm(r.stranger_restatement).includes(norm(term)));
+    if (repeated.length) throw new Error("plain_restatement 仍用本期疑难词解释自身，须换成其含义：" + repeated.join("、"));
+    if (wording(r.page_text) === wording(r.stranger_restatement))
+      throw new Error("plain_restatement 仅重复原句：" + r.page_text);
+  }
+}
+/** “已解释”须引用本页未删除文字的ID和原文片段；报告自述不能代替页面内容。 */
+function assertExplanationRefs(item: R, scene: R): void {
+  const refs = item.explanation_refs;
+  if (!Array.isArray(refs) || !refs.length) throw new Error("explained_on_page 缺 explanation_refs 页面解释引用：" + item.text);
+  const elements = (scene.elements ?? []).filter((e: R) => e.type === "text" && !e.isDeleted);
+  const original = norm(item.text).replace(/[\p{P}\p{S}]/gu, "");
+  for (const ref of refs) {
+    const e = elements.find((e: R) => e.id === ref?.element_id);
+    if (!e || !longText(ref.quote, 4) || !norm(e.text).includes(norm(ref.quote)))
+      throw new Error("explanation_refs 未指向当前页面可见原文：" + item.text);
+    if (norm(ref.quote).replace(/[\p{P}\p{S}]/gu, "") === original)
+      throw new Error("explanation_refs 仅用原句自证已解释：" + item.text);
+  }
+}
 /** 几何指纹：除文字外所有元素（线、箭头、形状、图片）的类型、位置、尺寸、点列和绑定；文字改了不影响。 */
 export function geometryHash(scene: R): string {
   const r = (n: unknown) => (typeof n === "number" ? Math.round(n) : n ?? null);
@@ -30,13 +72,15 @@ export function assertSentenceColdRead(c: R, scene: R, jargon: string[] = []): v
   if (!s || s.status !== "pass") throw new Error("作者自检缺少逐句冷读 sentence_cold_read（必做，未通过不得展示或登记）");
   const items: R[] = Array.isArray(s.items) ? s.items : [];
   const texts = sceneTexts(scene);
-  if (!items.length) throw new Error("sentence_cold_read.items 为空：每句文字须单独记录");
-  const covered = new Set(items.map((x) => norm(x?.text)));
-  const missing = texts.filter((t) => !covered.has(norm(t)));
-  if (missing.length) throw new Error("逐句冷读漏句：" + missing.slice(0, 5).join(" / "));
+  assertTextCoverage(items, texts, "text", "逐句冷读");
   for (const x of items) {
     if (!longText(x?.text, 1) || typeof x.flagged !== "boolean" || !longText(x.reason, 2)) throw new Error("逐句冷读条目缺 text/flagged/reason：" + String(x?.text ?? ""));
     if (x.flagged && !(x.resolution === "explained_on_page" && longText(x.explanation, 4))) throw new Error("页面上仍有未改白话的比喻/自造词/节目内部说法：" + x.text);
+    if (!["plain", "rewritten", "explained_on_page"].includes(x.resolution)) throw new Error("逐句冷读未完成裁定：" + x.text);
+    if (x.resolution === "explained_on_page") {
+      if (x.flagged !== true || !longText(x.explanation, 4)) throw new Error("explained_on_page 须明确标记疑难及解释：" + x.text);
+      assertExplanationRefs(x, scene);
+    }
     if (x.resolution === "rewritten" && !longText(x.original, 1)) throw new Error("rewritten 须写 original（原句）：" + x.text);
   }
   const all = texts.join("\n");

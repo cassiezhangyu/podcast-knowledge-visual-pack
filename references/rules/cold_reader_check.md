@@ -34,7 +34,7 @@
 | `title_reference_specific` | 正文提到“标题”“书名”“原话”时说清是哪一个，不和本页主标题混淆 | 标题里的3000% → 节目标题里的3000% |
 | `theory_named_explained_inline` | 理论、方法或人名第一次出现时，同一处用半句白话说它管什么；只放名字不算解释 | Scrum｜管回流 → Scrum｜管回流：短周期交出能用的一块，评审看产品，复盘看做法 |
 
-**逐句白话复述表** `cold_reader_check.plain_restatement`：页面上每个句子／标签组一行 `{page_text, stranger_restatement, clear}`（至少3行，覆盖副标题、结论、每个案例说明）。以从没听过节目的人口吻转述；转述需要补上下文、出现“？”或与原意不同，`clear=false`，修好再记。任何一行 `clear=false` 都不能记 `self_check_passed`。
+**逐句白话复述表** `cold_reader_check.plain_restatement`：页面上每个句子／标签组一行 `{page_text, stranger_restatement, clear}`（与当前 scene 的全部唯一文字组逐项对应，包含短标签、页脚和编号；加粗重字副本共用一行）。以从没听过节目的人口吻转述，复述实际含义而非重复术语，本期术语表命中的词在复述里换成它的含义；转述需要补上下文、出现“？”或与原意不同，`clear=false`，修好再记。任何一行 `clear=false` 都不能记 `self_check_passed`。
 
 
 ## 本期术语表（内容阶段产出，必做）
@@ -45,13 +45,15 @@
 {"kind": "reader_jargon", "terms": [{"term": "瓶颈", "plain": "整条流程里最慢的那一处"}, {"term": "在制品", "plain": "已经开始、还没做完的活"}]}
 ```
 
-收录专业术语、英文方法名、节目内部说法、缩写和容易被读成别的意思的词。确实没有时写 `"terms": []` 并加 `empty_reason`。内页收尾时，凡是含表中术语的句子，都必须在 `sentence_cold_read.items` 里标 `flagged: true`、`resolution: "explained_on_page"` 并写明页面哪里解释了它；更好的做法是直接改成 `plain` 里的白话。`author-check:init` 会自动标出这些句子。缺少术语表时 `visual:closeout` 拒绝内页收尾。
+收录专业术语、英文方法名、节目内部说法、缩写和容易被读成别的意思的词。确实没有时写 `"terms": []` 并加 `empty_reason`。内页收尾时，凡是含表中术语的句子，都必须在 `sentence_cold_read.items` 里标 `flagged: true`、`resolution: "explained_on_page"` 并写明页面哪里解释了它，提供 `explanation_refs: [{element_id, quote}]` 引用当前 scene 的可见原文；更好的做法是直接改成 `plain` 里的白话。`author-check:init` 会自动标出这些句子。缺少术语表时 `visual:closeout` 拒绝内页收尾。
 
 ## 逐句冷读与四项补充（必做）
 
 整页冷读会放过「像森林，不像房子」「破了不会马上立」这类句子。整页能懂 ≠ 每句能懂。
 
-**1. 逐句冷读（必查，工具强制）**：页面上每个文字元素单独过一遍。比喻、自造词、节目内部说法（长进去、种子、少即是多、破了不会马上立、像森林不像房子）要么改白话，要么在页面上当场解释。写入作者自检 `checks.sentence_cold_read.items[]`：`{text, flagged, resolution: plain|rewritten|explained_on_page, original?, explanation?, reason}`。scene 里每个文字元素都必须有一行；仍 `flagged` 且未当场解释、或页面仍含已知节目内部说法时，`visual:closeout` 与 `visual:register-versions` 拒绝。没有这份记录不得给用户看图。
+初始化字段保留未检查状态；作者逐条阅读后才裁定 `flagged` 与 `resolution`。程序检查全量覆盖、引用存在、明显原句重复及复述沿用本期疑难词，不能证明复述语义正确或替代真实读者测试。疑难词留在页面时，白话复述需直接说明其含义，不能靠“常用术语”放行；含义只能在报告中解释、页面没有解释时，须回改页面。
+
+**1. 逐句冷读（必查，工具强制）**：页面上每个文字元素单独过一遍。比喻、自造词、节目内部说法（长进去、种子、少即是多、破了不会马上立、像森林不像房子）要么改白话，要么在页面上当场解释。写入作者自检 `checks.sentence_cold_read.items[]`：`{text, flagged, resolution: plain|rewritten|explained_on_page, original?, explanation?, explanation_refs?: [{element_id, quote}], reason}`。scene 里每个文字元素都必须有一行；仍 `flagged` 且未当场解释、或页面仍含已知节目内部说法时，`visual:closeout` 与 `visual:register-versions` 拒绝。没有这份记录不得给用户看图。
   - 实例：像森林，不像房子 → 知识要自己长成网，不是先搭框架再往里填；立：长进去 → 立：消化成自己的；种子太多，一颗都长不出来 → 记太多，哪条都消化不了；少即是多 → 记得越少越好。
 
 **2. 比喻只撑主图（并入清单）**：主图可以用比喻（土壤、树），正文必须直接说结论，不能让读者解比喻。记录 `metaphor_body_plain {status, evidence}`。

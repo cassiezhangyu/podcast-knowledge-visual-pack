@@ -1,3 +1,4 @@
+import { measureRenderedMargins } from "./rendered-margins.js";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync, copyFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
@@ -30,6 +31,8 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
   mkdirSync(out, { recursive: true }); mkdirSync(join(out, "checks"), { recursive: true });
   const staleError = join(out, "render.error.json");
   if (existsSync(staleError)) unlinkSync(staleError);
+  const oldGate = join(out, "render_gate.json");
+  if (existsSync(oldGate)) unlinkSync(oldGate);
   const rendered: R[] = [];
   for (const item of pages) {
     const scenePath = resolve(workspace, item.file as string);
@@ -50,6 +53,9 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
       if (typeof spec.outline_regions_relative_path !== "string") fail("正式内页缺少当版提纲区域。", { page_id: item.page_id });
       command.push("--outline-regions", resolve(workspace, spec.outline_regions_relative_path as string));
     }
+    const readiness = spec.quality_readiness_relative_path;
+    if (typeof readiness !== "string") fail("测试版正式精修缺少quality_readiness_relative_path");
+    command.push("--quality-readiness", resolve(workspace, readiness as string));
     const result = spawnSync(process.execPath, command, { cwd: process.cwd(), encoding: "utf8" });
     if (result.error || result.status !== 0) fail("正式导出被统一机械门禁阻断。", { page_id: item.page_id, reason: result.stderr || result.stdout || String(result.error) });
     const mechanicalPath = join(checked, "MECHANICAL_RENDER_RECORD.json");
@@ -60,6 +66,10 @@ export async function renderScenes(workspace: string, onlyPages?: string[]) {
       copyFileSync((current[key] as R).path as string, destination);
       current[key] = { path: resolve(destination), sha256: hashBuffer(readFileSync(destination)) };
     }
+    // 正式导出复制图片后，重新测量并绑定最终位置，不能沿用临时导出的旧路径。
+    const marginRef = (mechanical.rendered_margin_audit as R).record as R;
+    writeFileSync(marginRef.path as string, `${JSON.stringify(measureRenderedMargins(mechanical), null, 2)}\n`);
+    marginRef.sha256 = hashBuffer(readFileSync(marginRef.path as string));
     writeFileSync(mechanicalPath, `${JSON.stringify(mechanical, null, 2)}\n`);
     const record: R = { page_id: item.page_id, scene_sha256: item.sha256, png: relative(workspace, destinations.png), png_sha256: (current.png as R).sha256, phone_png: relative(workspace, destinations.phone), phone_png_sha256: (current.phone as R).sha256, grayscale_png: relative(workspace, destinations.gray), grayscale_png_sha256: (current.gray as R).sha256, brand_asset_sha256: brand.sha256 };
     rendered.push(record);

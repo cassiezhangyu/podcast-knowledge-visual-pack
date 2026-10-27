@@ -4,33 +4,46 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { initAuthorCheck } from '../../scripts/src/author-check-init-cli.js';
 import { closeoutAuthorPages, verifyAuthorPageChecks } from '../../scripts/src/author-visual-closeout.js';
+// @ts-ignore 共享测试PNG工具
+import {marginPng} from "./margin-fixture.mjs";
+import {qualityFixture} from './visual-quality-fixture.js';
 const roots:string[]=[];
 afterEach(()=>{for(const r of roots.splice(0))rmSync(r,{recursive:true,force:true});});
 const sha=(b:any)=>createHash('sha256').update(b).digest('hex');
-function fixture(){
+function fixture(texts=['句一','句二','句三']){
  const root=mkdtempSync(join(tmpdir(),'author-closeout-'));roots.push(root);mkdirSync(join(root,'04-rendered'));
- const write=(n:string,v:any)=>{const p=join(root,n);writeFileSync(p,typeof v==='string'?v:JSON.stringify(v));return {path:p,sha256:sha(readFileSync(p))};};
+ const write=(n:string,v:any)=>{const p=join(root,n);writeFileSync(p,typeof v==='string'||Buffer.isBuffer(v)?v:JSON.stringify(v));return {path:p,sha256:sha(readFileSync(p))};};
  const tokens=JSON.parse(readFileSync(resolve('assets/design_tokens.json'),'utf8'));
  const token=write('tokens.json',tokens);
- const scene=write('scene.json',{elements:[{id:'bg',type:'rectangle',x:0,y:0,width:1200,height:1600,...tokens.stroke.role_settings.fill_only,customData:{stroke_role:'fill_only'}}],files:{}});
- const png=write('original.png','synthetic original'),phone=write('phone.png','synthetic phone'),gray=write('gray.png','synthetic gray');
+ const scene=write('scene.json',{elements:[{id:'bg',type:'rectangle',x:0,y:0,width:1200,height:1600,...tokens.stroke.role_settings.fill_only,customData:{stroke_role:'fill_only'}},...texts.map((text,i)=>({id:'t'+i,type:'text',text,x:80,y:400+i*40,width:100,height:30,fontSize:24,fontFamily:2,customData:{typography_role:'body'}}))],files:{}});
+ const png=write('original.png',marginPng(1)),phone=write('phone.png','synthetic phone'),gray=write('gray.png','synthetic gray');
  const preflight=write('preflight.json',{page_id:'P01',role:'cover',status:'completed_before_construction',inputs:{tokens:token}});
  const mechanical:any={kind:'mechanical_render_record',status:'pass',current:{scene,png,phone,gray},tokens:token,preflight,checks:['preconstruction_reference_plan','native_scene','typography_roles_sizes_strong_weight','stroke_roles','static_text_geometry','reader_facing_text','outline_alignment','current_input_bindings','same_scene_real_export'].map(name=>({name,status:'pass'})),outline_check:{status:'not_applicable',reason:'cover'}};
+ const review2x=write('P01@2x.png',marginPng(2)),delivery=write('delivery.png',marginPng(1));
+ mechanical.current.review2x=review2x;mechanical.current.delivery=delivery;
+ mechanical.review_2x={scale:2,scene_sha256:scene.sha256};mechanical.delivery_scale=1;
+ const measured=spawnSync('python3',['scripts/audit_rendered_margins.py','--scene',scene.path,'--design-tokens',token.path,'--review-png',review2x.path,'--delivery-png',delivery.path],{encoding:'utf8'});
+ if(measured.status!==0)throw new Error(measured.stdout+measured.stderr);
+ mechanical.rendered_margin_audit={status:'pass',record:write('margins.json',JSON.parse(measured.stdout))};
  const mech=write('mechanical.json',mechanical);
  const check:any={page_id:'P01',status:'self_check_passed',current:mechanical.current,mechanical_render_record:mech,checks:Object.fromEntries(['content_coverage','visual_explanation','reference_alignment','text_geometry','mobile_readability','cold_reader_check','layout_budget','margin_audit','cjk_glyph_audit'].map(name=>[name,{status:'pass',visible_evidence:`合成证据（${name}）：用于核验状态与绑定，不是实际作图结论`}]))};
+ check.checks.rendered_margin_audit={status:'pass',record:mechanical.rendered_margin_audit.record};
  check.checks.side_by_side_reference_comparison={status:'pass',visible_evidence:'合成：与正反例并排比较后的可见证据记录',positive:[{path:'/p/e248-overview.png',comparison:'合成：正例的关系结构在本页何处兑现'}],negative:[{path:'/n/capwords-01.png',comparison:'合成：本页避免了反例的散落标签与简笔人物'}],quality_bar:{R11:'合成：线条为手绘参数非SVG',R17:'合成：每模块有关系图',R18:'合成：无任何简笔画'}};
  check.checks.cold_reader_check.comprehension_checklist=Object.fromEntries(['memes_slang_plain','english_terms_chinese','no_literal_contradiction','reminder_items_on_page','example_outcome_and_feeling','one_caption_per_example_adjacent','diagram_labels_match_text','subtitle_reader_takeaway','highlighted_example_labeled','title_reference_specific','theory_named_explained_inline'].map(k=>[k,{status:'pass',evidence:'合成：逐项核对证据'}]));
- check.checks.cold_reader_check.plain_restatement=[{page_text:'句一',stranger_restatement:'合成白话复述一',clear:true},{page_text:'句二',stranger_restatement:'合成白话复述二',clear:true},{page_text:'句三',stranger_restatement:'合成白话复述三',clear:true}];
-check.checks.sentence_cold_read={status:'pass',items:[{text:'句一',flagged:false,resolution:'plain',reason:'直白'}],metaphor_body_plain:{status:'pass',evidence:'正文直说结论'},number_trace:[],label_collision:{status:'pass',findings:[]},outline_items:[]};
+ check.checks.cold_reader_check.plain_restatement=texts.map((page_text,i)=>({page_text,stranger_restatement:'合成：第'+i+'处内容的白话解释',clear:true}));
+check.checks.sentence_cold_read={status:'pass',items:texts.map(text=>({text,flagged:false,resolution:'plain',reason:'直白'})),metaphor_body_plain:{status:'pass',evidence:'正文直说结论'},number_trace:[],label_collision:{status:'pass',findings:[]},outline_items:[]};
  check.checks.text_and_scale_lock={status:'pass',visible_evidence:'合成：字号与终稿文字先于精修锁定'};
  const dead=write('dead.json',{kind:'dead_whitespace_audit',status:'pass',png_sha256:png.sha256,dead_zones:[]});
  check.checks.dead_whitespace_audit={status:'pass',record:dead};
  check.checks.arrow_audit={status:'not_applicable',reason:'合成：本页无箭头'};
  check.checks.content_text_min_size={status:'pass',visible_evidence:'合成：<24px 只剩页眉页脚'};
  check.visual_gain_counterproof={simple_alternative:'合成：同样事实的纯文字分组会失去的对照依据',remove_subject:'合成：移去主图后读者需自行配对的工作'};
+ check.preflight=preflight;
+ check.visual_quality_trial=qualityFixture(write,check.current,JSON.parse(readFileSync(preflight.path,"utf8")).inputs).trial;
  const page=write('check.json',check);
- const manifest:any={schema_version:'1.0',kind:'render_manifest',status:'completed',scene_manifest_sha256:'a'.repeat(64),created_at:new Date().toISOString(),pages:[{page_id:'P01',scene_sha256:scene.sha256,png:'original.png',png_sha256:png.sha256,phone_png:'phone.png',phone_png_sha256:phone.sha256,grayscale_png:'gray.png',grayscale_png_sha256:gray.sha256}]};
+ const manifest:any={schema_version:'1.0',kind:'render_manifest',status:'completed',scene_manifest_sha256:'a'.repeat(64),created_at:new Date().toISOString(),pages:[{page_id:'P01',scene_sha256:scene.sha256,png:'original.png',png_sha256:png.sha256,phone_png:'phone.png',phone_png_sha256:phone.sha256,grayscale_png:'gray.png',grayscale_png_sha256:gray.sha256,review_png:'P01@2x.png',review_png_sha256:review2x.sha256,review_scale:2,delivery_png:'delivery.png',delivery_png_sha256:delivery.sha256,delivery_scale:1}]};
  write('04-rendered/render_manifest.json',manifest);
  return {root,write,page,check,manifest,mechanical,png,preflight,scene};
 }
@@ -68,4 +81,30 @@ describe('v0.4.7-local 死白/箭头/改版差异/内容字号',()=>{
  it('改版差异清单为空被拒',()=>{const f=fixture();f.check.revision_of='A-V10';const prev=f.write('prev.png','prev');const sbs=f.write('sbs.png','sbs');f.check.checks.round_diff={record:f.write('diff.json',{kind:'round_diff',status:'pass',visible_diffs:[],previous:prev,side_by_side:sbs,current:f.png})};expect(run(f)).toThrow('round_diff');});
  it('改版差异完整可过',()=>{const f=fixture();f.check.revision_of='A-V10';const prev=f.write('prev.png','prev');const sbs=f.write('sbs.png','sbs');f.check.checks.round_diff={record:f.write('diff.json',{kind:'round_diff',status:'pass',visible_diffs:['睡眠例子移到各步下方'],previous:prev,side_by_side:sbs,current:f.png})};expect(run(f)().status).toBe('needs_human_review');});
  it('缺内容字号判定被拒',()=>{const f=fixture();delete f.check.checks.content_text_min_size;expect(run(f)).toThrow('content_text_min_size');});
+});
+
+describe('首读检查草稿保留未检查状态',()=>{
+ it('短标签也全量生成，未命中词表不自动判为普通表达',()=>{
+  const f=fixture(), draft=initAuthorCheck(f.root,f.check.mechanical_render_record.path);
+  expect(draft.checks.cold_reader_check.plain_restatement.map((x:any)=>x.page_text)).toEqual(['句一','句二','句三']);
+  expect(draft.checks.cold_reader_check.plain_restatement.every((x:any)=>x.clear===false)).toBe(true);
+  expect(draft.checks.sentence_cold_read.items.every((x:any)=>x.flagged===null&&x.resolution==='not_reviewed')).toBe(true);
+ });
+});
+
+describe('初始化超过十二条时不再截断',()=>{
+ it('包含短标签和编号的十八条文字全部保留',()=>{
+  const texts=[...Array.from({length:16},(_,i)=>'正文'+i),'甲','1'];
+  const f=fixture(texts), draft=initAuthorCheck(f.root,f.check.mechanical_render_record.path);
+  expect(draft.checks.cold_reader_check.plain_restatement.map((x:any)=>x.page_text)).toEqual(texts);
+  expect(draft.checks.sentence_cold_read.items).toHaveLength(texts.length);
+ });
+});
+
+describe('初始化与覆盖检查使用相同的文字组',()=>{
+ it('换行或加粗副本不产生重复待填项',()=>{
+  const f=fixture(['副标题','副\n标题','正文说明']),draft=initAuthorCheck(f.root,f.check.mechanical_render_record.path);
+  expect(draft.checks.cold_reader_check.plain_restatement).toHaveLength(2);
+  expect(draft.checks.sentence_cold_read.items).toHaveLength(2);
+ });
 });

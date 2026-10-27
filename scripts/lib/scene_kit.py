@@ -22,7 +22,14 @@ TEXT_WIDTH_SLACK = 0.03
 # audit_overlap_margins 把 765-(R+G+B) > 40 的像素算作墨迹；文字下的底色必须低于此值。
 UNDER_TEXT_INK_LIMIT = 36
 HEADER = {"meta_y": 64, "title_y": 100, "subtitle_y": 162, "rule_y": 206, "conclusion_y": 220}
-FOOTER = {"rule_y": 1512, "line1_y": 1524, "line2_y": 1552}
+def footer_positions(canvas, font_size):
+    # 按底部可见目标预留一行字高；最终字形边界仍由真实PNG审计确认。
+    line2_y = canvas["height"] - canvas["bottom_visible_target"] - font_size
+    return {"rule_y": line2_y - 40, "line1_y": line2_y - 28, "line2_y": line2_y}
+
+
+_DEFAULT_TOKENS = json.loads(TOKENS_PATH.read_text(encoding="utf-8"))
+FOOTER = footer_positions(_DEFAULT_TOKENS["canvas"], _DEFAULT_TOKENS["typography"]["role_sizes"]["footer_meta"])
 
 
 def _hex(c):
@@ -98,6 +105,7 @@ class Board:
         tokens = json.loads(Path(tokens_path).read_text(encoding="utf-8"))
         self.roles = {k: (v["strokeWidth"], v["roughness"]) for k, v in tokens["stroke"]["role_settings"].items()}
         self.sizes = dict(tokens["typography"]["role_sizes"])
+        self.footer_positions = footer_positions(tokens["canvas"], self.sizes["footer_meta"])
         self.min_size = tokens["typography"]["min_readable"]
         self.strong = set(tokens["typography"]["strong_inner_roles"])
         self.ellipse_limit = tokens["stroke"]["path_limits"]["large_ellipse_px"]
@@ -231,11 +239,11 @@ class Board:
         self.text(SAFE_LEFT + 150, y + 14, items, "annotation", self.p.ink, func="navigation")
 
     def footer(self, source_lines, page_label):
-        self.line([(SAFE_LEFT, FOOTER["rule_y"]), (SAFE_RIGHT, FOOTER["rule_y"])], self.p.primary_mid, "rule",
+        self.line([(SAFE_LEFT, self.footer_positions["rule_y"]), (SAFE_RIGHT, self.footer_positions["rule_y"])], self.p.primary_mid, "rule",
                   eid="footer_rule", solid=False)
         for k, line in enumerate(source_lines[:2]):
-            self.text(SAFE_LEFT, FOOTER["line1_y"] + 28 * k, line, "footer_meta", self.p.ink, func="source")
-        self.text(SAFE_RIGHT - text_width(page_label, self.sizes["footer_meta"]), FOOTER["line1_y"], page_label,
+            self.text(SAFE_LEFT, self.footer_positions["line1_y"] + 28 * k, line, "footer_meta", self.p.ink, func="source")
+        self.text(SAFE_RIGHT - text_width(page_label, self.sizes["footer_meta"]), self.footer_positions["line1_y"], page_label,
                   "footer_meta", self.p.ink, func="chrome")
 
     # ---------- 多部件物件示范（校准完成度用，不是构图模板） ----------

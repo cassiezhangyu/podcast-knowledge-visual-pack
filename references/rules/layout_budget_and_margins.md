@@ -13,11 +13,11 @@
 
 ## 2. 导出时自动执行：重叠、边距与页眉页脚留白
 
-`render-scene-checked.mjs` 在真实导出前自动运行 `layout_budget.py --scene`（封面除外）和 `audit_overlap_margins.py`。任一失败即停止，**不生成候选图**；结果写入输出目录的 `LAYOUT_BUDGET.txt`、`OVERLAP_MARGIN_AUDIT.json`，并绑定进 `MECHANICAL_RENDER_RECORD.json` 的 `layout_budget` 与 `overlap_margin_audit`。需要单独诊断时也可手动运行 `python3 scripts/audit_overlap_margins.py <scene.excalidraw> [scale]`。失败条件：
+`render-scene-checked.mjs` 在真实导出前自动运行 `layout_budget.py --scene`（封面除外）和 `audit_overlap_margins.py`。任一失败即停止，**不生成合格候选记录**；结果写入输出目录的 `LAYOUT_BUDGET.txt`、`OVERLAP_MARGIN_AUDIT.json`，并绑定进 `MECHANICAL_RENDER_RECORD.json` 的 `layout_budget` 与 `overlap_margin_audit`。需要单独诊断时也可手动运行 `python3 scripts/audit_overlap_margins.py <scene.excalidraw> [scale]`。失败条件：
 
 - 文字×线条、文字×排线、文字×文字的像素重叠（含 2px 膨胀，即"碰线"也算）；
-- 墨迹超出 x∈[80,1120]（专辑封面位除外）；
-- 左右边距不对称 >6px；
+- 墨迹超出当前 tokens.canvas.safe_left / safe_right（按 ink_boundary_tolerance 容纳手绘笔触，专辑封面位除外）；
+- 左右边距差超过 tokens.canvas.side_margin_tolerance；
 - 页面顶端首个墨迹 <40px；
 - 页眉线到正文首个墨迹 <12px；正文末墨迹到页脚线 <12px。
 
@@ -27,3 +27,17 @@
 2. **粗笔触图形离安全区边缘留 3–5px。** roughness ≥1.6 的图形（object、relation、emphasis），实际笔触会越过坐标 2–4px；坐标贴在 x=80 或 1120 时，审计会报出界和左右不对称。roughness ≤1.4 的徽章、细节、信息框和排版线贴在 x=80 时实测墨迹约 77.5，正好达标。
 
 结果记入当前 `RENDERED_PAGE_CHECK.json` 的 `layout_budget` 与 `margin_audit`；`author-check:init` 会从机械记录自动填入命令、状态和记录绑定。任一失败不得记 `self_check_passed`。机器通过后，仍须按 `page_quality_check.md` 第15、24、25项亲眼核对原图。
+
+## 3. 最终合成图外留白与交付门禁
+
+场景分层碰线审计不代表最终图片的全部边距通过。`render:scene:checked` 对合成官方专辑封面后的 `P01@2x.png` 和高清交付图执行 `audit_rendered_margins.py`，输出 `RENDERED_MARGIN_AUDIT.json`。测量采用可见墨迹（765减RGB合计大于40），所有像素距离按图片倍率换算到当前画布单位；测量值包含专辑封面，不能用场景坐标代替。
+
+唯一标准来源为本次绑定的 design_tokens：`canvas.safe_left/safe_right`、`ink_boundary_tolerance`、`side_margin_tolerance`、`top_visible_target`、`bottom_visible_target`、`outer_vertical_tolerance`。上下外留白各自距目标的偏差，以及上下实际留白差，均不得超过 outer_vertical_tolerance；当前默认目标64/68、容差8。缺项报错，项目覆盖仍须按 project_overrides.md 登记，不以放宽参数救当前失败图。
+
+```bash
+python3 scripts/audit_rendered_margins.py --scene <当前场景> --design-tokens <当前参数> --review-png <当前2倍图> --delivery-png <当前高清图> --out <边距记录>
+```
+
+记录绑定scene、两份PNG及参数的路径与sha256。失败输出仅作诊断，不得作为合格候选；导出启动时删除旧机械通过记录，失败后不留下旧版可用的通过状态。`author-check:init`只导入真实通过的测量；`render:manifest`及作者交付验证重新测量当前图片并核对原记录，缺测、旧格式、数值篡改或绑定变化均拒绝。作者填pass不能覆盖机器失败。
+
+正常字级草图后、精修前、交付前分别使用对应阶段的当前图。移动对象、改变页脚/文字换行、参数或重导出后，重新运行受影响检查，不继承旧图的通过。程序负责可量化边距，作者仍须按第24、25项实际看原图、390px及局部，判断视觉平衡与贴边感；机器通过不代替视觉判断。

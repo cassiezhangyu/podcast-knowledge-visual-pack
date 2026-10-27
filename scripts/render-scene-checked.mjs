@@ -10,13 +10,18 @@ import { findEpisodeMetadata, checkAlbumCoverSource, checkAlbumCoverFile } from 
 import { auditRenderedGeometry } from './lib/rendered-geometry.mjs';
 import { assertSceneMechanics } from '../dist/scene-mechanics.js';
 if(process.env.PKVP_GLYPH_NEGATIVE_CONTROL==='1')throw new Error('字形负向对照仅可用于审计验证，禁止正式导出');
+import { assertQualityReport, assertQualityContext } from '../dist/visual-quality.js';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const args=process.argv.slice(2), value=k=>args[args.indexOf(k)+1];
 for(const key of ['--scene','--preflight','--output'])if(!args.includes(key)||!value(key)||value(key).startsWith('--'))throw new Error('缺少必需参数 '+key);
 const scenePath=resolve(value('--scene')),preflightPath=resolve(value('--preflight')),out=resolve(value('--output'));
+rmSync(join(out,'MECHANICAL_RENDER_RECORD.json'),{force:true});
 const tokensPath=args.includes('--design-tokens')?resolve(value('--design-tokens')):join(root,'design_tokens.json'),sha=b=>createHash('sha256').update(b).digest('hex'),bind=p=>({path:p,sha256:sha(readFileSync(p))});
 const build=JSON.parse(readFileSync(join(root,'dist/render-build.json')));
 for(const file of build.files)if(sha(readFileSync(join(root,file.path)))!==file.sha256)throw new Error('渲染代码或构建产物过期：请先npm run build');
+const trialStage=args.includes('--trial-stage')?value('--trial-stage'):'final';
+if(!['sketch','final'].includes(trialStage))throw new Error('trial-stage须为sketch或final');
+if(trialStage==='final'){if(!args.includes('--quality-readiness'))throw new Error('试验版完整精修前须提供--quality-readiness；试画使用--trial-stage sketch');const ready=JSON.parse(readFileSync(resolve(value('--quality-readiness')),'utf8'));if(ready.phase!=='pre_refinement')throw new Error('须使用精修前报告');assertQualityReport(ready);assertQualityContext(ready,JSON.parse(readFileSync(preflightPath,"utf8")).inputs);}
 const sceneBytes=readFileSync(scenePath),scene=JSON.parse(sceneBytes),tokens=JSON.parse(readFileSync(tokensPath)),preflight=JSON.parse(readFileSync(preflightPath));
 if(preflight.status!=='completed_before_construction'||!preflight.page_id||!preflight.inputs||statSync(preflightPath).mtimeMs>statSync(scenePath).mtimeMs)throw new Error('联合预检缺失、未完成或晚于scene');
 if(preflight.design_tokens_sha256!==sha(readFileSync(tokensPath)))throw new Error('预检所用tokens过期');
@@ -56,7 +61,7 @@ if(preflight.role!=='cover'){
  if(budget.error||budget.status!==0)throw new Error('版面预算未通过，未生成候选图（删字或重排，不缩字号）：\n'+(budget.stdout||budget.stderr||budget.error));
 }
 {
- const overlap=spawnSync('python3',[join(root,'scripts/audit_overlap_margins.py'),scenePath],{cwd:root,encoding:'utf8'});
+ const overlap=spawnSync('python3',[join(root,'scripts/audit_overlap_margins.py'),scenePath,'--design-tokens',tokensPath],{cwd:root,encoding:'utf8'});
  writeFileSync(overlapPath,overlap.stdout||JSON.stringify({pass:false,error:overlap.stderr||String(overlap.error)}));
  if(overlap.error||overlap.status!==0)throw new Error('压线/边距审计未通过，未生成候选图（文字下的底色须足够浅；手绘图形离安全区边缘留3–5px）：\n'+(overlap.stdout||overlap.stderr||overlap.error).slice(0,4000));
 }
@@ -105,7 +110,12 @@ try{
   const bytes=Buffer.from(url.split(',')[1],'base64');if(bytes.toString('hex',0,8)!=='89504e470d0a1a0a'||bytes.readUInt32BE(16)!==width||bytes.readUInt32BE(20)!==height)throw new Error('真实导出尺寸异常：'+k);
   const p=join(out,name);writeFileSync(p,bytes);artifacts[k]=bind(p);
  }
+ const marginPath=join(out,'RENDERED_MARGIN_AUDIT.json');
+ const margin=spawnSync('python3',[join(root,'scripts/audit_rendered_margins.py'),'--scene',scenePath,'--design-tokens',tokensPath,'--review-png',artifacts.review2x.path,'--delivery-png',artifacts.delivery.path,'--out',marginPath],{cwd:root,encoding:'utf8'});
+ if(margin.error||margin.status!==0)throw new Error('最终合成图边距未通过，当前输出仅作诊断：'+(margin.stdout||margin.stderr||margin.error));
  const record={kind:'mechanical_render_record',status:'pass',page_id:preflight.page_id,created_at:new Date().toISOString(),checks:['preconstruction_reference_plan','native_scene','typography_roles_sizes_strong_weight','stroke_roles','static_text_geometry','reader_facing_text','outline_alignment','current_input_bindings','same_scene_real_export'].map(name=>({name,status:'pass'})),outline_check: outlineRegions ? {status:'pass',regions:bind(outlineRegions)} : {status:'not_applicable',reason:'cover'},tokens:bind(tokensPath),preflight:bind(preflightPath),renderer:bind(bundle),brand_asset:{...bind(assetPath),source_url:albumCoverCheck.source_url,album_cover_check:albumCoverCheck},current:artifacts,visual_quality:'needs_independent_review',pixel_geometry:'needs_rendered_review',semantic_roles:'needs_rendered_review'};
+ record.rendered_margin_audit={status:'pass',record:bind(marginPath)};
+ record.checks.push({name:'rendered_margin_audit',status:'pass'});
  record.diagnostics={layout:bind(layoutPath),glyphs:bind(glyphPath),geometry:bind(geometryPath)};
  record.overlap_margin_audit={status:'pass',command:'python3 scripts/audit_overlap_margins.py <scene>',record:bind(overlapPath)};
  record.checks.push({name:'overlap_margin_audit',status:'pass'});

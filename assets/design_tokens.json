@@ -10,7 +10,9 @@
     "top_visible_target": 64,
     "bottom_visible_target": 68,
     "outer_vertical_tolerance": 8,
-    "right_text_inner_buffer": 20
+    "right_text_inner_buffer": 20,
+    "ink_boundary_tolerance": 2.5,
+    "side_margin_tolerance": 6
   },
   "colors": {
     "background": "#FFFFFF",

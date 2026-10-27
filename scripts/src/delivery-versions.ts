@@ -7,7 +7,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pngSize, REVIEW_SIZE } from "./review-2x.js";
-import { assertArrowAudit } from "./author-visual-closeout.js";
+import { assertArrowAudit, assertComprehensionChecklist, assertNoPlaceholders, assertNotBoilerplate, readerJargon } from "./author-visual-closeout.js";
 import { validateArtifact } from "./validate.js";
 import { assertSentenceColdRead, geometryHash } from "./sentence-cold-read.js";
 type R = Record<string, any>;
@@ -41,7 +41,15 @@ export function checkVersion(workspace: string, v: VersionInput, prev: PrevVersi
     if (p) { try { const pc = JSON.parse(readFileSync(p.self_check, "utf8")); assertArrowAudit(pc, sceneData); inherited = { from_version: p.version_id, self_check: { path: p.self_check, sha256: fileHash(p.self_check) }, geometry_sha256: geo }; } catch (e2) { errors.push((e as Error).message + "（沿用上一版也失败：" + (e2 as Error).message + "）"); } }
     else errors.push((e as Error).message);
   }
-  try { assertSentenceColdRead(check, sceneData); } catch (e) { errors.push((e as Error).message); }
+  try {
+    if (check.status !== "self_check_passed") throw new Error("版本登记缺少已完成的作者自检");
+    assertNoPlaceholders(check);
+    assertNotBoilerplate(check);
+    const jargon = readerJargon(workspace);
+    assertComprehensionChecklist(check, sceneData, jargon);
+    // 登记入口同样读取本期术语表；封面与其他页均可使用空表并说明原因。
+    assertSentenceColdRead(check, sceneData, jargon);
+  } catch (e) { errors.push((e as Error).message); }
   return { version_id: v.version_id, status: errors.length ? "fail" : "pass", errors,
     scene: { path: abs(v.scene), sha256: fileHash(abs(v.scene)) }, png: { path: abs(v.png), sha256: fileHash(abs(v.png)) },
     review_png: { path: abs(v.review_png), sha256: fileHash(abs(v.review_png)), size: [w, h] }, self_check: { path: abs(v.self_check), sha256: fileHash(abs(v.self_check)) },

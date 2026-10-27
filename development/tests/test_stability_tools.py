@@ -47,7 +47,7 @@ class SceneKitTest(unittest.TestCase):
         b.rect(300, 400, 200, 100, bg=self.p.under_text_primary, under_text=True)
         b.text(320, 430, "浅底上的字", "body")
         b.parcel(700, 400)
-        b.outline(1436, "① 一  ② 二")
+        b.outline(1404, "① 一  ② 二")
         b.footer(["节目：《示例》", "回听：整期"], "第01页 / 共01页")
         with tempfile.TemporaryDirectory() as tmp:
             out = b.finish(Path(tmp) / "p.excalidraw")

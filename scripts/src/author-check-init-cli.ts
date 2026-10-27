@@ -6,6 +6,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { COMPREHENSION_ITEMS, readerJargon } from "./author-visual-closeout.js";
 import { COLLISION_TERMS, NUM_RE, norm, sceneTexts } from "./sentence-cold-read.js";
+import { assertRenderedMargins } from "./rendered-margins.js";
 type R = Record<string, any>;
 export const TODO = "待作者填写";
 const fileHash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
@@ -16,19 +17,21 @@ const judged = () => ({ status: TODO, visible_evidence: TODO });
 export function initAuthorCheck(workspace: string, recordPath: string, extra: R = {}): R {
   const mech = read(recordPath);
   if (mech.kind !== "mechanical_render_record" || mech.status !== "pass") throw new Error("机械记录未通过，不能生成自检草稿");
+  const margins = assertRenderedMargins(mech);
   const cur = mech.current, pre = read(mech.preflight.path), inputs = pre.inputs ?? {};
-  const scene = read(cur.scene.path), texts = [...new Set(sceneTexts(scene))];
+  const scene = read(cur.scene.path), texts = [...new Map(sceneTexts(scene).map(t => [norm(t), t])).values()];
   const out = dirname(resolve(recordPath));
   const overlap = mech.overlap_margin_audit?.record ? read(mech.overlap_margin_audit.record.path) : undefined;
   const budget = mech.layout_budget?.record ? readFileSync(mech.layout_budget.record.path, "utf8").trim().split("\n").pop() : undefined;
   const glyph = mech.diagnostics?.glyphs ? read(mech.diagnostics.glyphs.path) : undefined;
   const jargon = pre.role === "cover" ? [] : readerJargon(workspace);
   const checks: R = {
+    rendered_margin_audit: { status: "pass", record: mech.rendered_margin_audit.record, visible_evidence: `最终合成图边距已测量：${JSON.stringify(margins.images.review2x.margins)}；高清图另行核验。视觉平衡仍需作者看当前图。` },
     content_coverage: judged(), visual_explanation: judged(), reference_alignment: judged(), text_geometry: judged(), mobile_readability: judged(),
     cold_reader_check: {
       status: TODO, entry_and_path: TODO, one_sentence_restatement: TODO, breakpoints: [TODO], minimal_fixes: [TODO], visible_evidence: TODO,
       comprehension_checklist: Object.fromEntries(COMPREHENSION_ITEMS.map(k => [k, { status: TODO, evidence: TODO }])),
-      plain_restatement: texts.filter(t => norm(t).length > 8).slice(0, 12).map(t => ({ page_text: t, stranger_restatement: TODO, clear: false })),
+      plain_restatement: texts.map(t => ({ page_text: t, stranger_restatement: TODO, clear: false })),
     },
     layout_budget: budget ? { status: "pass", visible_evidence: `layout_budget.py --scene exit 0：${budget}`, record: mech.layout_budget.record } : judged(),
     margin_audit: overlap?.pass ? { status: "pass", visible_evidence: `audit_overlap_margins exit 0：issues ${overlap.issues.length}，墨迹左${overlap.ink_left} 右${overlap.ink_right}，不对称${overlap.side_margin_asymmetry}px，页眉线到正文${overlap.gap_header_rule_to_body}px，正文到页脚线${overlap.gap_body_to_footer_rule}px。`, record: mech.overlap_margin_audit.record } : judged(),
@@ -51,7 +54,7 @@ export function initAuthorCheck(workspace: string, recordPath: string, extra: R 
       status: TODO,
       items: texts.map(t => {
         const term = jargon.find(j => norm(t).includes(norm(j)));
-        return term ? { text: t, flagged: true, resolution: "explained_on_page", reason: `“${t.replace(/\s+/g, "").slice(0, 10)}”含本期术语“${term}”`, explanation: TODO } : { text: t, flagged: false, resolution: "plain", reason: TODO };
+        return term ? { text: t, flagged: true, resolution: "not_reviewed", reason: `“${t.replace(/\s+/g, "").slice(0, 10)}”含本期术语“${term}”`, explanation: TODO, explanation_refs: [] } : { text: t, flagged: null, resolution: "not_reviewed", reason: TODO, explanation_refs: [] };
       }),
       number_trace: texts.flatMap(t => [...new Set(t.match(NUM_RE) ?? [])].map(m => ({ text: t, number: m, kind: "structural", reason: TODO }))),
       label_collision: { status: "pass", findings: COLLISION_TERMS.filter(w => texts.join("\n").includes(w)).map(term => ({ term, ruling: TODO })) },
@@ -65,6 +68,7 @@ export function initAuthorCheck(workspace: string, recordPath: string, extra: R 
     note: "由 author-check:init 生成；逐项按当前 @2x 图写实际证据，全部写完后把 status 改为 self_check_passed。",
     current: Object.fromEntries(["scene", "png", "phone", "gray", "delivery", "review2x"].filter(k => cur[k]).map(k => [k, cur[k]])),
     mechanical_render_record: ref(recordPath), preflight: mech.preflight, checks,
+    visual_quality_trial: { status: "not_reviewed", sketch: {}, pre_refinement: {}, pre_delivery: {} },
     visual_gain_counterproof: { simple_alternative: TODO, remove_subject: TODO },
   };
   if (pre.role === "overview" && inputs.framework_basis) {

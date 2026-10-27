@@ -1,47 +1,48 @@
 {
   "page_id": "P01",
-  "status": "self_check_passed",
+  "status": "needs_author_review",
   "current": {},
   "mechanical_render_record": {},
   "checks": {
     "content_coverage": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "填写实际内容及来源核对证据"
     },
     "visual_explanation": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "填写图文如何呈现必要关系的证据"
     },
     "reference_alignment": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "填写与实际参考对照的结果"
     },
     "text_geometry": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "填写实际字形及间隔核对结果"
     },
     "mobile_readability": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "填写390px实图的可读性核对结果"
     },
     "cold_reader_check": {
-      "status": "pass",
-      "visible_evidence": "动线、各块读出vs想表达、断点与最小改法、一句话复述（见cold_reader_check.md）"
+      "status": "not_reviewed",
+      "visible_evidence": "先运行author-check:init生成当前scene全量条目，逐句复述及核对页面解释；机械通过不等于读者实测。",
+      "plain_restatement": []
     },
     "layout_budget": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "layout_budget.py 命令、exit code 与 slack"
     },
     "margin_audit": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "audit_overlap_margins.py exit 0；左右边距差、页眉/页脚留白数值"
     },
     "cjk_glyph_audit": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "audit_cjk_glyphs.mjs exit 0；实际平台字体（Noto Sans CJK SC / PingFang SC）"
     },
     "side_by_side_reference_comparison": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "当前PNG与正反例并排后的具体差距与兑现处",
       "positive": [
         {
@@ -62,7 +63,7 @@
       }
     },
     "dead_whitespace_audit": {
-      "status": "pass",
+      "status": "not_reviewed",
       "record": {
         "path": "<输出目录>/DEAD_SPACE_AUDIT.json",
         "sha256": "<记录文件sha256>"
@@ -70,7 +71,7 @@
       "visible_evidence": "v0.4.7-local：audit_dead_space.py 对当前 @2x 的结果；最大空块尺寸"
     },
     "arrow_audit": {
-      "status": "pass",
+      "status": "not_reviewed",
       "arrows": [
         {
           "id": "loop",
@@ -83,7 +84,7 @@
       ]
     },
     "content_text_min_size": {
-      "status": "pass",
+      "status": "not_reviewed",
       "visible_evidence": "逐条列出 <24px 的文字并判定：仅页眉页脚/导航/编号；承载内容的（例子、步骤说明）均 ≥24px"
     },
     "round_diff": {
@@ -94,18 +95,10 @@
       "note": "有 revision_of（改版）时必填：上一版并排图＋可见改动清单"
     },
     "sentence_cold_read": {
-      "status": "pass",
-      "items": [
-        {
-          "text": "知识要自己长成网，不是先搭框架再往里填",
-          "flagged": false,
-          "resolution": "rewritten",
-          "original": "像森林，不像房子",
-          "reason": "原句是比喻，陌生读者读不出意思"
-        }
-      ],
+      "status": "not_reviewed",
+      "items": [],
       "metaphor_body_plain": {
-        "status": "pass",
+        "status": "not_reviewed",
         "evidence": "土壤/树只在主图，正文直说结论"
       },
       "number_trace": [
@@ -116,7 +109,7 @@
         }
       ],
       "label_collision": {
-        "status": "pass",
+        "status": "not_reviewed",
         "findings": []
       },
       "outline_items": [
@@ -124,6 +117,11 @@
         "立",
         "行"
       ]
+    },
+    "rendered_margin_audit": {
+      "status": "not_reviewed",
+      "record": {},
+      "visible_evidence": "由author-check:init导入当前最终合成图测量；手填通过不能替代真实记录。"
     }
   },
   "visual_gain_counterproof": {
@@ -131,5 +129,11 @@
     "remove_subject": "移去主图后读者须自行完成的比较、配对或追踪"
   },
   "overview_framework_check": "总览必填：按 overview_page_production §6 逐条核对批准关系（格式见现有 overview-framework-check）",
-  "revision_of": "<上一版版本号；首版删去此字段>"
+  "revision_of": "<上一版版本号；首版删去此字段>",
+  "visual_quality_trial": {
+    "status": "not_reviewed",
+    "sketch": {},
+    "pre_refinement": {},
+    "pre_delivery": {}
+  }
 }

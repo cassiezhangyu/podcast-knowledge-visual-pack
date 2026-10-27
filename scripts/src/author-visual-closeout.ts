@@ -6,7 +6,9 @@ import { validateArtifact } from "./validate.js";
 import { assertSceneMechanics } from "./scene-mechanics.js";
 import { assertOverviewFrameworkCheck } from "./overview-framework-check.js";
 import { assertUserRequirementsCheck } from "./review-packet.js";
-import { assertSentenceColdRead } from "./sentence-cold-read.js";
+import { assertSentenceColdRead, assertPlainRestatements } from "./sentence-cold-read.js";
+import { assertRenderedMargins } from "./rendered-margins.js";
+import { assertVisualTrial } from "./visual-quality.js";
 type R = Record<string, any>;
 const hash = (v: unknown) => createHash("sha256").update(JSON.stringify(v)).digest("hex");
 const fileHash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
@@ -65,19 +67,16 @@ export function assertNotBoilerplate(c: R): void {
     seen.set(e, name);
   }
 }
-export function assertComprehensionChecklist(c: R): void {
+export function assertComprehensionChecklist(c: R, scene: R, jargon: string[] = []): void {
   const cold = c.checks?.cold_reader_check;
+  if (cold?.status !== "pass") throw new Error("cold_reader_check 未通过作者首读检查");
   const list = cold?.comprehension_checklist;
   if (!list || typeof list !== "object") throw new Error("cold_reader_check 缺少 comprehension_checklist（陌生读者必查清单）");
   for (const item of COMPREHENSION_ITEMS) {
     const v = list[item];
     if (!v || !["pass", "not_applicable"].includes(v.status) || !longText(v.evidence, 6)) throw new Error("comprehension_checklist 缺项或未通过：" + item);
   }
-  const rows = cold.plain_restatement;
-  if (!Array.isArray(rows) || rows.length < 3) throw new Error("cold_reader_check 缺少 plain_restatement 逐句白话复述表（至少3行）");
-  for (const r of rows) {
-    if (!r || !longText(r.page_text, 2) || !longText(r.stranger_restatement, 4) || r.clear !== true) throw new Error("plain_restatement 有读不懂或缺复述的句子：" + String(r?.page_text ?? ""));
-  }
+  assertPlainRestatements(c, scene, jargon);
 }
 /** 先锁字号和终稿文字，再精修图形。 */
 export function assertTextLock(c: R): void {
@@ -146,8 +145,8 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     for (const name of ["content_coverage", "visual_explanation", "reference_alignment", "text_geometry", "mobile_readability", "cold_reader_check", "layout_budget", "margin_audit", "cjk_glyph_audit"]) {
       if (c.checks?.[name]?.status !== "pass" || typeof c.checks[name].visible_evidence !== "string" || c.checks[name].visible_evidence.trim().length < 8) throw new Error("作者自检缺少实际证据：" + name);
     }
+    assertVisualTrial(c);
     assertComparisonAndCounterproof(c);
-    assertComprehensionChecklist(c);
     assertTextLock(c);
     assertDeadSpaceAudit(c);
     assertRoundDiff(c);
@@ -158,6 +157,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     const mechanical = read(c.mechanical_render_record.path);
     const required = ["preconstruction_reference_plan", "native_scene", "typography_roles_sizes_strong_weight", "stroke_roles", "static_text_geometry", "reader_facing_text", "outline_alignment", "current_input_bindings", "same_scene_real_export"];
     if (mechanical.kind !== "mechanical_render_record" || mechanical.status !== "pass" || required.some(name => !mechanical.checks?.some((x: R) => x.name === name && x.status === "pass"))) throw new Error("必要机械检查缺项或失败。");
+    assertRenderedMargins(mechanical, c);
     checkBindings(mechanical);
     const outputKeys: R = { scene: [null, "scene_sha256"], png: ["png", "png_sha256"], phone: ["phone_png", "phone_png_sha256"], gray: ["grayscale_png", "grayscale_png_sha256"] };
     if (page.delivery_png) outputKeys.delivery = ["delivery_png", "delivery_png_sha256"];
@@ -188,6 +188,7 @@ export function verifyAuthorPageChecks(workspace: string, manifest: R, paths: st
     assertUserRequirementsCheck(inputs?.user_requirements, inputs?.user_requirements ? read(inputs.user_requirements.path) : undefined, c.user_requirements_check);
     bound(mechanical.tokens);
     const sceneData = read(c.current.scene.path);
+    assertComprehensionChecklist(c, sceneData, preflight.role === "cover" ? [] : readerJargon(workspace));
     assertArrowAudit(c, sceneData);
     assertSentenceColdRead(c, sceneData, preflight.role === "cover" ? [] : readerJargon(workspace));
     assertSceneMechanics(sceneData as any, read(mechanical.tokens.path) as any);

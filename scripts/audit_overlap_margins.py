@@ -6,7 +6,7 @@
 - margins: ink outside x∈[80,1120] (except full-bleed bg/album slot), gap from body ink to footer rule
 - header/side (v0.6.2): left/right margin symmetry (|left−right| ≤ 6px), top ink ≥ 40px from page top,
   gap from header rule (long rule above y=400) to first body ink below it ≥ 12px"""
-import json, sys, subprocess, tempfile, os, itertools
+import json, sys, subprocess, tempfile, os, itertools, argparse
 import numpy as np
 from PIL import Image
 
@@ -42,7 +42,11 @@ RUNTIME = os.environ.get("PKVP_RUNTIME") or (SK if (Path(SK) / "dist").exists() 
 if RUNTIME is None and (Path(SK) / "RUNTIME_ROOT.json").exists():  # workflow mirror: no node runtime here
   RUNTIME = json.load(open(Path(SK) / "RUNTIME_ROOT.json"))["runtime_root"]
 RENDERER = str(Path(RUNTIME or SK) / "scripts" / "render_scene.mjs")
-src = sys.argv[1]; sc = float(sys.argv[2]) if len(sys.argv) > 2 else 2.0
+parser = argparse.ArgumentParser()
+parser.add_argument("scene"); parser.add_argument("scale", nargs="?", type=float, default=2.0)
+parser.add_argument("--design-tokens", default=str(Path(SK) / "assets/design_tokens.json"))
+opts = parser.parse_args(); src = opts.scene; sc = opts.scale
+canvas = json.load(open(opts.design_tokens))["canvas"]
 D = json.load(open(src)); E = D["elements"]
 tmp = tempfile.mkdtemp()
 CANVAS = [e for e in E if e["type"] == "rectangle" and e["x"] == 0 and e["y"] == 0 and e["width"] >= 1200]
@@ -96,7 +100,7 @@ xs = np.where((full & ~art).any(0))[0]; ys = np.where(full.any(1))[0]
 L, R = xs.min() / sc, (xs.max() + 1) / sc
 rule_y = max([e["y"] for e in E if e["type"] == "line" and e.get("width", 0) > 900], default=1490)
 above = full[: int((rule_y - 5) * sc)]; body_bottom = np.where(above.any(1))[0].max() / sc
-W_PAGE = 1200
+W_PAGE = canvas["width"]
 sym = abs(L - (W_PAGE - R))
 top_ink = ys.min() / sc
 hrules = [e["y"] for e in E if e["type"] == "line" and e.get("width", 0) > 900 and e["y"] < 400]
@@ -109,7 +113,7 @@ res = {"scene": os.path.basename(src), "ink_left": float(round(L, 1)), "ink_righ
        "gap_body_to_footer_rule": float(round(rule_y - body_bottom, 1)), "issues": issues,
        "side_margin_asymmetry": float(round(sym, 1)), "top_ink": float(round(top_ink, 1)),
        "header_rule_y": max(hrules) if hrules else None, "gap_header_rule_to_body": head_gap,
-       "pass": bool(not issues and L >= 77.5 and R <= 1122.5 and rule_y - body_bottom >= 12
-                    and sym <= 6 and top_ink >= 40 and (head_gap is None or head_gap >= 12))}
+       "pass": bool(not issues and L >= canvas["safe_left"] - canvas["ink_boundary_tolerance"] and R <= canvas["safe_right"] + canvas["ink_boundary_tolerance"] and rule_y - body_bottom >= 12
+                    and sym <= canvas["side_margin_tolerance"] and top_ink >= 40 and (head_gap is None or head_gap >= 12))}
 print(json.dumps(res, ensure_ascii=False, indent=1))
 sys.exit(0 if res["pass"] else 1)

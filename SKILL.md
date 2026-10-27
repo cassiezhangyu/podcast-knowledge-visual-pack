@@ -5,13 +5,15 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 
 # Podcast Knowledge Visual Pack Skill
 
+视觉创作须在草图后、精修前、交付前三个时点保存当前图片与作者判断，执行 [视觉质量检查](references/rules/visual_quality_trial.md)。检查记录通过不代表用户已验收。
+
 > **改 skill 只改本地：** 对本 Skill 的任何修改只在本地完成并在本地提交；用户明确要求时才推送到远程、开远程分支或发布。正式发版流程见根目录 [`RELEASE_GUIDE.md`](RELEASE_GUIDE.md)。
 
 > 生产任务执行本 Skill；目录与安装维护见仓库 `README.md`，单集成果保存在用户指定工作区。
 
 ## 安装入口与工具位置
 
-本项目直接在 `.agents/skills/podcast-knowledge-visual-pack/` 维护完整 Skill；所有 npm 与 scripts 命令在该根目录执行；源码与转写 worker 分别位于 `scripts/src/` 和 `scripts/workers/`。copy 安装将兼容链接展开为普通文件和目录，包含同一套代码与资源，在复制后的根目录安装依赖并构建。仅旧精简入口仍读取 `RUNTIME_ROOT.json → runtime_root` 定位程序。规范资料按本 Skill 根目录解析；`references/` 保存规则与数据合同，`assets/` 保存模板、参数和案例。旧 `rules/`、`schemas/`、`templates/`、`examples/`、`taste.md` 和 `design_tokens.json` 在源码中是兼容链接，在 copy 分发包中是生成副本；维护时修改规范资源并重新生成分发包。生产工作区放在 Skill 之外。
+完整 Skill 在本仓库根目录维护；项目安装副本通常位于 `.agents/skills/podcast-knowledge-visual-pack/`；所有 npm 与 scripts 命令在该根目录执行；源码与转写 worker 分别位于 `scripts/src/` 和 `scripts/workers/`。copy 安装将兼容链接展开为普通文件和目录，包含同一套代码与资源，在复制后的根目录安装依赖并构建。仅旧精简入口仍读取 `RUNTIME_ROOT.json → runtime_root` 定位程序。规范资料按本 Skill 根目录解析；`references/` 保存规则与数据合同，`assets/` 保存模板、参数和案例。旧 `rules/`、`schemas/`、`templates/`、`examples/`、`taste.md` 和 `design_tokens.json` 在源码中是兼容链接，在 copy 分发包中是生成副本；维护时修改规范资源并重新生成分发包。生产工作区放在 Skill 之外。
 
 ## 执行边界：主会话完成绘制与自检
 
@@ -49,7 +51,7 @@ description: 将小宇宙播客单集转成可追溯的内容梳理、内容拆�
 2. 同时产出本期术语表 `01-understanding/READER_JARGON.json`（`cold_reader_check.md`「本期术语表」）。
 3. `overview_page_production.md` 与 `visual_reasoning.md` 第1节：定三案的组织方式；实际打开正反例（`assets/examples/positive|negative`）。
 4. 用 `scripts/lib/scene_kit.py` 绘制（`scene_kit_usage.md`）；副标题只写内容陈述。
-5. `npm run render:scene:checked -- --scene … --preflight … --output … --brand … --design-tokens assets/design_tokens.json`（启动浏览器需宿主权限，见 `references/environment/RENDER_BROWSER_ENVIRONMENT.md`）。版面预算、压线和边距不通过时不出图。
+5. `npm run render:scene:checked -- --scene … --preflight … --output … --brand … --design-tokens assets/design_tokens.json`（启动浏览器需宿主权限，见 `references/environment/RENDER_BROWSER_ENVIRONMENT.md`）。版面预算、压线及最终合成图完整边距检查未通过时，不输出合格候选；保留的失败图片仅作诊断。
 6. 按 `visual_pack_execution.md`「给用户看图」生成无 `@` 副本和并排对比图，确认用户真的看到了，再请用户选。
 7. 选定后：`npm run author-check:init` → 逐项填写判断字段 → `npm run render:manifest` → `npm run visual:closeout -- --action submit`；用户确认看过并通过后再 `--action approve --user-approved`。
 
